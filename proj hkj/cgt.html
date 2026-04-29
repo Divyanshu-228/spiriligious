@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProCorp - Industry Level Webpage</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+
+    header {
+      background: #0a192f;
+      color: white;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 { font-size: 24px; }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover { color: #64ffda; }
+
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/1600/900');
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h2 { font-size: 48px; margin-bottom: 20px; }
+    .hero p { font-size: 20px; margin-bottom: 30px; }
+
+    .btn {
+      padding: 12px 25px;
+      background: #64ffda;
+      color: black;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .section {
+      padding: 60px 50px;
+      text-align: center;
+    }
+
+    .section h2 { margin-bottom: 30px; font-size: 32px; }
+
+    .services {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      background: #f4f4f4;
+      padding: 20px;
+      width: 300px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover { transform: translateY(-10px); }
+
+    .footer {
+      background: #0a192f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 32px; }
+      .services { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ProCorp</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Building Future-Ready Digital Solutions</h2>
+  <p>We deliver high-quality, scalable, and modern web solutions.</p>
+  <button class="btn">Get Started</button>
+</section>
+
+<section class="section" id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="card">
+      <h3>Web Development</h3>
+      <p>Modern and responsive websites tailored for your business.</p>
+    </div>
+    <div class="card">
+      <h3>UI/UX Design</h3>
+      <p>Clean, user-friendly designs focused on conversion.</p>
+    </div>
+    <div class="card">
+      <h3>Consulting</h3>
+      <p>Expert advice to scale your digital presence effectively.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2>About Us</h2>
+  <p>We are a team of passionate developers and designers committed to delivering excellence.</p>
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: contact@procorp.com</p>
+  <p>Phone: +91 98765 43210</p>
+</section>
+
+<footer class="footer">
+  <p>© 2026 ProCorp. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

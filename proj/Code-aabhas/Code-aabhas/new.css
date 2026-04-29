@@ -1,0 +1,22 @@
+.scroller {
+    max-width: 100%;
+    overflow: hidden;
+    /* This creates the nice fade-out effect on the edges */
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller__inner {
+    height: 400px; /* You can change this value to make images larger or smaller */
+
+    /* Allow the width to adjust automatically to maintain the aspect ratio */
+    width: auto;
+
+    /* Ensures the image covers the area without distortion */
+    object-fit: cover;
+    display: flex;
+    gap: 1rem;
+    padding-block: 1rem;
+    /* Let the container be as wide as its content */
+    width: max-content; 
+}

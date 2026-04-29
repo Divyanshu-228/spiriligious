@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Spiriligious · ज्ञान · अध्यात्म · विज्ञान</title>
+  <meta name="description" content="Spiriligious - परंपराओं को वैज्ञानिक दृष्टि से समझें, प्रश्न करें और सत्य की खोज करें।">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="sacred-glow">
+
+  <!-- MODAL (shared across all pages) -->
+  <div id="infoModal" class="modal">
+    <div class="modal-card">
+      <i class="fas fa-om" style="font-size: 2rem; color: #bc6f25; margin-bottom: 0.5rem;"></i>
+      <h3 id="modalTitle">शीर्षक</h3>
+      <p id="modalMessage">विवरण यहाँ दिखेगा...</p>
+      <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header style="padding: 1.2rem 0; border-bottom: 1px solid rgba(201, 126, 42, 0.15);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <a href="index.html" style="text-decoration: none;">
+          <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -0.5px; background: linear-gradient(135deg, #b45f2b, #e09d44); -webkit-background-clip: text; background-clip: text; color: transparent;">Spiriligious</span>
+        </a>
+        <span style="font-size: 0.8rem; background: #efe0cc; padding: 0.2rem 0.8rem; border-radius: 40px; margin-left: 0.8rem; font-weight: 500;">v1.0</span>
+      </div>
+      <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; flex-wrap: wrap;">
+        <a href="index.html" style="text-decoration: none; color: #c97e2a; font-weight: 600;"><i class="fas fa-home"></i> मुखपृष्ठ</a>
+        <a href="bhajan.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-music"></i> भजन संग्रह</a>
+        <a href="scientific.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-microscope"></i> वैज्ञानिक विश्लेषण</a>
+        <a href="encyclopedia.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-book"></i> ज्ञानकोश</a>
+        <a href="forum.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-comments"></i> मंथन मंच</a>
+        <a href="lab.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-flask"></i> प्रयोगशाला</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="container" style="padding: 3rem 0 2rem 0;">
+      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <div style="font-size: 1rem; letter-spacing: 3px; color: #c0752b; font-weight: 500;">🕉️ संतुलित मंथन 🧪</div>
+        <h1 style="font-size: clamp(2rem, 7vw, 3.3rem); font-weight: 700; margin: 1rem 0 0.75rem; line-height: 1.2; color: #2e241d;">
+          ज्ञान • अध्यात्म • विज्ञान का <br> संतुलित मंथन
+        </h1>
+        <p style="font-size: 1.25rem; color: #4f3e2c; max-width: 700px; margin: 0 auto 2rem auto;">
+          परंपराओं को समझें, प्रश्न करें, और सत्य की खोज करें
+        </p>
+        <div class="hero-buttons" style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 1rem;">
+          <button class="btn btn-primary" id="bhajanBtn"><i class="fas fa-music"></i> भजन देखें</button>
+          <button class="btn btn-outline" id="kyuBtn"><i class="fas fa-question-circle"></i> एसा क्यों?</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three core definitions -->
+    <section class="container" style="margin: 2.5rem auto;">
+      <div class="definitions-grid">
+        <div class="card-glass def-card">
+          <div class="pillar-icon"><i class="fas fa-balance-scale"></i></div>
+          <h3>धर्म</h3>
+          <p class="def-sub">= जीवन का संतुलन</p>
+          <p>संस्कार, कर्तव्य और सद्भाव का मार्ग — आधुनिक जीवन में संतुलन का वैज्ञानिक आधार।</p>
+        </div>
+        <div class="card-glass def-card">
+          <div class="pillar-icon"><i class="fas fa-brain"></i></div>
+          <h3>अध्यात्म</h3>
+          <p class="def-sub">= आत्मा का विज्ञान</p>
+          <p>चेतना, ध्यान और आत्म-अन्वेषण — आंतरिक विज्ञान जो प्राचीन ज्ञान को प्रयोगात्मक बनाता है।</p>
+        </div>
+        <div class="card-glass def-card">
+          <div class="pillar-icon"><i class="fas fa-microscope"></i></div>
+          <h3>उद्देश्य</h3>
+          <p class="def-sub">= परंपराओं का वैज्ञानिक विश्लेषण</p>
+          <p>अनुष्ठानों, मान्यताओं और दर्शन का तर्कपूर्ण मूल्यांकन — प्रश्न करना पहला सत्य है।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Balanced churning section -->
+    <section class="container" style="margin: 2rem auto 1rem;">
+      <div class="card-glass churning-card">
+        <i class="fas fa-yin-yang"></i>
+        <h3>मंथन — समन्वय का सूत्र</h3>
+        <p>जहाँ परंपरा विज्ञान से मिलती है, वहाँ सत्य का प्रकाश होता है। Spiriligious प्राचीन धारणाओं को कठोर वैज्ञानिक दृष्टि से परखता है — बिना पूर्वाग्रह के। ज्ञान, अध्यात्म और विज्ञान के सह-अस्तित्व का नया प्रतिमान।</p>
+      </div>
+    </section>
+
+    <!-- परंपराओं का वैज्ञानिक विश्लेषण – Premium Polished Section -->
+    <section style="max-width: 1100px; margin: 4rem auto 2rem; padding: 0 1rem;">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: #f3e8d8; font-size: 0.9rem; margin-bottom: 0.8rem;">
+          🔬 वैज्ञानिक दृष्टि
+        </span>
+        <h2 style="font-size: 2rem; margin: 0.5rem 0; font-weight: 600; letter-spacing: 0.5px;">
+          परंपराओं का वैज्ञानिक विश्लेषण
+        </h2>
+        <p style="max-width: 600px; margin: 0.5rem auto 0; line-height: 1.7; color: #555; font-size: 1rem;">
+          प्रत्येक रीति, अनुष्ठान या मान्यता के पीछे छिपे तर्क और विज्ञान को समझें।
+        </p>
+      </div>
+      <div id="analysisGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; font-size: 1.1rem; color: #666;">
+          🕉️ लोड हो रहा है...
+        </div>
+      </div>
+    </section>
+
+    <!-- Why section -->
+    <section class="container" style="margin: 3rem auto 2rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-badge"><i class="fas fa-quote-left"></i> सत्य की खोज</span>
+        <h2>प्रश्न करें, विश्लेषण करें, विकसित हों</h2>
+        <p>हर परंपरा के पीछे छिपे वैज्ञानिक तथ्यों को उजागर करना हमारा लक्ष्य है।</p>
+      </div>
+      <div class="features-flex">
+        <div class="feature-item"><i class="fas fa-chart-line"></i><p>तर्कसंगत दृष्टिकोण</p></div>
+        <div class="feature-item"><i class="fas fa-hand-sparkles"></i><p>आध्यात्मिक अन्वेषण</p></div>
+        <div class="feature-item"><i class="fas fa-flask"></i><p>विज्ञान संगत मूल्यांकन</p></div>
+      </div>
+    </section>
+    <hr />
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links-grid">
+        <div class="footer-col"><h4>Spiriligious</h4><a href="about.html">About</a><a href="team.html">Team</a><a href="contact.html">Contact Us</a></div>
+        <div class="footer-col"><h4>कानूनी & नीति</h4><a href="privacy.html">Privacy</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms and Conditions</a></div>
+        <div class="footer-col"><h4>जुड़ें</h4><a href="https://www.youtube.com/@spiriligious">Youtube</a><a href="https://facebook.com/spiriligious">Facebook</a><a href="https://instagram.com/spiriligious">Instagram</a></div>
+        <div class="footer-col"><h4>संसाधन</h4><a href="bhajan.html">भजन संग्रह</a><a href="podcast.html">मंथन पॉडकास्ट</a><a href="scientific-articles.html">वैज्ञानिक लेख</a></div>
+      </div>
+      <div class="footer-copyright">
+        <i class="far fa-copyright"></i> Spiriligious v1.0 — ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन | परंपराओं का वैज्ञानिक विश्लेषण
+      </div>
+      <div class="footer-tagline">धर्म = जीवन का संतुलन · अध्यात्म = आत्मा का विज्ञान · उद्देश्य = परंपराओं का वैज्ञानिक विश्लेषण</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
