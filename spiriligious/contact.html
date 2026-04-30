@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiriligious · प्रयोगशाला</title>
+  <title>Spiriligious · संपर्क करें</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="sacred-glow">
-
   <div id="infoModal" class="modal">
     <div class="modal-card">
       <i class="fas fa-om" style="font-size: 2rem; color: #bc6f25;"></i>
@@ -36,44 +35,18 @@
       </div>
     </div>
   </header>
-
-  <main class="container" style="padding: 2rem 0;">
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <span class="section-badge"><i class="fas fa-flask"></i> स्वयं प्रयोग करें</span>
-      <h1>आध्यात्मिक प्रयोगशाला</h1>
-      <p>विज्ञान और साधना के संगम को स्वयं अनुभव करें।</p>
-    </div>
-
-    <div class="lab-experiments-grid">
-      <!-- Experiment 1: Sound Visualizer -->
-      <div class="card-glass lab-card">
-        <i class="fas fa-waveform" style="font-size: 2rem; color:#c97e2a;"></i>
-        <h3>मंत्र ध्वनि विश्लेषक</h3>
-        <p>अपने माइक से "ॐ" या कोई मंत्र बोलें और ध्वनि तरंगें देखें।</p>
-        <button id="enableMicBtn" class="btn btn-outline">माइक शुरू करें</button>
-        <canvas id="audioWaveCanvas" width="400" height="150" style="width:100%; background:#1e1a15; border-radius:12px; margin-top:1rem;"></canvas>
-        <div id="freqData" style="margin-top:0.5rem; font-size:0.9rem;">🕉️ प्रमुख आवृत्ति: -- Hz</div>
-        <div id="relaxIndex" style="font-weight:bold;">😌 विश्राम सूचकांक: --</div>
-      </div>
-
-      <!-- Experiment 2: Breathing Timer -->
-      <div class="card-glass lab-card">
-        <i class="fas fa-lungs" style="font-size: 2rem; color:#c97e2a;"></i>
-        <h3>प्राणायाम टाइमर</h3>
-        <p>वैज्ञानिक तरीके से श्वास को नियंत्रित करें।</p>
-        <select id="breathingType" class="btn-outline" style="margin-bottom:1rem;">
-          <option value="478">4-7-8 श्वास (शांति)</option>
-          <option value="box">बॉक्स ब्रीदिंग (एकाग्रता)</option>
-        </select>
-        <div class="breathing-circle" id="breathingCircle" style="width:120px;height:120px;margin:0 auto;background:#f0e2ce;border-radius:50%;display:flex;align-items:center;justify-content:center;">🕉️</div>
-        <p id="breathingPhase" style="margin-top:1rem;">श्वास लें</p>
-        <button id="startBreathingBtn" class="btn btn-primary">प्रारंभ करें</button>
-        <button id="stopBreathingBtn" class="btn btn-outline">रोकें</button>
-        <p id="cycleCount" style="margin-top:0.5rem;">चक्र: 0</p>
-      </div>
+  <main class="container" style="padding: 3rem 0;">
+    <div class="card-glass" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+      <h1 style="text-align: center;">संपर्क करें</h1>
+      <form id="contactForm">
+        <input type="text" id="contactName" placeholder="आपका नाम" required style="width:100%; margin:0.5rem 0; padding:0.8rem;">
+        <input type="email" id="contactEmail" placeholder="ईमेल" required style="width:100%; margin:0.5rem 0; padding:0.8rem;">
+        <input type="text" id="contactSubject" placeholder="विषय" required style="width:100%; margin:0.5rem 0; padding:0.8rem;">
+        <textarea id="contactMessage" rows="5" placeholder="आपका संदेश" required style="width:100%; margin:0.5rem 0; padding:0.8rem;"></textarea>
+        <button type="submit" class="btn btn-primary">संदेश भेजें</button>
+      </form>
     </div>
   </main>
-
   <footer>
   <div class="container">
     <div class="footer-links-grid">
@@ -108,19 +81,8 @@
     <div class="footer-tagline">धर्म = जीवन का संतुलन · अध्यात्म = आत्मा का विज्ञान · उद्देश्य = परंपराओं का वैज्ञानिक विश्लेषण</div>
   </div>
   </footer>
-  
+
   <script src="script.js"></script>
-  <script>
-    initLabExperiments();
-  </script>
+  <script>initContactForm();</script>
 </body>
 </html>
-
-  
-  
-
-  
-
-  
-  
-  

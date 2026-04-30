@@ -10,54 +10,101 @@
 </head>
 <body class="sacred-glow">
 
-  <div id="infoModal" class="modal">...</div> <!-- same modal structure -->
-
-  <header style="padding: 1.2rem 0; border-bottom: 1px solid rgba(201, 126, 42, 0.15);">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
-      <div>
-        <a href="index.html" style="text-decoration: none;">
-          <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -0.5px; background: linear-gradient(135deg, #b45f2b, #e09d44); -webkit-background-clip: text; background-clip: text; color: transparent;">Spiriligious</span>
-        </a>
-        <span style="font-size: 0.8rem; background: #efe0cc; padding: 0.2rem 0.8rem; border-radius: 40px; margin-left: 0.8rem; font-weight: 500;">v1.0</span>
-      </div>
-      <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; flex-wrap: wrap;">
-        <a href="index.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-home"></i> मुखपृष्ठ</a>
-        <a href="bhajan.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-music"></i> भजन संग्रह</a>
-        <a href="scientific.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-microscope"></i> वैज्ञानिक विश्लेषण</a>
-        <a href="encyclopedia.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-book"></i> ज्ञानकोश</a>
-        <a href="forum.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-comments"></i> मंथन मंच</a>
-        <a href="lab.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-flask"></i> प्रयोगशाला</a>
-      </div>
+  <div id="infoModal" class="modal">
+    <div class="modal-card">
+      <i class="fas fa-om" style="font-size: 2rem; color: #bc6f25;"></i>
+      <h3 id="modalTitle">शीर्षक</h3>
+      <p id="modalMessage">विवरण</p>
+      <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
     </div>
-  </header>
+  </div>
+
+<header style="padding: 1.2rem 0; border-bottom: 1px solid rgba(201, 126, 42, 0.15);">
+  <div class="container" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <a href="index.html" style="text-decoration: none;">
+        <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -0.5px; background: linear-gradient(135deg, #b45f2b, #e09d44); -webkit-background-clip: text; background-clip: text; color: transparent;">Spiriligious</span>
+      </a>
+      <span style="font-size: 0.8rem; background: #efe0cc; padding: 0.2rem 0.8rem; border-radius: 40px; margin-left: 0.8rem; font-weight: 500;">v1.0</span>
+    </div>
+    <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; flex-wrap: wrap;">
+      <a href="index.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-home"></i> मुखपृष्ठ</a>
+      <a href="bhajan.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-music"></i> भजन संग्रह</a>
+      <a href="scientific.html" style="text-decoration: none; color: #c97e2a; font-weight: 600;"><i class="fas fa-microscope"></i> वैज्ञानिक विश्लेषण</a>
+      <a href="encyclopedia.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-book"></i> ज्ञानकोश</a>
+      <a href="forum.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-comments"></i> मंथन मंच</a>
+      <a href="lab.html" style="text-decoration: none; color: #6b4e2a;"><i class="fas fa-flask"></i> प्रयोगशाला</a>
+    </div>
+  </div>
+</header>
 
   <main class="container" style="padding: 2rem 0;">
     <div style="text-align: center; margin-bottom: 2rem;">
       <span class="section-badge"><i class="fas fa-microscope"></i> परंपरा × विज्ञान</span>
       <h1>वैज्ञानिक विश्लेषण</h1>
-      <p>हिंदू परंपराओं, रीति-रिवाजों और प्रतीकों का आधुनिक विज्ञान की कसौटी पर विश्लेषण।</p>
+      <p>हिंदू परंपराओं, रीति-रिवाजों और प्रतीकों का आधुनिक विज्ञान की कसौटी पर पूरा विश्लेषण।</p>
     </div>
-    <div id="analysisGrid" class="scientific-grid">
-      <div class="loading-spinner">🕉️ लोड हो रहा है...</div>
-    </div>
+    <div id="scientificFullGrid" class="scientific-grid"></div>
   </main>
 
   <footer>
-    <div class="container">
-      <div class="footer-links-grid">
-        <div class="footer-col"><h4>Spiriligious</h4><a href="about.html">About</a><a href="team.html">Team</a><a href="contact.html">Contact Us</a></div>
-        <div class="footer-col"><h4>कानूनी & नीति</h4><a href="privacy.html">Privacy</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms and Conditions</a></div>
-        <div class="footer-col"><h4>जुड़ें</h4><a href="https://www.youtube.com/@spiriligious">Youtube</a><a href="https://facebook.com/spiriligious">Facebook</a><a href="https://instagram.com/spiriligious">Instagram</a></div>
-        <div class="footer-col"><h4>संसाधन</h4><a href="bhajan.html">भजन संग्रह</a><a href="podcast.html">मंथन पॉडकास्ट</a><a href="scientific-articles.html">वैज्ञानिक लेख</a></div>
+  <div class="container">
+    <div class="footer-links-grid">
+      <div class="footer-col">
+        <h4>Spiriligious</h4>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+        <a href="team.html"><i class="fas fa-users"></i> Team</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
       </div>
-      <div class="footer-copyright">
-        <i class="far fa-copyright"></i> Spiriligious v1.0 — ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन | परंपराओं का वैज्ञानिक विश्लेषण
+      <div class="footer-col">
+        <h4>कानूनी &amp; नीति</h4>
+        <a href="privacy.html"><i class="fas fa-lock"></i> Privacy</a>
+        <a href="privacy.html"><i class="fas fa-file-alt"></i> Privacy Policy</a>
+        <a href="terms.html"><i class="fas fa-gavel"></i> Terms and Conditions</a>
       </div>
-      <div class="footer-tagline">धर्म = जीवन का संतुलन · अध्यात्म = आत्मा का विज्ञान · उद्देश्य = परंपराओं का वैज्ञानिक विश्लेषण</div>
+      <div class="footer-col">
+        <h4>जुड़ें</h4>
+        <a href="https://www.youtube.com/@spiriligious"><i class="fab fa-youtube"></i> Youtube</a>
+        <a href="https://facebook.com/spiriligious"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="https://instagram.com/spiriligious"><i class="fab fa-instagram"></i> Instagram</a>
+      </div>
+      <div class="footer-col">
+        <h4>संसाधन</h4>
+        <a href="bhajan.html"><i class="fas fa-music"></i> भजन संग्रह</a>
+        <a href="podcast.html"><i class="fas fa-podcast"></i> मंथन पॉडकास्ट</a>
+        <a href="scientific-articles.html"><i class="fas fa-flask"></i> वैज्ञानिक लेख</a>
+      </div>
     </div>
+    <div class="footer-copyright">
+      <i class="far fa-copyright"></i> Spiriligious v1.0 — ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन | परंपराओं का वैज्ञानिक विश्लेषण
+    </div>
+    <div class="footer-tagline">धर्म = जीवन का संतुलन · अध्यात्म = आत्मा का विज्ञान · उद्देश्य = परंपराओं का वैज्ञानिक विश्लेषण</div>
+  </div>
   </footer>
   
   <script src="script.js"></script>
-  <!-- The same script will render analysisGrid from traditionsData -->
+  <script>
+    // Override to show full analysis on scientific page
+    function renderFullAnalysis() {
+      const grid = document.getElementById('scientificFullGrid');
+      if (!grid) return;
+      let html = '';
+      traditionsData.forEach(t => {
+        html += `
+          <div class="analysis-card full-analysis-card">
+            <span class="card-tag">${t.category}</span>
+            <h3>${t.title}</h3>
+            <div class="tradition-category"><i class="fas fa-flask"></i> वैज्ञानिक एवं आध्यात्मिक विश्लेषण</div>
+            <div class="full-analysis-content">${t.fullAnalysis}</div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+    renderFullAnalysis();
+  </script>
 </body>
 </html>
+
+
+  

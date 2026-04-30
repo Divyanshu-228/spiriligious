@@ -4,13 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spiriligious · मंथन मंच</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="sacred-glow">
 
-  <div id="infoModal" class="modal">...</div>
+  <!-- CORRECT MODAL -->
+  <div id="infoModal" class="modal">
+    <div class="modal-card">
+      <i class="fas fa-om" style="font-size: 2rem; color: #bc6f25;"></i>
+      <h3 id="modalTitle">शीर्षक</h3>
+      <p id="modalMessage">विवरण</p>
+      <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
+    </div>
+  </div>
+
   <header style="padding: 1.2rem 0; border-bottom: 1px solid rgba(201, 126, 42, 0.15);">
     <div class="container" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
       <div>
@@ -30,13 +39,35 @@
     </div>
   </header>
 
-  <main class="container" style="padding: 3rem 0; text-align: center;">
-    <div class="card-glass" style="max-width: 700px; margin: 0 auto; padding: 3rem;">
-      <i class="fas fa-comments" style="font-size: 3rem; color: #c97e2a; margin-bottom: 1rem;"></i>
-      <h2>मंथन मंच – शीघ्र आ रहा है</h2>
-      <p style="margin: 1rem 0;">यहाँ आप परंपराओं, विज्ञान और अध्यात्म पर प्रश्न पूछ सकेंगे, उत्तर दे सकेंगे, और ज्ञान का सामूहिक मंथन कर सकेंगे।</p>
-      <button class="btn btn-primary" onclick="openModal('सूचना', 'मंच निर्माणाधीन है। हम आपको जल्द आमंत्रित करेंगे।')">सूचित करें</button>
+  <main class="container" style="padding: 2rem 0;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span class="section-badge"><i class="fas fa-comments"></i> सामूहिक मंथन</span>
+      <h1>मंथन मंच</h1>
+      <p>प्रश्न पूछें, उत्तर दें, और ज्ञान का सागर मंथन करें।</p>
     </div>
+
+    <div id="forumContainer">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <button id="newTopicBtn" class="btn btn-primary"><i class="fas fa-plus"></i> नया विषय</button>
+      </div>
+      <div id="topicsList" class="forum-topics-list"></div>
+    </div>
+
+    <!-- New Topic Modal (separate overlay) -->
+    <div id="newTopicModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); align-items:center; justify-content:center; z-index:1001;">
+      <div class="modal-card" style="max-width:500px; margin:auto;">
+        <h3>नया विषय बनाएँ</h3>
+        <input type="text" id="topicTitle" placeholder="विषय शीर्षक" style="width:100%; padding:10px; margin:10px 0; border-radius:12px; border:1px solid #e2c8a8;">
+        <input type="text" id="topicAuthor" placeholder="आपका नाम" style="width:100%; padding:10px; margin:10px 0; border-radius:12px; border:1px solid #e2c8a8;">
+        <textarea id="topicContent" rows="4" placeholder="विस्तृत चर्चा..." style="width:100%; padding:10px; margin:10px 0; border-radius:12px; border:1px solid #e2c8a8;"></textarea>
+        <div style="display:flex; gap:1rem; justify-content:center;">
+          <button id="saveTopicBtn" class="btn btn-primary">सबमिट करें</button>
+          <button id="cancelTopicBtn" class="btn btn-outline">रद्द करें</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="topicDetailView" style="display:none;"></div>
   </main>
 
   <footer>
