@@ -60,66 +60,21 @@ window.addEventListener('click', (e) => {
 // ==================== LOAD DATA FROM FIRESTORE ====================
 async function loadScientificCards() {
   try {
-    const snapshot = await db
-      .collection('scientificCards')
-      .where('published', '==', true)
-      .get();
+    const snapshot = await db.collection('scientificCards').where('published', '==', true).get();
     traditionsData = [];
-    snapshot.forEach(doc => {
-      traditionsData.push({
-        id: doc.id,
-        ...doc.data()
-      });
-    });
-    // manual sorting
-    traditionsData.sort((a, b) => {
-      // pinned first
-      if ((b.pinned || false) !== (a.pinned || false)) {
-        return (b.pinned || false) - (a.pinned || false);
-      }
-      // newest first
-      const aTime =
-        a.createdAt?.seconds || 0;
-      const bTime =
-        b.createdAt?.seconds || 0;
-      return bTime - aTime;
-    });
+    snapshot.forEach(doc => traditionsData.push({ id: doc.id, ...doc.data() }));
     renderAnalysisCards();
-    if (
-      document.getElementById('scientificFullGrid')
-    ) {
-      renderFullAnalysis();
-    }
-  } catch (err) {
-    console.error(err);
-  }
+    if (document.getElementById('scientificFullGrid')) renderFullAnalysis();
+  } catch (err) { console.error(err); }
 }
 
 async function loadBhajanVideos() {
   try {
-    const snapshot = await db
-      .collection('bhajanVideos')
-      .where('published', '==', true)
-      .get();
+    const snapshot = await db.collection('bhajanVideos').where('published', '==', true).get();
     bhajanVideos = [];
-    snapshot.forEach(doc => {
-      bhajanVideos.push({
-        id: doc.id,
-        ...doc.data()
-      });
-    });
-    // newest first
-    bhajanVideos.sort((a, b) => {
-      const aTime =
-        a.createdAt?.seconds || 0;
-      const bTime =
-        b.createdAt?.seconds || 0;
-      return bTime - aTime;
-    });
+    snapshot.forEach(doc => bhajanVideos.push({ id: doc.id, ...doc.data() }));
     renderBhajanPage();
-  } catch (err) {
-    console.error(err);
-  }
+  } catch (err) { console.error(err); }
 }
 
 async function loadEncyclopediaTerms() {
@@ -317,11 +272,22 @@ function hideNewTopicModal() {
 }
 
 async function saveNewTopic() {
+  // Get input values
   const title = document.getElementById('topicTitle').value.trim();
-  const author = document.getElementById('topicAuthor').value.trim() || 'साधक';
-  const content = document.getElementById('topicContent').value.trim();
-  if (!title || !content) return openModal('त्रुटि', 'कृपया शीर्षक और विवरण भरें');
+  const author =
+    document.getElementById('topicAuthor').value.trim() || 'साधक';
+  const content =
+    document.getElementById('topicContent').value.trim();
+  // Validation
+  if (!title || !content) {
+    hideNewTopicModal();
+    return openModal(
+      'त्रुटि',
+      'कृपया शीर्षक और विवरण भरें'
+    );
+  }
   try {
+    // Create topic object
     const newTopic = {
       title: escapeHtml(title),
       author: escapeHtml(author),
@@ -331,16 +297,30 @@ async function saveNewTopic() {
       locked: false,
       deleted: false,
       reports: 0,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt:
+        firebase.firestore.FieldValue.serverTimestamp(),
       replies: []
     };
+    // Save to Firestore
     await db.collection('forumTopics').add(newTopic);
+    // CLOSE form modal FIRST
     hideNewTopicModal();
+    // Reload forum list
     await loadTopics();
-    openModal('सफल','आपका विषय समीक्षा हेतु भेज दिया गया है। 🙏');
+    // Show success popup
+    openModal(
+      'सफल',
+      'आपका विषय समीक्षा हेतु भेज दिया गया है। 🙏'
+    );
   } catch (err) {
     console.error("saveNewTopic error:", err);
-    openModal('त्रुटि', 'विषय पोस्ट नहीं हो सका। कृपया बाद में प्रयास करें।');
+    // CLOSE form modal FIRST
+    hideNewTopicModal();
+    // Show error popup
+    openModal(
+      'त्रुटि',
+      'विषय पोस्ट नहीं हो सका। कृपया बाद में प्रयास करें।'
+    );
   }
 }
 
