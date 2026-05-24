@@ -1,78 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiriligious · About</title>
-  <meta name="description" content="Spiriligious - ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन।">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="sacred-glow">
-
-  <!-- MODAL (same as index) -->
-  <div id="infoModal" class="modal">
-    <div class="modal-card">
-      <i class="fas fa-om" style="font-size: 2rem; color: #bc6f25; margin-bottom: 0.5rem;"></i>
-      <h3 id="modalTitle">शीर्षक</h3>
-      <p id="modalMessage">विवरण यहाँ दिखेगा...</p>
-      <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
-    </div>
-  </div>
-
-  <header>
-    <div class="container" style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
-      <div>
-        <a href="index.html" style="text-decoration: none;">
-          <span style="font-size: 1.7rem; font-weight: 700; background: linear-gradient(135deg, #A68868, #4B6382); -webkit-background-clip: text; background-clip: text; color: transparent;">Spiriligious</span>
-        </a>
-        <span style="font-size: 0.8rem; background: #E3C39D; padding: 0.2rem 0.8rem; border-radius: 40px; margin-left: 0.8rem;">v1.0</span>
-      </div>
-      <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; flex-wrap: wrap;">
-        <a href="index.html" style="text-decoration: none; color: #A68868; font-weight: 600;"><i class="fas fa-home"></i> मुखपृष्ठ</a>
-        <a href="bhajan.html" style="text-decoration: none; color: #4B6382;"><i class="fas fa-music"></i> भजन संग्रह</a>
-        <a href="scientific.html" style="text-decoration: none; color: #4B6382;"><i class="fas fa-microscope"></i> वैज्ञानिक विश्लेषण</a>
-        <a href="encyclopedia.html" style="text-decoration: none; color: #4B6382;"><i class="fas fa-book"></i> ज्ञानकोश</a>
-        <a href="forum.html" style="text-decoration: none; color: #4B6382;"><i class="fas fa-comments"></i> मंथन मंच</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spiriligious · Our Team</title>
+    <meta
+      name="description"
+      content="Spiriligious - ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन।"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sacred-glow">
+    <div id="infoModal" class="modal">
+      <div class="modal-card">
+        <i
+          class="fas fa-om"
+          style="font-size: 2rem; color: #bc6f25; margin-bottom: 0.5rem"
+        ></i>
+        <h3 id="modalTitle">शीर्षक</h3>
+        <p id="modalMessage">विवरण यहाँ दिखेगा...</p>
+        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
       </div>
     </div>
-  </header>
 
-<main class="container" style="padding: 3rem 0;">
-  <div class="card-glass" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
-    <h1 style="text-align: center;">Our Team</h1>
-    <p style="text-align: center;"><strong>Lt (Dr.) Hemant Kumar Joshi</strong> – Founder</p>
-    <p style="text-align: center;"><br>हमारा उद्देश्य परंपराओं के पीछे छिपे विज्ञान और सत्य को समझना और प्रस्तुत करना है।</p>
-  </div>
-</main>
+    <div id="header-placeholder"></div>
 
-  <footer>
-    <div class="container">
-      <div class="footer-links-grid">
-        <div class="footer-col">
-          <h4>Spiriligious</h4>
-          <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-          <a href="team.html"><i class="fas fa-users"></i> Team</a>
-          <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+    <main class="container" style="padding: 3rem 0">
+      <div
+        class="card-glass"
+        style="max-width: 800px; margin: 0 auto; padding: 2rem"
+      >
+        <h1 style="text-align: center">हमारी टीम</h1>
+
+        <!-- Founder -->
+        <div style="text-align: center; margin-bottom: 2rem">
+          <i
+            class="fas fa-user-circle"
+            style="font-size: 1.5rem; color: var(--warm-brown)"
+          ></i>
+          <p style="margin-top: 0.5rem">
+            <strong>Lt (Dr.) Hemant Kumar Joshi</strong> – Founder
+          </p>
         </div>
-        <div class="footer-col">
-          <h4>कानूनी &amp; नीति</h4>
-          <a href="privacy.html"><i class="fas fa-file-alt"></i> Privacy Policy</a>
-          <a href="terms.html"><i class="fas fa-gavel"></i> Terms and Conditions</a>
+
+        <!-- Full Stack Developer -->
+        <div style="text-align: center">
+          <i
+            class="fas fa-code"
+            style="font-size: 1rem; color: var(--link-color)"
+          ></i>
+          <p style="margin-top: 0.5rem">
+            <strong>Dibyanshu sanyal</strong> – Digital Architect
+          </p>
         </div>
-        <div class="footer-col">
-          <h4>जुड़ें</h4>
-          <a href="https://www.youtube.com/@spiriligious" target="_blank"><i class="fab fa-youtube"></i> Youtube</a>
-          <a href="https://facebook.com/spiriligious" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-          <a href="https://instagram.com/spiriligious" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-        </div>
+
+        <p style="text-align: center; margin-top: 2rem">
+          हमारा उद्देश्य परंपराओं के पीछे छिपे विज्ञान और सत्य को समझना और
+          प्रस्तुत करना है।
+        </p>
       </div>
-      <div class="footer-copyright"><i class="far fa-copyright"></i> Spiriligious v1.0 — ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन | परंपराओं का वैज्ञानिक विश्लेषण</div>
-      <div class="footer-tagline">धर्म = जीवन का संतुलन · अध्यात्म = आत्मा का विज्ञान · उद्देश्य = परंपराओं का वैज्ञानिक विश्लेषण</div>
-    </div>
-  </footer>
+    </main>
 
-  <script src="script.js"></script>
-</body>
+    <div id="footer-placeholder"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="global.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

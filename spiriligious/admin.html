@@ -1,565 +1,1220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiriligious · Admin Panel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #CDD5DB 0%, #E3E8ED 100%); min-height: 100vh; padding: 2rem; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    .card { background: rgba(255,255,255,0.95); border: 1px solid rgba(166,136,104,0.25); border-radius: 2rem; box-shadow: 0 12px 28px -8px rgba(7,23,57,0.1); }
-    .login-form { max-width: 420px; margin: 8rem auto; padding: 2.5rem; text-align: center; }
-    .login-form h2 { color: #071739; font-size: 1.8rem; margin-bottom: 1.5rem; }
-    .login-form input { width: 100%; padding: 0.9rem 1rem; margin: 0.75rem 0; border: 1px solid #A4B5C4; border-radius: 1rem; font-size: 1rem; }
-    .login-form input:focus { outline: none; border-color: #A68868; box-shadow: 0 0 0 3px rgba(166,136,104,0.2); }
-    .relative { position: relative; }
-    .password-toggle { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #A68868; }
-    .login-form button { width: 100%; margin-top: 1rem; padding: 0.9rem; background: #A68868; color: white; border: none; border-radius: 2rem; cursor: pointer; font-weight: 600; transition: 0.2s; }
-    .login-form button:hover { background: #8f6e4c; transform: scale(1.02); }
-    .admin-card { background: rgba(255,255,255,0.95); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 2rem; }
-    h1 { color: #071739; font-size: 2rem; margin-bottom: 2rem; }
-    h2 { color: #071739; font-size: 1.4rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    button { background: #A68868; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 2rem; cursor: pointer; margin-right: 0.5rem; transition: 0.2s; }
-    button:hover { background: #8f6e4c; transform: translateY(-1px); }
-    .item { background: #FEF9F0; border: 1px solid #E3C39D; border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-    .draft-badge { background: #dc3545; color: white; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 1rem; margin-left: 0.5rem; }
-    .published-badge { background: #28a745; color: white; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 1rem; margin-left: 0.5rem; }
-    .hold-badge { background: #ffc107; color: #222; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 1rem; margin-left: 0.5rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem; }
-    .forum-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .forum-grid { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
-    .hidden { display: none; }
-    .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(7,23,57,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-    .modal-content { background: white; border-radius: 2rem; padding: 2rem; max-width: 500px; width: 90%; max-height: 85vh; overflow-y: auto; }
-    .modal-content h3 { margin-bottom: 1rem; color: #071739; }
-    .modal-content input, .modal-content textarea { width: 100%; padding: 0.6rem; margin: 0.5rem 0; border: 1px solid #A4B5C4; border-radius: 0.8rem; }
-    .modal-content label { display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; }
-    .modal-content small { color: #4B6382; }
-    .modal-content button { margin-top: 1rem; }
-    @media (max-width: 700px) { body { padding: 1rem; } .login-form { margin: 4rem auto; padding: 1.5rem; } }
-  </style>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spiriligious · Admin Panel</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Base styles (light theme by default) */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-<div id="loginContainer" class="container">
-  <div class="card login-form">
-    <h2>Admin Login</h2>
-    <input type="email" id="adminEmail" placeholder="Email">
-    <div class="relative">
-      <input type="password" id="adminPassword" placeholder="Password">
-      <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
-    </div>
-    <button id="loginBtn">Login</button>
-  </div>
-</div>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(145deg, #cdd5db 0%, #e3e8ed 100%);
+        min-height: 100vh;
+        padding: 2rem;
+        transition:
+          background 0.3s,
+          color 0.2s;
+      }
 
-<div id="adminPanel" class="hidden container">
-  <h1>Spiriligious CMS</h1>
+      /* Dark theme class */
+      body.dark-theme {
+        background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+        color: #e2e8f0;
+      }
 
-  <div class="admin-card">
-    <h2><i class="fas fa-microscope"></i> Scientific Cards</h2>
-    <button onclick="openCardForm()">+ Add New Card</button>
-    <div id="cardsList" class="grid"></div>
-  </div>
+      body.dark-theme .card,
+      body.dark-theme .admin-card,
+      body.dark-theme .login-form,
+      body.dark-theme .modal-content {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: rgba(166, 136, 104, 0.4);
+        color: #e2e8f0;
+      }
 
-  <div class="admin-card">
-    <h2><i class="fas fa-music"></i> Bhajan Videos</h2>
-    <button onclick="openVideoForm()">+ Add New Video</button>
-    <div id="videosList" class="grid"></div>
-  </div>
+      body.dark-theme .item {
+        background: #1e293b;
+        border-color: #a68868;
+      }
 
-  <div class="admin-card">
-    <h2><i class="fas fa-book"></i> Encyclopedia Terms</h2>
-    <button onclick="openTermForm()">+ Add New Term</button>
-    <div id="termsList" class="grid"></div>
-  </div>
+      body.dark-theme .item strong,
+      body.dark-theme .item h3 {
+        color: #f1f5f9;
+      }
 
-  <div class="admin-card">
-  <h2>
-    <i class="fas fa-comments"></i>
-    Forum Topics
-  </h2>
-  <div id="forumTopicsList" class="forum-grid"></div>
-</div>
-</div>
+      body.dark-theme .item p,
+      body.dark-theme .item small {
+        color: #cbd5e1;
+      }
 
-<script>
-  // ==================== FIREBASE CONFIG ====================
-  const firebaseConfig = {
-    apiKey: "AIzaSyC8h_NLwFq54mFSrZhG-gQnWJRIAr0zc5c",
-    authDomain: "spiriligious-cms.firebaseapp.com",
-    projectId: "spiriligious-cms",
-    storageBucket: "spiriligious-cms.firebasestorage.app",
-    messagingSenderId: "595657008516",
-    appId: "1:595657008516:web:e7d2fed4b5e1e5c481e9d1",
-    measurementId: "G-LXB9R61S94"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const auth = firebase.auth();
+      body.dark-theme .modal-content input,
+      body.dark-theme .modal-content textarea {
+        background: #0f172a;
+        border-color: #475569;
+        color: #f1f5f9;
+      }
 
-  // ==================== HELPER: YouTube URL to Embed ====================
-  // Optional: restrict to a specific channel ID (set to null to disable)
-  const ALLOWED_CHANNEL_ID = null; // e.g., "UCxxxxxxxxxxxxxxxxxxxxxx"
+      body.dark-theme .modal-content label {
+        color: #cbd5e1;
+      }
 
-  function extractYouTubeData(url) {
+      body.dark-theme .btn-outline-cancel {
+        background: #475569;
+        color: #f1f5f9;
+      }
 
-  // Playlist
-  const playlistMatch = url.match(/[?&]list=([^&]+)/);
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-  if (playlistMatch) {
-    return {
-      type: 'playlist',
-      id: playlistMatch[1]
-    };
-  }
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(166, 136, 104, 0.25);
+        border-radius: 2rem;
+        box-shadow: 0 12px 28px -8px rgba(7, 23, 57, 0.1);
+      }
 
-  // Videos / Shorts
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?#]+)/,
-    /youtube\.com\/shorts\/([^&?#]+)/
-  ];
+      .login-form {
+        max-width: 420px;
+        margin: 8rem auto;
+        padding: 2.5rem;
+        text-align: center;
+      }
 
-  for (let pattern of patterns) {
-    const match = url.match(pattern);
+      .login-form h2 {
+        color: #071739;
+      }
 
-    if (match && match[1]) {
-      return {
-        type: 'video',
-        id: match[1]
-      };
-    }
-  }
+      body.dark-theme .login-form h2 {
+        color: #e2e8f0;
+      }
 
-  return null;
-}
+      .login-form input {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        margin: 0.75rem 0;
+        border: 1px solid #a4b5c4;
+        border-radius: 1rem;
+        font-size: 1rem;
+      }
 
-  async function convertToEmbedUrl(inputUrl) {
-  const data = extractYouTubeData(inputUrl);
-  if (!data) return null;
-  if (data.type === 'playlist') {
-    return `https://www.youtube.com/embed/videoseries?list=${data.id}`;
-  }
-  return `https://www.youtube.com/embed/${data.id}`;
-}
+      .login-form input:focus {
+        outline: none;
+        border-color: #a68868;
+        box-shadow: 0 0 0 3px rgba(166, 136, 104, 0.2);
+      }
 
-  // Validate that the URL is a valid YouTube link (any form) and return embed URL
-  async function validateAndConvertYouTubeLink(inputUrl, fieldElement) {
-    if (!inputUrl.trim()) {
-      fieldElement.style.borderColor = "#A4B5C4";
-      return null;
-    }
-    const embed = await convertToEmbedUrl(inputUrl);
-    if (!embed) {
-      fieldElement.style.borderColor = "#dc3545";
-      alert("Invalid YouTube URL. Please enter a valid YouTube link (e.g., https://www.youtube.com/watch?v=... or https://youtu.be/...)");
-      return null;
-    }
-    fieldElement.style.borderColor = "#28a745";
-    return embed;
-  }
+      .relative {
+        position: relative;
+      }
 
-  // ==================== AUTH & UI ====================
-  const toggle = document.getElementById('togglePassword');
-  const pwd = document.getElementById('adminPassword');
-  if (toggle && pwd) {
-    toggle.addEventListener('click', () => {
-      const type = pwd.type === 'password' ? 'text' : 'password';
-      pwd.type = type;
-      toggle.classList.toggle('fa-eye');
-      toggle.classList.toggle('fa-eye-slash');
-    });
-  }
+      .password-toggle {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #a68868;
+      }
 
-  document.getElementById('loginBtn').onclick = async () => {
-    const email = document.getElementById('adminEmail').value;
-    const password = document.getElementById('adminPassword').value;
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      document.getElementById('loginContainer').classList.add('hidden');
-      document.getElementById('adminPanel').classList.remove('hidden');
-      loadAllData();
-    } catch (err) {
-      alert("Login failed: " + err.message);
-    }
-  };
+      .login-form button {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 0.9rem;
+        background: #a68868;
+        color: white;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+      }
 
-  async function loadAllData() { 
-    await loadCards(); 
-    await loadVideos(); 
-    await loadTerms();
-    await loadForumTopics(); 
-  }
+      .login-form button:hover {
+        background: #8f6e4c;
+        transform: scale(1.02);
+      }
 
-  async function loadCards() {
-      const snap = await db
-        .collection('scientificCards')
-        .get();
-      const container =
-        document.getElementById('cardsList');
-      container.innerHTML = '';
-      let docs = [];
-      snap.forEach(doc => {
-        docs.push({
-          id: doc.id,
-          ...doc.data()
-        });
-      });
-      // Sort pinned first, newest first
-      docs.sort((a, b) => {
-        if ((b.pinned || false) !== (a.pinned || false)) {
-          return (b.pinned || false)
-            - (a.pinned || false);
+      /* Header with title and theme toggle */
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .theme-toggle-btn {
+        background: #a68868;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        cursor: pointer;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: 0.2s;
+        color: white;
+      }
+
+      .theme-toggle-btn:hover {
+        background: #8f6e4c;
+        transform: scale(1.02);
+      }
+
+      body.dark-theme .theme-toggle-btn {
+        background: #475569;
+      }
+
+      body.dark-theme .theme-toggle-btn:hover {
+        background: #64748b;
+      }
+
+      .admin-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        color: #071739;
+        font-size: 2rem;
+        margin: 0;
+      }
+
+      body.dark-theme h1,
+      body.dark-theme h2 {
+        color: #e2e8f0;
+      }
+
+      h2 {
+        color: #071739;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      button {
+        background: #a68868;
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 2rem;
+        cursor: pointer;
+        margin-right: 0.5rem;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #8f6e4c;
+        transform: translateY(-1px);
+      }
+
+      .item {
+        background: #fef9f0;
+        border: 1px solid #e3c39d;
+        border-radius: 1rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .draft-badge {
+        background: #dc3545;
+        color: white;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      .published-badge {
+        background: #28a745;
+        color: white;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      .hold-badge {
+        background: #ffc107;
+        color: #222;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .forum-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .forum-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(7, 23, 57, 0.7);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 2rem;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .modal-content h3 {
+        margin-bottom: 1rem;
+        color: #071739;
+      }
+
+      .modal-content input,
+      .modal-content textarea {
+        width: 100%;
+        padding: 0.6rem;
+        margin: 0.5rem 0;
+        border: 1px solid #a4b5c4;
+        border-radius: 0.8rem;
+      }
+
+      .modal-content label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+      }
+
+      .modal-content small {
+        color: #4b6382;
+      }
+
+      .modal-content button {
+        margin-top: 1rem;
+      }
+
+      @media (max-width: 700px) {
+        body {
+          padding: 1rem;
         }
-        const aTime =
-          a.createdAt?.seconds || 0;
-        const bTime =
-          b.createdAt?.seconds || 0;
-        return bTime - aTime;
-      });
-      docs.forEach(data => {
-        const isPublished =
-          data.published === true;
-        const badge = isPublished
-          ? '<span class="published-badge">Published</span>'
-          : '<span class="draft-badge">Draft</span>';
-        const pinBadge = data.pinned
-          ? '<span class="hold-badge">Pinned</span>'
-          : '';
-        container.innerHTML += `
+        .login-form {
+          margin: 4rem auto;
+          padding: 1.5rem;
+        }
+        .admin-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        /* Admin page background image */
+        body {
+          background-image: url("../images/admin-bg.jpg"); /* ← adjust path if needed */
+          background-size: cover;
+          background-position: center center;
+          background-attachment: fixed;
+          position: relative;
+        }
+
+        /* Overlay to improve text contrast (light theme) */
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(
+            255,
+            255,
+            255,
+            0.7
+          ); /* light overlay for light mode */
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        /* Dark theme – darker overlay so the image stays but text pops */
+        body.dark-theme::before {
+          background: rgba(0, 0, 0, 0.75);
+        }
+      }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  </head>
+
+  <body>
+    <div id="loginContainer" class="container">
+      <div class="card login-form">
+        <h2>Admin Login</h2>
+        <input type="email" id="adminEmail" placeholder="Email" />
+        <div class="relative">
+          <input type="password" id="adminPassword" placeholder="Password" />
+          <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
+        </div>
+        <button id="loginBtn">Login</button>
+      </div>
+    </div>
+
+    <div id="adminPanel" class="hidden container">
+      <div class="admin-header">
+        <h1>Spiriligious CMS</h1>
+        <button id="themeToggleBtn" class="theme-toggle-btn">
+          <i class="fas fa-moon"></i> Dark Mode
+        </button>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-praying-hands"></i> आज का श्लोक (Daily Shlok)</h2>
+        <button onclick="openShlokForm()">+ Add / Edit Latest Shlok</button>
+        <div id="shlokList" class="grid"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-comments"></i> User Questions</h2>
+        <div id="forumTopicsList" class="forum-grid"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-microscope"></i> Scientific Cards</h2>
+        <button onclick="openCardForm()">+ Add New Card</button>
+        <div id="cardsList" class="grid"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-music"></i> Bhajan Videos</h2>
+        <button onclick="openVideoForm()">+ Add New Video</button>
+        <div id="videosList" class="grid"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-book"></i> Encyclopedia Terms</h2>
+        <button onclick="openTermForm()">+ Add New Term</button>
+        <div id="termsList" class="grid"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-temple"></i> Mandir Darshan</h2>
+        <button onclick="openMandirForm()">+ Add New Mandir</button>
+        <div id="mandirList" class="grid"></div>
+      </div>
+
+      <div class="admin-card">
+        <h2><i class="fas fa-user-astronaut"></i> Sant Darshan</h2>
+        <button onclick="openSantForm()">+ Add New Sant</button>
+        <div id="santList" class="grid"></div>
+      </div>
+    </div>
+
+    <script>
+      // ==================== DARK / LIGHT THEME ====================
+      const themeToggleBtn = document.getElementById("themeToggleBtn");
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          document.body.classList.add("dark-theme");
+          if (themeToggleBtn) {
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+          }
+          localStorage.setItem("adminTheme", "dark");
+        } else {
+          document.body.classList.remove("dark-theme");
+          if (themeToggleBtn) {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+          }
+          localStorage.setItem("adminTheme", "light");
+        }
+      }
+
+      function initTheme() {
+        const saved = localStorage.getItem("adminTheme");
+        if (saved === "dark") {
+          applyTheme("dark");
+        } else {
+          applyTheme("light");
+        }
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+          const isDark = document.body.classList.contains("dark-theme");
+          applyTheme(isDark ? "light" : "dark");
+        });
+      }
+
+      // ==================== FIREBASE CONFIG ====================
+      const firebaseConfig = {
+        apiKey: "AIzaSyC8h_NLwFq54mFSrZhG-gQnWJRIAr0zc5c",
+        authDomain: "spiriligious-cms.firebaseapp.com",
+        projectId: "spiriligious-cms",
+        storageBucket: "spiriligious-cms.firebasestorage.app",
+        messagingSenderId: "595657008516",
+        appId: "1:595657008516:web:e7d2fed4b5e1e5c481e9d1",
+        measurementId: "G-LXB9R61S94",
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const auth = firebase.auth();
+
+      // ==================== HELPER: YouTube URL to Embed ====================
+      function extractYouTubeData(url) {
+        const playlistMatch = url.match(/[?&]list=([^&]+)/);
+        if (playlistMatch) {
+          return { type: "playlist", id: playlistMatch[1] };
+        }
+        const patterns = [
+          /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?#]+)/,
+          /youtube\.com\/shorts\/([^&?#]+)/,
+        ];
+        for (let pattern of patterns) {
+          const match = url.match(pattern);
+          if (match && match[1]) {
+            return { type: "video", id: match[1] };
+          }
+        }
+        return null;
+      }
+
+      async function convertToEmbedUrl(inputUrl) {
+        const data = extractYouTubeData(inputUrl);
+        if (!data) return null;
+        if (data.type === "playlist") {
+          return `https://www.youtube.com/embed/videoseries?list=${data.id}`;
+        }
+        return `https://www.youtube.com/embed/${data.id}`;
+      }
+
+      async function validateAndConvertYouTubeLink(inputUrl, fieldElement) {
+        if (!inputUrl.trim()) {
+          fieldElement.style.borderColor = "#A4B5C4";
+          return null;
+        }
+        let embed = await convertToEmbedUrl(inputUrl);
+        if (!embed) {
+          const embedMatch = inputUrl.match(/\/embed\/([^?&]+)/);
+          if (embedMatch) {
+            embed = `https://www.youtube.com/embed/${embedMatch[1]}`;
+          }
+        }
+        if (!embed) {
+          fieldElement.style.borderColor = "#dc3545";
+          alert(
+            "Invalid YouTube URL. Please enter a valid YouTube link (e.g., https://www.youtube.com/watch?v=... or embed URL)",
+          );
+          return null;
+        }
+        fieldElement.style.borderColor = "#28a745";
+        return embed;
+      }
+
+      // ==================== AUTH & UI ====================
+      const toggle = document.getElementById("togglePassword");
+      const pwd = document.getElementById("adminPassword");
+      if (toggle && pwd) {
+        toggle.addEventListener("click", () => {
+          const type = pwd.type === "password" ? "text" : "password";
+          pwd.type = type;
+          toggle.classList.toggle("fa-eye");
+          toggle.classList.toggle("fa-eye-slash");
+        });
+      }
+
+      document.getElementById("loginBtn").onclick = async () => {
+        const email = document.getElementById("adminEmail").value;
+        const password = document.getElementById("adminPassword").value;
+        try {
+          await auth.signInWithEmailAndPassword(email, password);
+          document.getElementById("loginContainer").classList.add("hidden");
+          document.getElementById("adminPanel").classList.remove("hidden");
+          loadAllData();
+          // After login, re-apply theme (body visible now)
+          initTheme();
+        } catch (err) {
+          alert("Login failed: " + err.message);
+        }
+      };
+
+      async function loadAllData() {
+        await loadCards();
+        await loadVideos();
+        await loadTerms();
+        await loadForumTopics();
+        await loadMandirs();
+        await loadSants();
+        await loadShloks();
+      }
+
+      async function loadCards() {
+        const snap = await db.collection("scientificCards").get();
+        const container = document.getElementById("cardsList");
+        container.innerHTML = "";
+        let docs = [];
+        snap.forEach((doc) => docs.push({ id: doc.id, ...doc.data() }));
+        docs.sort((a, b) => {
+          if ((b.pinned || false) !== (a.pinned || false))
+            return (b.pinned || false) - (a.pinned || false);
+          const aTime = a.createdAt?.seconds || 0;
+          const bTime = b.createdAt?.seconds || 0;
+          return bTime - aTime;
+        });
+        docs.forEach((data) => {
+          const isPublished = data.published === true;
+          const badge = isPublished
+            ? '<span class="published-badge">Published</span>'
+            : '<span class="draft-badge">Draft</span>';
+          const pinBadge = data.pinned
+            ? '<span class="hold-badge">Pinned</span>'
+            : "";
+          container.innerHTML += `
           <div class="item">
             <div>
-              <strong>
-                ${escapeHtml(data.title)}
-              </strong>
+              <strong>${escapeHtml(data.title)}</strong>
               ${badge}
               ${pinBadge}
               <br>
-              <small>
-                ${escapeHtml(data.category)}
-              </small>
+              <small>${escapeHtml(data.category)}</small>
             </div>
             <div class="forum-actions">
-              <button onclick="togglePublishCard('${data.id}', ${!isPublished})">
-                ${isPublished ? 'Unpublish' : 'Publish'}
-              </button>
-              <button onclick="editCard('${data.id}')">
-                Edit
-              </button>
-              <button onclick="deleteCard('${data.id}')">
-                Delete
-              </button>
+              <button onclick="togglePublishCard('${data.id}', ${!isPublished})">${isPublished ? "Unpublish" : "Publish"}</button>
+              <button onclick="editCard('${data.id}')">Edit</button>
+              <button onclick="deleteCard('${data.id}')">Delete</button>
             </div>
           </div>
         `;
-      });
-    }    
-  async function loadVideos() {
-    const snap = await db.collection('bhajanVideos').get();
-    const container = document.getElementById('videosList');
-    container.innerHTML = '';
-    snap.forEach(doc => {
-      const data = doc.data();
-      const isPublished = data.published === true;
-      const badge = isPublished ? '<span class="published-badge">Published</span>' : '<span class="draft-badge">Draft</span>';
-      container.innerHTML += `
-        <div class="item">
-          <div><strong>${escapeHtml(data.title)}</strong> ${badge}<br><small>${escapeHtml(data.videoUrl)}</small></div>
-          <div>
-            <button onclick="togglePublishVideo('${doc.id}', ${!isPublished})">${isPublished ? 'Unpublish' : 'Publish'}</button>
-            <button onclick="editVideo('${doc.id}')">Edit</button>
-            <button onclick="deleteVideo('${doc.id}')">Delete</button>
+        });
+      }
+
+      async function loadVideos() {
+        const snap = await db.collection("bhajanVideos").get();
+        const container = document.getElementById("videosList");
+        container.innerHTML = "";
+        snap.forEach((doc) => {
+          const data = doc.data();
+          const isPublished = data.published === true;
+          const badge = isPublished
+            ? '<span class="published-badge">Published</span>'
+            : '<span class="draft-badge">Draft</span>';
+          container.innerHTML += `
+          <div class="item">
+            <div><strong>${escapeHtml(data.title)}</strong> ${badge}<br><small>${escapeHtml(data.videoUrl)}</small></div>
+            <div>
+              <button onclick="togglePublishVideo('${doc.id}', ${!isPublished})">${isPublished ? "Unpublish" : "Publish"}</button>
+              <button onclick="editVideo('${doc.id}')">Edit</button>
+              <button onclick="deleteVideo('${doc.id}')">Delete</button>
+            </div>
           </div>
-        </div>
-      `;
-    });
-  }
+        `;
+        });
+      }
 
-  async function loadTerms() {
-    const snap = await db.collection('encyclopediaTerms').get();
-    const container = document.getElementById('termsList');
-    container.innerHTML = '';
-    snap.forEach(doc => {
-      const data = doc.data();
-      const isPublished = data.published === true;
-      const badge = isPublished ? '<span class="published-badge">Published</span>' : '<span class="draft-badge">Draft</span>';
-      container.innerHTML += `
-        <div class="item">
-          <div><strong>${escapeHtml(data.term)}</strong> ${badge}<br><small>${escapeHtml(data.meaning.substring(0,50))}...</small></div>
-          <div>
-            <button onclick="togglePublishTerm('${doc.id}', ${!isPublished})">${isPublished ? 'Unpublish' : 'Publish'}</button>
-            <button onclick="editTerm('${doc.id}')">Edit</button>
-            <button onclick="deleteTerm('${doc.id}')">Delete</button>
+      async function loadTerms() {
+        const snap = await db.collection("encyclopediaTerms").get();
+        const container = document.getElementById("termsList");
+        container.innerHTML = "";
+        snap.forEach((doc) => {
+          const data = doc.data();
+          const isPublished = data.published === true;
+          const badge = isPublished
+            ? '<span class="published-badge">Published</span>'
+            : '<span class="draft-badge">Draft</span>';
+          container.innerHTML += `
+          <div class="item">
+            <div><strong>${escapeHtml(data.term)}</strong> ${badge}<br><small>${escapeHtml(data.meaning.substring(0, 50))}...</small></div>
+            <div>
+              <button onclick="togglePublishTerm('${doc.id}', ${!isPublished})">${isPublished ? "Unpublish" : "Publish"}</button>
+              <button onclick="editTerm('${doc.id}')">Edit</button>
+              <button onclick="deleteTerm('${doc.id}')">Delete</button>
+            </div>
           </div>
-        </div>
-      `;
-    });
-  }
+        `;
+        });
+      }
 
-  window.togglePublishCard = async (id, newStatus) => { await db.collection('scientificCards').doc(id).update({ published: newStatus }); loadCards(); };
-  window.togglePublishVideo = async (id, newStatus) => { await db.collection('bhajanVideos').doc(id).update({ published: newStatus }); loadVideos(); };
-  window.togglePublishTerm = async (id, newStatus) => { await db.collection('encyclopediaTerms').doc(id).update({ published: newStatus }); loadTerms(); };
-  window.deleteCard = async (id) => { if(confirm('Delete?')) await db.collection('scientificCards').doc(id).delete(); loadCards(); };
-  window.deleteVideo = async (id) => { if(confirm('Delete?')) await db.collection('bhajanVideos').doc(id).delete(); loadVideos(); };
-  window.deleteTerm = async (id) => { if(confirm('Delete?')) await db.collection('encyclopediaTerms').doc(id).delete(); loadTerms(); };
-
-  // ==================== FORMS WITH YOUTUBE CONVERTER ====================
-  function openCardForm(editId = null) { openModalForm('card', editId); }
-  function openVideoForm(editId = null) { openModalForm('video', editId); }
-  function openTermForm(editId = null) { openModalForm('term', editId); }
-
-  function openModalForm(type, editId = null) {
-    let html = '';
-    if (type === 'card') {
-      html = `<h3>${editId ? 'Edit' : 'Add'} Scientific Card</h3>
-        <input type="text" id="cardTitle" placeholder="Title"><br>
-        <input type="text" id="cardCategory" placeholder="Category"><br>
-        <textarea id="cardShortDesc" placeholder="Short Description" rows="2"></textarea><br>
-        <textarea id="cardFullAnalysis" placeholder="Full Analysis (HTML allowed)" rows="4"></textarea><br>
-        <label><input type="checkbox" id="cardPublished" checked>Publish immediately</label><br>
-        <label><input type="checkbox" id="cardPinned">Pin to top</label><br>
-        <button onclick="saveCard('${editId || ''}')">Save</button>
-        <button onclick="closeModal()">Cancel</button>`;
-    } else if (type === 'video') {
-      html = `<h3>${editId ? 'Edit' : 'Add'} Bhajan Video</h3>
-        <input type="text" id="videoTitle" placeholder="Title"><br>
-        <input type="text" id="videoUrlInput" placeholder="YouTube link (any format)" style="width:100%;"><br>
-        <small>Paste any YouTube link (watch, youtu.be, embed, share). It will be converted automatically.</small><br>
-        <label><input type="checkbox" id="videoPublished" checked> Publish immediately</label><br>
-        <button onclick="saveVideo('${editId || ''}')">Save</button>
-        <button onclick="closeModal()">Cancel</button>`;
-    } else if (type === 'term') {
-      html = `<h3>${editId ? 'Edit' : 'Add'} Encyclopedia Term</h3>
-        <input type="text" id="termName" placeholder="Term (e.g., ॐ)"><br>
-        <textarea id="termMeaning" placeholder="Traditional meaning" rows="2"></textarea><br>
-        <textarea id="termScientific" placeholder="Scientific explanation" rows="3"></textarea><br>
-        <label><input type="checkbox" id="termPublished" checked> Publish immediately</label><br>
-        <button onclick="saveTerm('${editId || ''}')">Save</button>
-        <button onclick="closeModal()">Cancel</button>`;
-    }
-    const modalDiv = document.createElement('div');
-    modalDiv.className = 'modal-overlay';
-    modalDiv.id = 'dynamicModal';
-    modalDiv.innerHTML = `<div class="modal-content">${html}</div>`;
-    document.body.appendChild(modalDiv);
-    if (editId) loadExistingData(type, editId);
-  }
-
-  async function loadExistingData(type, id) {
-    let doc;
-    if (type === 'card') doc = await db.collection('scientificCards').doc(id).get();
-    else if (type === 'video') doc = await db.collection('bhajanVideos').doc(id).get();
-    else doc = await db.collection('encyclopediaTerms').doc(id).get();
-    const data = doc.data();
-    if (type === 'card') {
-      document.getElementById('cardTitle').value = data.title || '';
-      document.getElementById('cardCategory').value = data.category || '';
-      document.getElementById('cardShortDesc').value = data.shortDesc || '';
-      document.getElementById('cardFullAnalysis').value = data.fullAnalysis || '';
-      document.getElementById('cardPublished').checked = data.published === true;
-      document.getElementById('cardPinned').checked = data.pinned === true;
-    } else if (type === 'video') {
-      document.getElementById('videoTitle').value = data.title || '';
-      document.getElementById('videoUrlInput').value = data.videoUrl || ''; 
-      document.getElementById('videoPublished').checked = data.published === true;
-    } else if (type === 'term') {
-      document.getElementById('termName').value = data.term || '';
-      document.getElementById('termMeaning').value = data.meaning || '';
-      document.getElementById('termScientific').value = data.scientific || '';
-      document.getElementById('termPublished').checked = data.published === true;
-    }
-  }
-
-  window.saveCard = async (id) => {
-  const data = {
-    title: document.getElementById('cardTitle').value,
-    category: document.getElementById('cardCategory').value,
-    shortDesc:
-      document.getElementById('cardShortDesc').value,
-    fullAnalysis:
-      document.getElementById('cardFullAnalysis').value,
-    published:
-      document.getElementById('cardPublished').checked,
-    pinned:
-      document.getElementById('cardPinned').checked
-  };
-  // ONLY add timestamp for NEW cards
-  if (!id) {
-    data.createdAt =
-      firebase.firestore.FieldValue.serverTimestamp();
-  }
-  if (id) {
-    await db.collection('scientificCards')
-      .doc(id)
-      .update(data);
-  } else {
-    await db.collection('scientificCards')
-      .add(data);
-  }
-  closeModal();
-  loadCards();
-};
-
-  window.saveVideo = async (id) => {
-  const urlInput =
-    document.getElementById('videoUrlInput').value.trim();
-  if (!urlInput) {
-    alert("Please enter a YouTube link.");
-    return;
-  }
-  const embedUrl =
-    await validateAndConvertYouTubeLink(
-      urlInput,
-      document.getElementById('videoUrlInput')
-    );
-  if (!embedUrl) return;
-  const data = {
-    title:
-      document.getElementById('videoTitle').value,
-    videoUrl: embedUrl,
-    published:
-      document.getElementById('videoPublished').checked
-  };
-  // ONLY for new videos
-  if (!id) {
-    data.createdAt =
-      firebase.firestore.FieldValue.serverTimestamp();
-  }
-  try {
-    if (id) {
-      await db.collection('bhajanVideos')
-        .doc(id)
-        .update(data);
-    } else {
-      await db.collection('bhajanVideos')
-        .add(data);
-    }
-    closeModal();
-    setTimeout(async () => {
-      await loadVideos();
-    }, 300);
-  } catch(err) {
-    console.error(err);
-    alert("Failed to save video.");
-  }
-};
-
-  window.saveTerm = async (id) => {
-    const data = {
-      term: document.getElementById('termName').value,
-      meaning: document.getElementById('termMeaning').value,
-      scientific: document.getElementById('termScientific').value,
-      published: document.getElementById('termPublished').checked
-    };
-    if (id) await db.collection('encyclopediaTerms').doc(id).update(data);
-    else await db.collection('encyclopediaTerms').add(data);
-    closeModal(); loadTerms();
-  };
-
-  window.editCard = (id) => openCardForm(id);
-  window.editVideo = (id) => openVideoForm(id);
-  window.editTerm = (id) => openTermForm(id);
-  function closeModal() { const modalDiv = document.getElementById('dynamicModal'); if (modalDiv) modalDiv.remove(); }
-  function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
-
-  async function loadForumTopics() {
-  try {
-    const snapshot = await db
-      .collection('forumTopics')
-      .where('deleted', '==', false)
-      .orderBy('createdAt', 'desc')
-      .get();
-    const container =
-      document.getElementById('forumTopicsList');
-    if (snapshot.empty) {
-      container.innerHTML = `
-        <p>No forum topics found.</p>
-      `;
-      return;
-    }
-    container.innerHTML = '';
-    snapshot.forEach(doc => {
-      const topic = doc.data();
-      container.innerHTML += `
-        <div class="item">
-          <div>
-            <strong>
-              ${escapeHtml(topic.title)}
-            </strong>
-            <br>
-            <small>
-              by ${escapeHtml(topic.author || "Anonymous")}
-            </small>
-            ${
-              topic.held
-                ? '<span class="hold-badge">Held</span>'
-                : topic.published
-                  ? '<span class="published-badge">Published</span>'
-                  : '<span class="draft-badge">Pending</span>'
-            }
-          </div>
+      async function loadMandirs() {
+        const snap = await db.collection("mandirDarshan").get();
+        const container = document.getElementById("mandirList");
+        container.innerHTML = "";
+        let docs = [];
+        snap.forEach((doc) => docs.push({ id: doc.id, ...doc.data() }));
+        docs.sort(
+          (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+        );
+        docs.forEach((item) => {
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `
+          <img src="${escapeHtml(item.imageUrl || "https://images.unsplash.com/photo-1561361058-c24cecae35ca?q=80&w=1200&auto=format&fit=crop")}"
+               style="width:100%; height:180px; object-fit:cover; border-radius:1rem;">
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.description?.slice(0, 120))}...</p>
+          <div><span class="${item.published ? "published-badge" : "draft-badge"}">${item.published ? "Published" : "Draft"}</span></div>
           <div class="forum-actions">
-            ${
-              !topic.published
-                ? `
-                  <button onclick="approveTopic('${doc.id}')">
-                    Approve
-                  </button>
-                `
-                : `
-                  <button onclick="holdTopic('${doc.id}')">
-                    Hold
-                  </button>
-                `
-            }
-            <button onclick="deleteTopic('${doc.id}')">
-              Delete
-            </button>
+            <button onclick='openMandirForm(${JSON.stringify(item)})'>Edit</button>
+            <button style="background:#dc3545;" onclick="deleteMandir('${item.id}')">Delete</button>
+          </div>
+        `;
+          container.appendChild(div);
+        });
+      }
+
+      async function deleteMandir(id) {
+        if (!confirm("Delete this mandir?")) return;
+        await db.collection("mandirDarshan").doc(id).delete();
+        loadMandirs();
+      }
+
+      // Same for Sants (loadSants, deleteSant, etc.) – keeping from original but renaming to avoid conflict with frontend.
+      async function loadSants() {
+        const snap = await db.collection("santDarshan").get();
+        const container = document.getElementById("santList");
+        container.innerHTML = "";
+        snap.forEach((doc) => {
+          const data = doc.data();
+          const badge = data.published
+            ? '<span class="published-badge">Published</span>'
+            : '<span class="draft-badge">Draft</span>';
+          container.innerHTML += `
+          <div class="item">
+            <div><strong>${escapeHtml(data.name)}</strong> ${badge}<br><small>${escapeHtml(data.description?.substring(0, 60))}...</small></div>
+            <div class="forum-actions">
+              <button onclick="togglePublishSant('${doc.id}', ${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button onclick="editSant('${doc.id}')">Edit</button>
+              <button onclick="deleteSant('${doc.id}')">Delete</button>
+            </div>
+          </div>
+        `;
+        });
+      }
+
+      window.togglePublishSant = async (id, newStatus) => {
+        await db
+          .collection("santDarshan")
+          .doc(id)
+          .update({ published: newStatus });
+        loadSants();
+      };
+      window.deleteSant = async (id) => {
+        if (confirm("Delete?"))
+          await db.collection("santDarshan").doc(id).delete();
+        loadSants();
+      };
+      window.editSant = (id) => openSantForm(id);
+      window.saveSant = async (id) => {
+        /* already defined in openSantForm */
+      };
+      function openSantForm(editId = null) {
+        let html = `<h3>${editId ? "Edit" : "Add"} Sant Darshan</h3>
+        <input type="text" id="santName" placeholder="Sant Name"><br>
+        <textarea id="santDesc" placeholder="Description" rows="3"></textarea><br>
+        <input type="text" id="santImageUrl" placeholder="Image URL"><br>
+        <input type="text" id="santVideoUrl" placeholder="YouTube link"><br>
+        <label><input type="checkbox" id="santPublished" checked> Publish immediately</label><br>
+        <button onclick="saveSantHandler('${editId || ""}')">Save</button>
+        <button onclick="closeModal()">Cancel</button>`;
+        showModalForm(html);
+        if (editId) loadSantData(editId);
+      }
+      async function loadSantData(id) {
+        const doc = await db.collection("santDarshan").doc(id).get();
+        const data = doc.data();
+        document.getElementById("santName").value = data.name || "";
+        document.getElementById("santDesc").value = data.description || "";
+        document.getElementById("santImageUrl").value = data.imageUrl || "";
+        document.getElementById("santVideoUrl").value = data.videoUrl || "";
+        document.getElementById("santPublished").checked =
+          data.published === true;
+      }
+      window.saveSantHandler = async (id) => {
+        const videoUrlInput = document
+          .getElementById("santVideoUrl")
+          .value.trim();
+        let embedUrl = null;
+        if (videoUrlInput) {
+          embedUrl = await validateAndConvertYouTubeLink(
+            videoUrlInput,
+            document.getElementById("santVideoUrl"),
+          );
+          if (!embedUrl) return;
+        }
+        const data = {
+          name: document.getElementById("santName").value,
+          description: document.getElementById("santDesc").value,
+          imageUrl: document.getElementById("santImageUrl").value,
+          videoUrl: embedUrl || "",
+          published: document.getElementById("santPublished").checked,
+        };
+        if (!id)
+          data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        if (id) await db.collection("santDarshan").doc(id).update(data);
+        else await db.collection("santDarshan").add(data);
+        closeModal();
+        loadSants();
+      };
+      function showModalForm(htmlContent) {
+        const modalDiv = document.createElement("div");
+        modalDiv.className = "modal-overlay";
+        modalDiv.id = "dynamicModal";
+        modalDiv.innerHTML = `<div class="modal-content">${htmlContent}</div>`;
+        document.body.appendChild(modalDiv);
+      }
+      function closeModal() {
+        const modalDiv = document.getElementById("dynamicModal");
+        if (modalDiv) modalDiv.remove();
+      }
+
+      // Re-apply theme after modal closes (no change needed)
+      // Publish toggles for cards/videos/terms/mandir/sant
+      window.togglePublishCard = async (id, newStatus) => {
+        await db
+          .collection("scientificCards")
+          .doc(id)
+          .update({ published: newStatus });
+        loadCards();
+      };
+      window.togglePublishVideo = async (id, newStatus) => {
+        await db
+          .collection("bhajanVideos")
+          .doc(id)
+          .update({ published: newStatus });
+        loadVideos();
+      };
+      window.togglePublishTerm = async (id, newStatus) => {
+        await db
+          .collection("encyclopediaTerms")
+          .doc(id)
+          .update({ published: newStatus });
+        loadTerms();
+      };
+      window.deleteCard = async (id) => {
+        if (confirm("Delete?"))
+          await db.collection("scientificCards").doc(id).delete();
+        loadCards();
+      };
+      window.deleteVideo = async (id) => {
+        if (confirm("Delete?"))
+          await db.collection("bhajanVideos").doc(id).delete();
+        loadVideos();
+      };
+      window.deleteTerm = async (id) => {
+        if (confirm("Delete?"))
+          await db.collection("encyclopediaTerms").doc(id).delete();
+        loadTerms();
+      };
+
+      // Editing functions (simplified)
+      window.editCard = (id) => openCardForm(id);
+      window.editVideo = (id) => openVideoForm(id);
+      window.editTerm = (id) => openTermForm(id);
+      window.saveCard = async (id) => {
+        /* handled by openCardForm */
+      };
+      window.saveVideo = async (id) => {
+        /* handled by openVideoForm */
+      };
+      window.saveTerm = async (id) => {
+        /* handled by openTermForm */
+      };
+      // You need the form openers – keep the original ones.
+      function openCardForm(editId = null) {
+        openModalForm("card", editId);
+      }
+      function openVideoForm(editId = null) {
+        openModalForm("video", editId);
+      }
+      function openTermForm(editId = null) {
+        openModalForm("term", editId);
+      }
+      function openModalForm(type, editId = null) {
+        let html = "";
+        if (type === "card") {
+          html = `<h3>${editId ? "Edit" : "Add"} Scientific Card</h3>
+          <input type="text" id="cardTitle" placeholder="Title"><br>
+          <input type="text" id="cardCategory" placeholder="Category"><br>
+          <textarea id="cardShortDesc" placeholder="Short Description" rows="2"></textarea><br>
+          <textarea id="cardFullAnalysis" placeholder="Full Analysis (HTML allowed)" rows="4"></textarea><br>
+          <label><input type="checkbox" id="cardPublished" checked>Publish immediately</label><br>
+          <label><input type="checkbox" id="cardPinned">Pin to top</label><br>
+          <button onclick="saveCardHandler('${editId || ""}')">Save</button>
+          <button onclick="closeModal()">Cancel</button>`;
+        } else if (type === "video") {
+          html = `<h3>${editId ? "Edit" : "Add"} Bhajan Video</h3>
+          <input type="text" id="videoTitle" placeholder="Title"><br>
+          <input type="text" id="videoUrlInput" placeholder="YouTube link (any format)" style="width:100%;"><br>
+          <small>Paste any YouTube link (watch, youtu.be, embed, share).</small><br>
+          <label><input type="checkbox" id="videoPublished" checked> Publish immediately</label><br>
+          <button onclick="saveVideoHandler('${editId || ""}')">Save</button>
+          <button onclick="closeModal()">Cancel</button>`;
+        } else if (type === "term") {
+          html = `<h3>${editId ? "Edit" : "Add"} Encyclopedia Term</h3>
+          <input type="text" id="termName" placeholder="Term (e.g., ॐ)"><br>
+          <textarea id="termMeaning" placeholder="Traditional meaning" rows="2"></textarea><br>
+          <textarea id="termScientific" placeholder="Scientific explanation" rows="3"></textarea><br>
+          <label><input type="checkbox" id="termPublished" checked> Publish immediately</label><br>
+          <button onclick="saveTermHandler('${editId || ""}')">Save</button>
+          <button onclick="closeModal()">Cancel</button>`;
+        }
+        showModalForm(html);
+        if (editId) loadExistingData(type, editId);
+      }
+      async function loadExistingData(type, id) {
+        let doc;
+        if (type === "card")
+          doc = await db.collection("scientificCards").doc(id).get();
+        else if (type === "video")
+          doc = await db.collection("bhajanVideos").doc(id).get();
+        else doc = await db.collection("encyclopediaTerms").doc(id).get();
+        const data = doc.data();
+        if (type === "card") {
+          document.getElementById("cardTitle").value = data.title || "";
+          document.getElementById("cardCategory").value = data.category || "";
+          document.getElementById("cardShortDesc").value = data.shortDesc || "";
+          document.getElementById("cardFullAnalysis").value =
+            data.fullAnalysis || "";
+          document.getElementById("cardPublished").checked =
+            data.published === true;
+          document.getElementById("cardPinned").checked = data.pinned === true;
+        } else if (type === "video") {
+          document.getElementById("videoTitle").value = data.title || "";
+          document.getElementById("videoUrlInput").value = data.videoUrl || "";
+          document.getElementById("videoPublished").checked =
+            data.published === true;
+        } else if (type === "term") {
+          document.getElementById("termName").value = data.term || "";
+          document.getElementById("termMeaning").value = data.meaning || "";
+          document.getElementById("termScientific").value =
+            data.scientific || "";
+          document.getElementById("termPublished").checked =
+            data.published === true;
+        }
+      }
+      window.saveCardHandler = async (id) => {
+        const data = {
+          title: document.getElementById("cardTitle").value,
+          category: document.getElementById("cardCategory").value,
+          shortDesc: document.getElementById("cardShortDesc").value,
+          fullAnalysis: document.getElementById("cardFullAnalysis").value,
+          published: document.getElementById("cardPublished").checked,
+          pinned: document.getElementById("cardPinned").checked,
+        };
+        if (!id)
+          data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        if (id) await db.collection("scientificCards").doc(id).update(data);
+        else await db.collection("scientificCards").add(data);
+        closeModal();
+        loadCards();
+      };
+      window.saveVideoHandler = async (id) => {
+        const urlInput = document.getElementById("videoUrlInput").value.trim();
+        if (!urlInput) {
+          alert("Please enter a YouTube link.");
+          return;
+        }
+        const embedUrl = await validateAndConvertYouTubeLink(
+          urlInput,
+          document.getElementById("videoUrlInput"),
+        );
+        if (!embedUrl) return;
+        const data = {
+          title: document.getElementById("videoTitle").value,
+          videoUrl: embedUrl,
+          published: document.getElementById("videoPublished").checked,
+        };
+        if (!id)
+          data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        if (id) await db.collection("bhajanVideos").doc(id).update(data);
+        else await db.collection("bhajanVideos").add(data);
+        closeModal();
+        loadVideos();
+      };
+      window.saveTermHandler = async (id) => {
+        const data = {
+          term: document.getElementById("termName").value,
+          meaning: document.getElementById("termMeaning").value,
+          scientific: document.getElementById("termScientific").value,
+          published: document.getElementById("termPublished").checked,
+        };
+        if (id) await db.collection("encyclopediaTerms").doc(id).update(data);
+        else await db.collection("encyclopediaTerms").add(data);
+        closeModal();
+        loadTerms();
+      };
+      function openMandirForm(existing = null) {
+        const modal = document.createElement("div");
+        modal.className = "modal-overlay";
+        modal.innerHTML = `
+        <div class="modal-content">
+          <h3>${existing ? "Edit Mandir" : "Add New Mandir"}</h3>
+          <input id="mandirTitle" placeholder="Temple Name" value="${escapeHtml(existing?.title || "")}">
+          <textarea id="mandirDescription" placeholder="Temple Description" rows="5">${escapeHtml(existing?.description || "")}</textarea>
+          <input id="mandirImage" placeholder="Temple Image URL (optional)" value="${escapeHtml(existing?.imageUrl || "")}">
+          <input id="mandirVideo" placeholder="YouTube Link" value="${escapeHtml(existing?.videoUrl || "")}">
+          <label><input type="checkbox" id="mandirPublished" ${existing?.published !== false ? "checked" : ""}> Published</label>
+          <button id="saveMandirBtn">Save Mandir</button>
+          <button style="background:#ccc; color:#222;" id="closeMandirModal">Cancel</button>
+        </div>
+      `;
+        document.body.appendChild(modal);
+        document.getElementById("closeMandirModal").onclick = () =>
+          modal.remove();
+        document.getElementById("saveMandirBtn").onclick = async () => {
+          const title = document.getElementById("mandirTitle").value.trim();
+          const description = document
+            .getElementById("mandirDescription")
+            .value.trim();
+          const imageUrl = document.getElementById("mandirImage").value.trim();
+          const videoInput = document.getElementById("mandirVideo");
+          const published = document.getElementById("mandirPublished").checked;
+          if (!title || !description) {
+            alert("Please fill all required fields");
+            return;
+          }
+          const embedUrl = await validateAndConvertYouTubeLink(
+            videoInput.value,
+            videoInput,
+          );
+          if (!embedUrl) return;
+          const payload = {
+            title,
+            description,
+            imageUrl,
+            videoUrl: embedUrl,
+            published,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          };
+          try {
+            if (existing?.id)
+              await db
+                .collection("mandirDarshan")
+                .doc(existing.id)
+                .update(payload);
+            else await db.collection("mandirDarshan").add(payload);
+            modal.remove();
+            loadMandirs();
+            alert("Mandir saved successfully 🙏");
+          } catch (err) {
+            console.error(err);
+            alert("Error saving mandir");
+          }
+        };
+      }
+      async function loadForumTopics() {
+        try {
+          const snapshot = await db
+            .collection("forumTopics")
+            .where("deleted", "==", false)
+            .orderBy("createdAt", "desc")
+            .get();
+          const container = document.getElementById("forumTopicsList");
+          if (snapshot.empty) {
+            container.innerHTML = `<p>No forum topics found.</p>`;
+            return;
+          }
+          container.innerHTML = "";
+          snapshot.forEach((doc) => {
+            const topic = doc.data();
+            container.innerHTML += `
+            <div class="item">
+              <div><strong>${escapeHtml(topic.title)}</strong><br><small>by ${escapeHtml(topic.author || "Anonymous")}</small>
+                ${topic.held ? '<span class="hold-badge">Held</span>' : topic.published ? '<span class="published-badge">Published</span>' : '<span class="draft-badge">Pending</span>'}
+              </div>
+              <div class="forum-actions">
+                ${!topic.published ? `<button onclick="approveTopic('${doc.id}')">Approve</button>` : `<button onclick="holdTopic('${doc.id}')">Hold</button>`}
+                <button onclick="deleteTopic('${doc.id}')">Delete</button>
+              </div>
+            </div>
+          `;
+          });
+        } catch (err) {
+          console.error(err);
+          document.getElementById("forumTopicsList").innerHTML =
+            `<p style="color:red;">Failed to load forum topics.</p>`;
+        }
+      }
+      window.approveTopic = async (id) => {
+        await db
+          .collection("forumTopics")
+          .doc(id)
+          .update({ published: true, held: false });
+        loadForumTopics();
+      };
+      window.holdTopic = async (id) => {
+        await db
+          .collection("forumTopics")
+          .doc(id)
+          .update({ published: false, held: true });
+        loadForumTopics();
+      };
+      window.deleteTopic = async (id) => {
+        await db.collection("forumTopics").doc(id).update({ deleted: true });
+        loadForumTopics();
+      };
+      function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(
+          /[&<>]/g,
+          (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[m],
+        );
+      }
+
+      async function loadShloks() {
+        const container = document.getElementById("shlokList");
+        if (!container) return;
+        try {
+          const snap = await db.collection("dailyShlok").get();
+          if (snap.empty) {
+            container.innerHTML =
+              "<p>कोई श्लोक नहीं। ऊपर दिए बटन से जोड़ें।</p>";
+            return;
+          }
+
+          // Convert to array and sort by date descending manually
+          let docs = [];
+          snap.forEach((doc) => docs.push({ id: doc.id, ...doc.data() }));
+          docs.sort((a, b) => {
+            const aDate = a.date?.toDate ? a.date.toDate() : new Date(0);
+            const bDate = b.date?.toDate ? b.date.toDate() : new Date(0);
+            return bDate - aDate;
+          });
+
+          container.innerHTML = "";
+          docs.forEach((doc) => {
+            const data = doc;
+            const badge = data.published
+              ? '<span class="published-badge">Published</span>'
+              : '<span class="draft-badge">Draft</span>';
+            const dateStr = data.date?.toDate
+              ? data.date.toDate().toLocaleDateString()
+              : "No date";
+            container.innerHTML += `
+        <div class="item">
+          <div><strong>${escapeHtml(data.text?.substring(0, 60))}</strong> ${badge}<br><small>${dateStr}</small></div>
+          <div class="forum-actions">
+            <button onclick="togglePublishShlok('${doc.id}', ${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+            <button onclick="editShlok('${doc.id}')">Edit</button>
+            <button onclick="deleteShlok('${doc.id}')">Delete</button>
           </div>
         </div>
       `;
-    });
-  } catch (err) {
-    console.error("Forum topics error:", err);
-    document.getElementById('forumTopicsList').innerHTML = `
-      <p style="color:red;">
-        Failed to load forum topics.
-      </p>
-    `;
-  }
-}
-async function approveTopic(id) {
-  await db.collection('forumTopics')
-    .doc(id)
-    .update({
-      published: true,
-      held: false
-    });
-  loadForumTopics();
-}
-async function holdTopic(id) {
-  await db.collection('forumTopics')
-    .doc(id)
-    .update({
-      published: false,
-      held: true
-    });
-  loadForumTopics();
-}
-async function deleteTopic(id) {
-  await db.collection('forumTopics')
-    .doc(id)
-    .update({
-      deleted: true
-    });
-  loadForumTopics();
-}
-</script>
-</body>
+          });
+        } catch (err) {
+          console.error("Error loading shloks:", err);
+          container.innerHTML = `<p style='color:red'>श्लोक लोड नहीं हो सके: ${err.message}</p>`;
+        }
+      }
+
+      function openShlokForm(editId = null) {
+        let html = `<h3>${editId ? "Edit" : "Add"} Daily Shlok</h3>
+  <textarea id="shlokText" rows="3" placeholder="श्लोक (Sanskrit / Hindi)" style="width:100%;"></textarea><br>
+  <input type="text" id="shlokMeaning" placeholder="अर्थ / व्याख्या" style="width:100%;"><br>
+  <input type="text" id="shlokSource" placeholder="स्रोत (optional)"><br>
+  <input type="date" id="shlokDate" value="${new Date().toISOString().slice(0, 10)}"><br>
+  <label><input type="checkbox" id="shlokPublished" checked> Publish on homepage</label><br>
+  <button onclick="saveShlokHandler('${editId || ""}')">Save</button>
+  <button onclick="closeModal()">Cancel</button>`;
+        showModalForm(html);
+        if (editId) loadShlokData(editId);
+      }
+
+      async function loadShlokData(id) {
+        const doc = await db.collection("dailyShlok").doc(id).get();
+        const data = doc.data();
+        document.getElementById("shlokText").value = data.text || "";
+        document.getElementById("shlokMeaning").value = data.meaning || "";
+        document.getElementById("shlokSource").value = data.source || "";
+        if (data.date) {
+          const d = data.date.toDate();
+          document.getElementById("shlokDate").value = d
+            .toISOString()
+            .slice(0, 10);
+        }
+        document.getElementById("shlokPublished").checked =
+          data.published === true;
+      }
+
+      window.saveShlokHandler = async (id) => {
+        const text = document.getElementById("shlokText").value.trim();
+        const meaning = document.getElementById("shlokMeaning").value.trim();
+        const source = document.getElementById("shlokSource").value.trim();
+        const dateStr = document.getElementById("shlokDate").value;
+        if (!text || !meaning) return alert("श्लोक और अर्थ आवश्यक है");
+        const payload = {
+          text,
+          meaning,
+          source,
+          date: firebase.firestore.Timestamp.fromDate(new Date(dateStr)),
+          published: document.getElementById("shlokPublished").checked,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        };
+        if (!id)
+          payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        if (id) await db.collection("dailyShlok").doc(id).update(payload);
+        else await db.collection("dailyShlok").add(payload);
+        closeModal();
+        loadShloks();
+      };
+
+      window.togglePublishShlok = async (id, newStatus) => {
+        await db
+          .collection("dailyShlok")
+          .doc(id)
+          .update({ published: newStatus });
+        loadShloks();
+      };
+      window.deleteShlok = async (id) => {
+        if (confirm("Delete this shlok?"))
+          await db.collection("dailyShlok").doc(id).delete();
+        loadShloks();
+      };
+      window.editShlok = (id) => openShlokForm(id);
+    </script>
+  </body>
 </html>

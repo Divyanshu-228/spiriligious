@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiriligious · वैज्ञानिक विश्लेषण</title>
+  <title>Spiriligious · मंदिर दर्शन</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="sacred-glow">
 
+  <!-- Modal (same as other pages) -->
   <div id="infoModal" class="modal">
     <div class="modal-card">
       <i class="fas fa-om" style="font-size: 2rem; color: #A68868;"></i>
@@ -19,24 +20,41 @@
     </div>
   </div>
 
+  <!-- Header will be injected here -->
   <div id="header-placeholder"></div>
 
-  <main class="container" style="padding: 2rem 0;">
+  <main class="container" style="padding: 2rem 0 4rem;">
     <div style="text-align: center; margin-bottom: 2rem;">
-      <span class="section-badge"><i class="fas fa-microscope"></i> परंपरा × विज्ञान</span>
-      <h1>वैज्ञानिक विश्लेषण</h1>
-      <p>हिंदू परंपराओं, रीति-रिवाजों और प्रतीकों का आधुनिक विज्ञान की कसौटी पर पूरा विश्लेषण।</p>
+      <span class="section-badge"><i class="fas fa-temple"></i> दिव्य स्थल</span>
+      <h1>मंदिर दर्शन</h1>
+      <p>प्रमुख मंदिरों का इतिहास, वास्तुकला और वैज्ञानिक महत्व</p>
     </div>
-    <div id="scientificFullGrid" class="scientific-grid"></div>
+    <div id="mandirDarshanContainer" class="darshan-grid"></div>
   </main>
 
+  <!-- Footer will be injected here -->
   <div id="footer-placeholder"></div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <!-- Firebase and scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <script src="global.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
+
+
+<div class="mobile-nav-top">
+  <a href="index.html" class="logo-text">
+    <span class="logo-title">Spiriligious</span>
+  </a>
+
+  <button id="menuToggle" class="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
+</div>
+
+<div class="nav-menu" id="navMenu">
+  <!-- all links here -->
+</div>
