@@ -265,7 +265,7 @@ function renderEncyclopediaPage() {
     .join("");
 }
 
-// ==================== MANDIR DARSHAN ====================
+// ==================== MANDIR DARSHAN (Premium Card Rendering) ====================
 async function loadMandirs() {
   const container = document.getElementById("mandirDarshanContainer");
   if (!container) return;
@@ -287,53 +287,57 @@ async function loadMandirs() {
     }
 
     let html = "";
-
     snapshot.forEach((doc) => {
       const m = doc.data();
-
       html += `
-        <div class="darshan-card">
-          <img 
-            src="${escapeHtml(m.imageUrl || "https://via.placeholder.com/400x200?text=Mandir")}" 
-            alt="${escapeHtml(m.title)}"
-            class="darshan-image"
-          >
-
-          <div class="darshan-content">
-            <span class="darshan-badge">🛕 दिव्य स्थल</span>
-
+        <div class="mandir-card" data-id="${doc.id}">
+          <div class="mandir-image-wrapper">
+            <img 
+              class="mandir-image" 
+              src="${escapeHtml(m.imageUrl || "https://via.placeholder.com/400x300?text=Mandir")}" 
+              alt="${escapeHtml(m.title)}"
+              loading="lazy"
+            >
+            <div class="mandir-overlay"></div>
+          </div>
+          <div class="mandir-content">
+            <div class="mandir-badge">
+              <i class="fas fa-temple"></i> दिव्य स्थल
+            </div>
             <h3>${escapeHtml(m.title)}</h3>
-
-            <p>${escapeHtml(m.description || "")}</p>
-
-            ${
-              m.videoUrl
-                ? `
-                <div class="video-wrapper">
-                  <iframe
-                    src="${m.videoUrl}?rel=0"
-                    title="${escapeHtml(m.title)}"
-                    frameborder="0"
-                    allowfullscreen>
-                  </iframe>
-                </div>
-              `
-                : ""
-            }
+            <p>${escapeHtml(m.description || "").substring(0, 120)}${(m.description || "").length > 120 ? "…" : ""}</p>
+            <button class="mandir-btn" data-id="${doc.id}" data-video="${escapeHtml(m.videoUrl || "")}">
+              विस्तार से देखें <i class="fas fa-arrow-right"></i>
+            </button>
           </div>
         </div>
       `;
     });
-
     container.innerHTML = html;
+
+    // Attach click handlers for modal video
+    document.querySelectorAll(".mandir-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const videoUrl = btn.getAttribute("data-video");
+        const card = btn.closest(".mandir-card");
+        const title = card.querySelector("h3").innerText;
+        if (videoUrl) {
+          openModal(
+            title,
+            `<div style="position:relative; padding-bottom:56.25%;"><iframe src="${videoUrl}?rel=0" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe></div><p style="margin-top:1rem;">${card.querySelector("p").innerText}</p>`,
+          );
+        } else {
+          openModal(
+            title,
+            `<p>${card.querySelector("p").innerText}</p><p><em>वीडियो उपलब्ध नहीं है।</em></p>`,
+          );
+        }
+      });
+    });
   } catch (err) {
     console.error(err);
-
-    container.innerHTML = `
-      <div style="text-align:center; padding:2rem;">
-        त्रुटि: मंदिर डेटा लोड नहीं हो सका।
-      </div>
-    `;
+    container.innerHTML = `<div style="text-align:center; padding:2rem;">त्रुटि: मंदिर डेटा लोड नहीं हो सका।</div>`;
   }
 }
 
@@ -365,6 +369,7 @@ async function loadSants() {
   });
 }
 
+// ==================== SANT ARTICLES (Premium Article Cards) ====================
 async function loadSantArticles() {
   const container = document.getElementById("santArticlesGrid");
   if (!container) return;
@@ -383,13 +388,30 @@ async function loadSantArticles() {
     let html = "";
     snapshot.forEach((doc) => {
       const article = doc.data();
+      const excerpt = article.content.replace(/<[^>]*>/g, "").substring(0, 120);
       html += `
-        <a href="sant-article.html?id=${doc.id}" class="article-card">
-          <img src="${article.imageUrl || "https://via.placeholder.com/400x200?text=Sant"}" alt="${article.title}">
-          <div class="content">
+        <a href="sant-article.html?id=${doc.id}" class="sant-article-card">
+          <div class="sant-image-wrapper">
+            <img 
+              class="sant-image" 
+              src="${article.imageUrl || "https://via.placeholder.com/400x300?text=Sant"}" 
+              alt="${escapeHtml(article.title)}"
+              loading="lazy"
+            >
+            <div class="sant-overlay"></div>
+          </div>
+          <div class="sant-content">
+            <div class="sant-badge">
+              <i class="fas fa-feather-alt"></i> महापुरुष
+            </div>
             <h3>${escapeHtml(article.title)}</h3>
-            <div class="author">✍️ ${escapeHtml(article.author)}</div>
-            <div class="excerpt">${escapeHtml(article.content.substring(0, 120))}...</div>
+            <div class="sant-author">
+              <i class="fas fa-pen-fancy"></i> ${escapeHtml(article.author)}
+            </div>
+            <div class="sant-excerpt">${escapeHtml(excerpt)}…</div>
+            <div class="sant-read-btn">
+              पूरा लेख पढ़ें <i class="fas fa-arrow-right"></i>
+            </div>
           </div>
         </a>
       `;

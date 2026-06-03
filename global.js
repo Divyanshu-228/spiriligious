@@ -1,4 +1,5 @@
-// global.js – Premium Navbar, Footer, Smart Hide/Show, Mobile Drawer, Background
+// global.js – Fixed Navbar (Hamburger + Mobile Drawer + Dropdowns)
+
 function loadHeader() {
   document.getElementById("header-placeholder").innerHTML = `
     <header>
@@ -92,16 +93,67 @@ function initMobileMenu() {
   const btn = document.getElementById("mobileMenuBtn");
   const nav = document.getElementById("navLinks");
   if (!btn || !nav) return;
-  btn.addEventListener("click", () => nav.classList.toggle("active"));
-  document.addEventListener("click", (e) => {
-    if (!nav.contains(e.target) && !btn.contains(e.target))
-      nav.classList.remove("active");
+
+  // Remove any existing listeners to avoid duplicates
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+  const newNav = nav.cloneNode(true);
+  nav.parentNode.replaceChild(newNav, nav);
+
+  const finalBtn = document.getElementById("mobileMenuBtn");
+  const finalNav = document.getElementById("navLinks");
+
+  // Toggle drawer
+  finalBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    finalNav.classList.toggle("active");
+    // Prevent body scroll when drawer is open
+    if (finalNav.classList.contains("active")) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
   });
-  nav
-    .querySelectorAll("a")
-    .forEach((link) =>
-      link.addEventListener("click", () => nav.classList.remove("active")),
-    );
+
+  // Close drawer when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!finalNav.contains(e.target) && !finalBtn.contains(e.target)) {
+      finalNav.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  // Close drawer when any link (a) inside is clicked
+  finalNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      finalNav.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  });
+}
+
+// Mobile dropdown toggle (event delegation)
+function initMobileDropdowns() {
+  const nav = document.getElementById("navLinks");
+  if (!nav) return;
+
+  nav.addEventListener("click", (e) => {
+    if (window.innerWidth > 768) return;
+    const dropbtn = e.target.closest(".dropbtn");
+    if (!dropbtn) return;
+    e.preventDefault();
+    const dropdownContent = dropbtn.nextElementSibling;
+    if (
+      !dropdownContent ||
+      !dropdownContent.classList.contains("dropdown-content")
+    )
+      return;
+    // Close all other open dropdowns
+    document.querySelectorAll(".dropdown-content").forEach((menu) => {
+      if (menu !== dropdownContent) menu.classList.remove("show");
+    });
+    dropdownContent.classList.toggle("show");
+  });
 }
 
 function setPageBackground() {
@@ -116,12 +168,26 @@ function setPageBackground() {
   }
 }
 
+function onWindowResize() {
+  if (window.innerWidth > 768) {
+    document.querySelectorAll(".dropdown-content").forEach((menu) => {
+      menu.classList.remove("show");
+    });
+    // Ensure body scroll is re-enabled if drawer was open
+    document.body.style.overflow = "";
+    const nav = document.getElementById("navLinks");
+    if (nav) nav.classList.remove("active");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
   highlightActiveNav();
   setPageBackground();
   initMobileMenu();
+  initMobileDropdowns();
   window.addEventListener("scroll", handleNavScroll);
+  window.addEventListener("resize", onWindowResize);
   document.body.style.paddingTop = "70px";
 });

@@ -34,11 +34,11 @@
     <div id="header-placeholder"></div>
 
     <main>
-      <!-- Hero Section with Daily Shlok (background image behind card) -->
+      <!-- Hero Section with Daily Shlok -->
       <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content container">
-          <div class="shlok-card premium-card" id="dailyShlokCard">
+          <div class="shlok-card" id="dailyShlokCard">
             <div id="shlokContent">
               <p>🙏 श्लोक लोड हो रहा है...</p>
             </div>
@@ -74,36 +74,17 @@
         </div>
       </div>
 
-      <!-- Philosophy Cards (धर्म, अध्यात्म, उद्देश्य) -->
-      <div class="container">
-        <div class="philosophy-grid">
-          <div class="philosophy-card premium-card">
-            <div class="icon-circle"><i class="fas fa-balance-scale"></i></div>
-            <h3>धर्म</h3>
-            <p class="subtitle">= जीवन का संतुलन</p>
-            <p>
-              संस्कार, कर्तव्य और सद्भाव का मार्ग — आधुनिक जीवन में संतुलन का
-              वैज्ञानिक आधार।
-            </p>
-          </div>
-          <div class="philosophy-card premium-card">
-            <div class="icon-circle"><i class="fas fa-brain"></i></div>
-            <h3>अध्यात्म</h3>
-            <p class="subtitle">= आत्मा का विज्ञान</p>
-            <p>
-              चेतना, ध्यान और आत्म-अन्वेषण — आंतरिक विज्ञान जो प्राचीन ज्ञान को
-              प्रयोगात्मक बनाता है।
-            </p>
-          </div>
-          <div class="philosophy-card premium-card">
-            <div class="icon-circle"><i class="fas fa-microscope"></i></div>
-            <h3>उद्देश्य</h3>
-            <p class="subtitle">= परंपराओं का वैज्ञानिक विश्लेषण</p>
-            <p>
-              अनुष्ठानों, मान्यताओं और दर्शन का तर्कपूर्ण मूल्यांकन — प्रश्न
-              करना पहला सत्य है।
-            </p>
-          </div>
+      <!-- Mission Statement (replaces Philosophy Cards) -->
+      <div class="container mission-section">
+        <div class="mission-content">
+          <h2>Spiriligious क्या है?</h2>
+          <p>
+            धर्म, अध्यात्म और विज्ञान के बीच संवाद स्थापित करने का एक प्रयास।
+          </p>
+          <p>
+            हमारा उद्देश्य परंपराओं को अंधविश्वास या अंध-विरोध के बजाय जिज्ञासा,
+            तर्क और अनुभव की दृष्टि से समझना है।
+          </p>
         </div>
       </div>
 
@@ -120,44 +101,45 @@
         <div id="analysisGrid" class="scientific-grid"></div>
       </div>
 
-      <!-- Sant Articles Section (Dynamic) -->
-      <div class="container section-spacing" id="sant-articles">
-        <div class="section-header">
-          <span class="section-badge">✨ संत दर्शन ✨</span>
-          <h2>विद्वानों की कलम से</h2>
-          <p>महान संतों, आचार्यों और आध्यात्मिक गुरुओं का जीवन और शिक्षाएँ</p>
-        </div>
-        <div id="santArticlesGrid" class="articles-grid"></div>
-      </div>
-
-      <!-- Bhajan Preview (moved above Mandir Darshan) -->
-      <div class="container section-spacing">
-        <div class="two-column-grid">
-          <div class="preview-card" onclick="location.href = 'bhajan.html'">
-            <i class="fas fa-music"></i>
-            <h3>भजन संग्रह</h3>
-            <p>
-              हमारे YouTube चैनल के सभी भजन, मंत्र और भक्ति रस – एक ही स्थान पर।
-            </p>
-            <span class="link-arrow">अन्वेषण करें →</span>
-          </div>
-          <div class="preview-card" onclick="location.href = 'forum.html'">
-            <i class="fas fa-comments"></i>
-            <h3>मंथन मंच</h3>
-            <p>प्रश्न पूछें, उत्तर दें, और ज्ञान का सागर मंथन करें।</p>
-            <span class="link-arrow">अन्वेषण करें →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mandir Darshan Section (below Bhajan) -->
+      <!-- Mandir Darshan Section (Premium Cards) -->
       <div class="container section-spacing">
         <div class="section-header">
           <span class="section-badge">🛕 दिव्य स्थल</span>
           <h2>मंदिर दर्शन</h2>
           <p>प्रमुख मंदिरों का इतिहास, वास्तुकला और वैज्ञानिक महत्व</p>
         </div>
-        <div id="mandirDarshanContainer" class="darshan-grid"></div>
+        <div id="mandirDarshanContainer" class="mandir-grid"></div>
+      </div>
+
+      <!-- Sant Articles Section (Premium Article Collection) -->
+      <!-- <div class="container section-spacing" id="sant-articles">
+        <div class="section-header">
+          <span class="section-badge">✨ संत दर्शन ✨</span>
+          <h2>विद्वानों की कलम से</h2>
+          <p>महान संतों, आचार्यों और आध्यात्मिक गुरुओं का जीवन और शिक्षाएँ</p>
+        </div>
+        <div id="santArticlesGrid" class="sant-articles-grid"></div>
+      </div> -->
+
+      <!-- Bhajan + Forum Preview (Gateway Cards) -->
+      <div class="container section-spacing">
+        <div class="preview-grid">
+          <div class="preview-card" onclick="location.href = 'bhajan.html'">
+            <div class="preview-icon"><i class="fas fa-music"></i></div>
+            <h3>भजन संग्रह</h3>
+            <p>Explore devotional music and spiritual recitations.</p>
+            <span class="preview-link">Explore →</span>
+          </div>
+          <div class="preview-card" onclick="location.href = 'forum.html'">
+            <div class="preview-icon"><i class="fas fa-comments"></i></div>
+            <h3>मंथन मंच</h3>
+            <p>
+              Ask questions, discuss ideas, and participate in thoughtful
+              dialogue.
+            </p>
+            <span class="preview-link">Join Discussion →</span>
+          </div>
+        </div>
       </div>
     </main>
 
