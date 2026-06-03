@@ -1,53 +1,36 @@
-<!DOCTYPE html>
+<!-- FILE: bhajan.html -->
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiriligious · भजन संग्रह</title>
-  <meta name="description" content="भजन, मंत्र और भक्ति संगीत – वैज्ञानिक दृष्टि के साथ।">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="sacred-glow">
-
-  <!-- MODAL -->
-  <div id="infoModal" class="modal">
-    <div class="modal-card">
-      <i class="fas fa-om" style="font-size: 2rem; color: #A68868;"></i>
-      <h3 id="modalTitle">शीर्षक</h3>
-      <p id="modalMessage">विवरण</p>
-      <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
-    </div>
-  </div>
-
-  <div id="header-placeholder"></div>
-
-  <main class="container" style="padding: 2rem 0 4rem;">
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <span class="section-badge"><i class="fas fa-music"></i> श्रवण एवं मंथन</span>
-      <h1>भजन संग्रह</h1>
-      <p>हमारे YouTube चैनल के सभी भजन, मंत्र और भक्ति रस – एक ही स्थान पर।</p>
-    </div>
-
-    <!-- Dynamic container for videos loaded from Firestore -->
-    <div id="bhajanVideosContainer" class="darshan-grid bhajan-section"></div>
-
-    <div class="card-glass" style="padding: 2rem; text-align: center;">
-      <i class="fas fa-chalkboard-user" style="font-size: 2rem; color: #A68868;"></i>
-      <h3>वैज्ञानिक विश्लेषण जल्द आ रहा है</h3>
-      <p>हम प्रत्येक भजन के ध्वनि कंपन, मंत्रों के न्यूरोलॉजिकल प्रभाव, और भक्ति रस के मनोवैज्ञानिक लाभों पर शोध कर रहे हैं।</p>
-      <button class="btn btn-outline" onclick="openModal('आ रहा है', 'भजन-विज्ञान श्रृंखला शीघ्र प्रारंभ होगी। सूचना के लिए हमें सब्सक्राइब करें।')">सूचित रहें</button>
-    </div>
-  </main>
-
-  <div id="footer-placeholder"></div>
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="global.js"></script>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spiriligious · Bhajan Collection</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="infoModal" class="modal">...</div>
+    <div id="header-placeholder"></div>
+    <main class="container" style="padding: 2rem 0">
+      <div class="page-header">
+        <h1>भजन संग्रह</h1>
+        <p>
+          हमारे YouTube चैनल के सभी भजन, मंत्र और भक्ति रस – एक ही स्थान पर।
+        </p>
+      </div>
+      <div id="bhajanVideosContainer" class="darshan-grid"></div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="global.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

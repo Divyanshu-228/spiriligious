@@ -365,6 +365,43 @@ async function loadSants() {
   });
 }
 
+async function loadSantArticles() {
+  const container = document.getElementById("santArticlesGrid");
+  if (!container) return;
+  try {
+    const snapshot = await db
+      .collection("santArticles")
+      .where("published", "==", true)
+      .orderBy("createdAt", "desc")
+      .limit(6)
+      .get();
+    if (snapshot.empty) {
+      container.innerHTML =
+        '<p style="text-align:center;">लेख जल्द आ रहे हैं। 🙏</p>';
+      return;
+    }
+    let html = "";
+    snapshot.forEach((doc) => {
+      const article = doc.data();
+      html += `
+        <a href="sant-article.html?id=${doc.id}" class="article-card">
+          <img src="${article.imageUrl || "https://via.placeholder.com/400x200?text=Sant"}" alt="${article.title}">
+          <div class="content">
+            <h3>${escapeHtml(article.title)}</h3>
+            <div class="author">✍️ ${escapeHtml(article.author)}</div>
+            <div class="excerpt">${escapeHtml(article.content.substring(0, 120))}...</div>
+          </div>
+        </a>
+      `;
+    });
+    container.innerHTML = html;
+  } catch (err) {
+    console.error(err);
+    container.innerHTML =
+      '<p style="text-align:center;">लेख लोड नहीं हो सके।</p>';
+  }
+}
+
 window.deleteSant = async (id) => {
   if (!confirm("Delete this sant?")) return;
   await db.collection("santDarshan").doc(id).delete();
@@ -741,5 +778,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Contact form
   if (document.getElementById("contactForm")) {
     initContactForm();
+  }
+  if (document.getElementById("shlokContent")) {
+    loadDailyShlok();
   }
 });

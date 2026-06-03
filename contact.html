@@ -1,11 +1,12 @@
+<!-- FILE: contact.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spiriligious · संपर्क करें</title>
+    <title>Spiriligious · Contact</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -14,110 +15,96 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="sacred-glow">
-    <div id="infoModal" class="modal">
-      <div class="modal-card">
-        <i class="fas fa-om" style="font-size: 2rem; color: #bc6f25"></i>
-        <h3 id="modalTitle">शीर्षक</h3>
-        <p id="modalMessage">विवरण</p>
-        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
-      </div>
-    </div>
-
+  <body>
+    <div id="infoModal" class="modal">...</div>
     <div id="header-placeholder"></div>
-
     <main class="container" style="padding: 3rem 0">
       <div
         class="card-glass"
         style="max-width: 600px; margin: 0 auto; padding: 2rem"
       >
-        <h1 style="text-align: center">संपर्क करें</h1>
-
-        <!-- Example email address displayed -->
-        <div style="text-align: center; margin-bottom: 1.5rem">
-          <p style="color: var(--warm-brown)">
-            <i class="fas fa-envelope"></i> <strong>ईमेल :</strong>
-            <a
-              href="mailto:info@spiriligious.in"
-              style="color: var(--warm-brown); text-decoration: none"
-              >info@spiriligious.in</a
-            ><br>
-          </p>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            आप हमें सीधा ईमेल भी लिख सकते हैं।
-          </p>
-        </div>
-
+        <h1 style="text-align: center; color: var(--primary-green)">
+          Contact Us
+        </h1>
+        <p style="text-align: center; margin: 1rem 0">
+          <i class="fas fa-envelope"></i> <strong>Email:</strong>
+          <a
+            href="mailto:info@spiriligious.in"
+            style="color: var(--primary-green)"
+            >info@spiriligious.in</a
+          >
+        </p>
         <form id="contactForm">
           <input
             type="text"
             id="contactName"
-            placeholder="आपका नाम"
+            placeholder="Your Name"
             required
-            style="width: 100%; margin: 0.5rem 0; padding: 0.8rem"
+            style="
+              width: 100%;
+              margin: 0.5rem 0;
+              padding: 0.8rem;
+              border: 1px solid var(--border-light);
+              border-radius: 0.5rem;
+            "
           />
           <input
             type="email"
             id="contactEmail"
-            placeholder="ईमेल"
+            placeholder="Email"
             required
-            style="width: 100%; margin: 0.5rem 0; padding: 0.8rem"
+            style="
+              width: 100%;
+              margin: 0.5rem 0;
+              padding: 0.8rem;
+              border: 1px solid var(--border-light);
+              border-radius: 0.5rem;
+            "
           />
           <input
             type="text"
             id="contactSubject"
-            placeholder="विषय"
+            placeholder="Subject"
             required
-            style="width: 100%; margin: 0.5rem 0; padding: 0.8rem"
+            style="
+              width: 100%;
+              margin: 0.5rem 0;
+              padding: 0.8rem;
+              border: 1px solid var(--border-light);
+              border-radius: 0.5rem;
+            "
           />
           <textarea
             id="contactMessage"
             rows="5"
-            placeholder="आपका संदेश"
+            placeholder="Message"
             required
-            style="width: 100%; margin: 0.5rem 0; padding: 0.8rem"
+            style="
+              width: 100%;
+              margin: 0.5rem 0;
+              padding: 0.8rem;
+              border: 1px solid var(--border-light);
+              border-radius: 0.5rem;
+            "
           ></textarea>
-          <button type="submit" class="btn btn-primary">संदेश भेजें</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="
+              background: var(--primary-green);
+              color: white;
+              border: none;
+              padding: 0.6rem 1.2rem;
+              border-radius: 2rem;
+              cursor: pointer;
+            "
+          >
+            Send Message
+          </button>
         </form>
       </div>
-
-      <div style="margin-top: 3rem">
-        <h2 style="text-align: center">हमसे जुड़ें</h2>
-        <div
-          style="
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-          "
-        >
-          <a
-            href="https://www.facebook.com/spiriligious"
-            target="_blank"
-            class="social-link"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-          <a
-            href="https://www.instagram.com/spiriligious"
-            target="_blank"
-            class="social-link"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a
-            href="https://www.twitter.com/spiriligious"
-            target="_blank"
-            class="social-link"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="mailto:support@spiriligious.com" class="social-link"
-            ><i class="fas fa-envelope"></i
-          ></a>
-        </div>
-      </div>
     </main>
-
     <div id="footer-placeholder"></div>
-
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>

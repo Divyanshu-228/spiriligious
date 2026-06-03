@@ -1,41 +1,49 @@
-<!DOCTYPE html>
+<!-- FILE: podcast.html -->
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiriligious · मंथन पॉडकास्ट</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="sacred-glow">
-
-  <div id="infoModal" class="modal">
-    <div class="modal-card">
-      <i class="fas fa-om" style="font-size: 2rem; color: #A68868;"></i>
-      <h3 id="modalTitle">शीर्षक</h3>
-      <p id="modalMessage">विवरण</p>
-      <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
-    </div>
-  </div>
-
-  <div id="header-placeholder"></div>
-
-  <main class="container" style="padding: 4rem 0; text-align: center;">
-    <div class="card-glass" style="max-width: 700px; margin: 0 auto; padding: 3rem;">
-      <i class="fas fa-microphone-alt" style="font-size: 4rem; color: #A68868; margin-bottom: 1rem;"></i>
-      <h1 style="font-size: 2.5rem;">🎙️ मंथन पॉडकास्ट</h1>
-      <p style="font-size: 1.3rem; margin: 1rem 0;">जल्द आ रहा है...</p>
-      <p>हम जल्द ही गहन चर्चाओं, वैज्ञानिक विश्लेषणों और आध्यात्मिक संवादों के साथ उपस्थित होंगे।</p>
-      <p style="margin-top: 1.5rem; font-style: italic;">🙏 कृपया बने रहें।</p>
-    </div>
-  </main>
-
-  <div id="footer-placeholder"></div>
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="global.js"></script>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spiriligious · Manthan Podcast</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="infoModal" class="modal">...</div>
+    <div id="header-placeholder"></div>
+    <main class="container" style="padding: 4rem 0; text-align: center">
+      <div
+        class="card-glass"
+        style="max-width: 700px; margin: 0 auto; padding: 3rem"
+      >
+        <i
+          class="fas fa-microphone-alt"
+          style="
+            font-size: 4rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+          "
+        ></i>
+        <h1>🎙️ मंथन पॉडकास्ट</h1>
+        <p style="margin: 1rem 0">जल्द आ रहा है...</p>
+        <p>
+          हम जल्द ही गहन चर्चाओं, वैज्ञानिक विश्लेषणों और आध्यात्मिक संवादों के
+          साथ उपस्थित होंगे।
+        </p>
+        <p style="margin-top: 1rem"><em>🙏 कृपया बने रहें।</em></p>
+      </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="global.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

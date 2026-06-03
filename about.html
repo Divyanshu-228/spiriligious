@@ -1,15 +1,12 @@
+<!-- FILE: about.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spiriligious · About</title>
-    <meta
-      name="description"
-      content="Spiriligious - ज्ञान, अध्यात्म और विज्ञान का संतुलित मंथन।"
-    />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Noto+Sans+Devanagari&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -18,81 +15,29 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="sacred-glow">
-    <!-- MODAL (same as index) -->
-    <div id="infoModal" class="modal">
-      <div class="modal-card">
-        <i
-          class="fas fa-om"
-          style="font-size: 2rem; color: #bc6f25; margin-bottom: 0.5rem"
-        ></i>
-        <h3 id="modalTitle">शीर्षक</h3>
-        <p id="modalMessage">विवरण यहाँ दिखेगा...</p>
-        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
-      </div>
-    </div>
-
+  <body>
+    <div id="infoModal" class="modal">...</div>
     <div id="header-placeholder"></div>
-
     <main class="container" style="padding: 3rem 0">
-      <div
-        class="card-glass"
-        style="max-width: 800px; margin: 0 auto; padding: 2rem"
-      >
-        <h1 style="text-align: center; color: var(--warm-brown)">
+      <div class="card-glass content-card">
+        <h1 style="text-align: center; color: var(--primary-green)">
           About Spiriligious
         </h1>
-
-        <p
-          style="
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-          "
-        >
+        <p style="margin-top: 1rem">
           Spiriligious is a platform that bridges ancient traditions with modern
           science. We believe every ritual, belief, and practice has a logical
           and scientific foundation that has been obscured over time.
         </p>
-
-        <p
-          style="
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-          "
-        >
+        <p style="margin-top: 1rem">
           Our mission is to revive the spirit of inquiry – to question, analyze,
           and discover the truth behind traditions, while respecting their
           spiritual essence.
         </p>
-
-        <p
-          style="
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-          "
-        >
+        <p style="margin-top: 1rem">
           We are a team of researchers, scientists, and spiritual seekers
-          dedicated to balanced churning (<span style="font-weight: 600"
-            >मंथन</span
-          >) of knowledge.
+          dedicated to balanced churning (<strong>मंथन</strong>) of knowledge.
         </p>
-
-        <p
-          style="
-            text-align: center;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-top: 1.5rem;
-            color: var(--text-dark);
-          "
-        >
+        <p style="margin-top: 1rem; text-align: center">
           Join us in this journey of
           <strong>ज्ञान, अध्यात्म और विज्ञान</strong> – exploring the unknown,
           questioning the known, and celebrating the eternal wisdom of our
@@ -100,9 +45,7 @@
         </p>
       </div>
     </main>
-
     <div id="footer-placeholder"></div>
-
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>
