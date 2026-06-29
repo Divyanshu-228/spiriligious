@@ -1,4 +1,4 @@
-// ==================== FIREBASE CONFIGURATION ====================
+// ==================== FIREBASE ====================
 const firebaseConfig = {
   apiKey: "AIzaSyC8h_NLwFq54mFSrZhG-gQnWJRIAr0zc5c",
   authDomain: "spiriligious-cms.firebaseapp.com",
@@ -8,800 +8,730 @@ const firebaseConfig = {
   appId: "1:595657008516:web:e7d2fed4b5e1e5c481e9d1",
   measurementId: "G-LXB9R61S94",
 };
-
-// Initialize Firebase (only once)
-if (!firebase.apps || !firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Helper: escape HTML
+// ==================== HELPERS ====================
 function escapeHtml(str) {
   if (!str) return "";
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  return str.replace(/[&<>]/g, function (m) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m];
+  });
+}
+function openComingSoon(title) {
+  openModal(
+    "🚧 आने वाला है",
+    "<h3>" +
+      title +
+      "</h3><p>हम जल्द ही इस सुविधा को लाएंगे। कृपया बने रहें। 🙏</p>",
+  );
+}
+function scrollToSection(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// ==================== GLOBAL VARIABLES ====================
-let traditionsData = [];
-let bhajanVideos = [];
-let encyclopediaTerms = [];
-let mandirDarshan = [];
-let santDarshan = [];
+// ==================== MODALS ====================
+var modal = document.getElementById("infoModal");
+var modalTitle = document.getElementById("modalTitle");
+var modalMessage = document.getElementById("modalMessage");
 
-// YouTube config
-const YOUTUBE_CHANNEL_ID = "UCxxxxxxxxxxxxxxxxxxxxxx";
-const YOUTUBE_VIDEO_ID = "LYhkZO3MRyE";
-const bhajanEmbedUrl = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&rel=0`;
-
-// ==================== MODAL LOGIC ====================
-const modal = document.getElementById("infoModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalMessage = document.getElementById("modalMessage");
-
-function openModal(title, messageHtml) {
-  if (!modal) return;
+function openModal(title, html) {
   modalTitle.innerText = title;
-  modalMessage.innerHTML = messageHtml;
+  modalMessage.innerHTML = html;
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
 }
-
 function closeModal() {
-  if (!modal) return;
   modal.style.display = "none";
   document.body.style.overflow = "auto";
 }
-
-window.addEventListener("click", (e) => {
+window.addEventListener("click", function (e) {
   if (e.target === modal) closeModal();
 });
 
-// ==================== LOAD DATA FROM FIRESTORE ====================
-async function loadScientificCards() {
-  try {
-    const snapshot = await db
-      .collection("scientificCards")
-      .where("published", "==", true)
-      .get();
-    traditionsData = [];
-    snapshot.forEach((doc) => {
-      traditionsData.push({ id: doc.id, ...doc.data() });
-    });
-    traditionsData.sort((a, b) => {
-      if ((b.pinned || false) !== (a.pinned || false))
-        return (b.pinned || false) - (a.pinned || false);
-      const aTime = a.createdAt?.seconds || 0;
-      const bTime = b.createdAt?.seconds || 0;
-      return bTime - aTime;
-    });
-    renderAnalysisCards();
-    if (document.getElementById("scientificFullGrid")) renderFullAnalysis();
-  } catch (err) {
-    console.error(err);
-  }
-}
+// Detail Modal
+var detailModal = document.getElementById("detailModal");
+var detailBody = document.getElementById("detailBody");
 
-async function loadBhajanVideos() {
-  try {
-    const snapshot = await db
-      .collection("bhajanVideos")
-      .where("published", "==", true)
-      .get();
-    bhajanVideos = [];
-    snapshot.forEach((doc) => {
-      bhajanVideos.push({ id: doc.id, ...doc.data() });
-    });
-    bhajanVideos.sort(
-      (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
-    );
-    renderBhajanPage();
-  } catch (err) {
-    console.error(err);
-  }
+function openDetailModal(html) {
+  detailBody.innerHTML = html;
+  detailModal.style.display = "flex";
+  document.body.style.overflow = "hidden";
 }
+function closeDetailModal() {
+  detailModal.style.display = "none";
+  document.body.style.overflow = "auto";
+}
+window.addEventListener("click", function (e) {
+  if (e.target === detailModal) closeDetailModal();
+});
 
-async function loadEncyclopediaTerms() {
-  try {
-    const snapshot = await db
-      .collection("encyclopediaTerms")
-      .where("published", "==", true)
-      .get();
-    encyclopediaTerms = [];
-    snapshot.forEach((doc) =>
-      encyclopediaTerms.push({ id: doc.id, ...doc.data() }),
-    );
-    renderEncyclopediaPage();
-  } catch (err) {
-    console.error(err);
-  }
-}
-// ==================== DAILY SHLOK (Aaj ka Shlok) ====================
+// ==================== LOAD DATA ====================
+
+// ----- Daily Shlok -----
 async function loadDailyShlok() {
-  const container = document.getElementById("shlokContent");
+  var container = document.getElementById("shlokContent");
   if (!container) return;
   try {
-    // Fetch all published shloks (no orderBy, no limit)
-    const snapshot = await db
+    var snap = await db
       .collection("dailyShlok")
       .where("published", "==", true)
       .get();
-
-    if (snapshot.empty) {
-      container.innerHTML = `
-        <p style="font-size:1.2rem;"><i class="fas fa-praying-hands"></i> ॐ सह नाववतु । सह नौ भुनक्तु । सह वीर्यं करवावहै ।</p>
-        <p style="margin-top:0.5rem;">(शीघ्र ही प्रतिदिन नया श्लोक उपलब्ध होगा।)</p>
-      `;
+    if (snap.empty) {
+      container.innerHTML =
+        '<p class="shlok-placeholder">🙏 कोई प्रकाशित श्लोक नहीं। कृपया बाद में देखें।</p>';
       return;
     }
-
-    // Find the document with the latest date manually
-    let latest = null;
-    let latestDate = null;
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      const dateVal = data.date?.toDate ? data.date.toDate() : new Date(0);
-      if (!latestDate || dateVal > latestDate) {
-        latestDate = dateVal;
+    var latest = null;
+    var latestDate = null;
+    snap.forEach(function (doc) {
+      var data = doc.data();
+      var d = data.date && data.date.toDate ? data.date.toDate() : new Date(0);
+      if (!latestDate || d > latestDate) {
+        latestDate = d;
         latest = data;
       }
     });
-
     if (!latest) {
-      container.innerHTML = `<p>🙏 कोई प्रकाशित श्लोक नहीं।</p>`;
+      container.innerHTML =
+        '<p class="shlok-placeholder">🙏 श्लोक डेटा प्राप्त नहीं हुआ।</p>';
       return;
     }
-
-    container.innerHTML = `
-      <div style="font-size:1.4rem; font-weight:500; font-family: 'Noto Sans Devanagari', serif;">${escapeHtml(latest.text || "")}</div>
-      <div style="margin-top:1rem;"><strong>अर्थ :</strong> ${escapeHtml(latest.meaning || "")}</div>
-      ${latest.source ? `<div style="margin-top:0.5rem;"><small>स्रोत : ${escapeHtml(latest.source)}</small></div>` : ""}
-    `;
-  } catch (err) {
-    console.error("Error loading daily shlok:", err);
-    container.innerHTML = `<p>🙏 श्लोक लोड नहीं हो सका। कृपया बाद में देखें।</p>`;
-  }
-}
-
-// ==================== RENDER FUNCTIONS ====================
-function renderAnalysisCards() {
-  const grid = document.getElementById("analysisGrid");
-  if (!grid) return;
-  if (traditionsData.length === 0) {
-    grid.innerHTML =
-      '<div style="grid-column:1/-1; text-align:center; padding:2rem;">⚠️ कोई विश्लेषण उपलब्ध नहीं। कृपया बाद में देखें।</div>';
-    return;
-  }
-  grid.innerHTML = traditionsData
-    .map(
-      (t) => `
-    <div class="analysis-card">
-      <span class="card-tag">${escapeHtml(t.category)}</span>
-      <h3>${escapeHtml(t.title)}</h3>
-      <div class="tradition-category"><i class="fas fa-flask"></i> वैज्ञानिक सारांश</div>
-      <p>${escapeHtml(t.shortDesc)}</p>
-      <button class="read-more-btn" data-id="${t.id}">पूरा विश्लेषण पढ़ें <i class="fas fa-arrow-right"></i></button>
-    </div>
-  `,
-    )
-    .join("");
-  document.querySelectorAll(".read-more-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const id = btn.getAttribute("data-id");
-      const item = traditionsData.find((t) => t.id === id);
-      if (item) openModal(`🔬 ${item.title}`, item.fullAnalysis);
-      e.stopPropagation();
-    });
-  });
-}
-
-function renderFullAnalysis() {
-  const grid = document.getElementById("scientificFullGrid");
-  if (!grid) return;
-  if (traditionsData.length === 0) {
-    grid.innerHTML =
-      '<div style="text-align:center; padding:2rem;">कोई विश्लेषण उपलब्ध नहीं।</div>';
-    return;
-  }
-  grid.innerHTML = traditionsData
-    .map(
-      (t) => `
-    <div class="analysis-card full-analysis-card">
-      <span class="card-tag">${escapeHtml(t.category)}</span>
-      <h3>${escapeHtml(t.title)}</h3>
-      <div class="tradition-category"><i class="fas fa-flask"></i> वैज्ञानिक एवं आध्यात्मिक विश्लेषण</div>
-      <div class="full-analysis-content">${t.fullAnalysis}</div>
-    </div>
-  `,
-    )
-    .join("");
-}
-
-function renderBhajanPage() {
-  const container = document.getElementById("bhajanVideosContainer");
-  if (!container) return;
-  if (bhajanVideos.length === 0) {
     container.innerHTML =
-      '<p style="text-align:center;">कोई भजन उपलब्ध नहीं। कृपया बाद में देखें।</p>';
-    return;
-  }
-  container.innerHTML = bhajanVideos
-    .map(
-      (video) => `
-    <div class="card-glass" style="padding:1rem; margin-bottom:2rem;">
-      <h3 style="margin-bottom:0.5rem;">${escapeHtml(video.title)}</h3>
-      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:1rem;">
-        <iframe src="${video.videoUrl}?autoplay=0&rel=0" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  `,
-    )
-    .join("");
-}
-
-function renderEncyclopediaPage() {
-  const grid = document.getElementById("encyclopediaGrid");
-  if (!grid) return;
-  if (encyclopediaTerms.length === 0) {
-    grid.innerHTML =
-      '<div style="text-align:center; padding:2rem;">📖 कोई शब्द उपलब्ध नहीं।</div>';
-    return;
-  }
-  grid.innerHTML = encyclopediaTerms
-    .map(
-      (term) => `
-    <div class="card-glass" style="padding:1.5rem; cursor:pointer;" onclick="openModal('🔍 ${escapeHtml(term.term)}', '<strong>परंपरागत अर्थ:</strong> ${escapeHtml(term.meaning)}<br><br><strong>वैज्ञानिक व्याख्या:</strong> ${escapeHtml(term.scientific)}')">
-      <i class="fas fa-gem" style="font-size:2rem; color:#A68868;"></i>
-      <h3>${escapeHtml(term.term)}</h3>
-      <p>${escapeHtml(term.meaning)}</p>
-      <button class="read-more-btn" style="background:none; border:none; color:#A68868;">विवरण खोलें →</button>
-    </div>
-  `,
-    )
-    .join("");
-}
-
-// ==================== MANDIR DARSHAN (Premium Card Rendering) ====================
-async function loadMandirs() {
-  const container = document.getElementById("mandirDarshanContainer");
-  if (!container) return;
-
-  try {
-    const snapshot = await db
-      .collection("mandirDarshan")
-      .where("published", "==", true)
-      .orderBy("createdAt", "desc")
-      .get();
-
-    if (snapshot.empty) {
-      container.innerHTML = `
-        <div style="text-align:center; padding:2rem;">
-          🛕 कोई मंदिर उपलब्ध नहीं।
-        </div>
-      `;
-      return;
-    }
-
-    let html = "";
-    snapshot.forEach((doc) => {
-      const m = doc.data();
-      html += `
-        <div class="mandir-card" data-id="${doc.id}">
-          <div class="mandir-image-wrapper">
-            <img 
-              class="mandir-image" 
-              src="${escapeHtml(m.imageUrl || "https://via.placeholder.com/400x300?text=Mandir")}" 
-              alt="${escapeHtml(m.title)}"
-              loading="lazy"
-            >
-            <div class="mandir-overlay"></div>
-          </div>
-          <div class="mandir-content">
-            <div class="mandir-badge">
-              <i class="fas fa-temple"></i> दिव्य स्थल
-            </div>
-            <h3>${escapeHtml(m.title)}</h3>
-            <p>${escapeHtml(m.description || "").substring(0, 120)}${(m.description || "").length > 120 ? "…" : ""}</p>
-            <button class="mandir-btn" data-id="${doc.id}" data-video="${escapeHtml(m.videoUrl || "")}">
-              विस्तार से देखें <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-      `;
-    });
-    container.innerHTML = html;
-
-    // Attach click handlers for modal video
-    document.querySelectorAll(".mandir-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const videoUrl = btn.getAttribute("data-video");
-        const card = btn.closest(".mandir-card");
-        const title = card.querySelector("h3").innerText;
-        if (videoUrl) {
-          openModal(
-            title,
-            `<div style="position:relative; padding-bottom:56.25%;"><iframe src="${videoUrl}?rel=0" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe></div><p style="margin-top:1rem;">${card.querySelector("p").innerText}</p>`,
-          );
-        } else {
-          openModal(
-            title,
-            `<p>${card.querySelector("p").innerText}</p><p><em>वीडियो उपलब्ध नहीं है।</em></p>`,
-          );
-        }
-      });
-    });
+      '<div class="shlok-text">' +
+      escapeHtml(latest.text) +
+      "</div>" +
+      '<div class="shlok-meaning"><strong>अर्थ :</strong> ' +
+      escapeHtml(latest.meaning) +
+      "</div>" +
+      (latest.source
+        ? '<div class="shlok-source">स्रोत : ' +
+          escapeHtml(latest.source) +
+          "</div>"
+        : "");
   } catch (err) {
-    console.error(err);
-    container.innerHTML = `<div style="text-align:center; padding:2rem;">त्रुटि: मंदिर डेटा लोड नहीं हो सका।</div>`;
+    console.error("Error loading shlok:", err);
+    container.innerHTML =
+      '<p class="shlok-placeholder">🙏 श्लोक लोड नहीं हो सका। कृपया पुनः प्रयास करें।</p>';
   }
 }
 
-// ==================== SANT DARSHAN (FIXED) ====================
-async function loadSants() {
-  const snap = await db.collection("santDarshan").get();
-  const container = document.getElementById("santList");
-  container.innerHTML = "";
-  let docs = [];
-  snap.forEach((doc) => docs.push({ id: doc.id, ...doc.data() }));
-  docs.sort(
-    (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
-  );
-  docs.forEach((item) => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <img src="${escapeHtml(item.imageUrl || "https://via.placeholder.com/400x200?text=Sant")}" 
-           style="width:100%; height:180px; object-fit:cover; border-radius:1rem;">
-      <h3>${escapeHtml(item.name)}</h3>
-      <p>${escapeHtml(item.description?.slice(0, 120))}...</p>
-      <div><span class="${item.published ? "published-badge" : "draft-badge"}">${item.published ? "Published" : "Draft"}</span></div>
-      <div class="forum-actions">
-        <button onclick="editSant('${item.id}')">Edit</button>
-        <button style="background:#dc3545;" onclick="deleteSant('${item.id}')">Delete</button>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-// ==================== SANT ARTICLES (Premium Article Cards) ====================
+// ----- Sant Articles (client-side sorting – no index required) -----
 async function loadSantArticles() {
-  const container = document.getElementById("santArticlesGrid");
-  if (!container) return;
+  var featuredContainer = document.getElementById("featuredSantContainer");
+  var gridContainer = document.getElementById("santArticlesGrid");
+  if (!featuredContainer || !gridContainer) return;
+
   try {
-    const snapshot = await db
+    var snap = await db
       .collection("santArticles")
       .where("published", "==", true)
-      .orderBy("createdAt", "desc")
-      .limit(6)
       .get();
-    if (snapshot.empty) {
-      container.innerHTML =
-        '<p style="text-align:center;">लेख जल्द आ रहे हैं। 🙏</p>';
+    if (snap.empty) {
+      featuredContainer.innerHTML =
+        '<div class="featured-image"><img src="https://via.placeholder.com/600x400?text=Sant" alt="No content" loading="lazy" /></div>' +
+        '<div class="featured-content"><span class="badge">Featured</span><h3>Coming Soon</h3><p>Sant articles will appear here. 🙏</p></div>';
+      gridContainer.innerHTML = "";
       return;
     }
-    let html = "";
-    snapshot.forEach((doc) => {
-      const article = doc.data();
-      const excerpt = article.content.replace(/<[^>]*>/g, "").substring(0, 120);
-      html += `
-        <a href="sant-article.html?id=${doc.id}" class="sant-article-card">
-          <div class="sant-image-wrapper">
-            <img 
-              class="sant-image" 
-              src="${article.imageUrl || "https://via.placeholder.com/400x300?text=Sant"}" 
-              alt="${escapeHtml(article.title)}"
-              loading="lazy"
-            >
-            <div class="sant-overlay"></div>
-          </div>
-          <div class="sant-content">
-            <div class="sant-badge">
-              <i class="fas fa-feather-alt"></i> महापुरुष
-            </div>
-            <h3>${escapeHtml(article.title)}</h3>
-            <div class="sant-author">
-              <i class="fas fa-pen-fancy"></i> ${escapeHtml(article.author)}
-            </div>
-            <div class="sant-excerpt">${escapeHtml(excerpt)}…</div>
-            <div class="sant-read-btn">
-              पूरा लेख पढ़ें <i class="fas fa-arrow-right"></i>
-            </div>
-          </div>
-        </a>
-      `;
+
+    var docs = snap.docs;
+    // Sort manually by createdAt (descending) – no Firebase index needed
+    docs.sort(function (a, b) {
+      var aDate =
+        a.data().createdAt && a.data().createdAt.toDate
+          ? a.data().createdAt.toDate()
+          : new Date(0);
+      var bDate =
+        b.data().createdAt && b.data().createdAt.toDate
+          ? b.data().createdAt.toDate()
+          : new Date(0);
+      return bDate - aDate;
     });
-    container.innerHTML = html;
+
+    var first = docs[0];
+    var rest = docs.slice(1);
+    var a = first.data();
+
+    // Featured
+    featuredContainer.innerHTML =
+      '<div class="featured-image"><img src="' +
+      escapeHtml(
+        a.imageUrl || "https://via.placeholder.com/600x400?text=Sant",
+      ) +
+      '" alt="' +
+      escapeHtml(a.title) +
+      '" loading="lazy" /></div>' +
+      '<div class="featured-content">' +
+      '<span class="badge">Featured</span>' +
+      "<h3>" +
+      escapeHtml(a.title) +
+      "</h3>" +
+      '<div class="meta"><i class="fas fa-user"></i> ' +
+      escapeHtml(a.author) +
+      "</div>" +
+      "<p>" +
+      escapeHtml((a.content || "").substring(0, 150)) +
+      "...</p>" +
+      '<button class="btn-gold" onclick="openSantArticle(\'' +
+      first.id +
+      "')\">Read Article</button>" +
+      "</div>";
+
+    // Grid
+    if (rest.length === 0) {
+      gridContainer.innerHTML = "";
+      return;
+    }
+    var html = "";
+    rest.forEach(function (doc) {
+      var item = doc.data();
+      html +=
+        '<div class="article-card" onclick="openSantArticle(\'' +
+        doc.id +
+        "')\">" +
+        '<img src="' +
+        escapeHtml(
+          item.imageUrl || "https://via.placeholder.com/400x200?text=Sant",
+        ) +
+        '" alt="' +
+        escapeHtml(item.title) +
+        '" />' +
+        '<div class="content">' +
+        "<h3>" +
+        escapeHtml(item.title) +
+        "</h3>" +
+        '<div class="author">✍️ ' +
+        escapeHtml(item.author) +
+        "</div>" +
+        '<div class="excerpt">' +
+        escapeHtml((item.content || "").substring(0, 120)) +
+        "...</div>" +
+        "</div></div>";
+    });
+    gridContainer.innerHTML = html;
   } catch (err) {
-    console.error(err);
-    container.innerHTML =
-      '<p style="text-align:center;">लेख लोड नहीं हो सके।</p>';
+    console.error("Error loading sant articles:", err);
+    featuredContainer.innerHTML =
+      '<div class="featured-content"><h3>Error</h3><p>Could not load articles.</p></div>';
+    gridContainer.innerHTML = "";
   }
 }
 
-window.deleteSant = async (id) => {
-  if (!confirm("Delete this sant?")) return;
-  await db.collection("santDarshan").doc(id).delete();
-  loadSants();
-};
-
-async function editSant(id) {
-  const doc = await db.collection("santDarshan").doc(id).get();
-  const data = doc.data();
-  openSantForm(data, id);
+// ----- Open Sant Article -----
+async function openSantArticle(id) {
+  var doc = await db.collection("santArticles").doc(id).get();
+  if (!doc.exists) return;
+  var a = doc.data();
+  var html =
+    "<h1>" +
+    escapeHtml(a.title) +
+    "</h1>" +
+    '<div class="detail-meta"><strong>✍️ ' +
+    escapeHtml(a.author) +
+    "</strong>" +
+    (a.authorCredits ? " · " + escapeHtml(a.authorCredits) : "") +
+    "</div>" +
+    (a.imageUrl
+      ? '<img src="' +
+        escapeHtml(a.imageUrl) +
+        '" alt="' +
+        escapeHtml(a.title) +
+        '" />'
+      : "") +
+    '<div class="full-text sant-article-content">' +
+    a.content +
+    "</div>";
+  openDetailModal(html);
 }
 
-function openSantForm(existingData = null, existingId = null) {
-  const modal = document.createElement("div");
-  modal.className = "modal-overlay";
-  const name = existingData ? existingData.name || "" : "";
-  const description = existingData ? existingData.description || "" : "";
-  const imageUrl = existingData ? existingData.imageUrl || "" : "";
-  const videoUrl = existingData ? existingData.videoUrl || "" : "";
-  const published = existingData ? existingData.published !== false : true;
-  modal.innerHTML = `
-    <div class="modal-content">
-      <h3>${existingData ? "Edit Sant" : "Add New Sant"}</h3>
-      <input id="santName" placeholder="Sant Name" value="${escapeHtml(name)}">
-      <textarea id="santDesc" placeholder="Description" rows="5">${escapeHtml(description)}</textarea>
-      <input id="santImage" placeholder="Image URL (optional)" value="${escapeHtml(imageUrl)}">
-      <input id="santVideo" placeholder="YouTube Link (any format)" value="${escapeHtml(videoUrl)}">
-      <label><input type="checkbox" id="santPublished" ${published ? "checked" : ""}> Published</label>
-      <button id="saveSantBtn">Save Sant</button>
-      <button style="background:#ccc; color:#222;" id="closeSantModal">Cancel</button>
-    </div>
-  `;
-  document.body.appendChild(modal);
-  document.getElementById("closeSantModal").onclick = () => modal.remove();
-  document.getElementById("saveSantBtn").onclick = async () => {
-    const nameVal = document.getElementById("santName").value.trim();
-    const descVal = document.getElementById("santDesc").value.trim();
-    const imageVal = document.getElementById("santImage").value.trim();
-    const videoInput = document.getElementById("santVideo");
-    const publishedVal = document.getElementById("santPublished").checked;
-    if (!nameVal || !descVal) return alert("Please fill name and description");
-    let embedUrl = null;
-    if (videoInput.value.trim()) {
-      embedUrl = await validateAndConvertYouTubeLink(
-        videoInput.value.trim(),
-        videoInput,
-      );
-      if (!embedUrl) return;
-    }
-    const payload = {
-      name: nameVal,
-      description: descVal,
-      imageUrl: imageVal,
-      videoUrl: embedUrl || "",
-      published: publishedVal,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    };
-    try {
-      if (existingId)
-        await db.collection("santDarshan").doc(existingId).update(payload);
-      else await db.collection("santDarshan").add(payload);
-      modal.remove();
-      loadSants();
-      alert("Sant saved successfully 🙏");
-    } catch (err) {
-      console.error(err);
-      alert("Error saving sant");
-    }
-  };
-}
+// ----- Mandir Darshan (client-side sorting) -----
+async function loadMandirs() {
+  var featuredContainer = document.getElementById("featuredTempleContainer");
+  var gridContainer = document.getElementById("mandirGrid");
+  if (!featuredContainer || !gridContainer) return;
 
-// Also update loadAllData() to call loadSants() (not loadSant)
-async function loadAllData() {
-  await loadCards();
-  await loadVideos();
-  await loadTerms();
-  await loadForumTopics();
-  await loadMandirs();
-  await loadSants(); // ✅ fixed
-}
-
-// ==================== SANT DARSHAN ====================
-async function loadSantDarshan() {
-  const container = document.getElementById("santDarshanContainer");
-  if (!container) return;
   try {
-    const snapshot = await db
-      .collection("santDarshan")
+    var snap = await db
+      .collection("mandirDarshan")
       .where("published", "==", true)
-      .orderBy("createdAt", "desc")
       .get();
-    if (snapshot.empty) {
-      container.innerHTML =
-        '<div style="text-align:center; padding:2rem;">🙏 कोई संत उपलब्ध नहीं। जल्द आ रहा है।</div>';
+    if (snap.empty) {
+      featuredContainer.innerHTML =
+        '<div class="featured-image"><img src="https://via.placeholder.com/600x400?text=Temple" alt="No content" loading="lazy" /></div>' +
+        '<div class="featured-content"><span class="badge">Featured</span><h3>Coming Soon</h3><p>Temples will appear here. 🙏</p></div>';
+      gridContainer.innerHTML = "";
       return;
     }
-    let html = "";
-    snapshot.forEach((doc) => {
-      const s = doc.data();
-      html += `
-        <div class="darshan-card">
-          <img src="${escapeHtml(s.imageUrl || "https://via.placeholder.com/400x200?text=Sant")}" 
-               alt="${escapeHtml(s.name)}" 
-               class="darshan-image">
-          <div class="darshan-content">
-            <span class="darshan-badge">🙏 महापुरुष</span>
-            <h3>${escapeHtml(s.name)}</h3>
-            <p>${escapeHtml(s.description)}</p>
-            ${
-              s.videoUrl
-                ? `
-              <div class="video-wrapper">
-                <iframe src="${s.videoUrl}?rel=0" 
-                        title="${escapeHtml(s.name)}" 
-                        frameborder="0" 
-                        allowfullscreen></iframe>
-              </div>
-            `
-                : ""
-            }
-          </div>
-        </div>
-      `;
+
+    var docs = snap.docs;
+    docs.sort(function (a, b) {
+      var aDate =
+        a.data().createdAt && a.data().createdAt.toDate
+          ? a.data().createdAt.toDate()
+          : new Date(0);
+      var bDate =
+        b.data().createdAt && b.data().createdAt.toDate
+          ? b.data().createdAt.toDate()
+          : new Date(0);
+      return bDate - aDate;
+    });
+
+    var first = docs[0];
+    var rest = docs.slice(1);
+    var m = first.data();
+
+    featuredContainer.innerHTML =
+      '<div class="featured-image"><img src="' +
+      escapeHtml(
+        m.imageUrl || "https://via.placeholder.com/600x400?text=Temple",
+      ) +
+      '" alt="' +
+      escapeHtml(m.title) +
+      '" loading="lazy" /></div>' +
+      '<div class="featured-content">' +
+      '<span class="badge">Featured</span>' +
+      "<h3>" +
+      escapeHtml(m.title) +
+      "</h3>" +
+      '<div class="meta"><i class="fas fa-map-pin"></i> ' +
+      escapeHtml(m.location || "Sacred Site") +
+      "</div>" +
+      "<p>" +
+      escapeHtml((m.description || "").substring(0, 150)) +
+      "...</p>" +
+      '<button class="btn-gold" onclick="openMandirDetail(\'' +
+      first.id +
+      "')\">Explore Temple</button>" +
+      "</div>";
+
+    if (rest.length === 0) {
+      gridContainer.innerHTML = "";
+      return;
+    }
+    var html = "";
+    rest.forEach(function (doc) {
+      var item = doc.data();
+      html +=
+        '<div class="darshan-card" onclick="openMandirDetail(\'' +
+        doc.id +
+        "')\">" +
+        '<img class="darshan-image" src="' +
+        escapeHtml(
+          item.imageUrl || "https://via.placeholder.com/400x200?text=Mandir",
+        ) +
+        '" alt="' +
+        escapeHtml(item.title) +
+        '" />' +
+        '<div class="darshan-content">' +
+        '<span class="darshan-badge">🛕 दिव्य स्थल</span>' +
+        "<h3>" +
+        escapeHtml(item.title) +
+        "</h3>" +
+        "<p>" +
+        escapeHtml((item.description || "").substring(0, 100)) +
+        "...</p>" +
+        "</div></div>";
+    });
+    gridContainer.innerHTML = html;
+  } catch (err) {
+    console.error("Error loading mandirs:", err);
+    featuredContainer.innerHTML =
+      '<div class="featured-content"><h3>Error</h3><p>Could not load temples.</p></div>';
+    gridContainer.innerHTML = "";
+  }
+}
+
+// ----- Open Mandir Detail -----
+async function openMandirDetail(id) {
+  var doc = await db.collection("mandirDarshan").doc(id).get();
+  if (!doc.exists) return;
+  var m = doc.data();
+  var videoHtml = "";
+  if (m.videoUrl) {
+    videoHtml =
+      '<div class="video-wrapper"><iframe src="' +
+      m.videoUrl +
+      '?rel=0" frameborder="0" allowfullscreen></iframe></div>';
+  }
+  var html =
+    "<h1>" +
+    escapeHtml(m.title) +
+    "</h1>" +
+    (m.imageUrl
+      ? '<img src="' +
+        escapeHtml(m.imageUrl) +
+        '" alt="' +
+        escapeHtml(m.title) +
+        '" />'
+      : "") +
+    '<div class="full-text">' +
+    escapeHtml(m.description) +
+    "</div>" +
+    videoHtml;
+  openDetailModal(html);
+}
+
+// ----- Bhajan Videos (client-side sorting) -----
+async function loadBhajans() {
+  var featuredContainer = document.getElementById("featuredBhajanContainer");
+  var gridContainer = document.getElementById("bhajanGrid");
+  if (!featuredContainer || !gridContainer) return;
+
+  try {
+    var snap = await db
+      .collection("bhajanVideos")
+      .where("published", "==", true)
+      .get();
+    if (snap.empty) {
+      featuredContainer.innerHTML =
+        '<div class="featured-image"><img src="https://via.placeholder.com/600x400?text=Bhajan" alt="No content" loading="lazy" /></div>' +
+        '<div class="featured-content"><span class="badge">Featured</span><h3>Coming Soon</h3><p>Bhajans will appear here. 🙏</p></div>';
+      gridContainer.innerHTML = "";
+      return;
+    }
+
+    var docs = snap.docs;
+    docs.sort(function (a, b) {
+      var aDate =
+        a.data().createdAt && a.data().createdAt.toDate
+          ? a.data().createdAt.toDate()
+          : new Date(0);
+      var bDate =
+        b.data().createdAt && b.data().createdAt.toDate
+          ? b.data().createdAt.toDate()
+          : new Date(0);
+      return bDate - aDate;
+    });
+
+    var first = docs[0];
+    var rest = docs.slice(1);
+    var v = first.data();
+
+    featuredContainer.innerHTML =
+      '<div class="featured-image"><img src="https://img.youtube.com/vi/' +
+      extractYouTubeId(v.videoUrl) +
+      '/hqdefault.jpg" alt="' +
+      escapeHtml(v.title) +
+      '" loading="lazy" /></div>' +
+      '<div class="featured-content">' +
+      '<span class="badge">Featured</span>' +
+      "<h3>" +
+      escapeHtml(v.title) +
+      "</h3>" +
+      '<div class="meta"><i class="fas fa-microphone-alt"></i> Bhajan</div>' +
+      "<p>" +
+      escapeHtml(
+        (v.description || "").substring(0, 150) ||
+          "Listen to this devotional bhajan.",
+      ) +
+      "</p>" +
+      '<button class="btn-gold" onclick="openBhajanDetail(\'' +
+      first.id +
+      "')\">Listen Now</button>" +
+      "</div>";
+
+    if (rest.length === 0) {
+      gridContainer.innerHTML = "";
+      return;
+    }
+    var html = "";
+    rest.forEach(function (doc) {
+      var item = doc.data();
+      html +=
+        '<div class="darshan-card" onclick="openBhajanDetail(\'' +
+        doc.id +
+        "')\">" +
+        '<div class="darshan-content">' +
+        '<span class="darshan-badge">🎵 भजन</span>' +
+        "<h3>" +
+        escapeHtml(item.title) +
+        "</h3>" +
+        '<div style="margin-top:0.5rem; background:#000; border-radius:8px; overflow:hidden;">' +
+        '<iframe src="' +
+        item.videoUrl +
+        '?rel=0" style="width:100%; aspect-ratio:16/9;" frameborder="0" allowfullscreen></iframe>' +
+        "</div></div></div>";
+    });
+    gridContainer.innerHTML = html;
+  } catch (err) {
+    console.error("Error loading bhajans:", err);
+    featuredContainer.innerHTML =
+      '<div class="featured-content"><h3>Error</h3><p>Could not load bhajans.</p></div>';
+    gridContainer.innerHTML = "";
+  }
+}
+
+// ----- Open Bhajan Detail -----
+async function openBhajanDetail(id) {
+  var doc = await db.collection("bhajanVideos").doc(id).get();
+  if (!doc.exists) return;
+  var v = doc.data();
+  var html =
+    "<h1>" +
+    escapeHtml(v.title) +
+    "</h1>" +
+    '<div class="video-wrapper"><iframe src="' +
+    v.videoUrl +
+    '?rel=0" frameborder="0" allowfullscreen></iframe></div>' +
+    (v.description
+      ? '<div class="full-text">' + escapeHtml(v.description) + "</div>"
+      : "");
+  openDetailModal(html);
+}
+
+// ----- Extract YouTube ID -----
+function extractYouTubeId(url) {
+  if (!url) return "";
+  var match = url.match(/(?:youtube\.com\/embed\/|youtu\.be\/|v=)([^&?/]+)/);
+  return match ? match[1] : "";
+}
+
+// ----- Science Section -----
+async function loadScience() {
+  var container = document.getElementById("scienceGrid");
+  if (!container) return;
+  try {
+    var [cardsSnap, termsSnap] = await Promise.all([
+      db.collection("scientificCards").where("published", "==", true).get(),
+      db.collection("encyclopediaTerms").where("published", "==", true).get(),
+    ]);
+    var items = [];
+    cardsSnap.forEach(function (doc) {
+      var data = doc.data();
+      items.push({
+        id: doc.id,
+        type: "scientific",
+        title: data.title,
+        category: data.category,
+        shortDesc: data.shortDesc,
+        fullContent: data.fullAnalysis,
+        pinned: data.pinned || false,
+        createdAt: data.createdAt?.seconds || 0,
+        imageUrl: data.imageUrl || null,
+      });
+    });
+    termsSnap.forEach(function (doc) {
+      var data = doc.data();
+      items.push({
+        id: doc.id,
+        type: "encyclopedia",
+        title: data.term,
+        category: "ज्ञानकोश",
+        shortDesc: data.meaning,
+        fullContent:
+          "<strong>परंपरागत अर्थ:</strong> " +
+          escapeHtml(data.meaning) +
+          "<br><br><strong>वैज्ञानिक व्याख्या:</strong> " +
+          escapeHtml(data.scientific),
+        pinned: false,
+        createdAt: 0,
+        imageUrl: null,
+      });
+    });
+    items.sort(function (a, b) {
+      if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+      return b.createdAt - a.createdAt;
+    });
+    if (items.length === 0) {
+      container.innerHTML =
+        '<div style="grid-column:1/-1; text-align:center; padding:2rem;">⚠️ कोई विश्लेषण उपलब्ध नहीं।</div>';
+      return;
+    }
+    var html = "";
+    items.forEach(function (item) {
+      var tag =
+        item.type === "scientific" ? "🔬 वैज्ञानिक विश्लेषण" : "📖 ज्ञानकोश";
+      var short =
+        item.type === "scientific"
+          ? item.shortDesc
+          : (item.shortDesc || "").substring(0, 120) + "...";
+      var imgHtml = item.imageUrl
+        ? '<img src="' +
+          escapeHtml(item.imageUrl) +
+          '" alt="' +
+          escapeHtml(item.title) +
+          '" class="science-image" />'
+        : "";
+      html +=
+        '<div class="analysis-card" onclick="openScienceDetail(\'' +
+        item.id +
+        "','" +
+        item.type +
+        "')\">" +
+        imgHtml +
+        '<div class="analysis-content">' +
+        '<span class="card-tag">' +
+        tag +
+        "</span>" +
+        "<h3>" +
+        escapeHtml(item.title) +
+        "</h3>" +
+        "<p>" +
+        escapeHtml(short) +
+        "</p>" +
+        '<button class="read-more-btn">पूरा विवरण →</button>' +
+        "</div></div>";
     });
     container.innerHTML = html;
   } catch (err) {
     console.error(err);
     container.innerHTML =
-      '<div style="text-align:center; padding:2rem;">त्रुटि: डेटा लोड नहीं हो सका।</div>';
+      '<div style="text-align:center;padding:2rem;">त्रुटि: डेटा लोड नहीं हो सका।</div>';
   }
 }
 
-// ==================== HOMEPAGE BUTTONS ====================
-document.getElementById("bhajanBtn")?.addEventListener("click", () => {
-  openModal(
-    "🎵 भजन संध्या",
-    `
-    <div style="position:relative; padding-bottom:56.25%;">
-      <iframe src="${bhajanEmbedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <p style="margin-top:1rem;">🕉️ इन भजनों का वैज्ञानिक विश्लेषण जल्द आ रहा है।<br>
-    <a href="https://www.youtube.com/channel/${YOUTUBE_CHANNEL_ID}" target="_blank" style="color:#A68868;">सब्सक्राइब करें</a></p>
-  `,
-  );
-});
-
-document.getElementById("kyuBtn")?.addEventListener("click", () => {
-  openModal(
-    "❓ एसा क्यों? — Spiriligious का दर्शन",
-    "<strong>“परंपराएँ अंध विश्वास नहीं, बल्कि छिपे हुए विज्ञान की कुंजी हैं”</strong><br><br>" +
-      "हम Spiriligious में मानते हैं कि प्रत्येक रीति, अनुष्ठान और आध्यात्मिक प्रथा के पीछे तर्क और वैज्ञानिक आधार होता है。<br><br>" +
-      "जिज्ञासा ही भक्ति है, और विश्लेषण ही आस्था का आधुनिक सोपान। 🙏",
-  );
-});
-
-// ==================== FORUM ====================
-async function initForum() {
-  const newTopicBtn = document.getElementById("newTopicBtn");
-  if (!newTopicBtn) return;
-  try {
-    await loadTopics();
-    newTopicBtn.onclick = () => showNewTopicModal();
-    document.getElementById("saveTopicBtn").onclick = saveNewTopic;
-    document.getElementById("cancelTopicBtn").onclick = hideNewTopicModal;
-  } catch (err) {
-    console.error(err);
-    openModal("त्रुटि", "फोरम लोड नहीं हो सका। कृपया पेज रिफ्रेश करें।");
+// ----- Open Science Detail -----
+async function openScienceDetail(id, type) {
+  var data;
+  if (type === "scientific") {
+    var doc = await db.collection("scientificCards").doc(id).get();
+    if (!doc.exists) return;
+    data = doc.data();
+    var html =
+      "<h1>" +
+      escapeHtml(data.title) +
+      "</h1>" +
+      '<div class="detail-meta">📂 ' +
+      escapeHtml(data.category) +
+      "</div>" +
+      (data.imageUrl
+        ? '<img src="' +
+          escapeHtml(data.imageUrl) +
+          '" alt="' +
+          escapeHtml(data.title) +
+          '" />'
+        : "") +
+      '<div class="full-text">' +
+      data.fullAnalysis +
+      "</div>";
+    openDetailModal(html);
+  } else {
+    var doc = await db.collection("encyclopediaTerms").doc(id).get();
+    if (!doc.exists) return;
+    data = doc.data();
+    var html =
+      "<h1>" +
+      escapeHtml(data.term) +
+      "</h1>" +
+      '<div class="full-text">' +
+      "<strong>परंपरागत अर्थ:</strong> " +
+      escapeHtml(data.meaning) +
+      "<br><br>" +
+      "<strong>वैज्ञानिक व्याख्या:</strong> " +
+      escapeHtml(data.scientific) +
+      "</div>";
+    openDetailModal(html);
   }
 }
 
-async function loadTopics() {
-  const container = document.getElementById("topicsList");
+// ----- Community Discussions -----
+async function loadCommunityDiscussions() {
+  var container = document.getElementById("communityTopicsList");
   if (!container) return;
   try {
-    const snapshot = await db
+    var snap = await db
       .collection("forumTopics")
       .where("published", "==", true)
       .where("deleted", "==", false)
       .orderBy("createdAt", "desc")
+      .limit(10)
       .get();
-    if (snapshot.empty) {
+    if (snap.empty) {
       container.innerHTML =
-        '<div style="text-align:center; padding:2rem;">✨ कोई विषय नहीं। नया विषय बनाएँ ✨</div>';
+        '<div class="discussion-item"><h4>अभी कोई चर्चा नहीं।</h4><p>पहली चर्चा शुरू करें! 🙏</p></div>';
       return;
     }
-    let html = "";
-    snapshot.forEach((doc) => {
-      const t = doc.data();
-      const dateStr = t.createdAt
+    var html = "";
+    snap.forEach(function (doc) {
+      var t = doc.data();
+      var dateStr = t.createdAt
         ? new Date(t.createdAt.toDate()).toLocaleString()
-        : new Date().toLocaleString();
-      html += `
-        <div class="forum-topic-card" data-id="${doc.id}">
-          <h3>${escapeHtml(t.title)}</h3>
-          <p>${escapeHtml(t.content.substring(0, 120))}...</p>
-          <small>✍️ ${escapeHtml(t.author)} · ${dateStr} · 💬 ${t.replies ? t.replies.length : 0} उत्तर</small>
-        </div>
-      `;
+        : "";
+      var replyCount = (t.replies && t.replies.length) || 0;
+      html +=
+        '<div class="discussion-item" onclick="openDiscussionDetail(\'' +
+        doc.id +
+        "')\">" +
+        "<h4>" +
+        escapeHtml(t.title) +
+        "</h4>" +
+        "<p>" +
+        escapeHtml((t.content || "").substring(0, 100)) +
+        "...</p>" +
+        '<div class="discussion-meta">' +
+        '<span><i class="fas fa-user"></i> ' +
+        escapeHtml(t.author || "साधक") +
+        "</span>" +
+        '<span><i class="fas fa-calendar-alt"></i> ' +
+        dateStr +
+        "</span>" +
+        '<span><i class="fas fa-comment"></i> ' +
+        replyCount +
+        " replies</span>" +
+        "</div></div>";
     });
     container.innerHTML = html;
-    document.querySelectorAll(".forum-topic-card").forEach((card) => {
-      card.onclick = () => showTopicDetail(card.dataset.id);
-    });
   } catch (err) {
     console.error(err);
     container.innerHTML =
-      '<div style="text-align:center; padding:2rem; color:red;">डेटा लोड करने में त्रुटि। कृपया बाद में प्रयास करें।</div>';
+      '<div class="discussion-item"><h4>चर्चाएँ लोड नहीं हो सकीं।</h4></div>';
   }
 }
 
-function showNewTopicModal() {
-  const modalDiv = document.getElementById("newTopicModal");
-  if (modalDiv) modalDiv.style.display = "flex";
+// ----- Open Discussion Detail -----
+async function openDiscussionDetail(id) {
+  var doc = await db.collection("forumTopics").doc(id).get();
+  if (!doc.exists) return;
+  var t = doc.data();
+  var dateStr = t.createdAt
+    ? new Date(t.createdAt.toDate()).toLocaleString()
+    : "";
+  var repliesHtml = "";
+  if (t.replies && t.replies.length > 0) {
+    repliesHtml = t.replies
+      .map(function (r) {
+        return (
+          '<div class="reply-item"><strong>' +
+          escapeHtml(r.author || "साधक") +
+          '</strong><span class="reply-date">' +
+          (r.timestamp ? new Date(r.timestamp.toDate()).toLocaleString() : "") +
+          "</span><p>" +
+          escapeHtml(r.content) +
+          "</p></div>"
+        );
+      })
+      .join("");
+  } else {
+    repliesHtml = '<p style="color:var(--brown-soft);">अभी कोई उत्तर नहीं।</p>';
+  }
+  var html =
+    "<h1>" +
+    escapeHtml(t.title) +
+    "</h1>" +
+    '<div class="detail-meta"><strong>✍️ ' +
+    escapeHtml(t.author || "साधक") +
+    "</strong> · " +
+    dateStr +
+    "</div>" +
+    '<div class="full-text" style="margin:1rem 0 1.5rem;">' +
+    escapeHtml(t.content) +
+    "</div>" +
+    '<h3 style="font-family:var(--font-serif); margin-bottom:0.8rem;">💬 उत्तर</h3>' +
+    repliesHtml +
+    '<div style="margin-top:1.5rem; border-top:1px solid rgba(201,168,76,0.1); padding-top:1.5rem;">' +
+    '<p style="font-size:0.9rem; color:var(--brown-soft);">💡 उत्तर देने के लिए <a href="forum.html" style="color:var(--gold); font-weight:600;">Manthan Forum</a> पर जाएँ।</p>' +
+    "</div>";
+  openDetailModal(html);
 }
 
-function hideNewTopicModal() {
-  const modalDiv = document.getElementById("newTopicModal");
-  if (modalDiv) modalDiv.style.display = "none";
-  document.getElementById("topicTitle").value = "";
-  document.getElementById("topicAuthor").value = "";
-  document.getElementById("topicContent").value = "";
-}
-
-async function saveNewTopic() {
-  const title = document.getElementById("topicTitle").value.trim();
-  const author = document.getElementById("topicAuthor").value.trim() || "साधक";
-  const content = document.getElementById("topicContent").value.trim();
-  if (!title || !content)
-    return openModal("त्रुटि", "कृपया शीर्षक और विवरण भरें");
-  try {
-    const newTopic = {
-      title: escapeHtml(title),
-      author: escapeHtml(author),
-      content: escapeHtml(content),
-      category: "General",
-      published: false,
-      locked: false,
-      deleted: false,
-      reports: 0,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      replies: [],
-    };
-    await db.collection("forumTopics").add(newTopic);
-    hideNewTopicModal();
-    await loadTopics();
-    openModal("सफल", "आपका विषय समीक्षा हेतु भेज दिया गया है। 🙏");
-  } catch (err) {
-    console.error(err);
-    openModal("त्रुटि", "विषय पोस्ट नहीं हो सका। कृपया बाद में प्रयास करें।");
-  }
-}
-
-async function showTopicDetail(topicId) {
-  try {
-    const doc = await db.collection("forumTopics").doc(topicId).get();
-    if (!doc.exists) return;
-    const topic = { id: doc.id, ...doc.data() };
-    const container = document.getElementById("topicDetailView");
-    const mainContainer = document.getElementById("forumContainer");
-    mainContainer.style.display = "none";
-    container.style.display = "block";
-    let repliesHtml = "";
-    if (topic.replies && topic.replies.length) {
-      repliesHtml = topic.replies
-        .map(
-          (r) => `
-        <div class="forum-reply-card">
-          <strong>${escapeHtml(r.author)}</strong> <small>${new Date(r.date).toLocaleString()}</small>
-          <p>${escapeHtml(r.content)}</p>
-        </div>
-      `,
-        )
-        .join("");
-    } else {
-      repliesHtml = "<p>कोई उत्तर नहीं। पहला उत्तर लिखें।</p>";
-    }
-    const createdAtStr = topic.createdAt
-      ? new Date(topic.createdAt.toDate()).toLocaleString()
-      : new Date().toLocaleString();
-    container.innerHTML = `
-      <div class="card-glass" style="padding:1.5rem;">
-        <button id="backToTopicsBtn" class="btn btn-outline" style="margin-bottom:1rem;"><i class="fas fa-arrow-left"></i> सभी विषय</button>
-        <h2>${escapeHtml(topic.title)}</h2>
-        <p><small>${escapeHtml(topic.author)} · ${createdAtStr}</small></p>
-        <div style="margin:1rem 0; padding:1rem; background:#E3C39D; border-radius:1rem;">${escapeHtml(topic.content)}</div>
-        <h3>उत्तर (${topic.replies ? topic.replies.length : 0})</h3>
-        <div id="repliesList">${repliesHtml}</div>
-        <div style="margin-top:1.5rem;">
-          <textarea id="replyContent" rows="3" placeholder="अपना उत्तर लिखें..." style="width:100%; padding:10px; border-radius:12px; border:1px solid #A4B5C4;"></textarea>
-          <button id="postReplyBtn" class="btn btn-primary" style="margin-top:0.5rem;">उत्तर दें</button>
-        </div>
-      </div>
-    `;
-    document.getElementById("backToTopicsBtn").onclick = () => {
-      container.style.display = "none";
-      mainContainer.style.display = "block";
-      loadTopics();
-    };
-    document.getElementById("postReplyBtn").onclick = async () => {
-      const replyText = document.getElementById("replyContent").value.trim();
-      if (!replyText) return openModal("त्रुटि", "कृपया उत्तर लिखें");
-      const newReply = {
-        author: "साधक",
-        content: replyText,
-        date: new Date().toISOString(),
-      };
-      const updatedReplies = [...(topic.replies || []), newReply];
-      await db
-        .collection("forumTopics")
-        .doc(topicId)
-        .update({ replies: updatedReplies });
-      showTopicDetail(topicId);
-    };
-  } catch (err) {
-    console.error(err);
-    openModal("त्रुटि", "विषय विवरण लोड नहीं हो सका।");
-  }
-}
-
-// ==================== CONTACT FORM ====================
-function initContactForm() {
-  const form = document.getElementById("contactForm");
-  if (!form) return;
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("contactName").value.trim();
-    const email = document.getElementById("contactEmail").value.trim();
-    const subject = document.getElementById("contactSubject").value.trim();
-    const message = document.getElementById("contactMessage").value.trim();
-    if (!name || !email || !subject || !message)
-      return openModal("त्रुटि", "कृपया सभी फ़ील्ड भरें");
-    if (!email.includes("@"))
-      return openModal("त्रुटि", "कृपया मान्य ईमेल दर्ज करें");
-    openModal(
-      "धन्यवाद!",
-      `प्रिय ${name}, आपका संदेश प्राप्त हो गया है। हम जल्द उत्तर देंगे। 🙏`,
-    );
-    form.reset();
-  });
-}
-
-// ==================== INITIALIZATION ====================
-document.addEventListener("DOMContentLoaded", async () => {
-  // Load scientific cards
-  if (
-    document.getElementById("analysisGrid") ||
-    document.getElementById("scientificFullGrid")
-  ) {
-    await loadScientificCards();
-  }
-  // Load bhajan videos
-  if (document.getElementById("bhajanVideosContainer")) {
-    await loadBhajanVideos();
-  }
-  // Load encyclopedia
-  if (document.getElementById("encyclopediaGrid")) {
-    await loadEncyclopediaTerms();
-  }
-  // Load mandir darshan
-  if (document.getElementById("mandirDarshanContainer")) {
-    loadMandirs();
-  }
-  // Load sant darshan
-  if (document.getElementById("santDarshanContainer")) {
-    loadSantDarshan();
-  }
-  if (document.getElementById("dailyShlokCard")) {
-    await loadDailyShlok();
-  }
-  // Forum
-  if (document.getElementById("newTopicBtn")) {
-    initForum();
-  }
-  // Contact form
-  if (document.getElementById("contactForm")) {
-    initContactForm();
-  }
-  if (document.getElementById("shlokContent")) {
-    loadDailyShlok();
-  }
+// ==================== INIT ====================
+document.addEventListener("DOMContentLoaded", function () {
+  loadDailyShlok();
+  loadSantArticles();
+  loadMandirs();
+  loadBhajans();
+  loadScience();
+  loadCommunityDiscussions();
 });

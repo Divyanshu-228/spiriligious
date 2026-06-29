@@ -1,44 +1,905 @@
-<!-- FILE: team.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spiriligious · Our Team</title>
+    <title>Spiriligious · The People Behind</title>
+    <meta
+      name="description"
+      content="Meet the dedicated individuals behind Spiriligious — preserving, understanding, and sharing timeless wisdom through spirituality, research, and technology."
+    />
+
+    <!-- Google Fonts & Icons -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+
+    <!-- Global Styles -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Page-specific styles -->
+    <style>
+      :root {
+        --gold: #c9a84c;
+        --gold-soft: #dcc37e;
+        --gold-pale: #f0e6c8;
+        --cream: #fdf8f0;
+        --brown: #4a3f35;
+        --brown-soft: #7a6b5a;
+        --green: #2a5e3a;
+        --green-dark: #1c4028;
+        --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.12);
+        --radius-lg: 1.75rem;
+        --radius-md: 1.25rem;
+        --radius-sm: 1rem;
+        --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      body {
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        position: relative;
+        background-color: var(--cream);
+        padding-top: 70px;
+        margin: 0;
+        min-height: 100vh;
+      }
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(253, 248, 240, 0.78);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-glass);
+        padding: 2.5rem;
+        transition: var(--transition);
+      }
+      .glass-panel:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        border-color: rgba(201, 168, 76, 0.3);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(60px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      .lotus-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 3rem 0;
+        color: var(--gold);
+        font-size: 1rem;
+        opacity: 0.6;
+      }
+      .lotus-divider::before,
+      .lotus-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        max-width: 120px;
+      }
+      .lotus-divider i {
+        font-size: 1.4rem;
+        color: var(--gold);
+      }
+
+      .gold-heading {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        color: var(--brown);
+        position: relative;
+        display: inline-block;
+      }
+      .gold-heading::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 3px;
+      }
+      .gold-heading.centered::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .section-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(201, 168, 76, 0.1);
+        padding: 0.25rem 1.2rem;
+        border-radius: 40px;
+        margin-bottom: 0.8rem;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+      }
+
+      /* Hero */
+      .hero-team {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 8rem 2rem 4rem;
+      }
+      .hero-team .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+      }
+      .hero-team .hero-badge {
+        display: inline-block;
+        font-family: "Tiro Devanagari Hindi", serif;
+        font-size: 1.4rem;
+        color: var(--gold);
+        letter-spacing: 4px;
+        background: rgba(201, 168, 76, 0.08);
+        padding: 0.3rem 1.8rem;
+        border-radius: 60px;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        margin-bottom: 1.5rem;
+      }
+      .hero-team h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--brown);
+        line-height: 1.1;
+        margin-bottom: 0.8rem;
+        letter-spacing: -0.02em;
+      }
+      .hero-team h1 span {
+        color: var(--gold);
+      }
+      .hero-team .subtitle {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--brown-soft);
+      }
+      .hero-team .scroll-indicator {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--brown-soft);
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: floatDown 2s ease-in-out infinite;
+      }
+      .hero-team .scroll-indicator i {
+        font-size: 1.2rem;
+        color: var(--gold);
+      }
+      @keyframes floatDown {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+      }
+
+      /* Intro */
+      .intro-section {
+        padding: 2rem 0 0;
+      }
+      .intro-text {
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: var(--brown-soft);
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .intro-text strong {
+        color: var(--green);
+        font-weight: 600;
+      }
+
+      /* Leadership */
+      .leadership-section {
+        padding: 4rem 0;
+      }
+      .leader-card {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .leader-card .leader-avatar {
+        flex: 0 0 160px;
+        text-align: center;
+      }
+      .leader-card .leader-avatar .avatar-icon {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold-pale), var(--gold-soft));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        border: 4px solid white;
+        box-shadow: 0 4px 16px rgba(201, 168, 76, 0.2);
+      }
+      .leader-card .leader-avatar .avatar-icon i {
+        font-size: 4rem;
+        color: var(--brown);
+        opacity: 0.5;
+      }
+      .leader-card .leader-info {
+        flex: 1;
+        min-width: 280px;
+      }
+      .leader-card .leader-info h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
+      }
+      .leader-card .leader-info .role {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.8rem;
+      }
+      .leader-card .leader-info .bio {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--brown-soft);
+        margin-bottom: 1rem;
+      }
+      .leader-card .leader-info .quote-block {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: var(--brown);
+        padding: 1rem 1.5rem;
+        background: rgba(201, 168, 76, 0.06);
+        border-left: 3px solid var(--gold);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        margin-top: 0.5rem;
+      }
+      .leader-card .leader-info .quote-block::before {
+        content: "“";
+        font-size: 2.4rem;
+        color: var(--gold);
+        opacity: 0.4;
+        margin-right: 0.2rem;
+      }
+      .leader-card .leader-info .quote-block::after {
+        content: "”";
+        font-size: 2.4rem;
+        color: var(--gold);
+        opacity: 0.4;
+        margin-left: 0.2rem;
+      }
+
+      /* Core Team */
+      .core-team-section {
+        padding: 4rem 0;
+      }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .team-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 168, 76, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 2rem 1.8rem;
+        text-align: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow-glass);
+      }
+      .team-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(201, 168, 76, 0.2);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+      }
+      .team-card .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold-pale), var(--gold-soft));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        border: 3px solid white;
+        box-shadow: 0 4px 16px rgba(201, 168, 76, 0.2);
+      }
+      .team-card .avatar i {
+        font-size: 2.4rem;
+        color: var(--brown);
+        opacity: 0.5;
+      }
+      .team-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        color: var(--brown);
+        margin-bottom: 0.1rem;
+      }
+      .team-card .role {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+      }
+      .team-card p {
+        font-size: 0.9rem;
+        color: var(--brown-soft);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* How We Work */
+      .how-we-work {
+        padding: 4rem 0;
+      }
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .work-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(201, 168, 76, 0.06);
+        border-radius: var(--radius-md);
+        padding: 1.8rem 1.2rem;
+        text-align: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow-glass);
+      }
+      .work-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+      .work-card i {
+        font-size: 2.2rem;
+        color: var(--gold);
+        margin-bottom: 0.6rem;
+        display: block;
+      }
+      .work-card h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
+      }
+      .work-card p {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      /* Quote */
+      .quote-section {
+        padding: 4rem 0;
+        text-align: center;
+      }
+      .quote-section blockquote {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--brown);
+        line-height: 1.5;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding: 0 1rem;
+      }
+      .quote-section blockquote::before {
+        content: "“";
+        font-size: 4rem;
+        color: var(--gold);
+        opacity: 0.4;
+        position: absolute;
+        top: -1.8rem;
+        left: -0.5rem;
+        font-family: "Playfair Display", serif;
+        line-height: 1;
+      }
+      .quote-section .quote-author {
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--brown-soft);
+        margin-top: 0.8rem;
+        font-style: normal;
+      }
+      .quote-section .quote-author span {
+        color: var(--gold);
+      }
+
+      /* CTA */
+      .cta-section {
+        padding: 4rem 0 6rem;
+        text-align: center;
+      }
+      .cta-section .cta-panel {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: var(--radius-lg);
+        padding: 3.5rem 2.5rem;
+        box-shadow: var(--shadow-glass);
+      }
+      .cta-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.4rem;
+        color: var(--brown);
+        margin-bottom: 0.6rem;
+      }
+      .cta-section p {
+        font-size: 1.1rem;
+        color: var(--brown-soft);
+        max-width: 600px;
+        margin: 0 auto 1.8rem;
+        line-height: 1.7;
+      }
+      .cta-section .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 2.4rem;
+        border-radius: 60px;
+        font-weight: 600;
+        font-size: 1rem;
+        background: var(--green);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(42, 94, 58, 0.2);
+      }
+      .cta-section .btn:hover {
+        transform: translateY(-3px);
+        background: var(--green-dark);
+        box-shadow: 0 8px 28px rgba(42, 94, 58, 0.25);
+      }
+      .cta-section .btn i {
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 1024px) {
+        .team-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .work-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1.2rem;
+        }
+        .hero-team h1 {
+          font-size: 2.8rem;
+        }
+        .hero-team .subtitle {
+          font-size: 1.2rem;
+        }
+        .leader-card {
+          flex-direction: column;
+          text-align: center;
+        }
+        .leader-card .leader-avatar {
+          flex: 0 0 auto;
+        }
+        .leader-card .leader-avatar .avatar-icon {
+          width: 120px;
+          height: 120px;
+        }
+        .leader-card .leader-info .quote-block {
+          text-align: left;
+        }
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+        .work-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .glass-panel {
+          padding: 1.5rem;
+        }
+        .cta-section .cta-panel {
+          padding: 2rem 1.5rem;
+        }
+        .cta-section h2 {
+          font-size: 1.8rem;
+        }
+        .quote-section blockquote {
+          font-size: 1.6rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-team h1 {
+          font-size: 2.2rem;
+        }
+        .hero-team .subtitle {
+          font-size: 1rem;
+        }
+        .leader-card .leader-info h3 {
+          font-size: 1.4rem;
+        }
+        .work-grid {
+          grid-template-columns: 1fr;
+        }
+        .glass-panel {
+          padding: 1.2rem;
+        }
+        .cta-section h2 {
+          font-size: 1.5rem;
+        }
+        .quote-section blockquote {
+          font-size: 1.3rem;
+        }
+        .team-card {
+          padding: 1.5rem 1rem;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <div id="infoModal" class="modal">...</div>
-    <div id="header-placeholder"></div>
-    <main class="container" style="padding: 3rem 0">
-      <div class="card-glass content-card">
-        <h1 style="text-align: center; color: var(--primary-green)">
-          Our Team
-        </h1>
-        <div style="text-align: center; margin-top: 1rem">
-          <strong>Lt (Dr.) Hemant Kumar Joshi</strong> – Founder
-        </div>
-        <div style="text-align: center; margin-top: 0.5rem">
-          <strong>Dibyanshu Sanyal</strong> – Digital Architect
-        </div>
-        <p style="text-align: center; margin-top: 2rem">
-          हमारा उद्देश्य परंपराओं के पीछे छिपे विज्ञान और सत्य को समझना और
-          प्रस्तुत करना है।
-        </p>
+    <!-- Page overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Modal -->
+    <div id="infoModal" class="modal">
+      <div class="modal-card">
+        <i class="fas fa-om" style="font-size: 2rem; color: #2a5e3a"></i>
+        <h3 id="modalTitle">शीर्षक</h3>
+        <p id="modalMessage">विवरण</p>
+        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
       </div>
+    </div>
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main -->
+    <main>
+      <section class="hero-team">
+        <div class="hero-content">
+          <div class="hero-badge">ॐ</div>
+          <h1>The People Behind <span>Spiriligious</span></h1>
+          <p class="subtitle">
+            Dedicated to preserving, understanding, and sharing timeless wisdom.
+          </p>
+          <div class="scroll-indicator">
+            <span>Meet the team</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="intro-section container reveal">
+        <div class="glass-panel" style="text-align: center">
+          <span class="section-label">Our People</span><br />
+          <h2 class="gold-heading centered" style="margin-bottom: 1.2rem">
+            Built by Believers
+          </h2>
+          <div class="intro-text">
+            <p>
+              Spiriligious is not just a platform — it is a calling. It is built
+              by people who believe that
+              <strong
+                >spirituality, research, and technology should work
+                together</strong
+              >
+              to illuminate the path of wisdom. Our team brings together diverse
+              expertise, united by a shared reverence for India's spiritual
+              heritage and a commitment to presenting it with clarity,
+              integrity, and depth.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="leadership-section container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">Founder &amp; Visionary</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            Guiding the Way
+          </h2>
+        </div>
+        <div class="glass-panel leader-card">
+          <div class="leader-avatar">
+            <div class="avatar-icon"><i class="fas fa-user-circle"></i></div>
+          </div>
+          <div class="leader-info">
+            <h3>Dr. (Lt.) Hemant Kumar Joshi</h3>
+            <div class="role">Founder</div>
+            <p class="bio">
+              A visionary with a deep passion for India's spiritual heritage,
+              Dr. Joshi has dedicated his life to bridging the gap between
+              ancient traditions and modern understanding. With a background in
+              both scientific research and spiritual studies, he founded
+              Spiriligious to create a space where faith and reason coexist
+              harmoniously. His work focuses on extracting the timeless wisdom
+              embedded in our scriptures and presenting it in a way that is both
+              authentic and accessible to the modern seeker.
+            </p>
+            <div class="quote-block">
+              Our traditions are not merely rituals — they are a living science
+              of the soul. Spiriligious is my humble attempt to rekindle that
+              flame.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="core-team-section container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">Core Team</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            The Architects
+          </h2>
+          <p
+            style="
+              color: var(--brown-soft);
+              max-width: 600px;
+              margin: 0.5rem auto 0;
+              font-size: 1rem;
+            "
+          >
+            Bringing the vision to life through design, development, and
+            infrastructure.
+          </p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal reveal-delay-1">
+            <div class="avatar"><i class="fas fa-laptop-code"></i></div>
+            <h4>Dibyanshu Sanyal</h4>
+            <div class="role">Digital Architect</div>
+            <p>
+              Responsible for website design, UI/UX, platform development,
+              digital experience, and technology integration. He transforms the
+              vision into a seamless, modern digital journey for every visitor,
+              ensuring that the spiritual experience is matched by an equally
+              refined digital one.
+            </p>
+          </div>
+          <div class="team-card reveal reveal-delay-2">
+            <div class="avatar"><i class="fas fa-server"></i></div>
+            <h4>Alap</h4>
+            <div class="role">Infrastructure Engineer</div>
+            <p>
+              Responsible for domain management, server infrastructure, hosting,
+              deployment, and platform reliability. He ensures that Spiriligious
+              remains accessible, fast, and secure — the unsung hero who keeps
+              the digital backbone strong and resilient.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="how-we-work container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">Our Ethos</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            How We Work
+          </h2>
+        </div>
+        <div class="work-grid">
+          <div class="work-card reveal reveal-delay-1">
+            <i class="fas fa-scroll"></i>
+            <h4>Authenticity</h4>
+            <p>
+              Every piece of content is rooted in authentic scriptures, texts,
+              and traditional sources.
+            </p>
+          </div>
+          <div class="work-card reveal reveal-delay-2">
+            <i class="fas fa-flask"></i>
+            <h4>Research</h4>
+            <p>
+              We rigorously research every topic, combining ancient wisdom with
+              modern scientific inquiry.
+            </p>
+          </div>
+          <div class="work-card reveal reveal-delay-3">
+            <i class="fas fa-cogs"></i>
+            <h4>Technology</h4>
+            <p>
+              We leverage modern technology to make timeless wisdom accessible,
+              interactive, and engaging.
+            </p>
+          </div>
+          <div class="work-card reveal reveal-delay-4">
+            <i class="fas fa-users"></i>
+            <h4>Community</h4>
+            <p>
+              We foster a respectful, inclusive community where seekers and
+              scholars can learn and grow together.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="quote-section container reveal">
+        <div class="glass-panel" style="background: rgba(255, 255, 255, 0.4)">
+          <blockquote>
+            A team that cherishes the past, embraces the present, and builds a
+            bridge to the future — that is the spirit of Spiriligious.
+          </blockquote>
+          <p class="quote-author">— <span>The Spiriligious Team</span></p>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="cta-section container reveal">
+        <div class="cta-panel">
+          <h2>Become Part of the Journey</h2>
+          <p>
+            Spiriligious is more than a platform — it is a living community. We
+            invite researchers, developers, designers, writers, volunteers, and
+            sincere seekers to contribute their talents and hearts. Whether you
+            have knowledge to share, skills to offer, or a deep desire to learn
+            — there is a place for you here.
+          </p>
+          <a href="contact.html" class="btn"
+            ><i class="fas fa-handshake"></i> Join the Churning</a
+          >
+        </div>
+      </section>
     </main>
+
+    <!-- Footer -->
     <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>
     <script src="script.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const revealElements = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        );
+        revealElements.forEach((el) => observer.observe(el));
+
+        window.openModal = function (title, msgHtml) {
+          const modal = document.getElementById("infoModal");
+          const modalTitle = document.getElementById("modalTitle");
+          const modalMessage = document.getElementById("modalMessage");
+          if (modal && modalTitle && modalMessage) {
+            modalTitle.innerText = title;
+            modalMessage.innerHTML = msgHtml;
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        };
+        window.closeModal = function () {
+          const modal = document.getElementById("infoModal");
+          if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        };
+        document
+          .getElementById("infoModal")
+          ?.addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+          });
+      });
+    </script>
   </body>
 </html>

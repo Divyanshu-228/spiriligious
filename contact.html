@@ -1,116 +1,1278 @@
-<!-- FILE: contact.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spiriligious · Contact</title>
+    <title>Spiriligious · Begin a Conversation</title>
+    <meta
+      name="description"
+      content="Connect with Spiriligious — share your questions, research contributions, suggestions, or partnership ideas. Knowledge grows through dialogue."
+    />
+
+    <!-- Google Fonts & Icons -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+
+    <!-- Global Styles -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Page-specific styles -->
+    <style>
+      :root {
+        --gold: #c9a84c;
+        --gold-soft: #dcc37e;
+        --gold-pale: #f0e6c8;
+        --cream: #fdf8f0;
+        --brown: #4a3f35;
+        --brown-soft: #7a6b5a;
+        --green: #2a5e3a;
+        --green-dark: #1c4028;
+        --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.12);
+        --radius-lg: 1.75rem;
+        --radius-md: 1.25rem;
+        --radius-sm: 1rem;
+        --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      body {
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        position: relative;
+        background-color: var(--cream);
+        padding-top: 70px;
+        margin: 0;
+        min-height: 100vh;
+      }
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(253, 248, 240, 0.78);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-glass);
+        padding: 2.5rem;
+        transition: var(--transition);
+      }
+      .glass-panel:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        border-color: rgba(201, 168, 76, 0.3);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(60px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+      .reveal-delay-5 {
+        transition-delay: 0.5s;
+      }
+      .reveal-delay-6 {
+        transition-delay: 0.6s;
+      }
+
+      .lotus-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 3rem 0;
+        color: var(--gold);
+        font-size: 1rem;
+        opacity: 0.6;
+      }
+      .lotus-divider::before,
+      .lotus-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        max-width: 120px;
+      }
+      .lotus-divider i {
+        font-size: 1.4rem;
+        color: var(--gold);
+      }
+
+      .gold-heading {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        color: var(--brown);
+        position: relative;
+        display: inline-block;
+      }
+      .gold-heading::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 3px;
+      }
+      .gold-heading.centered::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .section-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(201, 168, 76, 0.1);
+        padding: 0.25rem 1.2rem;
+        border-radius: 40px;
+        margin-bottom: 0.8rem;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+      }
+
+      .floral-deco {
+        position: fixed;
+        font-size: 2.8rem;
+        color: var(--gold-pale);
+        opacity: 0.25;
+        z-index: 0;
+        pointer-events: none;
+        user-select: none;
+      }
+      .floral-deco-1 {
+        top: 15%;
+        left: 3%;
+        transform: rotate(-15deg);
+      }
+      .floral-deco-2 {
+        bottom: 20%;
+        right: 2%;
+        transform: rotate(25deg) scale(1.4);
+      }
+      .floral-deco-3 {
+        top: 55%;
+        left: 1%;
+        transform: rotate(-30deg) scale(0.8);
+      }
+      .floral-deco-4 {
+        bottom: 45%;
+        right: 1%;
+        transform: rotate(15deg) scale(1.1);
+      }
+      @media (max-width: 768px) {
+        .floral-deco {
+          display: none;
+        }
+      }
+
+      /* Hero */
+      .hero-contact {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 8rem 2rem 4rem;
+      }
+      .hero-contact .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+      }
+      .hero-contact .hero-badge {
+        display: inline-block;
+        font-family: "Tiro Devanagari Hindi", serif;
+        font-size: 1.4rem;
+        color: var(--gold);
+        letter-spacing: 4px;
+        background: rgba(201, 168, 76, 0.08);
+        padding: 0.3rem 1.8rem;
+        border-radius: 60px;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        margin-bottom: 1.5rem;
+      }
+      .hero-contact h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--brown);
+        line-height: 1.1;
+        margin-bottom: 0.8rem;
+        letter-spacing: -0.02em;
+      }
+      .hero-contact h1 span {
+        color: var(--gold);
+      }
+      .hero-contact .subtitle {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--brown-soft);
+      }
+      .hero-contact .scroll-indicator {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--brown-soft);
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: floatDown 2s ease-in-out infinite;
+      }
+      .hero-contact .scroll-indicator i {
+        font-size: 1.2rem;
+        color: var(--gold);
+      }
+      @keyframes floatDown {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+      }
+
+      /* Welcome */
+      .welcome-section {
+        padding: 2rem 0 0;
+      }
+      .welcome-text {
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: var(--brown-soft);
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .welcome-text strong {
+        color: var(--green);
+        font-weight: 600;
+      }
+
+      /* Contact Cards */
+      .contact-cards-section {
+        padding: 4rem 0;
+      }
+      .contact-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .contact-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 168, 76, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 2.2rem 1.8rem;
+        text-align: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow-glass);
+      }
+      .contact-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(201, 168, 76, 0.2);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+      }
+      .contact-card .icon-wrap {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 168, 76, 0.12),
+          rgba(201, 168, 76, 0.04)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        border: 1px solid rgba(201, 168, 76, 0.1);
+      }
+      .contact-card .icon-wrap i {
+        font-size: 1.8rem;
+        color: var(--gold);
+      }
+      .contact-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        color: var(--brown);
+        margin-bottom: 0.3rem;
+      }
+      .contact-card p {
+        font-size: 0.9rem;
+        color: var(--brown-soft);
+        line-height: 1.6;
+        margin: 0 0 0.8rem;
+      }
+      .contact-card .email-link {
+        color: var(--green);
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: color 0.2s;
+      }
+      .contact-card .email-link:hover {
+        color: var(--gold);
+      }
+
+      /* Form */
+      .form-section {
+        padding: 4rem 0;
+      }
+      .form-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .form-group {
+        margin-bottom: 1.8rem;
+        position: relative;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--brown);
+        margin-bottom: 0.4rem;
+        letter-spacing: 0.3px;
+      }
+      .form-group label .required {
+        color: var(--gold);
+        margin-left: 0.2rem;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border: 1.5px solid rgba(201, 168, 76, 0.15);
+        border-radius: var(--radius-md);
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(4px);
+        transition: var(--transition);
+        color: var(--brown);
+        outline: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.08);
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .form-group textarea {
+        min-height: 140px;
+        resize: vertical;
+        line-height: 1.7;
+        background: rgba(255, 255, 255, 0.4);
+        background-image: linear-gradient(
+          rgba(201, 168, 76, 0.03) 1px,
+          transparent 1px
+        );
+        background-size: 100% 2.2rem;
+        background-position: 0 0.5rem;
+      }
+      .form-group select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1.2rem center;
+        padding-right: 3rem;
+      }
+      .form-group select option {
+        background: #fff;
+        color: var(--brown);
+      }
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: var(--brown-soft);
+        opacity: 0.5;
+        font-weight: 300;
+      }
+
+      .form-submit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 2.8rem;
+        border-radius: 60px;
+        font-weight: 600;
+        font-size: 1rem;
+        background: var(--green);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 16px rgba(42, 94, 58, 0.2);
+        font-family: "Inter", sans-serif;
+        width: 100%;
+        justify-content: center;
+      }
+      .form-submit-btn:hover {
+        transform: translateY(-3px);
+        background: var(--green-dark);
+        box-shadow: 0 8px 28px rgba(42, 94, 58, 0.25);
+      }
+      .form-submit-btn:active {
+        transform: scale(0.97);
+      }
+
+      /* Bento */
+      .contribute-section {
+        padding: 4rem 0;
+      }
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .bento-item {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(201, 168, 76, 0.06);
+        border-radius: var(--radius-md);
+        padding: 1.8rem 1.5rem;
+        text-align: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow-glass);
+      }
+      .bento-item:hover {
+        transform: translateY(-4px);
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+      .bento-item i {
+        font-size: 2.2rem;
+        color: var(--gold);
+        margin-bottom: 0.6rem;
+        display: block;
+      }
+      .bento-item h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
+      }
+      .bento-item p {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .bento-item.featured {
+        background: rgba(201, 168, 76, 0.04);
+        border-color: rgba(201, 168, 76, 0.12);
+      }
+
+      /* FAQ */
+      .faq-section {
+        padding: 4rem 0;
+      }
+      .faq-item {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(201, 168, 76, 0.06);
+        border-radius: var(--radius-md);
+        margin-bottom: 1rem;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+      .faq-item:hover {
+        border-color: rgba(201, 168, 76, 0.12);
+      }
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 1.8rem;
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--brown);
+        font-size: 1rem;
+        transition: background 0.2s;
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .faq-question:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .faq-question i {
+        color: var(--gold);
+        transition: transform 0.3s ease;
+        font-size: 0.9rem;
+      }
+      .faq-question.active i {
+        transform: rotate(180deg);
+      }
+      .faq-answer {
+        padding: 0 1.8rem;
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.4s ease,
+          padding 0.3s ease;
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+      .faq-answer.open {
+        max-height: 300px;
+        padding: 0 1.8rem 1.5rem;
+      }
+      .faq-answer p {
+        margin: 0;
+      }
+      .faq-answer strong {
+        color: var(--green);
+      }
+
+      /* Quote */
+      .quote-section {
+        padding: 4rem 0;
+        text-align: center;
+      }
+      .quote-section .quote-deco {
+        font-family: "Tiro Devanagari Hindi", serif;
+        font-size: 1.6rem;
+        color: var(--gold);
+        opacity: 0.4;
+        margin-bottom: 0.5rem;
+        letter-spacing: 2px;
+      }
+      .quote-section blockquote {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--brown);
+        line-height: 1.5;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding: 0 1rem;
+      }
+      .quote-section blockquote::before {
+        content: "“";
+        font-size: 4rem;
+        color: var(--gold);
+        opacity: 0.4;
+        position: absolute;
+        top: -1.8rem;
+        left: -0.5rem;
+        font-family: "Playfair Display", serif;
+        line-height: 1;
+      }
+      .quote-section .quote-author {
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--brown-soft);
+        margin-top: 0.8rem;
+        font-style: normal;
+      }
+      .quote-section .quote-author span {
+        color: var(--gold);
+      }
+
+      /* Closing CTA */
+      .closing-section {
+        padding: 2rem 0 6rem;
+        text-align: center;
+      }
+      .closing-section .closing-panel {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: var(--radius-lg);
+        padding: 3.5rem 2.5rem;
+        box-shadow: var(--shadow-glass);
+      }
+      .closing-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        color: var(--brown);
+        margin-bottom: 0.6rem;
+      }
+      .closing-section p {
+        font-size: 1.1rem;
+        color: var(--brown-soft);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+      .closing-section .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.9rem 2.4rem;
+        border-radius: 60px;
+        font-weight: 600;
+        font-size: 1rem;
+        background: var(--green);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(42, 94, 58, 0.2);
+        margin-top: 1.5rem;
+      }
+      .closing-section .btn:hover {
+        transform: translateY(-3px);
+        background: var(--green-dark);
+        box-shadow: 0 8px 28px rgba(42, 94, 58, 0.25);
+      }
+
+      @media (max-width: 1024px) {
+        .contact-cards-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .bento-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1.2rem;
+        }
+        .hero-contact h1 {
+          font-size: 2.8rem;
+        }
+        .hero-contact .subtitle {
+          font-size: 1.2rem;
+        }
+        .contact-cards-grid {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+        .bento-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .bento-item.featured {
+          grid-column: span 1;
+        }
+        .glass-panel {
+          padding: 1.5rem;
+        }
+        .quote-section blockquote {
+          font-size: 1.6rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+          font-size: 0.95rem;
+          padding: 0.8rem 1rem;
+        }
+        .closing-section .closing-panel {
+          padding: 2rem 1.5rem;
+        }
+        .closing-section h2 {
+          font-size: 1.8rem;
+        }
+        .faq-question {
+          padding: 1rem 1.2rem;
+          font-size: 0.95rem;
+        }
+        .faq-answer {
+          font-size: 0.9rem;
+        }
+        .faq-answer.open {
+          padding: 0 1.2rem 1.2rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-contact h1 {
+          font-size: 2.2rem;
+        }
+        .hero-contact .subtitle {
+          font-size: 1rem;
+        }
+        .bento-grid {
+          grid-template-columns: 1fr;
+        }
+        .glass-panel {
+          padding: 1.2rem;
+        }
+        .quote-section blockquote {
+          font-size: 1.3rem;
+        }
+        .contact-card {
+          padding: 1.5rem 1.2rem;
+        }
+        .closing-section h2 {
+          font-size: 1.5rem;
+        }
+        .form-submit-btn {
+          padding: 0.8rem 1.8rem;
+          font-size: 0.95rem;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <div id="infoModal" class="modal">...</div>
-    <div id="header-placeholder"></div>
-    <main class="container" style="padding: 3rem 0">
-      <div
-        class="card-glass"
-        style="max-width: 600px; margin: 0 auto; padding: 2rem"
-      >
-        <h1 style="text-align: center; color: var(--primary-green)">
-          Contact Us
-        </h1>
-        <p style="text-align: center; margin: 1rem 0">
-          <i class="fas fa-envelope"></i> <strong>Email:</strong>
-          <a
-            href="mailto:info@spiriligious.in"
-            style="color: var(--primary-green)"
-            >info@spiriligious.in</a
-          >
-        </p>
-        <form id="contactForm">
-          <input
-            type="text"
-            id="contactName"
-            placeholder="Your Name"
-            required
-            style="
-              width: 100%;
-              margin: 0.5rem 0;
-              padding: 0.8rem;
-              border: 1px solid var(--border-light);
-              border-radius: 0.5rem;
-            "
-          />
-          <input
-            type="email"
-            id="contactEmail"
-            placeholder="Email"
-            required
-            style="
-              width: 100%;
-              margin: 0.5rem 0;
-              padding: 0.8rem;
-              border: 1px solid var(--border-light);
-              border-radius: 0.5rem;
-            "
-          />
-          <input
-            type="text"
-            id="contactSubject"
-            placeholder="Subject"
-            required
-            style="
-              width: 100%;
-              margin: 0.5rem 0;
-              padding: 0.8rem;
-              border: 1px solid var(--border-light);
-              border-radius: 0.5rem;
-            "
-          />
-          <textarea
-            id="contactMessage"
-            rows="5"
-            placeholder="Message"
-            required
-            style="
-              width: 100%;
-              margin: 0.5rem 0;
-              padding: 0.8rem;
-              border: 1px solid var(--border-light);
-              border-radius: 0.5rem;
-            "
-          ></textarea>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            style="
-              background: var(--primary-green);
-              color: white;
-              border: none;
-              padding: 0.6rem 1.2rem;
-              border-radius: 2rem;
-              cursor: pointer;
-            "
-          >
-            Send Message
-          </button>
-        </form>
+    <!-- Page overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Floral decorations -->
+    <div class="floral-deco floral-deco-1"><i class="fas fa-lotus"></i></div>
+    <div class="floral-deco floral-deco-2"><i class="fas fa-leaf"></i></div>
+    <div class="floral-deco floral-deco-3"><i class="fas fa-seedling"></i></div>
+    <div class="floral-deco floral-deco-4"><i class="fas fa-lotus"></i></div>
+
+    <!-- Modal -->
+    <div id="infoModal" class="modal">
+      <div class="modal-card">
+        <i class="fas fa-om" style="font-size: 2rem; color: #2a5e3a"></i>
+        <h3 id="modalTitle">शीर्षक</h3>
+        <p id="modalMessage">विवरण</p>
+        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
       </div>
+    </div>
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main -->
+    <main>
+      <section class="hero-contact">
+        <div class="hero-content">
+          <div class="hero-badge">ॐ</div>
+          <h1>Begin a <span>Conversation</span></h1>
+          <p class="subtitle">Knowledge grows through dialogue.</p>
+          <div class="scroll-indicator">
+            <span>Connect with us</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="welcome-section container reveal">
+        <div class="glass-panel" style="text-align: center">
+          <span class="section-label">Welcome</span><br />
+          <h2 class="gold-heading centered" style="margin-bottom: 1.2rem">
+            Let's Talk
+          </h2>
+          <div class="welcome-text">
+            <p>
+              Spiriligious is a living community, and every conversation
+              strengthens it. Whether you have a <strong>question</strong>, a
+              <strong>research contribution</strong>, a
+              <strong>suggestion</strong>, or a
+              <strong>partnership idea</strong> — we are here to listen, learn,
+              and grow together. Your voice matters.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="contact-cards-section container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">Connect</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            How to Reach Us
+          </h2>
+        </div>
+        <div class="contact-cards-grid">
+          <div class="contact-card reveal reveal-delay-1">
+            <div class="icon-wrap"><i class="fas fa-envelope"></i></div>
+            <h4>General Enquiries</h4>
+            <p>
+              Questions about Spiriligious, our content, or how to get involved.
+            </p>
+            <a href="mailto:info@spiriligious.in" class="email-link"
+              ><i class="fas fa-paper-plane"></i> info@spiriligious.in</a
+            >
+          </div>
+          <div class="contact-card reveal reveal-delay-2">
+            <div class="icon-wrap"><i class="fas fa-scroll"></i></div>
+            <h4>Research &amp; Contributions</h4>
+            <p>
+              Share your research, articles, or knowledge with our community.
+            </p>
+            <a href="mailto:research@spiriligious.in" class="email-link"
+              ><i class="fas fa-paper-plane"></i> research@spiriligious.in</a
+            >
+          </div>
+          <div class="contact-card reveal reveal-delay-3">
+            <div class="icon-wrap"><i class="fas fa-laptop-code"></i></div>
+            <h4>Technical Support</h4>
+            <p>
+              Report issues, suggest improvements, or get help with the
+              platform.
+            </p>
+            <a href="mailto:support@spiriligious.in" class="email-link"
+              ><i class="fas fa-paper-plane"></i> support@spiriligious.in</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="form-section container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">Send a Message</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            We'd Love to Hear From You
+          </h2>
+          <p
+            style="
+              color: var(--brown-soft);
+              max-width: 600px;
+              margin: 0.5rem auto 0;
+            "
+          >
+            Fill in the form below and we'll respond as soon as we can.
+          </p>
+        </div>
+        <div class="form-wrapper">
+          <div class="glass-panel">
+            <form id="contactForm" novalidate>
+              <div class="form-group">
+                <label for="contactName"
+                  >Your Name <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="contactName"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contactEmail"
+                  >Email Address <span class="required">*</span></label
+                >
+                <input
+                  type="email"
+                  id="contactEmail"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contactCategory">Category</label>
+                <select id="contactCategory">
+                  <option value="General Question">General Question</option>
+                  <option value="Research Contribution">
+                    Research Contribution
+                  </option>
+                  <option value="Suggestion">Suggestion</option>
+                  <option value="Technical Issue">Technical Issue</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="Volunteer">Volunteer</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contactSubject"
+                  >Subject <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="contactSubject"
+                  placeholder="Brief subject line"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contactMessage"
+                  >Message <span class="required">*</span></label
+                >
+                <textarea
+                  id="contactMessage"
+                  placeholder="Share your thoughts, questions, or ideas..."
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="form-submit-btn">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="contribute-section container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">Contribute</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            Ways You Can Contribute
+          </h2>
+          <p
+            style="
+              color: var(--brown-soft);
+              max-width: 600px;
+              margin: 0.5rem auto 0;
+            "
+          >
+            Spiriligious is built by the community, for the community.
+          </p>
+        </div>
+        <div class="bento-grid">
+          <div class="bento-item reveal reveal-delay-1">
+            <i class="fas fa-search"></i>
+            <h4>Research</h4>
+            <p>
+              Help us uncover the scientific and historical truth behind
+              traditions.
+            </p>
+          </div>
+          <div class="bento-item featured reveal reveal-delay-2">
+            <i class="fas fa-feather-alt"></i>
+            <h4>Article Writing</h4>
+            <p>
+              Share your knowledge by writing articles for our Sant Darshan and
+              Encyclopedia sections.
+            </p>
+          </div>
+          <div class="bento-item reveal reveal-delay-3">
+            <i class="fas fa-camera"></i>
+            <h4>Temple Photography</h4>
+            <p>
+              Contribute high-quality images of temples and sacred sites for
+              Mandir Darshan.
+            </p>
+          </div>
+          <div class="bento-item reveal reveal-delay-4">
+            <i class="fas fa-language"></i>
+            <h4>Translation</h4>
+            <p>
+              Help translate content into other Indian languages and reach more
+              seekers.
+            </p>
+          </div>
+          <div class="bento-item featured reveal reveal-delay-5">
+            <i class="fas fa-hands-helping"></i>
+            <h4>Volunteering</h4>
+            <p>
+              Join our team of volunteers — help with content, moderation, or
+              community outreach.
+            </p>
+          </div>
+          <div class="bento-item reveal reveal-delay-6">
+            <i class="fas fa-code"></i>
+            <h4>Technical Support</h4>
+            <p>Assist with development, design, or platform maintenance.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="faq-section container reveal">
+        <div style="text-align: center; margin-bottom: 2rem">
+          <span class="section-label">FAQ</span><br />
+          <h2 class="gold-heading centered" style="font-size: 2.2rem">
+            Common Questions
+          </h2>
+        </div>
+        <div class="glass-panel" style="padding: 1.5rem 1.5rem 0.5rem">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              How can I contribute research or articles to Spiriligious?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Send your research, articles, or ideas to
+                <strong>research@spiriligious.in</strong>. Our editorial team
+                reviews all submissions and will get back to you within 5–7
+                working days. We welcome well-researched, authentic content that
+                aligns with our mission.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              I want to volunteer. How do I get involved?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Wonderful! Please fill in the contact form with "Volunteer" as
+                the category, or email us at
+                <strong>info@spiriligious.in</strong>. Tell us about your
+                skills, interests, and how much time you can offer. We'll find
+                the right role for you.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              What kind of content does Spiriligious accept?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                We accept well-researched articles on saints, temples, spiritual
+                traditions, scientific analysis of rituals, encyclopedia
+                entries, and original research. All content must be authentic,
+                respectful, and grounded in credible sources.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              I found an error or technical issue. How do I report it?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Please report any errors or technical issues to
+                <strong>support@spiriligious.in</strong> or use the "Technical
+                Issue" category in our contact form. We appreciate your help in
+                making Spiriligious better for everyone.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="quote-section container reveal">
+        <div class="glass-panel" style="background: rgba(255, 255, 255, 0.4)">
+          <div class="quote-deco">ॐ</div>
+          <blockquote>
+            ज्ञान साझा करने से बढ़ता है।<br />
+            Knowledge flourishes when it is shared.
+          </blockquote>
+          <p class="quote-author">— <span>Spiriligious</span></p>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <section class="closing-section container reveal">
+        <div class="closing-panel">
+          <h2>Ready to Begin?</h2>
+          <p>
+            Every great journey begins with a single step — or a single message.
+            We look forward to hearing from you.
+          </p>
+          <a href="#header-placeholder" class="btn"
+            ><i class="fas fa-paper-plane"></i> Send Your Message</a
+          >
+        </div>
+      </section>
     </main>
+
+    <!-- Footer -->
     <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>
     <script src="script.js"></script>
+
     <script>
-      initContactForm();
+      document.addEventListener("DOMContentLoaded", function () {
+        const revealElements = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        );
+        revealElements.forEach((el) => observer.observe(el));
+
+        window.toggleFaq = function (questionEl) {
+          const answer = questionEl.nextElementSibling;
+          const icon = questionEl.querySelector("i");
+          const isOpen = answer.classList.contains("open");
+
+          document.querySelectorAll(".faq-answer").forEach((el) => {
+            if (el !== answer) {
+              el.classList.remove("open");
+              el.previousElementSibling
+                .querySelector("i")
+                .classList.remove("active");
+            }
+          });
+          document.querySelectorAll(".faq-question").forEach((el) => {
+            if (el !== questionEl) el.classList.remove("active");
+          });
+
+          if (isOpen) {
+            answer.classList.remove("open");
+            questionEl.classList.remove("active");
+            icon.classList.remove("active");
+          } else {
+            answer.classList.add("open");
+            questionEl.classList.add("active");
+            icon.classList.add("active");
+          }
+        };
+
+        const form = document.getElementById("contactForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("contactName").value.trim();
+            const email = document.getElementById("contactEmail").value.trim();
+            const subject = document
+              .getElementById("contactSubject")
+              .value.trim();
+            const message = document
+              .getElementById("contactMessage")
+              .value.trim();
+
+            const fields = [name, email, subject, message];
+            const ids = [
+              "contactName",
+              "contactEmail",
+              "contactSubject",
+              "contactMessage",
+            ];
+            let hasError = false;
+
+            ids.forEach((id, index) => {
+              const el = document.getElementById(id);
+              if (!fields[index]) {
+                el.style.borderColor = "#dc3545";
+                hasError = true;
+                setTimeout(() => {
+                  el.style.borderColor = "";
+                }, 2000);
+              }
+            });
+
+            if (hasError) {
+              openModal("⚠️ Attention", "कृपया सभी आवश्यक फ़ील्ड भरें। 🙏");
+              return;
+            }
+
+            if (!email.includes("@")) {
+              document.getElementById("contactEmail").style.borderColor =
+                "#dc3545";
+              setTimeout(() => {
+                document.getElementById("contactEmail").style.borderColor = "";
+              }, 2000);
+              openModal("⚠️ Attention", "कृपया मान्य ईमेल दर्ज करें। 📧");
+              return;
+            }
+
+            openModal(
+              "धन्यवाद! 🙏",
+              `<p>प्रिय ${name}, आपका संदेश प्राप्त हो गया है।</p>
+               <p style="color: var(--brown-soft);">हम जल्द उत्तर देंगे।</p>
+               <p style="margin-top: 1rem; font-style: italic; color: var(--gold);">"ज्ञान साझा करने से बढ़ता है।"</p>`,
+            );
+            form.reset();
+          });
+        }
+
+        window.openModal = function (title, msgHtml) {
+          const modal = document.getElementById("infoModal");
+          const modalTitle = document.getElementById("modalTitle");
+          const modalMessage = document.getElementById("modalMessage");
+          if (modal && modalTitle && modalMessage) {
+            modalTitle.innerText = title;
+            modalMessage.innerHTML = msgHtml;
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        };
+        window.closeModal = function () {
+          const modal = document.getElementById("infoModal");
+          if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        };
+        document
+          .getElementById("infoModal")
+          ?.addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+          });
+      });
     </script>
   </body>
 </html>

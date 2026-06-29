@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spiriligious · Astro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        padding-top: 70px;
+        margin: 0;
+        background: var(--cream);
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        position: relative;
+      }
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(253, 248, 240, 0.78);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .page-header {
+        text-align: center;
+        padding: 3rem 0 1rem;
+      }
+      .page-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.8rem;
+        color: var(--brown);
+        margin-bottom: 0.5rem;
+      }
+      .page-header p {
+        color: var(--brown-soft);
+        font-size: 1.1rem;
+      }
+      .three-column-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .preview-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 168, 76, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem 2rem;
+        text-align: center;
+        transition: var(--transition);
+        cursor: pointer;
+        box-shadow: var(--shadow-glass);
+      }
+      .preview-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(201, 168, 76, 0.2);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+      }
+      .preview-card i {
+        font-size: 3rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+      .preview-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        color: var(--brown);
+        margin-bottom: 0.5rem;
+      }
+      .preview-card p {
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .preview-card .link-arrow {
+        display: inline-block;
+        color: var(--gold);
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: transform 0.2s ease;
+      }
+      .preview-card:hover .link-arrow {
+        transform: translateX(6px);
+      }
+      @media (max-width: 768px) {
+        .three-column-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2rem;
+        }
+        .preview-card {
+          padding: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-overlay"></div>
+    <div id="infoModal" class="modal">...</div>
+    <div id="header-placeholder"></div>
+
+    <main class="container" style="padding: 3rem 0">
+      <div class="page-header">
+        <h1>ज्योतिष एवं पंचांग</h1>
+        <p>वैदिक ज्योतिष, ग्रहों की स्थिति, त्योहार और शुभ मुहूर्त</p>
+      </div>
+
+      <div class="three-column-grid">
+        <div class="preview-card" onclick="openComingSoon('ज्योतिष परामर्श')">
+          <i class="fas fa-star-of-life"></i>
+          <h3>ज्योतिष परामर्श</h3>
+          <p>व्यक्तिगत कुंडली, ग्रह दशा, और जीवन मार्गदर्शन – शीघ्र आ रहा है</p>
+          <span class="link-arrow">आने वाला है →</span>
+        </div>
+        <div class="preview-card" onclick="openComingSoon('पंचांग')">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>पंचांग</h3>
+          <p>हिंदू कैलेंडर, त्योहार, व्रत, और शुभ मुहूर्त – जल्द उपलब्ध</p>
+          <span class="link-arrow">आने वाला है →</span>
+        </div>
+        <div class="preview-card" onclick="openComingSoon('मुहूर्त')">
+          <i class="fas fa-clock"></i>
+          <h3>शुभ मुहूर्त</h3>
+          <p>विवाह, गृह प्रवेश, यात्रा आदि के लिए वैदिक समय – जल्द आ रहा है</p>
+          <span class="link-arrow">आने वाला है →</span>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="global.js"></script>
+    <script src="script.js"></script>
+    <script>
+      function openComingSoon(title) {
+        openModal(
+          "🚧 आने वाला है",
+          `<h3>${title}</h3><p>हम जल्द ही इस सुविधा को लाएंगे। कृपया बने रहें। 🙏</p>`,
+        );
+      }
+    </script>
+  </body>
+</html>

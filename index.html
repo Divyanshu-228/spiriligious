@@ -9,145 +9,1003 @@
     <title>Spiriligious · ज्ञान · अध्यात्म · विज्ञान</title>
     <meta
       name="description"
-      content="Spiriligious – आध्यात्मिक परंपराओं का वैज्ञानिक विश्लेषण, संत दर्शन, मंदिर दर्शन, वैज्ञानिक दृष्टि।"
+      content="Spiriligious – a sacred space where ancient traditions meet modern understanding. Explore Sant Darshan, Mandir Darshan, Bhajan, and community discussions."
     />
+
+    <!-- Google Fonts & Icons -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+
+    <!-- Global Styles -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Page-specific styles -->
+    <style>
+      body {
+        background: var(--cream);
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        position: relative;
+        min-height: 100vh;
+        padding-top: 70px;
+        margin: 0;
+      }
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(253, 248, 240, 0.78);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+
+      .premium-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000 !important;
+        background: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        padding: 0.6rem 0;
+        transition:
+          transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          box-shadow 0.3s ease;
+      }
+      .premium-header.hidden {
+        transform: translateY(-100%);
+      }
+      .premium-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .logo-image {
+        height: 44px;
+        width: auto;
+        display: block;
+      }
+      .logo-text-inline {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .nav-link {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--brown-soft);
+        text-decoration: none;
+        padding: 0.4rem 0.2rem;
+        position: relative;
+        transition:
+          color 0.25s ease,
+          transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        white-space: nowrap;
+      }
+      .nav-link i {
+        font-size: 0.8rem;
+        color: var(--gold);
+        opacity: 0.5;
+        transition:
+          opacity 0.25s ease,
+          transform 0.25s ease;
+      }
+      .nav-link:hover {
+        color: var(--primary-green);
+        transform: translateY(-1px);
+      }
+      .nav-link:hover i {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+      .nav-link.active {
+        color: var(--primary-green);
+        font-weight: 600;
+      }
+      .nav-link.active i {
+        opacity: 1;
+        color: var(--gold);
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: transparent;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        border-radius: var(--radius-xs);
+        padding: 0.5rem 0.6rem;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 46px;
+        height: 46px;
+        transition: var(--transition);
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(4px);
+        gap: 4px;
+      }
+      .mobile-menu-btn:hover {
+        border-color: var(--gold);
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .mobile-menu-btn .pill {
+        display: block;
+        width: 24px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 3px;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform-origin: center;
+      }
+      .mobile-menu-btn.active .pill:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .mobile-menu-btn.active .pill:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .mobile-menu-btn.active .pill:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .mobile-menu-btn {
+          display: flex;
+        }
+        .logo-image {
+          height: 36px;
+        }
+        .logo-text-inline {
+          font-size: 1.2rem;
+        }
+        .premium-header .container {
+          padding: 0 1.2rem;
+        }
+      }
+
+      .mobile-drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        z-index: 999998;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .mobile-drawer-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+      .mobile-drawer {
+        position: fixed;
+        top: 0;
+        right: -85%;
+        width: 85%;
+        max-width: 400px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(24px);
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.08);
+        z-index: 999999;
+        transition: right 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        padding: 2rem 1.8rem;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0 0 0 2rem;
+        overflow-y: auto;
+      }
+      .mobile-drawer.open {
+        right: 0;
+      }
+      .drawer-header {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+      .drawer-logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+      }
+      .drawer-logo {
+        height: 36px;
+        width: auto;
+      }
+      .drawer-logo-text {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-green);
+      }
+      .drawer-tagline {
+        font-family: "Tiro Devanagari Hindi", serif;
+        font-size: 0.9rem;
+        color: var(--gold);
+        letter-spacing: 1.5px;
+        opacity: 0.7;
+        margin-top: 0.2rem;
+      }
+      .drawer-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        border: none;
+        font-size: 1.6rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          color 0.25s ease;
+        padding: 0.4rem;
+      }
+      .drawer-close:hover {
+        transform: rotate(90deg);
+        color: var(--gold);
+      }
+      .drawer-divider {
+        height: 1px;
+        background: linear-gradient(to right, var(--gold), transparent);
+        margin: 1rem 0 1.5rem;
+        opacity: 0.3;
+      }
+      .drawer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        flex: 1;
+      }
+      .drawer-link {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--brown);
+        text-decoration: none;
+        padding: 0.8rem 1rem;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        transition: var(--transition);
+      }
+      .drawer-link i {
+        width: 24px;
+        font-size: 1.1rem;
+        color: var(--gold);
+        text-align: center;
+      }
+      .drawer-link:hover {
+        background: rgba(201, 168, 76, 0.08);
+        transform: translateX(4px);
+        color: var(--primary-green);
+      }
+      .drawer-link.active {
+        background: rgba(201, 168, 76, 0.1);
+        color: var(--primary-green);
+        font-weight: 600;
+        border-left: 3px solid var(--gold);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        text-align: center;
+        background: url("images/hero-bg.jpg") center/cover no-repeat fixed;
+        padding: 0 0 2rem;
+        margin-top: 0;
+        z-index: 1;
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.25) 0%,
+          rgba(0, 0, 0, 0.1) 60%,
+          rgba(0, 0, 0, 0.4) 100%
+        );
+        z-index: 1;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, var(--cream), transparent);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding: 0 0 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: 60vh;
+      }
+      .icon-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.8rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        padding: 1.2rem 1.8rem;
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .icon-item {
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .icon-item i {
+        font-size: 1.6rem;
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+        backdrop-filter: blur(4px);
+        transition: var(--transition);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .icon-item:hover {
+        transform: translateY(-4px);
+      }
+      .icon-item:hover i {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: #fff;
+        color: #ffd700;
+      }
+      .icon-item span {
+        display: block;
+        margin-top: 0.4rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+    </style>
   </head>
+
   <body>
+    <!-- Background overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- ===== MODALS ===== -->
     <div id="infoModal" class="modal">
       <div class="modal-card">
-        <i class="fas fa-om" style="font-size: 2rem; color: #285943"></i>
+        <i class="fas fa-om" style="font-size: 2rem; color: #2a5e3a"></i>
         <h3 id="modalTitle">शीर्षक</h3>
         <p id="modalMessage">विवरण</p>
         <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
       </div>
     </div>
 
-    <div id="header-placeholder"></div>
+    <div id="detailModal" class="modal detail-modal">
+      <div class="detail-modal-content">
+        <button class="detail-close" onclick="closeDetailModal()">
+          <i class="fas fa-times"></i>
+        </button>
+        <div id="detailBody"></div>
+      </div>
+    </div>
 
+    <!-- ===== HEADER ===== -->
+    <header class="premium-header" role="banner">
+      <div class="container">
+        <a href="index.html" class="logo-link" aria-label="Spiriligious – Home">
+          <img src="images/logo.png" alt="Spiriligious" class="logo-image" />
+          <span class="logo-text-inline">Spiriligious</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+          <a href="index.html" class="nav-link active" data-page="index"
+            ><i class="fas fa-home"></i> Home</a
+          >
+          <a href="about.html" class="nav-link" data-page="about"
+            ><i class="fas fa-info-circle"></i> About</a
+          >
+          <a href="team.html" class="nav-link" data-page="team"
+            ><i class="fas fa-users"></i> Team</a
+          >
+          <a href="forum.html" class="nav-link" data-page="forum"
+            ><i class="fas fa-comments"></i> Manthan</a
+          >
+          <a href="astro.html" class="nav-link" data-page="astro"
+            ><i class="fas fa-star-of-life"></i> Jyotish</a
+          >
+          <a href="panchang.html" class="nav-link" data-page="panchang"
+            ><i class="fas fa-calendar-alt"></i> Panchang</a
+          >
+          <a href="contact.html" class="nav-link" data-page="contact"
+            ><i class="fas fa-envelope"></i> Contact</a
+          >
+        </nav>
+
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <span class="pill"></span>
+          <span class="pill"></span>
+          <span class="pill"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div
+      class="mobile-drawer"
+      id="mobileDrawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="drawer-header">
+        <a href="index.html" class="drawer-logo-link">
+          <img src="images/logo.png" alt="Spiriligious" class="drawer-logo" />
+          <span class="drawer-logo-text">Spiriligious</span>
+        </a>
+        <p class="drawer-tagline">ज्ञान · अध्यात्म · विज्ञान</p>
+        <button
+          class="drawer-close"
+          id="drawerCloseBtn"
+          aria-label="Close navigation menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="drawer-divider"></div>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link active" data-page="index"
+          ><i class="fas fa-home"></i> Home</a
+        >
+        <a href="about.html" class="drawer-link" data-page="about"
+          ><i class="fas fa-info-circle"></i> About</a
+        >
+        <a href="team.html" class="drawer-link" data-page="team"
+          ><i class="fas fa-users"></i> Team</a
+        >
+        <a href="forum.html" class="drawer-link" data-page="forum"
+          ><i class="fas fa-comments"></i> Manthan</a
+        >
+        <a href="astro.html" class="drawer-link" data-page="astro"
+          ><i class="fas fa-star-of-life"></i> Jyotish</a
+        >
+        <a href="panchang.html" class="drawer-link" data-page="panchang"
+          ><i class="fas fa-calendar-alt"></i> Panchang</a
+        >
+        <a href="contact.html" class="drawer-link" data-page="contact"
+          ><i class="fas fa-envelope"></i> Contact</a
+        >
+      </nav>
+    </div>
+
+    <!-- ===== MAIN ===== -->
     <main>
-      <!-- Hero Section with Daily Shlok -->
+      <!-- HERO -->
       <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content container">
-          <div class="shlok-card" id="dailyShlokCard">
-            <div id="shlokContent">
-              <p>🙏 श्लोक लोड हो रहा है...</p>
+          <div class="icon-grid">
+            <div class="icon-item" onclick="scrollToSection('sant-section')">
+              <i class="fas fa-feather-alt"></i><span>संत</span>
             </div>
-            <div class="shlok-meta">🌟 आज का श्लोक 🌟</div>
+            <div class="icon-item" onclick="scrollToSection('mandir-section')">
+              <i class="fas fa-om"></i><span>मंदिर</span>
+            </div>
+            <div class="icon-item" onclick="scrollToSection('bhajan-section')">
+              <i class="fas fa-music"></i><span>भजन</span>
+            </div>
+            <div class="icon-item" onclick="scrollToSection('science-section')">
+              <i class="fas fa-microscope"></i><span>विज्ञान</span>
+            </div>
+            <div class="icon-item" onclick="scrollToSection('manthan-section')">
+              <i class="fas fa-comments"></i><span>मंथन</span>
+            </div>
+            <div class="icon-item" onclick="openComingSoon()">
+              <i class="fas fa-star-of-life"></i><span>ज्योतिष</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Circular Quick Navigation -->
-      <div class="container quick-nav">
-        <div class="icon-grid">
-          <div class="icon-item" onclick="location.href = 'scientific.html'">
-            <i class="fas fa-microscope"></i><span>वैज्ञानिक दृष्टि</span>
-          </div>
-          <div
-            class="icon-item"
-            onclick="location.href = 'mandir-darshan.html'"
-          >
-            <i class="fas fa-om"></i><span>मंदिर दर्शन</span>
-          </div>
-          <div class="icon-item" onclick="location.href = 'sant-darshan.html'">
-            <i class="fas fa-feather-alt"></i><span>संत दर्शन</span>
-          </div>
-          <div class="icon-item" onclick="location.href = 'bhajan.html'">
-            <i class="fas fa-music"></i><span>भजन संग्रह</span>
-          </div>
-          <div class="icon-item" onclick="location.href = 'encyclopedia.html'">
-            <i class="fas fa-book"></i><span>ज्ञानकोश</span>
-          </div>
-          <div class="icon-item" onclick="location.href = 'forum.html'">
-            <i class="fas fa-comments"></i><span>मंथन मंच</span>
-          </div>
-        </div>
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- Mission Statement (replaces Philosophy Cards) -->
-      <div class="container mission-section">
-        <div class="mission-content">
-          <h2>Spiriligious क्या है?</h2>
-          <p>
-            धर्म, अध्यात्म और विज्ञान के बीच संवाद स्थापित करने का एक प्रयास।
+      <!-- ===== DAILY SHLOK ===== -->
+      <section class="container shlok-section reveal" id="shlok-section">
+        <div class="shlok-manuscript" id="dailyShlokCard">
+          <div id="shlokContent"><p>🙏 श्लोक लोड हो रहा है...</p></div>
+        </div>
+      </section>
+
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <!-- ===== SANT DARSHAN ===== -->
+      <section class="container section-spacing reveal" id="sant-section">
+        <div class="section-header-custom">
+          <!-- <span class="section-label">Sant Darshan</span> -->
+          <h2>Sant Darshan</h2>
+          <p class="sub">Wisdom of the great masters, preserved and shared.</p>
+        </div>
+        <div id="featuredSantContainer" class="featured-card-horizontal">
+          <div class="featured-image">
+            <img
+              src="https://via.placeholder.com/600x400?text=Sant"
+              alt="Featured Sant"
+              loading="lazy"
+            />
+          </div>
+          <div class="featured-content">
+            <span class="badge">Featured</span>
+            <h3>Loading...</h3>
+            <div class="meta"><i class="fas fa-user"></i> Loading</div>
+            <p>Please wait...</p>
+            <button class="btn-gold" disabled>Read Article</button>
+          </div>
+        </div>
+        <div id="santArticlesGrid" class="grid-cards grid-cards-2col"></div>
+      </section>
+
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <!-- ===== MANDIR DARSHAN ===== -->
+      <section class="container section-spacing reveal" id="mandir-section">
+        <div class="section-header-custom">
+          <!-- <span class="section-label">Mandir Darshan</span> -->
+          <h2>Mandir Darshan</h2>
+          <p class="sub">
+            Sacred architecture, history, and spiritual significance.
           </p>
-          <p>
-            हमारा उद्देश्य परंपराओं को अंधविश्वास या अंध-विरोध के बजाय जिज्ञासा,
-            तर्क और अनुभव की दृष्टि से समझना है।
-          </p>
         </div>
-      </div>
-
-      <!-- Scientific Analysis Section (Dynamic Cards) -->
-      <div class="container section-spacing">
-        <div class="section-header">
-          <span class="section-badge">🔬 वैज्ञानिक दृष्टि</span>
-          <h2>परंपराओं का वैज्ञानिक विश्लेषण</h2>
-          <p>
-            प्रत्येक रीति, अनुष्ठान या मान्यता के पीछे छिपे तर्क और विज्ञान को
-            समझें।
-          </p>
-        </div>
-        <div id="analysisGrid" class="scientific-grid"></div>
-      </div>
-
-      <!-- Mandir Darshan Section (Premium Cards) -->
-      <div class="container section-spacing">
-        <div class="section-header">
-          <span class="section-badge">🛕 दिव्य स्थल</span>
-          <h2>मंदिर दर्शन</h2>
-          <p>प्रमुख मंदिरों का इतिहास, वास्तुकला और वैज्ञानिक महत्व</p>
-        </div>
-        <div id="mandirDarshanContainer" class="mandir-grid"></div>
-      </div>
-
-      <!-- Sant Articles Section (Premium Article Collection) -->
-      <!-- <div class="container section-spacing" id="sant-articles">
-        <div class="section-header">
-          <span class="section-badge">✨ संत दर्शन ✨</span>
-          <h2>विद्वानों की कलम से</h2>
-          <p>महान संतों, आचार्यों और आध्यात्मिक गुरुओं का जीवन और शिक्षाएँ</p>
-        </div>
-        <div id="santArticlesGrid" class="sant-articles-grid"></div>
-      </div> -->
-
-      <!-- Bhajan + Forum Preview (Gateway Cards) -->
-      <div class="container section-spacing">
-        <div class="preview-grid">
-          <div class="preview-card" onclick="location.href = 'bhajan.html'">
-            <div class="preview-icon"><i class="fas fa-music"></i></div>
-            <h3>भजन संग्रह</h3>
-            <p>Explore devotional music and spiritual recitations.</p>
-            <span class="preview-link">Explore →</span>
+        <div id="featuredTempleContainer" class="featured-card-horizontal">
+          <div class="featured-image">
+            <img
+              src="https://via.placeholder.com/600x400?text=Temple"
+              alt="Featured Temple"
+              loading="lazy"
+            />
           </div>
-          <div class="preview-card" onclick="location.href = 'forum.html'">
-            <div class="preview-icon"><i class="fas fa-comments"></i></div>
-            <h3>मंथन मंच</h3>
-            <p>
-              Ask questions, discuss ideas, and participate in thoughtful
-              dialogue.
-            </p>
-            <span class="preview-link">Join Discussion →</span>
+          <div class="featured-content">
+            <span class="badge">Featured</span>
+            <h3>Loading...</h3>
+            <div class="meta">
+              <i class="fas fa-map-pin"></i> Loading location
+            </div>
+            <p>Please wait...</p>
+            <button class="btn-gold" disabled>Explore Temple</button>
           </div>
         </div>
+        <div id="mandirGrid" class="grid-cards grid-cards-2col"></div>
+      </section>
+
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
+
+      <!-- ===== BHAJAN DARSHAN ===== -->
+      <section class="container section-spacing reveal" id="bhajan-section">
+        <div class="section-header-custom">
+          <!-- <span class="section-label">Bhajan Collection</span> -->
+          <h2>Latest Bhajans</h2>
+          <p class="sub">Devotional music to uplift the soul.</p>
+        </div>
+        <div id="featuredBhajanContainer" class="featured-card-horizontal">
+          <div class="featured-image">
+            <img
+              src="https://via.placeholder.com/600x400?text=Bhajan"
+              alt="Featured Bhajan"
+              loading="lazy"
+            />
+          </div>
+          <div class="featured-content">
+            <span class="badge">Featured</span>
+            <h3>Loading...</h3>
+            <div class="meta">
+              <i class="fas fa-microphone-alt"></i> Loading
+            </div>
+            <p>Please wait...</p>
+            <button class="btn-gold" disabled>Listen Now</button>
+          </div>
+        </div>
+        <div id="bhajanGrid" class="grid-cards grid-cards-2col"></div>
+      </section>
+
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <!-- ===== SCIENCE SECTION ===== -->
+      <section class="container section-spacing reveal" id="science-section">
+        <div class="section-header-custom">
+          <!-- <span class="section-label">Science & Knowledge</span> -->
+          <h2>Science & Knowledge</h2>
+          <p class="sub">
+            Exploring the logic and science behind ancient traditions.
+          </p>
+        </div>
+        <div id="scienceGrid" class="grid-cards grid-cards-2col"></div>
+      </section>
+
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <!-- ===== MANTHAN FORUM ===== -->
+      <section class="container section-spacing reveal" id="manthan-section">
+        <div class="section-header-custom">
+          <!-- <span class="section-label">Community</span> -->
+          <h2>Manthan Forum</h2>
+          <p class="sub">Discuss, ask, and share wisdom with fellow seekers.</p>
+        </div>
+        <div class="manthan-grid">
+          <div class="discussions">
+            <h3>Recent Discussions</h3>
+            <div class="manthan-tabs">
+              <button class="active" data-tab="latest">Latest</button>
+              <button data-tab="popular">Popular</button>
+              <button data-tab="unanswered">Unanswered</button>
+            </div>
+            <div id="communityTopicsList" class="discussion-list">
+              <div class="discussion-item">
+                <h4>Loading discussions...</h4>
+                <p>Please wait.</p>
+                <div class="discussion-meta">
+                  <span><i class="fas fa-user"></i> Loading</span>
+                  <span><i class="fas fa-calendar-alt"></i> Loading</span>
+                  <span><i class="fas fa-comment"></i> 0 replies</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="create-discussion">
+            <h3>Create Discussion</h3>
+            <div class="discuss-form">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="discussTitle"
+                  placeholder="Discussion title..."
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  id="discussMessage"
+                  placeholder="Share your thoughts..."
+                  rows="4"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="discussAuthor"
+                  placeholder="Your name (optional)"
+                />
+              </div>
+              <button class="btn-gold" id="submitDiscussionBtn">
+                <i class="fas fa-paper-plane"></i> Post Discussion
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== LOTUS DIVIDER ===== -->
+      <div class="container">
+        <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
+      </div>
+
+      <!-- ===== COMING SOON ===== -->
+      <section class="container section-spacing reveal">
+        <div class="section-header-custom">
+          <!-- <span class="section-label">Coming Soon</span> -->
+          <h2>Future Experiences</h2>
+          <p class="sub">
+            We are expanding — new ways to connect, learn, and grow.
+          </p>
+        </div>
+        <div class="coming-grid">
+          <div class="coming-card" onclick="openComingSoon()">
+            <i class="fas fa-podcast"></i>
+            <h4>Spiriligious Podcast</h4>
+            <p>Deep conversations on spirituality, science, and culture.</p>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+          <div class="coming-card" onclick="openComingSoon()">
+            <i class="fas fa-calendar-alt"></i>
+            <h4>Panchang</h4>
+            <p>Hindu calendar, festivals, and auspicious timings.</p>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+          <div class="coming-card" onclick="openComingSoon()">
+            <i class="fas fa-star"></i>
+            <h4>Jyotish Paramarsh</h4>
+            <p>Vedic astrology consultations and guidance.</p>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <div id="footer-placeholder"></div>
 
+    <!-- ===== SCRIPTS ===== -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>
     <script src="script.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load all dynamic content
+        if (typeof loadDailyShlok === "function") loadDailyShlok();
+        if (typeof loadFeaturedSant === "function") loadFeaturedSant();
+        if (typeof loadSantArticles === "function") loadSantArticles();
+        if (typeof loadFeaturedTemple === "function") loadFeaturedTemple();
+        if (typeof loadMandirs === "function") loadMandirs();
+        if (typeof loadFeaturedBhajan === "function") loadFeaturedBhajan();
+        if (typeof loadBhajans === "function") loadBhajans();
+        if (typeof loadScience === "function") loadScience();
+        if (typeof loadCommunityDiscussions === "function")
+          loadCommunityDiscussions();
+
+        // Submit discussion
+        document
+          .getElementById("submitDiscussionBtn")
+          ?.addEventListener("click", async function () {
+            const title = document.getElementById("discussTitle").value.trim();
+            const message = document
+              .getElementById("discussMessage")
+              .value.trim();
+            const author =
+              document.getElementById("discussAuthor").value.trim() || "साधक";
+            if (!title || !message) {
+              openModal("⚠️", "कृपया शीर्षक और संदेश दोनों भरें। 🙏");
+              return;
+            }
+            try {
+              await db.collection("forumTopics").add({
+                title,
+                content: message,
+                author,
+                published: false,
+                deleted: false,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                replies: [],
+              });
+              openModal(
+                "धन्यवाद! 🙏",
+                "<p>आपकी चर्चा मॉडरेशन के लिए सबमिट कर दी गई है।</p>",
+              );
+              document.getElementById("discussTitle").value = "";
+              document.getElementById("discussMessage").value = "";
+              document.getElementById("discussAuthor").value = "";
+              loadCommunityDiscussions();
+            } catch (err) {
+              alert("Error: " + err.message);
+            }
+          });
+
+        // Forum tabs
+        document.querySelectorAll(".manthan-tabs button").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            document
+              .querySelectorAll(".manthan-tabs button")
+              .forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+            loadCommunityDiscussions();
+          });
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        );
+        revealElements.forEach((el) => observer.observe(el));
+
+        // Coming soon
+        window.openComingSoon = function () {
+          openModal(
+            "आने वाला है",
+            "<h3>Coming Soon</h3><p>We are working on this feature. Please stay tuned. 🙏</p>",
+          );
+        };
+
+        // Mobile drawer
+        const menuBtn = document.getElementById("mobileMenuBtn");
+        const drawer = document.getElementById("mobileDrawer");
+        const overlay = document.getElementById("mobileDrawerOverlay");
+        const closeBtn = document.getElementById("drawerCloseBtn");
+        if (menuBtn && drawer && overlay && closeBtn) {
+          function openDrawer() {
+            drawer.classList.add("open");
+            overlay.classList.add("active");
+            menuBtn.classList.add("active");
+            menuBtn.setAttribute("aria-expanded", "true");
+            document.body.style.overflow = "hidden";
+          }
+          function closeDrawer() {
+            drawer.classList.remove("open");
+            overlay.classList.remove("active");
+            menuBtn.classList.remove("active");
+            menuBtn.setAttribute("aria-expanded", "false");
+            document.body.style.overflow = "";
+          }
+          menuBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            drawer.classList.contains("open") ? closeDrawer() : openDrawer();
+          });
+          closeBtn.addEventListener("click", closeDrawer);
+          overlay.addEventListener("click", closeDrawer);
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && drawer.classList.contains("open"))
+              closeDrawer();
+          });
+          drawer.querySelectorAll(".drawer-link").forEach((link) => {
+            link.addEventListener("click", closeDrawer);
+          });
+        }
+
+        // Navbar scroll hide/show
+        const header = document.querySelector(".premium-header");
+        let lastScrollY = 0;
+        window.addEventListener(
+          "scroll",
+          function () {
+            const currentScrollY = window.scrollY;
+            const delta = currentScrollY - lastScrollY;
+            if (delta > 10 && currentScrollY > 100) {
+              header.classList.add("hidden");
+            } else if (delta < -5 || currentScrollY < 50) {
+              header.classList.remove("hidden");
+            }
+            lastScrollY = currentScrollY;
+          },
+          { passive: true },
+        );
+
+        // Highlight active nav links
+        const currentPage =
+          window.location.pathname.split("/").pop() || "index.html";
+        document.querySelectorAll(".nav-link, .drawer-link").forEach((link) => {
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === currentPage,
+          );
+        });
+
+        // Modal functions (if not already defined)
+        window.openModal = function (title, msgHtml) {
+          const modal = document.getElementById("infoModal");
+          const modalTitle = document.getElementById("modalTitle");
+          const modalMessage = document.getElementById("modalMessage");
+          if (modal && modalTitle && modalMessage) {
+            modalTitle.innerText = title;
+            modalMessage.innerHTML = msgHtml;
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        };
+        window.closeModal = function () {
+          const modal = document.getElementById("infoModal");
+          if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        };
+        document
+          .getElementById("infoModal")
+          ?.addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+          });
+
+        window.openDetailModal = function (html) {
+          const modal = document.getElementById("detailModal");
+          const body = document.getElementById("detailBody");
+          if (modal && body) {
+            body.innerHTML = html;
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        };
+        window.closeDetailModal = function () {
+          const modal = document.getElementById("detailModal");
+          if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        };
+        document
+          .getElementById("detailModal")
+          ?.addEventListener("click", function (e) {
+            if (e.target === this) closeDetailModal();
+          });
+      });
+    </script>
   </body>
 </html>

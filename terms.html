@@ -1,4 +1,3 @@
-<!-- FILE: terms.html -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spiriligious · Terms & Conditions</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -14,23 +13,115 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        padding-top: 70px;
+        margin: 0;
+        background: var(--cream);
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        position: relative;
+      }
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(253, 248, 240, 0.78);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .page-header {
+        text-align: center;
+        padding: 3rem 0 1rem;
+      }
+      .page-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.8rem;
+        color: var(--brown);
+        margin-bottom: 0.5rem;
+      }
+      .page-header p {
+        color: var(--brown-soft);
+        font-size: 1.1rem;
+      }
+      .content-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 168, 76, 0.08);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-glass);
+        padding: 2.5rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        transition: var(--transition);
+      }
+      .content-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(201, 168, 76, 0.2);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+      }
+      .content-card a {
+        color: var(--primary-green);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .content-card a:hover {
+        color: var(--gold);
+      }
+      @media (max-width: 768px) {
+        .page-header h1 {
+          font-size: 2rem;
+        }
+        .content-card {
+          padding: 1.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div class="page-overlay"></div>
     <div id="infoModal" class="modal">...</div>
     <div id="header-placeholder"></div>
+
     <main class="container" style="padding: 3rem 0">
-      <div class="card-glass content-card">
-        <h1 style="color: var(--primary-green)">Terms & Conditions</h1>
+      <div class="page-header">
+        <h1>
+          <i class="fas fa-gavel" style="color: var(--primary-green)"></i> Terms
+          & Conditions
+        </h1>
+        <p>कृपया इन नियमों को ध्यान से पढ़ें।</p>
+      </div>
+
+      <div class="content-card">
         <p><strong>Last updated:</strong> April 2026</p>
-        <p>
+        <p style="margin-top: 1rem">
           By accessing Spiriligious, you agree to these Terms. All content is
           for informational purposes only. Do not misuse the site. We are not
           liable for any damages.
         </p>
-        <p>For questions, <a href="contact.html">contact us</a>.</p>
+        <p style="margin-top: 1.5rem">
+          For questions, <a href="contact.html">contact us</a>.
+        </p>
       </div>
     </main>
+
     <div id="footer-placeholder"></div>
+
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>

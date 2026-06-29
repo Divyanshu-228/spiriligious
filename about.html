@@ -1,54 +1,2336 @@
-<!-- FILE: about.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spiriligious · About</title>
+    <title>Spiriligious · Admin Panel</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      :root {
+        --primary-green: #2a5e3a;
+        --primary-green-dark: #1c4028;
+        --gold: #c9a84c;
+        --gold-soft: #dcc37e;
+        --cream: #fdf8f0;
+        --cream-dark: #f5efe4;
+        --ivory: #faf3e8;
+        --brown: #4a3f35;
+        --brown-soft: #7a6b5a;
+        --brown-light: #b5a692;
+        --gray-50: #f9f7f4;
+        --gray-100: #f1ede8;
+        --gray-200: #e3ddd5;
+        --gray-300: #cbc2b8;
+        --gray-400: #a69689;
+        --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.06);
+        --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.1);
+        --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.15);
+        --radius-lg: 24px;
+        --radius-md: 16px;
+        --radius-sm: 12px;
+        --radius-xs: 8px;
+        --transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --sidebar-width: 240px;
+        --header-height: 72px;
+        --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-serif: "Playfair Display", serif;
+      }
+
+      body.dark-theme {
+        --cream: #1a1e2a;
+        --cream-dark: #141824;
+        --ivory: #1e2332;
+        --gray-50: #1e2332;
+        --gray-100: #2a2f42;
+        --gray-200: #3a4058;
+        --gray-300: #5a6180;
+        --gray-400: #8a93b0;
+        --brown: #e2e8f0;
+        --brown-soft: #b0b8c8;
+        --brown-light: #8a93b0;
+        --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.3);
+        --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.4);
+        --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: var(--font-sans);
+        background: var(--cream);
+        color: var(--brown);
+        transition:
+          background 0.3s,
+          color 0.2s;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--cream), var(--gray-100));
+        padding: 2rem;
+      }
+      .login-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: var(--radius-lg);
+        padding: 3rem 2.5rem;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: var(--shadow-medium);
+        text-align: center;
+      }
+      body.dark-theme .login-card {
+        background: rgba(30, 35, 50, 0.8);
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+      .login-card .logo-icon {
+        font-size: 2.8rem;
+        color: var(--gold);
+        margin-bottom: 0.5rem;
+      }
+      .login-card h2 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        color: var(--primary-green);
+        margin-bottom: 0.2rem;
+      }
+      .login-card p.sub {
+        color: var(--brown-soft);
+        font-size: 0.9rem;
+        margin-bottom: 1.8rem;
+      }
+      .login-card .input-group {
+        position: relative;
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+      .login-card .input-group label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--brown-soft);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      .login-card .input-group input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        font-size: 0.95rem;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(4px);
+        transition: var(--transition);
+        color: var(--brown);
+      }
+      body.dark-theme .login-card .input-group input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--gray-300);
+        color: #e2e8f0;
+      }
+      .login-card .input-group input:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.2);
+      }
+      .login-card .input-group .password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 38px;
+        cursor: pointer;
+        color: var(--gray-400);
+      }
+      .login-card .btn-login {
+        width: 100%;
+        padding: 0.9rem;
+        background: var(--primary-green);
+        color: white;
+        border: none;
+        border-radius: 60px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      .login-card .btn-login:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(42, 94, 58, 0.25);
+      }
+      .login-card .btn-login i {
+        font-size: 0.9rem;
+      }
+
+      .admin-wrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: var(--sidebar-width);
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-right: 1px solid rgba(201, 168, 76, 0.08);
+        padding: 1.5rem 1rem;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow-y: auto;
+        transition: var(--transition);
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      body.dark-theme .sidebar {
+        background: rgba(30, 35, 50, 0.7);
+        border-color: rgba(201, 168, 76, 0.1);
+      }
+      .sidebar .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        margin-bottom: 1rem;
+      }
+      .sidebar .brand i {
+        color: var(--gold);
+        font-size: 1.6rem;
+      }
+      .sidebar .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.7rem 1rem;
+        border-radius: var(--radius-sm);
+        color: var(--brown-soft);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: var(--transition);
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        font-family: var(--font-sans);
+      }
+      .sidebar .nav-item:hover {
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--brown);
+      }
+      .sidebar .nav-item.active {
+        background: rgba(201, 168, 76, 0.12);
+        color: var(--primary-green);
+        font-weight: 600;
+      }
+      .sidebar .nav-item i {
+        width: 20px;
+        font-size: 1rem;
+      }
+      .sidebar .nav-item .badge-dot {
+        margin-left: auto;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 2rem 2.5rem;
+        overflow-y: auto;
+        background: var(--cream);
+        transition: background 0.3s;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .topbar .page-title {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--brown);
+      }
+      .topbar .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .topbar .actions .btn-icon {
+        background: none;
+        border: 1px solid var(--gray-200);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .topbar .actions .btn-icon:hover {
+        background: var(--gray-100);
+        border-color: var(--gold);
+      }
+      body.dark-theme .topbar .actions .btn-icon {
+        border-color: var(--gray-300);
+        color: var(--gray-400);
+      }
+      body.dark-theme .topbar .actions .btn-icon:hover {
+        background: var(--gray-200);
+      }
+      .topbar .actions .theme-toggle {
+        background: var(--primary-green);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 60px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .topbar .actions .theme-toggle:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+      }
+      .topbar .actions .logout-btn {
+        background: transparent;
+        border: 1px solid var(--gray-200);
+        padding: 0.5rem 1.2rem;
+        border-radius: 60px;
+        font-weight: 500;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .topbar .actions .logout-btn:hover {
+        background: #f0e6dc;
+        border-color: var(--brown-soft);
+      }
+      body.dark-theme .topbar .actions .logout-btn:hover {
+        background: var(--gray-200);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.2rem;
+        margin-bottom: 2.5rem;
+      }
+      .stat-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(201, 168, 76, 0.08);
+        border-radius: var(--radius-md);
+        padding: 1.2rem 1.5rem;
+        transition: var(--transition);
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      body.dark-theme .stat-card {
+        background: rgba(30, 35, 50, 0.5);
+        border-color: rgba(201, 168, 76, 0.05);
+      }
+      .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+      .stat-card .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(201, 168, 76, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--gold);
+        flex-shrink: 0;
+      }
+      .stat-card .stat-info {
+        flex: 1;
+      }
+      .stat-card .stat-info .number {
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--brown);
+      }
+      .stat-card .stat-info .label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--brown-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .section-container {
+        margin-bottom: 3rem;
+      }
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.2rem;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .section-header h2 {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        color: var(--brown);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .section-header h2 i {
+        color: var(--gold);
+        font-size: 1.2rem;
+      }
+      .section-header .section-actions {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .section-header .section-actions .search-box {
+        position: relative;
+      }
+      .section-header .section-actions .search-box input {
+        padding: 0.5rem 1rem 0.5rem 2.4rem;
+        border: 1px solid var(--gray-200);
+        border-radius: 60px;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(4px);
+        font-size: 0.85rem;
+        width: 200px;
+        transition: var(--transition);
+        color: var(--brown);
+      }
+      body.dark-theme .section-header .section-actions .search-box input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--gray-300);
+        color: #e2e8f0;
+      }
+      .section-header .section-actions .search-box input:focus {
+        outline: none;
+        border-color: var(--gold);
+        width: 260px;
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+      }
+      .section-header .section-actions .search-box i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-400);
+      }
+      .btn-primary {
+        background: var(--primary-green);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 60px;
+        font-weight: 500;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .btn-primary:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(42, 94, 58, 0.2);
+      }
+      .btn-secondary {
+        background: var(--gray-200);
+        color: var(--brown);
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 60px;
+        font-weight: 500;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .btn-secondary:hover {
+        background: var(--gray-300);
+      }
+
+      .filter-chips {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .filter-chip {
+        padding: 0.2rem 0.8rem;
+        border-radius: 40px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        background: var(--gray-100);
+        color: var(--brown-soft);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .filter-chip.active {
+        background: rgba(201, 168, 76, 0.15);
+        border-color: var(--gold);
+        color: var(--primary-green);
+      }
+      .filter-chip:hover {
+        background: var(--gray-200);
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.2rem;
+      }
+      .content-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(201, 168, 76, 0.06);
+        border-radius: var(--radius-md);
+        padding: 1.2rem;
+        transition: var(--transition);
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      body.dark-theme .content-card {
+        background: rgba(30, 35, 50, 0.4);
+        border-color: rgba(201, 168, 76, 0.04);
+      }
+      .content-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(201, 168, 76, 0.15);
+      }
+      .content-card .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      .content-card .card-top .title {
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--brown);
+        flex: 1;
+      }
+      .content-card .card-top .badge {
+        font-size: 0.6rem;
+        font-weight: 600;
+        padding: 0.15rem 0.6rem;
+        border-radius: 40px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        flex-shrink: 0;
+      }
+      .badge-published {
+        background: #d4edda;
+        color: #155724;
+      }
+      .badge-draft {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .badge-pinned {
+        background: #ffd700;
+        color: #856404;
+      }
+      .badge-held {
+        background: #ffeaa7;
+        color: #856404;
+      }
+      .badge-pending {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .badge-archived {
+        background: #e2e3e5;
+        color: #383d41;
+      }
+      body.dark-theme .badge-published {
+        background: #1e3a2a;
+        color: #8fdf9f;
+      }
+      body.dark-theme .badge-draft {
+        background: #3a1e1e;
+        color: #f8a5a5;
+      }
+      body.dark-theme .badge-pinned {
+        background: #3a3500;
+        color: #ffd700;
+      }
+      body.dark-theme .badge-held {
+        background: #3a2f00;
+        color: #ffc107;
+      }
+      body.dark-theme .badge-pending {
+        background: #3a2f00;
+        color: #ffc107;
+      }
+      body.dark-theme .badge-archived {
+        background: #2a2a2a;
+        color: #aaa;
+      }
+
+      .content-card .card-meta {
+        font-size: 0.75rem;
+        color: var(--brown-soft);
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      .content-card .card-meta i {
+        margin-right: 0.2rem;
+      }
+      .content-card .card-actions {
+        display: flex;
+        gap: 0.4rem;
+        margin-top: 0.4rem;
+        flex-wrap: wrap;
+      }
+      .content-card .card-actions .btn-sm {
+        padding: 0.2rem 0.8rem;
+        border-radius: 40px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        background: var(--gray-100);
+        color: var(--brown-soft);
+      }
+      .content-card .card-actions .btn-sm:hover {
+        background: var(--gray-200);
+        transform: translateY(-1px);
+      }
+      .content-card .card-actions .btn-sm.primary {
+        background: var(--primary-green);
+        color: white;
+      }
+      .content-card .card-actions .btn-sm.primary:hover {
+        background: var(--primary-green-dark);
+      }
+      .content-card .card-actions .btn-sm.danger {
+        background: #dc3545;
+        color: white;
+      }
+      .content-card .card-actions .btn-sm.danger:hover {
+        background: #c82333;
+      }
+
+      .moderation-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .mod-item {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(201, 168, 76, 0.06);
+        border-radius: var(--radius-sm);
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        transition: var(--transition);
+      }
+      body.dark-theme .mod-item {
+        background: rgba(30, 35, 50, 0.3);
+        border-color: rgba(201, 168, 76, 0.04);
+      }
+      .mod-item:hover {
+        border-color: rgba(201, 168, 76, 0.15);
+      }
+      .mod-item .mod-info {
+        flex: 1;
+      }
+      .mod-item .mod-info h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--brown);
+      }
+      .mod-item .mod-info p {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+      }
+      .mod-item .mod-actions {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .slide-over {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 640px;
+        height: 100%;
+        background: var(--cream);
+        box-shadow: var(--shadow-heavy);
+        transition: right 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 2000;
+        overflow-y: auto;
+        padding: 2rem;
+      }
+      body.dark-theme .slide-over {
+        background: var(--cream-dark);
+      }
+      .slide-over.open {
+        right: 0;
+      }
+      .slide-over .slide-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        padding-bottom: 1rem;
+      }
+      .slide-over .slide-header h3 {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        color: var(--brown);
+      }
+      .slide-over .slide-header .close-slide {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+      }
+      .slide-over .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .slide-over .form-group label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--brown-soft);
+        margin-bottom: 0.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .slide-over .form-group input,
+      .slide-over .form-group textarea,
+      .slide-over .form-group select {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        font-size: 0.95rem;
+        transition: var(--transition);
+        color: var(--brown);
+      }
+      body.dark-theme .slide-over .form-group input,
+      body.dark-theme .slide-over .form-group textarea,
+      body.dark-theme .slide-over .form-group select {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--gray-300);
+        color: #e2e8f0;
+      }
+      .slide-over .form-group input:focus,
+      .slide-over .form-group textarea:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+      }
+      .slide-over .form-group .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .slide-over .form-group .checkbox-group input[type="checkbox"] {
+        width: auto;
+        accent-color: var(--primary-green);
+      }
+      .slide-over .form-actions {
+        display: flex;
+        gap: 0.8rem;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+        border-top: 1px solid rgba(201, 168, 76, 0.1);
+        padding-top: 1.5rem;
+      }
+      .slide-over .form-actions .btn {
+        padding: 0.6rem 1.6rem;
+        border-radius: 60px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .slide-over .form-actions .btn-primary {
+        background: var(--primary-green);
+        color: white;
+      }
+      .slide-over .form-actions .btn-primary:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+      }
+      .slide-over .form-actions .btn-secondary {
+        background: var(--gray-200);
+        color: var(--brown);
+      }
+      .slide-over .form-actions .btn-secondary:hover {
+        background: var(--gray-300);
+      }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        z-index: 1999;
+        display: none;
+      }
+      .overlay.active {
+        display: block;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--primary-green);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-medium);
+        font-weight: 500;
+        z-index: 3000;
+        transform: translateY(80px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      @media (max-width: 1024px) {
+        .sidebar {
+          width: 72px;
+          padding: 1rem 0.5rem;
+        }
+        .sidebar .brand span {
+          display: none;
+        }
+        .sidebar .nav-item span {
+          display: none;
+        }
+        .sidebar .nav-item i {
+          font-size: 1.3rem;
+          width: auto;
+        }
+        .sidebar .nav-item .badge-dot {
+          display: none;
+        }
+        .main-content {
+          padding: 1.5rem;
+        }
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+        .main-content {
+          padding: 1rem;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .section-header {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .section-header .section-actions {
+          flex-wrap: wrap;
+        }
+        .section-header .section-actions .search-box input {
+          width: 100%;
+        }
+        .slide-over {
+          max-width: 100%;
+          padding: 1.5rem;
+        }
+        .topbar .page-title {
+          font-size: 1.4rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .topbar .actions {
+          flex-wrap: wrap;
+        }
+      }
+
+      .skeleton {
+        animation: pulse 1.5s ease-in-out infinite;
+        background: var(--gray-100);
+        border-radius: var(--radius-xs);
+      }
+      @keyframes pulse {
+        0% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.6;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <div id="infoModal" class="modal">...</div>
-    <div id="header-placeholder"></div>
-    <main class="container" style="padding: 3rem 0">
-      <div class="card-glass content-card">
-        <h1 style="text-align: center; color: var(--primary-green)">
-          About Spiriligious
-        </h1>
-        <p style="margin-top: 1rem">
-          Spiriligious is a platform that bridges ancient traditions with modern
-          science. We believe every ritual, belief, and practice has a logical
-          and scientific foundation that has been obscured over time.
-        </p>
-        <p style="margin-top: 1rem">
-          Our mission is to revive the spirit of inquiry – to question, analyze,
-          and discover the truth behind traditions, while respecting their
-          spiritual essence.
-        </p>
-        <p style="margin-top: 1rem">
-          We are a team of researchers, scientists, and spiritual seekers
-          dedicated to balanced churning (<strong>मंथन</strong>) of knowledge.
-        </p>
-        <p style="margin-top: 1rem; text-align: center">
-          Join us in this journey of
-          <strong>ज्ञान, अध्यात्म और विज्ञान</strong> – exploring the unknown,
-          questioning the known, and celebrating the eternal wisdom of our
-          heritage.
-        </p>
+    <!-- ===== LOGIN CONTAINER ===== -->
+    <div id="loginContainer" class="login-wrapper">
+      <div class="login-card">
+        <div class="logo-icon"><i class="fas fa-om"></i></div>
+        <h2>Spiriligious</h2>
+        <p class="sub">Admin Access</p>
+        <div class="input-group">
+          <label>Email</label>
+          <input
+            type="email"
+            id="adminEmail"
+            placeholder="admin@spiriligious.in"
+          />
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="adminPassword" placeholder="••••••••" />
+          <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
+        </div>
+        <button class="btn-login" id="loginBtn">
+          <i class="fas fa-lock-open"></i> Login
+        </button>
       </div>
-    </main>
-    <div id="footer-placeholder"></div>
+    </div>
+
+    <!-- ===== ADMIN DASHBOARD ===== -->
+    <div id="adminPanel" style="display: none">
+      <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+          <div class="brand">
+            <i class="fas fa-om"></i><span>Spiriligious</span>
+          </div>
+          <button class="nav-item active" data-section="dashboard">
+            <i class="fas fa-th-large"></i><span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-section="shlok">
+            <i class="fas fa-praying-hands"></i><span>Daily Shlok</span>
+          </button>
+          <button class="nav-item" data-section="sant-articles">
+            <i class="fas fa-feather-alt"></i><span>Sant Articles</span>
+          </button>
+          <button class="nav-item" data-section="sant-darshan">
+            <i class="fas fa-user-astronaut"></i><span>Sant Darshan</span>
+          </button>
+          <button class="nav-item" data-section="mandir">
+            <i class="fas fa-om"></i><span>Mandir Darshan</span>
+          </button>
+          <button class="nav-item" data-section="bhajan">
+            <i class="fas fa-music"></i><span>Bhajan Videos</span>
+          </button>
+          <button class="nav-item" data-section="encyclopedia">
+            <i class="fas fa-book"></i><span>Encyclopedia</span>
+          </button>
+          <button class="nav-item" data-section="community">
+            <i class="fas fa-comments"></i><span>Community</span>
+          </button>
+          <button class="nav-item" data-section="podcast">
+            <i class="fas fa-microphone-alt"></i><span>Podcasts</span>
+          </button>
+          <div style="flex: 1"></div>
+          <button class="nav-item" id="logoutSidebarBtn">
+            <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+          </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+          <!-- Top Bar -->
+          <div class="topbar">
+            <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            <div class="actions">
+              <button class="btn-icon" id="themeToggleBtn">
+                <i class="fas fa-moon"></i>
+              </button>
+              <button class="logout-btn" id="logoutTopBtn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </div>
+          </div>
+
+          <!-- ===== DASHBOARD ===== -->
+          <section id="dashboardSection">
+            <div class="stats-grid" id="statsGrid"></div>
+            <div
+              style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem"
+            >
+              <div>
+                <h3 style="font-family: var(--font-serif); margin-bottom: 1rem">
+                  Recent Updates
+                </h3>
+                <div id="recentActivity" class="moderation-list"></div>
+              </div>
+              <div>
+                <h3 style="font-family: var(--font-serif); margin-bottom: 1rem">
+                  Quick Actions
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 0.8rem">
+                  <button class="btn-primary" onclick="openSlideOver('shlok')">
+                    <i class="fas fa-plus"></i> Add Shlok
+                  </button>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('sant-articles')"
+                  >
+                    <i class="fas fa-plus"></i> Add Article
+                  </button>
+                  <button class="btn-primary" onclick="openSlideOver('mandir')">
+                    <i class="fas fa-plus"></i> Add Temple
+                  </button>
+                  <button class="btn-primary" onclick="openSlideOver('bhajan')">
+                    <i class="fas fa-plus"></i> Add Bhajan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== CONTENT SECTIONS (all IDs now match the pattern: data-section + "Section") ===== -->
+          <section id="shlokSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-praying-hands"></i> Daily Shlok</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search shlok..."
+                      id="shlokSearch"
+                    />
+                  </div>
+                  <button class="btn-primary" onclick="openSlideOver('shlok')">
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="shlokFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="shlokList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <!-- FIXED: ID is now "sant-articlesSection" (matches JavaScript pattern) -->
+          <section id="sant-articlesSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-feather-alt"></i> Sant Articles</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search articles..."
+                      id="santArticleSearch"
+                    />
+                  </div>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('sant-articles')"
+                  >
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="santArticleFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="santArticlesList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <!-- FIXED: ID is now "sant-darshanSection" (matches JavaScript pattern) -->
+          <section id="sant-darshanSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-user-astronaut"></i> Sant Darshan</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search sants..."
+                      id="santSearch"
+                    />
+                  </div>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('sant-darshan')"
+                  >
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="santFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="santList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <section id="mandirSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-om"></i> Mandir Darshan</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search temples..."
+                      id="mandirSearch"
+                    />
+                  </div>
+                  <button class="btn-primary" onclick="openSlideOver('mandir')">
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="mandirFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="mandirList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <section id="bhajanSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-music"></i> Bhajan Videos</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search bhajans..."
+                      id="bhajanSearch"
+                    />
+                  </div>
+                  <button class="btn-primary" onclick="openSlideOver('bhajan')">
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="bhajanFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="videosList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <section id="encyclopediaSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-book"></i> Encyclopedia Terms</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search terms..."
+                      id="termSearch"
+                    />
+                  </div>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('encyclopedia')"
+                  >
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="termFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="termsList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <section id="communitySection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-comments"></i> Community Topics</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search topics..."
+                      id="topicSearch"
+                    />
+                  </div>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('community')"
+                  >
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="topicFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="pending">Pending</span>
+                <span class="filter-chip" data-filter="held">Held</span>
+              </div>
+              <div id="forumTopicsList" class="moderation-list"></div>
+            </div>
+          </section>
+
+          <section id="podcastSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-microphone-alt"></i> Podcasts</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="Search podcasts..."
+                      id="podcastSearch"
+                    />
+                  </div>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('podcast')"
+                  >
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="podcastFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="podcastsList" class="content-grid"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE-OVER EDITOR ===== -->
+    <div class="overlay" id="slideOverlay"></div>
+    <div class="slide-over" id="slideEditor">
+      <div class="slide-header">
+        <h3 id="slideTitle">Edit Content</h3>
+        <button class="close-slide" id="closeSlideBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="slideBody"></div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== SCRIPTS ===== -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-    <script src="global.js"></script>
-    <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+      // ============================================================
+      // FIREBASE CONFIG & INIT
+      // ============================================================
+      const firebaseConfig = {
+        apiKey: "AIzaSyC8h_NLwFq54mFSrZhG-gQnWJRIAr0zc5c",
+        authDomain: "spiriligious-cms.firebaseapp.com",
+        projectId: "spiriligious-cms",
+        storageBucket: "spiriligious-cms.firebasestorage.app",
+        messagingSenderId: "595657008516",
+        appId: "1:595657008516:web:e7d2fed4b5e1e5c481e9d1",
+        measurementId: "G-LXB9R61S94",
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const auth = firebase.auth();
+
+      // ============================================================
+      // GLOBAL STATE
+      // ============================================================
+      let currentSection = "dashboard";
+      let editingId = null;
+      let editingType = null;
+
+      // ============================================================
+      // HELPERS
+      // ============================================================
+      function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function (m) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m];
+        });
+      }
+
+      function showToast(msg, duration) {
+        duration = duration || 3000;
+        var t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(t._timeout);
+        t._timeout = setTimeout(function () {
+          t.classList.remove("show");
+        }, duration);
+      }
+
+      function getStatusBadge(status) {
+        var map = {
+          published: "badge-published",
+          draft: "badge-draft",
+          pinned: "badge-pinned",
+          held: "badge-held",
+          pending: "badge-pending",
+          archived: "badge-archived",
+        };
+        return (
+          '<span class="badge ' +
+          (map[status] || "badge-draft") +
+          '">' +
+          status +
+          "</span>"
+        );
+      }
+
+      // ============================================================
+      // AUTH
+      // ============================================================
+      var loginBtn = document.getElementById("loginBtn");
+      var togglePwd = document.getElementById("togglePassword");
+      var pwdInput = document.getElementById("adminPassword");
+
+      togglePwd.addEventListener("click", function () {
+        var type = pwdInput.type === "password" ? "text" : "password";
+        pwdInput.type = type;
+        togglePwd.classList.toggle("fa-eye");
+        togglePwd.classList.toggle("fa-eye-slash");
+      });
+
+      loginBtn.addEventListener("click", function () {
+        var email = document.getElementById("adminEmail").value;
+        var password = document.getElementById("adminPassword").value;
+        auth
+          .signInWithEmailAndPassword(email, password)
+          .then(function () {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("adminPanel").style.display = "block";
+            loadAllData();
+            showToast("Welcome back, Admin!");
+          })
+          .catch(function (err) {
+            alert("Login failed: " + err.message);
+          });
+      });
+
+      document
+        .getElementById("logoutTopBtn")
+        .addEventListener("click", function () {
+          auth.signOut();
+          location.reload();
+        });
+      document
+        .getElementById("logoutSidebarBtn")
+        .addEventListener("click", function () {
+          auth.signOut();
+          location.reload();
+        });
+
+      // ============================================================
+      // THEME TOGGLE
+      // ============================================================
+      var themeBtn = document.getElementById("themeToggleBtn");
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          document.body.classList.add("dark-theme");
+          themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+          localStorage.setItem("adminTheme", "dark");
+        } else {
+          document.body.classList.remove("dark-theme");
+          themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+          localStorage.setItem("adminTheme", "light");
+        }
+      }
+      var savedTheme = localStorage.getItem("adminTheme");
+      if (savedTheme === "dark") applyTheme("dark");
+      themeBtn.addEventListener("click", function () {
+        var isDark = document.body.classList.contains("dark-theme");
+        applyTheme(isDark ? "light" : "dark");
+      });
+
+      // ============================================================
+      // SIDEBAR NAVIGATION – FIXED: uses proper section mapping
+      // ============================================================
+      var sections = {
+        dashboard: "Dashboard",
+        shlok: "Daily Shlok",
+        "sant-articles": "Sant Articles",
+        "sant-darshan": "Sant Darshan",
+        mandir: "Mandir Darshan",
+        bhajan: "Bhajan Videos",
+        encyclopedia: "Encyclopedia",
+        community: "Community",
+        podcast: "Podcasts",
+      };
+
+      document
+        .querySelectorAll(".nav-item[data-section]")
+        .forEach(function (item) {
+          item.addEventListener("click", function () {
+            var section = this.dataset.section;
+            // Update active nav
+            document.querySelectorAll(".nav-item").forEach(function (n) {
+              n.classList.remove("active");
+            });
+            this.classList.add("active");
+            // Hide all sections
+            document
+              .querySelectorAll("#mainContent > section")
+              .forEach(function (s) {
+                s.style.display = "none";
+              });
+            // Show selected – use the section name directly as ID
+            var target = document.getElementById(section + "Section");
+            if (target) {
+              target.style.display = "block";
+            } else {
+              // Fallback to dashboard if section not found
+              document.getElementById("dashboardSection").style.display =
+                "block";
+            }
+            document.getElementById("pageTitle").textContent =
+              sections[section] || "Dashboard";
+            currentSection = section;
+
+            // Load data
+            if (section === "shlok") loadShloks();
+            else if (section === "sant-articles") loadSantArticles();
+            else if (section === "sant-darshan") loadSants();
+            else if (section === "mandir") loadMandirs();
+            else if (section === "bhajan") loadVideos();
+            else if (section === "encyclopedia") loadTerms();
+            else if (section === "community") loadForumTopics();
+            else if (section === "podcast") loadPodcasts();
+            else if (section === "dashboard") loadDashboard();
+          });
+        });
+
+      // ============================================================
+      // SLIDE-OVER EDITOR
+      // ============================================================
+      function openSlideOver(type, editId) {
+        editingId = editId || null;
+        editingType = type;
+        var overlay = document.getElementById("slideOverlay");
+        var editor = document.getElementById("slideEditor");
+        var title = document.getElementById("slideTitle");
+        var body = document.getElementById("slideBody");
+        var isEdit = !!editingId;
+        var html = "";
+
+        if (type === "shlok") {
+          title.textContent = isEdit ? "Edit Daily Shlok" : "Add Daily Shlok";
+          html = `
+            <div class="form-group">
+              <label>Shlok Text</label>
+              <textarea id="shlokText" rows="3" placeholder="Enter shlok..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Meaning</label>
+              <input type="text" id="shlokMeaning" placeholder="Meaning / translation" />
+            </div>
+            <div class="form-group">
+              <label>Source (optional)</label>
+              <input type="text" id="shlokSource" placeholder="e.g., Bhagavad Gita" />
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="shlokDate" />
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="shlokPublished" checked />
+              <label for="shlokPublished">Publish immediately</label>
+            </div>
+          `;
+        } else if (type === "sant-articles") {
+          title.textContent = isEdit ? "Edit Sant Article" : "Add Sant Article";
+          html = `
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="santArticleTitle" placeholder="Article title" />
+            </div>
+            <div class="form-group">
+              <label>Author</label>
+              <input type="text" id="santArticleAuthor" placeholder="Author name" />
+            </div>
+            <div class="form-group">
+              <label>Author Credits (optional)</label>
+              <input type="text" id="santArticleCredits" placeholder="e.g., PhD" />
+            </div>
+            <div class="form-group">
+              <label>Image URL</label>
+              <input type="text" id="santArticleImage" placeholder="https://..." />
+            </div>
+            <div class="form-group">
+              <label>Content (HTML allowed)</label>
+              <textarea id="santArticleContent" rows="12" placeholder="Paste the full article here. Use HTML tags for formatting..."></textarea>
+              <small style="color: var(--brown-soft); font-size: 0.75rem; display: block; margin-top: 0.3rem; background: rgba(201,168,76,0.06); padding: 0.5rem 0.8rem; border-radius: var(--radius-xs); border-left: 3px solid var(--gold);">
+                💡 <b>HTML tips:</b> &lt;p&gt;Paragraph&lt;/p&gt; &bull; &lt;br&gt; line break &bull; &lt;b&gt;bold&lt;/b&gt; &bull; &lt;i&gt;italic&lt;/i&gt; &bull; &lt;ul&gt;&lt;li&gt;list items&lt;/li&gt;&lt;/ul&gt; &bull; &lt;h3&gt;Heading&lt;/h3&gt;
+              </small>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="santArticlePublished" checked />
+              <label for="santArticlePublished">Publish</label>
+            </div>
+          `;
+        } else if (type === "sant-darshan") {
+          title.textContent = isEdit ? "Edit Sant" : "Add Sant";
+          html = `
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" id="santName" placeholder="Sant name" />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="santDesc" rows="4" placeholder="Description..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Image URL</label>
+              <input type="text" id="santImage" placeholder="https://..." />
+            </div>
+            <div class="form-group">
+              <label>YouTube Video URL</label>
+              <input type="text" id="santVideo" placeholder="https://www.youtube.com/watch?v=..." />
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="santPublished" checked />
+              <label for="santPublished">Published</label>
+            </div>
+          `;
+        } else if (type === "mandir") {
+          title.textContent = isEdit ? "Edit Temple" : "Add Temple";
+          html = `
+            <div class="form-group">
+              <label>Temple Name</label>
+              <input type="text" id="mandirTitle" placeholder="Temple name" />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="mandirDescription" rows="4" placeholder="Description..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Image URL</label>
+              <input type="text" id="mandirImage" placeholder="https://..." />
+            </div>
+            <div class="form-group">
+              <label>YouTube Video URL</label>
+              <input type="text" id="mandirVideo" placeholder="https://www.youtube.com/watch?v=..." />
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="mandirPublished" checked />
+              <label for="mandirPublished">Published</label>
+            </div>
+          `;
+        } else if (type === "bhajan") {
+          title.textContent = isEdit ? "Edit Bhajan" : "Add Bhajan";
+          html = `
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="videoTitle" placeholder="Bhajan title" />
+            </div>
+            <div class="form-group">
+              <label>YouTube Embed URL</label>
+              <input type="text" id="videoUrlInput" placeholder="https://www.youtube.com/embed/..." />
+            </div>
+            <div class="form-group">
+              <label>Description (optional)</label>
+              <textarea id="videoDesc" rows="3" placeholder="Lyrics or description..."></textarea>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="videoPublished" checked />
+              <label for="videoPublished">Published</label>
+            </div>
+          `;
+        } else if (type === "encyclopedia") {
+          title.textContent = isEdit ? "Edit Term" : "Add Term";
+          html = `
+            <div class="form-group">
+              <label>Term</label>
+              <input type="text" id="termName" placeholder="e.g., ॐ" />
+            </div>
+            <div class="form-group">
+              <label>Traditional Meaning</label>
+              <textarea id="termMeaning" rows="3" placeholder="Traditional meaning..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Scientific Explanation</label>
+              <textarea id="termScientific" rows="4" placeholder="Scientific interpretation..."></textarea>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="termPublished" checked />
+              <label for="termPublished">Published</label>
+            </div>
+          `;
+        } else if (type === "community") {
+          title.textContent = isEdit ? "Edit Topic" : "Add Topic";
+          html = `
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="topicTitle" placeholder="Topic title" />
+            </div>
+            <div class="form-group">
+              <label>Content</label>
+              <textarea id="topicContent" rows="5" placeholder="Discussion content..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Author</label>
+              <input type="text" id="topicAuthor" placeholder="Author name" />
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="topicPublished" checked />
+              <label for="topicPublished">Published</label>
+            </div>
+          `;
+        } else if (type === "podcast") {
+          title.textContent = isEdit ? "Edit Podcast" : "Add Podcast";
+          html = `
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="podcastTitle" placeholder="Podcast title" />
+            </div>
+            <div class="form-group">
+              <label>YouTube Embed URL</label>
+              <input type="text" id="podcastVideo" placeholder="https://www.youtube.com/embed/..." />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="podcastDesc" rows="3" placeholder="Description..."></textarea>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="podcastPublished" checked />
+              <label for="podcastPublished">Published</label>
+            </div>
+          `;
+        }
+
+        body.innerHTML = html;
+        if (isEdit) loadEditData(type, editingId);
+        overlay.classList.add("active");
+        editor.classList.add("open");
+
+        var saveBtn = document.createElement("button");
+        saveBtn.className = "btn btn-primary";
+        saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+        saveBtn.onclick = function () {
+          saveSlideOver(type);
+        };
+        var cancelBtn = document.createElement("button");
+        cancelBtn.className = "btn btn-secondary";
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.onclick = closeSlideOver;
+        var actions = document.createElement("div");
+        actions.className = "form-actions";
+        actions.appendChild(cancelBtn);
+        actions.appendChild(saveBtn);
+        body.appendChild(actions);
+      }
+
+      function closeSlideOver() {
+        document.getElementById("slideOverlay").classList.remove("active");
+        document.getElementById("slideEditor").classList.remove("open");
+        editingId = null;
+        editingType = null;
+      }
+
+      document
+        .getElementById("closeSlideBtn")
+        .addEventListener("click", closeSlideOver);
+      document
+        .getElementById("slideOverlay")
+        .addEventListener("click", closeSlideOver);
+
+      async function loadEditData(type, id) {
+        var doc;
+        if (type === "shlok")
+          doc = await db.collection("dailyShlok").doc(id).get();
+        else if (type === "sant-articles")
+          doc = await db.collection("santArticles").doc(id).get();
+        else if (type === "sant-darshan")
+          doc = await db.collection("santDarshan").doc(id).get();
+        else if (type === "mandir")
+          doc = await db.collection("mandirDarshan").doc(id).get();
+        else if (type === "bhajan")
+          doc = await db.collection("bhajanVideos").doc(id).get();
+        else if (type === "encyclopedia")
+          doc = await db.collection("encyclopediaTerms").doc(id).get();
+        else if (type === "community")
+          doc = await db.collection("forumTopics").doc(id).get();
+        else if (type === "podcast")
+          doc = await db.collection("podcasts").doc(id).get();
+        if (!doc.exists) return;
+        var data = doc.data();
+        var map = {
+          shlok: [
+            "shlokText",
+            "shlokMeaning",
+            "shlokSource",
+            "shlokDate",
+            "shlokPublished",
+          ],
+          "sant-articles": [
+            "santArticleTitle",
+            "santArticleAuthor",
+            "santArticleCredits",
+            "santArticleImage",
+            "santArticleContent",
+            "santArticlePublished",
+          ],
+          "sant-darshan": [
+            "santName",
+            "santDesc",
+            "santImage",
+            "santVideo",
+            "santPublished",
+          ],
+          mandir: [
+            "mandirTitle",
+            "mandirDescription",
+            "mandirImage",
+            "mandirVideo",
+            "mandirPublished",
+          ],
+          bhajan: [
+            "videoTitle",
+            "videoUrlInput",
+            "videoDesc",
+            "videoPublished",
+          ],
+          encyclopedia: [
+            "termName",
+            "termMeaning",
+            "termScientific",
+            "termPublished",
+          ],
+          community: [
+            "topicTitle",
+            "topicContent",
+            "topicAuthor",
+            "topicPublished",
+          ],
+          podcast: [
+            "podcastTitle",
+            "podcastVideo",
+            "podcastDesc",
+            "podcastPublished",
+          ],
+        };
+        var fields = map[type] || [];
+        fields.forEach(function (f) {
+          var el = document.getElementById(f);
+          if (!el) return;
+          if (el.type === "checkbox") {
+            el.checked = data[f.replace("Published", "")] === true;
+          } else if (el.type === "date" && data.date) {
+            var d = data.date.toDate();
+            el.value = d.toISOString().slice(0, 10);
+          } else {
+            el.value = data[f] || "";
+          }
+        });
+      }
+
+      async function saveSlideOver(type) {
+        var isEdit = !!editingId;
+        var payload = {};
+        var getVal = function (id) {
+          var el = document.getElementById(id);
+          return el ? el.value : "";
+        };
+        var getCheck = function (id) {
+          var el = document.getElementById(id);
+          return el ? el.checked : false;
+        };
+
+        if (type === "shlok") {
+          payload = {
+            text: getVal("shlokText"),
+            meaning: getVal("shlokMeaning"),
+            source: getVal("shlokSource"),
+            date: firebase.firestore.Timestamp.fromDate(
+              new Date(getVal("shlokDate") || Date.now()),
+            ),
+            published: getCheck("shlokPublished"),
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("dailyShlok").doc(editingId).update(payload);
+          else await db.collection("dailyShlok").add(payload);
+        } else if (type === "sant-articles") {
+          payload = {
+            title: getVal("santArticleTitle"),
+            author: getVal("santArticleAuthor"),
+            authorCredits: getVal("santArticleCredits"),
+            imageUrl: getVal("santArticleImage"),
+            content: getVal("santArticleContent"),
+            published: getCheck("santArticlePublished"),
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("santArticles").doc(editingId).update(payload);
+          else await db.collection("santArticles").add(payload);
+        } else if (type === "sant-darshan") {
+          payload = {
+            name: getVal("santName"),
+            description: getVal("santDesc"),
+            imageUrl: getVal("santImage"),
+            videoUrl: getVal("santVideo"),
+            published: getCheck("santPublished"),
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("santDarshan").doc(editingId).update(payload);
+          else await db.collection("santDarshan").add(payload);
+        } else if (type === "mandir") {
+          payload = {
+            title: getVal("mandirTitle"),
+            description: getVal("mandirDescription"),
+            imageUrl: getVal("mandirImage"),
+            videoUrl: getVal("mandirVideo"),
+            published: getCheck("mandirPublished"),
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("mandirDarshan").doc(editingId).update(payload);
+          else await db.collection("mandirDarshan").add(payload);
+        } else if (type === "bhajan") {
+          payload = {
+            title: getVal("videoTitle"),
+            videoUrl: getVal("videoUrlInput"),
+            description: getVal("videoDesc"),
+            published: getCheck("videoPublished"),
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("bhajanVideos").doc(editingId).update(payload);
+          else await db.collection("bhajanVideos").add(payload);
+        } else if (type === "encyclopedia") {
+          payload = {
+            term: getVal("termName"),
+            meaning: getVal("termMeaning"),
+            scientific: getVal("termScientific"),
+            published: getCheck("termPublished"),
+          };
+          if (isEdit)
+            await db
+              .collection("encyclopediaTerms")
+              .doc(editingId)
+              .update(payload);
+          else await db.collection("encyclopediaTerms").add(payload);
+        } else if (type === "community") {
+          payload = {
+            title: getVal("topicTitle"),
+            content: getVal("topicContent"),
+            author: getVal("topicAuthor") || "Anonymous",
+            published: getCheck("topicPublished"),
+            deleted: false,
+            replies: [],
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("forumTopics").doc(editingId).update(payload);
+          else await db.collection("forumTopics").add(payload);
+        } else if (type === "podcast") {
+          payload = {
+            title: getVal("podcastTitle"),
+            videoUrl: getVal("podcastVideo"),
+            description: getVal("podcastDesc"),
+            published: getCheck("podcastPublished"),
+          };
+          if (!isEdit)
+            payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          if (isEdit)
+            await db.collection("podcasts").doc(editingId).update(payload);
+          else await db.collection("podcasts").add(payload);
+        }
+
+        closeSlideOver();
+        showToast(isEdit ? "Updated successfully!" : "Created successfully!");
+        refreshCurrentSection();
+      }
+
+      function refreshCurrentSection() {
+        var section = currentSection;
+        if (section === "shlok") loadShloks();
+        else if (section === "sant-articles") loadSantArticles();
+        else if (section === "sant-darshan") loadSants();
+        else if (section === "mandir") loadMandirs();
+        else if (section === "bhajan") loadVideos();
+        else if (section === "encyclopedia") loadTerms();
+        else if (section === "community") loadForumTopics();
+        else if (section === "podcast") loadPodcasts();
+        else if (section === "dashboard") loadDashboard();
+      }
+
+      // ============================================================
+      // DATA LOADING FUNCTIONS
+      // ============================================================
+
+      async function loadDashboard() {
+        var grid = document.getElementById("statsGrid");
+        var collections = [
+          "dailyShlok",
+          "santArticles",
+          "santDarshan",
+          "mandirDarshan",
+          "bhajanVideos",
+          "encyclopediaTerms",
+          "forumTopics",
+          "podcasts",
+        ];
+        var stats = {};
+        var total = 0;
+        for (var i = 0; i < collections.length; i++) {
+          var snap = await db.collection(collections[i]).get();
+          var count = snap.size;
+          stats[collections[i]] = count;
+          total += count;
+        }
+        var pendingSnap = await db
+          .collection("forumTopics")
+          .where("published", "==", false)
+          .where("deleted", "==", false)
+          .get();
+        var pending = pendingSnap.size;
+
+        grid.innerHTML = `
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-praying-hands"></i></div><div class="stat-info"><span class="number">${stats.dailyShlok || 0}</span><div class="label">Shlok</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-feather-alt"></i></div><div class="stat-info"><span class="number">${stats.santArticles || 0}</span><div class="label">Sant Articles</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-user-astronaut"></i></div><div class="stat-info"><span class="number">${stats.santDarshan || 0}</span><div class="label">Sants</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-om"></i></div><div class="stat-info"><span class="number">${stats.mandirDarshan || 0}</span><div class="label">Temples</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-info"><span class="number">${stats.bhajanVideos || 0}</span><div class="label">Bhajans</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-info"><span class="number">${stats.encyclopediaTerms || 0}</span><div class="label">Terms</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-comments"></i></div><div class="stat-info"><span class="number">${pending}</span><div class="label">Pending Posts</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-file-alt"></i></div><div class="stat-info"><span class="number">${stats.podcasts || 0}</span><div class="label">Podcasts</div></div></div>
+        `;
+
+        var recent = [];
+        for (var j = 0; j < collections.length; j++) {
+          var snap2 = await db
+            .collection(collections[j])
+            .orderBy("updatedAt", "desc")
+            .limit(2)
+            .get();
+          snap2.forEach(function (d) {
+            var data = d.data();
+            recent.push({
+              collection: collections[j],
+              id: d.id,
+              title:
+                data.title || data.name || data.term || data.text || "Untitled",
+              updated: data.updatedAt?.toDate?.() || new Date(),
+            });
+          });
+        }
+        recent.sort(function (a, b) {
+          return b.updated - a.updated;
+        });
+        var activityDiv = document.getElementById("recentActivity");
+        if (recent.length === 0) {
+          activityDiv.innerHTML =
+            '<div class="mod-item"><div class="mod-info"><p>No recent updates.</p></div></div>';
+        } else {
+          activityDiv.innerHTML = recent
+            .slice(0, 5)
+            .map(function (item) {
+              return (
+                '<div class="mod-item"><div class="mod-info"><h4>' +
+                escapeHtml(item.title) +
+                "</h4><p>" +
+                item.collection +
+                " · " +
+                item.updated.toLocaleString() +
+                "</p></div></div>"
+              );
+            })
+            .join("");
+        }
+      }
+
+      async function loadShloks() {
+        var snap = await db.collection("dailyShlok").get();
+        var container = document.getElementById("shlokList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          var dateStr = data.date?.toDate?.()?.toLocaleDateString() || "";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.text?.substring(0, 60))}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="far fa-calendar-alt"></i> ${dateStr}</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('shlok','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('dailyShlok','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('dailyShlok','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadSantArticles() {
+        var snap = await db.collection("santArticles").get();
+        var container = document.getElementById("santArticlesList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.title)}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.author)}</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('sant-articles','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('santArticles','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('santArticles','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadSants() {
+        var snap = await db.collection("santDarshan").get();
+        var container = document.getElementById("santList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.name)}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.description?.substring(0, 50))}...</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('sant-darshan','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('santDarshan','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('santDarshan','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadMandirs() {
+        var snap = await db.collection("mandirDarshan").get();
+        var container = document.getElementById("mandirList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.title)}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="fas fa-map-pin"></i> ${escapeHtml(data.description?.substring(0, 50))}...</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('mandir','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('mandirDarshan','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('mandirDarshan','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadVideos() {
+        var snap = await db.collection("bhajanVideos").get();
+        var container = document.getElementById("videosList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.title)}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="fab fa-youtube"></i> ${escapeHtml(data.videoUrl)}</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('bhajan','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('bhajanVideos','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('bhajanVideos','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadTerms() {
+        var snap = await db.collection("encyclopediaTerms").get();
+        var container = document.getElementById("termsList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.term)}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="fas fa-book-open"></i> ${escapeHtml(data.meaning?.substring(0, 50))}...</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('encyclopedia','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('encyclopediaTerms','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('encyclopediaTerms','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadForumTopics() {
+        var snap = await db
+          .collection("forumTopics")
+          .where("deleted", "==", false)
+          .get();
+        var container = document.getElementById("forumTopicsList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published
+            ? "published"
+            : data.held
+              ? "held"
+              : "pending";
+          container.innerHTML += `
+            <div class="mod-item">
+              <div class="mod-info">
+                <h4>${escapeHtml(data.title)}</h4>
+                <p>${escapeHtml(data.content?.substring(0, 80))}...</p>
+                <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.author)} · ${data.createdAt?.toDate?.()?.toLocaleString() || ""}</div>
+              </div>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                ${getStatusBadge(status)}
+                <button class="btn-sm" onclick="togglePublish('forumTopics','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('forumTopics','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      async function loadPodcasts() {
+        var snap = await db.collection("podcasts").get();
+        var container = document.getElementById("podcastsList");
+        container.innerHTML = "";
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          var status = data.published ? "published" : "draft";
+          container.innerHTML += `
+            <div class="content-card">
+              <div class="card-top">
+                <span class="title">${escapeHtml(data.title)}</span>
+                ${getStatusBadge(status)}
+              </div>
+              <div class="card-meta"><i class="fab fa-youtube"></i> ${escapeHtml(data.videoUrl)}</div>
+              <div class="card-actions">
+                <button class="btn-sm primary" onclick="openSlideOver('podcast','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn-sm" onclick="togglePublish('podcasts','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+                <button class="btn-sm danger" onclick="deleteItem('podcasts','${doc.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // ============================================================
+      // GENERIC CRUD HELPERS
+      // ============================================================
+      window.togglePublish = async function (collection, id, newStatus) {
+        await db
+          .collection(collection)
+          .doc(id)
+          .update({ published: newStatus });
+        refreshCurrentSection();
+        showToast("Status updated to " + (newStatus ? "Published" : "Draft"));
+      };
+
+      window.deleteItem = async function (collection, id) {
+        if (!confirm("Delete this item?")) return;
+        if (collection === "forumTopics") {
+          await db.collection(collection).doc(id).update({ deleted: true });
+        } else {
+          await db.collection(collection).doc(id).delete();
+        }
+        refreshCurrentSection();
+        showToast("Deleted successfully.");
+      };
+
+      // ============================================================
+      // INITIAL LOAD
+      // ============================================================
+      async function loadAllData() {
+        await loadDashboard();
+        await Promise.all([
+          loadShloks(),
+          loadSantArticles(),
+          loadSants(),
+          loadMandirs(),
+          loadVideos(),
+          loadTerms(),
+          loadForumTopics(),
+          loadPodcasts(),
+        ]);
+      }
+
+      auth.onAuthStateChanged(function (user) {
+        if (user) {
+          document.getElementById("loginContainer").style.display = "none";
+          document.getElementById("adminPanel").style.display = "block";
+          loadAllData();
+        } else {
+          document.getElementById("loginContainer").style.display = "flex";
+          document.getElementById("adminPanel").style.display = "none";
+        }
+      });
+    </script>
   </body>
 </html>
