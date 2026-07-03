@@ -16,9 +16,8 @@ function loadHeader() {
           <a href="index.html" class="nav-link" data-page="index"><i class="fas fa-home"></i> Home</a>
           <a href="about.html" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a>
           <a href="team.html" class="nav-link" data-page="team"><i class="fas fa-users"></i> Team</a>
-          <a href="forum.html" class="nav-link" data-page="forum"><i class="fas fa-comments"></i> Manthan</a>
-          <a href="astro.html" class="nav-link" data-page="astro"><i class="fas fa-star-of-life"></i> Jyotish</a>
-          <a href="panchang.html" class="nav-link" data-page="panchang"><i class="fas fa-calendar-alt"></i> Panchang</a>
+          <a href="index.html#manthan-section" class="nav-link" data-page="forum"><i class="fas fa-comments"></i> Manthan</a>
+          <a href="astro.html" class="nav-link" data-page="astro"><i class="fas fa-star-of-life"></i> Jyotish · Panchang</a>
           <a href="contact.html" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a>
         </nav>
 
@@ -48,9 +47,8 @@ function loadHeader() {
         <a href="index.html" class="drawer-link" data-page="index"><i class="fas fa-home"></i> Home</a>
         <a href="about.html" class="drawer-link" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         <a href="team.html" class="drawer-link" data-page="team"><i class="fas fa-users"></i> Team</a>
-        <a href="forum.html" class="drawer-link" data-page="forum"><i class="fas fa-comments"></i> Manthan</a>
-        <a href="astro.html" class="drawer-link" data-page="astro"><i class="fas fa-star-of-life"></i> Jyotish</a>
-        <a href="panchang.html" class="drawer-link" data-page="panchang"><i class="fas fa-calendar-alt"></i> Panchang</a>
+        <a href="index.html#manthan-section" class="drawer-link" data-page="forum"><i class="fas fa-comments"></i> Manthan</a>
+        <a href="astro.html" class="drawer-link" data-page="astro"><i class="fas fa-star-of-life"></i> Jyotish · Panchang</a>
         <a href="contact.html" class="drawer-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a>
       </nav>
     </div>
@@ -65,9 +63,10 @@ function loadFooter() {
     <footer class="premium-footer" role="contentinfo">
       <div class="container">
         <div class="footer-main">
+          <!-- Brand with Logo -->
           <div class="footer-brand">
             <div class="brand-logo">
-              <span class="logo-om">ॐ</span>
+              <img src="images/logo.png" alt="Spiriligious" class="footer-logo-image" />
               <span class="logo-text">Spiriligious</span>
             </div>
             <p class="brand-tagline">ज्ञान · अध्यात्म · विज्ञान</p>
@@ -114,7 +113,6 @@ function loadFooter() {
               <i class="fas fa-envelope contact-icon"></i>
               <h4>Get in Touch</h4>
               <p class="contact-email"><a href="mailto:info@spiriligious.in">info@spiriligious.in</a></p>
-              
             </div>
           </div>
         </div>
@@ -127,8 +125,8 @@ function loadFooter() {
 
         <div class="footer-bottom">
           <div class="footer-bottom-content">
-            <p class="copyright">&copy; 2026 Spiriligious. All Rights Reserved. <span class="heart">❤️</span> Built to preserve India's timeless spiritual heritage.</p>
-            <p class="credit">Designed &amp; Developed with <span class="heart-small">❤️</span> by <span class="credit-name">Dibyanshu Sanyal</span></p>
+            <p class="copyright">&copy; 2026 Spiriligious. All Rights Reserved. <span class="heart">|</span> Built to preserve India's timeless spiritual heritage.</p>
+            <p class="credit">Rooted in tradition. Inspired by knowledge.</p>
           </div>
         </div>
       </div>

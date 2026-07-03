@@ -14,624 +14,612 @@ const db = firebase.firestore();
 // ==================== HELPERS ====================
 function escapeHtml(str) {
   if (!str) return "";
-  return str.replace(/[&<>]/g, function (m) {
-    return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m];
-  });
-}
-function openComingSoon(title) {
-  openModal(
-    "🚧 आने वाला है",
-    "<h3>" +
-      title +
-      "</h3><p>हम जल्द ही इस सुविधा को लाएंगे। कृपया बने रहें। 🙏</p>",
+  return str.replace(
+    /[&<>]/g,
+    (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[m],
   );
 }
-function scrollToSection(id) {
-  var el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+function getReadingTime(content) {
+  if (!content) return "1 min";
+  const words = content.split(/\s+/).length;
+  return Math.ceil(words / 200) + " min read";
 }
 
-// ==================== MODALS ====================
-var modal = document.getElementById("infoModal");
-var modalTitle = document.getElementById("modalTitle");
-var modalMessage = document.getElementById("modalMessage");
-
-function openModal(title, html) {
-  modalTitle.innerText = title;
-  modalMessage.innerHTML = html;
-  modal.style.display = "flex";
-  document.body.style.overflow = "hidden";
+function extractYouTubeId(url) {
+  if (!url) return "";
+  const match = url.match(/(?:youtube\.com\/embed\/|youtu\.be\/|v=)([^&?/]+)/);
+  return match ? match[1] : "";
 }
-function closeModal() {
-  modal.style.display = "none";
-  document.body.style.overflow = "auto";
+
+function formatDate(timestamp) {
+  if (!timestamp || !timestamp.toDate) return "";
+  return new Date(timestamp.toDate()).toLocaleString();
 }
-window.addEventListener("click", function (e) {
-  if (e.target === modal) closeModal();
-});
 
-// Detail Modal
-var detailModal = document.getElementById("detailModal");
-var detailBody = document.getElementById("detailBody");
+// ==================== UNIFIED RENDER FUNCTIONS ====================
 
-function openDetailModal(html) {
-  detailBody.innerHTML = html;
-  detailModal.style.display = "flex";
-  document.body.style.overflow = "hidden";
+/**
+ * Renders a featured card for any content type
+ * @param {string} containerId - The DOM id of the featured container
+ * @param {Object} item - The featured item data
+ * @param {string} type - 'sant', 'mandir', 'bhajan', 'science'
+ * @param {string} detailFn - The function name to call on click (string)
+ */
+function renderFeatured(containerId, item, type, detailFn) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (!item) {
+    container.innerHTML = `
+      <div class="featured-image"><img src="https://via.placeholder.com/800x600?text=${type}" alt="No content" loading="lazy" /><span class="featured-badge">Featured</span></div>
+      <div class="featured-content">
+        <span class="category-tag">${type.charAt(0).toUpperCase() + type.slice(1)}</span>
+        <h3>Coming Soon</h3>
+        <div class="featured-divider"></div>
+        <p class="featured-desc">Content will appear here. 🙏</p>
+      </div>
+    `;
+    return;
+  }
+
+  const configs = {
+    sant: {
+      tag: "Sant Darshan",
+      title: item.title,
+      meta: [
+        { icon: "fa-user", value: item.author || "Unknown" },
+        { icon: "fa-clock", value: getReadingTime(item.content) },
+      ],
+      desc: item.content || "",
+      image: item.imageUrl || "https://via.placeholder.com/800x600?text=Sant",
+      btnText: "Read Article",
+      btnIcon: "fa-book-open",
+    },
+    mandir: {
+      tag: "Mandir Darshan",
+      title: item.title,
+      meta: [
+        { icon: "fa-map-pin", value: item.location || "Sacred Site" },
+        { icon: "fa-clock", value: getReadingTime(item.description) },
+      ],
+      desc: item.description || "",
+      image: item.imageUrl || "https://via.placeholder.com/800x600?text=Temple",
+      btnText: "Explore Temple",
+      btnIcon: "fa-landmark",
+    },
+    bhajan: {
+      tag: "Bhajan Collection",
+      title: item.title,
+      meta: [
+        { icon: "fa-microphone-alt", value: item.singer || "Unknown" },
+        { icon: "fa-clock", value: item.duration || "—" },
+      ],
+      desc: item.description || "",
+      image:
+        item.thumbnail ||
+        (item.videoUrl
+          ? `https://img.youtube.com/vi/${extractYouTubeId(item.videoUrl)}/hqdefault.jpg`
+          : "https://via.placeholder.com/800x600?text=Bhajan"),
+      btnText: "Listen Now",
+      btnIcon: "fa-play",
+    },
+    science: {
+      tag: "Science & Knowledge",
+      title: item.title || item.term,
+      meta: [
+        { icon: "fa-user", value: item.author || "Researcher" },
+        {
+          icon: "fa-clock",
+          value: getReadingTime(item.shortDesc || item.meaning),
+        },
+      ],
+      desc: item.shortDesc || item.meaning || "",
+      image:
+        item.imageUrl || "https://via.placeholder.com/800x600?text=Science",
+      btnText: "Read Analysis",
+      btnIcon: "fa-microscope",
+    },
+  };
+
+  const cfg = configs[type] || configs.sant;
+  const metaHtml = cfg.meta
+    .map(
+      (m) =>
+        `<span><i class="fas ${m.icon}"></i> ${escapeHtml(m.value)}</span>`,
+    )
+    .join("");
+
+  container.innerHTML = `
+    <div class="featured-image">
+      <img src="${escapeHtml(cfg.image)}" alt="${escapeHtml(cfg.title)}" loading="lazy" />
+      <span class="featured-badge">Featured</span>
+    </div>
+    <div class="featured-content">
+      <span class="category-tag">${cfg.tag}</span>
+      <h3>${escapeHtml(cfg.title)}</h3>
+      <div class="featured-meta">${metaHtml}</div>
+      <div class="featured-divider"></div>
+      <p class="featured-desc">${escapeHtml((cfg.desc || "").substring(0, 180))}...</p>
+      <div class="featured-actions">
+        <button class="btn-primary-featured" onclick="${detailFn}('${item.id}')">
+          <i class="fas ${cfg.btnIcon}"></i> ${cfg.btnText}
+        </button>
+      </div>
+    </div>
+  `;
 }
-function closeDetailModal() {
-  detailModal.style.display = "none";
-  document.body.style.overflow = "auto";
+
+/**
+ * Renders a grid of content cards
+ * @param {string} containerId - DOM id of the grid container
+ * @param {Array} items - Array of item objects
+ * @param {string} type - 'sant', 'mandir', 'bhajan', 'science'
+ * @param {string} detailFn - Function name to call on click
+ */
+function renderCards(containerId, items, type, detailFn) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (!items || items.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const configs = {
+    sant: {
+      badge: "Sant",
+      meta: (item) =>
+        `<span><i class="fas fa-user"></i> ${escapeHtml(item.author)}</span>`,
+      image: (item) =>
+        item.imageUrl || "https://via.placeholder.com/400x250?text=Sant",
+      title: (item) => item.title,
+      desc: (item) => item.content || "",
+      action: "Read More",
+    },
+    mandir: {
+      badge: "Temple",
+      meta: (item) =>
+        `<span><i class="fas fa-map-pin"></i> ${escapeHtml(item.location || "Sacred")}</span>`,
+      image: (item) =>
+        item.imageUrl || "https://via.placeholder.com/400x250?text=Mandir",
+      title: (item) => item.title,
+      desc: (item) => item.description || "",
+      action: "Explore",
+    },
+    bhajan: {
+      badge: "Bhajan",
+      meta: (item) =>
+        item.singer
+          ? `<span><i class="fas fa-microphone-alt"></i> ${escapeHtml(item.singer)}</span>`
+          : "",
+      image: (item) =>
+        item.thumbnail ||
+        (item.videoUrl
+          ? `https://img.youtube.com/vi/${extractYouTubeId(item.videoUrl)}/hqdefault.jpg`
+          : "https://via.placeholder.com/400x250?text=Bhajan"),
+      title: (item) => item.title,
+      desc: (item) => item.description || "",
+      action: "Listen",
+    },
+    science: {
+      badge: (item) =>
+        item.type === "scientific" ? "Science" : "Encyclopedia",
+      meta: (item) =>
+        `<span><i class="fas fa-tag"></i> ${escapeHtml(item.category || "ज्ञानकोश")}</span>`,
+      image: (item) =>
+        item.imageUrl || "https://via.placeholder.com/400x250?text=Science",
+      title: (item) => item.title || item.term,
+      desc: (item) =>
+        item.shortDesc || (item.meaning || "").substring(0, 120) + "...",
+      action: "Read More",
+    },
+  };
+
+  const cfg = configs[type] || configs.sant;
+  let html = "";
+
+  items.forEach((item) => {
+    const badge = typeof cfg.badge === "function" ? cfg.badge(item) : cfg.badge;
+    const image = typeof cfg.image === "function" ? cfg.image(item) : cfg.image;
+    const title = typeof cfg.title === "function" ? cfg.title(item) : cfg.title;
+    const desc = typeof cfg.desc === "function" ? cfg.desc(item) : cfg.desc;
+    const meta = typeof cfg.meta === "function" ? cfg.meta(item) : cfg.meta;
+
+    html += `
+      <div class="content-card-unified" onclick="${detailFn}('${item.id}')">
+        <div class="card-image-wrap">
+          <img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="lazy" />
+          <span class="card-badge">${escapeHtml(badge)}</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">${escapeHtml(title)}</h3>
+          <p class="card-desc">${escapeHtml((desc || "").substring(0, 120))}...</p>
+          <div class="card-meta">${meta}</div>
+          <span class="card-action">${cfg.action} <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
 }
-window.addEventListener("click", function (e) {
-  if (e.target === detailModal) closeDetailModal();
-});
 
-// ==================== LOAD DATA ====================
+// ==================== DATA LOADING FUNCTIONS ====================
 
-// ----- Daily Shlok -----
 async function loadDailyShlok() {
-  var container = document.getElementById("shlokContent");
+  const container = document.getElementById("shlokContent");
   if (!container) return;
   try {
-    var snap = await db
+    const snap = await db
       .collection("dailyShlok")
       .where("published", "==", true)
       .get();
     if (snap.empty) {
-      container.innerHTML =
-        '<p class="shlok-placeholder">🙏 कोई प्रकाशित श्लोक नहीं। कृपया बाद में देखें।</p>';
+      container.innerHTML = `<p class="shlok-placeholder">🙏 कोई प्रकाशित श्लोक नहीं। कृपया बाद में देखें।</p>`;
       return;
     }
-    var latest = null;
-    var latestDate = null;
-    snap.forEach(function (doc) {
-      var data = doc.data();
-      var d = data.date && data.date.toDate ? data.date.toDate() : new Date(0);
+    let latest = null,
+      latestDate = null;
+    snap.forEach((doc) => {
+      const data = doc.data();
+      const d = data.date?.toDate ? data.date.toDate() : new Date(0);
       if (!latestDate || d > latestDate) {
         latestDate = d;
         latest = data;
       }
     });
     if (!latest) {
-      container.innerHTML =
-        '<p class="shlok-placeholder">🙏 श्लोक डेटा प्राप्त नहीं हुआ।</p>';
+      container.innerHTML = `<p class="shlok-placeholder">🙏 श्लोक डेटा प्राप्त नहीं हुआ।</p>`;
       return;
     }
-    container.innerHTML =
-      '<div class="shlok-text">' +
-      escapeHtml(latest.text) +
-      "</div>" +
-      '<div class="shlok-meaning"><strong>अर्थ :</strong> ' +
-      escapeHtml(latest.meaning) +
-      "</div>" +
-      (latest.source
-        ? '<div class="shlok-source">स्रोत : ' +
-          escapeHtml(latest.source) +
-          "</div>"
-        : "");
+    const lines = latest.text
+      .split(/\r?\n/)
+      .filter((line) => line.trim() !== "");
+    const shlokHtml = lines
+      .map((line) => `<div class="shlok-line">${escapeHtml(line)}</div>`)
+      .join("");
+    container.innerHTML = `
+      <div class="shlok-text">${shlokHtml}</div>
+      <div class="shlok-meaning"><strong>अर्थ :</strong> ${escapeHtml(latest.meaning)}</div>
+      ${latest.source ? `<div class="shlok-source">स्रोत : ${escapeHtml(latest.source)}</div>` : ""}
+    `;
   } catch (err) {
     console.error("Error loading shlok:", err);
-    container.innerHTML =
-      '<p class="shlok-placeholder">🙏 श्लोक लोड नहीं हो सका। कृपया पुनः प्रयास करें।</p>';
+    container.innerHTML = `<p class="shlok-placeholder">🙏 श्लोक लोड नहीं हो सका। कृपया पुनः प्रयास करें।</p>`;
   }
 }
 
-// ----- Sant Articles (client-side sorting – no index required) -----
-async function loadSantArticles() {
-  var featuredContainer = document.getElementById("featuredSantContainer");
-  var gridContainer = document.getElementById("santArticlesGrid");
-  if (!featuredContainer || !gridContainer) return;
-
+// --- Unified loader for collections ---
+async function loadCollection(
+  collectionName,
+  featuredId,
+  gridId,
+  type,
+  detailFn,
+  transformFn,
+) {
   try {
-    var snap = await db
-      .collection("santArticles")
+    const snap = await db
+      .collection(collectionName)
       .where("published", "==", true)
       .get();
-    if (snap.empty) {
-      featuredContainer.innerHTML =
-        '<div class="featured-image"><img src="https://via.placeholder.com/600x400?text=Sant" alt="No content" loading="lazy" /></div>' +
-        '<div class="featured-content"><span class="badge">Featured</span><h3>Coming Soon</h3><p>Sant articles will appear here. 🙏</p></div>';
-      gridContainer.innerHTML = "";
-      return;
-    }
+    const docs = snap.docs;
 
-    var docs = snap.docs;
-    // Sort manually by createdAt (descending) – no Firebase index needed
-    docs.sort(function (a, b) {
-      var aDate =
-        a.data().createdAt && a.data().createdAt.toDate
-          ? a.data().createdAt.toDate()
-          : new Date(0);
-      var bDate =
-        b.data().createdAt && b.data().createdAt.toDate
-          ? b.data().createdAt.toDate()
-          : new Date(0);
+    // Sort by createdAt descending
+    docs.sort((a, b) => {
+      const aDate = a.data().createdAt?.toDate
+        ? a.data().createdAt.toDate()
+        : new Date(0);
+      const bDate = b.data().createdAt?.toDate
+        ? b.data().createdAt.toDate()
+        : new Date(0);
       return bDate - aDate;
     });
 
-    var first = docs[0];
-    var rest = docs.slice(1);
-    var a = first.data();
+    // Find featured: either explicit featured flag or first doc
+    let featuredDoc =
+      docs.find((d) => d.data().featured === true) ||
+      (docs.length > 0 ? docs[0] : null);
+    let rest = docs.filter((d) => d.id !== featuredDoc?.id);
 
-    // Featured
-    featuredContainer.innerHTML =
-      '<div class="featured-image"><img src="' +
-      escapeHtml(
-        a.imageUrl || "https://via.placeholder.com/600x400?text=Sant",
-      ) +
-      '" alt="' +
-      escapeHtml(a.title) +
-      '" loading="lazy" /></div>' +
-      '<div class="featured-content">' +
-      '<span class="badge">Featured</span>' +
-      "<h3>" +
-      escapeHtml(a.title) +
-      "</h3>" +
-      '<div class="meta"><i class="fas fa-user"></i> ' +
-      escapeHtml(a.author) +
-      "</div>" +
-      "<p>" +
-      escapeHtml((a.content || "").substring(0, 150)) +
-      "...</p>" +
-      '<button class="btn-gold" onclick="openSantArticle(\'' +
-      first.id +
-      "')\">Read Article</button>" +
-      "</div>";
+    // Transform data
+    const transform = transformFn || ((doc) => ({ id: doc.id, ...doc.data() }));
 
-    // Grid
-    if (rest.length === 0) {
-      gridContainer.innerHTML = "";
-      return;
-    }
-    var html = "";
-    rest.forEach(function (doc) {
-      var item = doc.data();
-      html +=
-        '<div class="article-card" onclick="openSantArticle(\'' +
-        doc.id +
-        "')\">" +
-        '<img src="' +
-        escapeHtml(
-          item.imageUrl || "https://via.placeholder.com/400x200?text=Sant",
-        ) +
-        '" alt="' +
-        escapeHtml(item.title) +
-        '" />' +
-        '<div class="content">' +
-        "<h3>" +
-        escapeHtml(item.title) +
-        "</h3>" +
-        '<div class="author">✍️ ' +
-        escapeHtml(item.author) +
-        "</div>" +
-        '<div class="excerpt">' +
-        escapeHtml((item.content || "").substring(0, 120)) +
-        "...</div>" +
-        "</div></div>";
-    });
-    gridContainer.innerHTML = html;
+    let featuredItem = featuredDoc ? transform(featuredDoc) : null;
+    let restItems = rest.map((d) => transform(d));
+
+    // Render featured
+    renderFeatured(featuredId, featuredItem, type, detailFn);
+
+    // Render grid
+    renderCards(gridId, restItems, type, detailFn);
+
+    return { featured: featuredItem, items: restItems };
   } catch (err) {
-    console.error("Error loading sant articles:", err);
-    featuredContainer.innerHTML =
-      '<div class="featured-content"><h3>Error</h3><p>Could not load articles.</p></div>';
-    gridContainer.innerHTML = "";
+    console.error(`Error loading ${collectionName}:`, err);
+    const container = document.getElementById(featuredId);
+    if (container) {
+      container.innerHTML = `<div class="featured-content"><h3>Error</h3><p>Could not load content.</p></div>`;
+    }
+    const grid = document.getElementById(gridId);
+    if (grid) grid.innerHTML = "";
   }
 }
 
-// ----- Open Sant Article -----
-async function openSantArticle(id) {
-  var doc = await db.collection("santArticles").doc(id).get();
-  if (!doc.exists) return;
-  var a = doc.data();
-  var html =
-    "<h1>" +
-    escapeHtml(a.title) +
-    "</h1>" +
-    '<div class="detail-meta"><strong>✍️ ' +
-    escapeHtml(a.author) +
-    "</strong>" +
-    (a.authorCredits ? " · " + escapeHtml(a.authorCredits) : "") +
-    "</div>" +
-    (a.imageUrl
-      ? '<img src="' +
-        escapeHtml(a.imageUrl) +
-        '" alt="' +
-        escapeHtml(a.title) +
-        '" />'
-      : "") +
-    '<div class="full-text sant-article-content">' +
-    a.content +
-    "</div>";
-  openDetailModal(html);
+// ==================== SECTION LOADERS ====================
+
+function loadSantArticles() {
+  return loadCollection(
+    "santArticles",
+    "featuredSantContainer",
+    "santArticlesGrid",
+    "sant",
+    "openSantArticle",
+    (doc) => ({ id: doc.id, ...doc.data() }),
+  );
 }
 
-// ----- Mandir Darshan (client-side sorting) -----
-async function loadMandirs() {
-  var featuredContainer = document.getElementById("featuredTempleContainer");
-  var gridContainer = document.getElementById("mandirGrid");
-  if (!featuredContainer || !gridContainer) return;
-
-  try {
-    var snap = await db
-      .collection("mandirDarshan")
-      .where("published", "==", true)
-      .get();
-    if (snap.empty) {
-      featuredContainer.innerHTML =
-        '<div class="featured-image"><img src="https://via.placeholder.com/600x400?text=Temple" alt="No content" loading="lazy" /></div>' +
-        '<div class="featured-content"><span class="badge">Featured</span><h3>Coming Soon</h3><p>Temples will appear here. 🙏</p></div>';
-      gridContainer.innerHTML = "";
-      return;
-    }
-
-    var docs = snap.docs;
-    docs.sort(function (a, b) {
-      var aDate =
-        a.data().createdAt && a.data().createdAt.toDate
-          ? a.data().createdAt.toDate()
-          : new Date(0);
-      var bDate =
-        b.data().createdAt && b.data().createdAt.toDate
-          ? b.data().createdAt.toDate()
-          : new Date(0);
-      return bDate - aDate;
-    });
-
-    var first = docs[0];
-    var rest = docs.slice(1);
-    var m = first.data();
-
-    featuredContainer.innerHTML =
-      '<div class="featured-image"><img src="' +
-      escapeHtml(
-        m.imageUrl || "https://via.placeholder.com/600x400?text=Temple",
-      ) +
-      '" alt="' +
-      escapeHtml(m.title) +
-      '" loading="lazy" /></div>' +
-      '<div class="featured-content">' +
-      '<span class="badge">Featured</span>' +
-      "<h3>" +
-      escapeHtml(m.title) +
-      "</h3>" +
-      '<div class="meta"><i class="fas fa-map-pin"></i> ' +
-      escapeHtml(m.location || "Sacred Site") +
-      "</div>" +
-      "<p>" +
-      escapeHtml((m.description || "").substring(0, 150)) +
-      "...</p>" +
-      '<button class="btn-gold" onclick="openMandirDetail(\'' +
-      first.id +
-      "')\">Explore Temple</button>" +
-      "</div>";
-
-    if (rest.length === 0) {
-      gridContainer.innerHTML = "";
-      return;
-    }
-    var html = "";
-    rest.forEach(function (doc) {
-      var item = doc.data();
-      html +=
-        '<div class="darshan-card" onclick="openMandirDetail(\'' +
-        doc.id +
-        "')\">" +
-        '<img class="darshan-image" src="' +
-        escapeHtml(
-          item.imageUrl || "https://via.placeholder.com/400x200?text=Mandir",
-        ) +
-        '" alt="' +
-        escapeHtml(item.title) +
-        '" />' +
-        '<div class="darshan-content">' +
-        '<span class="darshan-badge">🛕 दिव्य स्थल</span>' +
-        "<h3>" +
-        escapeHtml(item.title) +
-        "</h3>" +
-        "<p>" +
-        escapeHtml((item.description || "").substring(0, 100)) +
-        "...</p>" +
-        "</div></div>";
-    });
-    gridContainer.innerHTML = html;
-  } catch (err) {
-    console.error("Error loading mandirs:", err);
-    featuredContainer.innerHTML =
-      '<div class="featured-content"><h3>Error</h3><p>Could not load temples.</p></div>';
-    gridContainer.innerHTML = "";
-  }
+function loadMandirs() {
+  return loadCollection(
+    "mandirDarshan",
+    "featuredTempleContainer",
+    "mandirGrid",
+    "mandir",
+    "openMandirDetail",
+    (doc) => ({ id: doc.id, ...doc.data() }),
+  );
 }
 
-// ----- Open Mandir Detail -----
-async function openMandirDetail(id) {
-  var doc = await db.collection("mandirDarshan").doc(id).get();
-  if (!doc.exists) return;
-  var m = doc.data();
-  var videoHtml = "";
-  if (m.videoUrl) {
-    videoHtml =
-      '<div class="video-wrapper"><iframe src="' +
-      m.videoUrl +
-      '?rel=0" frameborder="0" allowfullscreen></iframe></div>';
-  }
-  var html =
-    "<h1>" +
-    escapeHtml(m.title) +
-    "</h1>" +
-    (m.imageUrl
-      ? '<img src="' +
-        escapeHtml(m.imageUrl) +
-        '" alt="' +
-        escapeHtml(m.title) +
-        '" />'
-      : "") +
-    '<div class="full-text">' +
-    escapeHtml(m.description) +
-    "</div>" +
-    videoHtml;
-  openDetailModal(html);
+function loadBhajans() {
+  return loadCollection(
+    "bhajanVideos",
+    "featuredBhajanContainer",
+    "bhajanGrid",
+    "bhajan",
+    "openBhajanDetail",
+    (doc) => ({ id: doc.id, ...doc.data() }),
+  );
 }
 
-// ----- Bhajan Videos (client-side sorting) -----
-async function loadBhajans() {
-  var featuredContainer = document.getElementById("featuredBhajanContainer");
-  var gridContainer = document.getElementById("bhajanGrid");
-  if (!featuredContainer || !gridContainer) return;
-
-  try {
-    var snap = await db
-      .collection("bhajanVideos")
-      .where("published", "==", true)
-      .get();
-    if (snap.empty) {
-      featuredContainer.innerHTML =
-        '<div class="featured-image"><img src="https://via.placeholder.com/600x400?text=Bhajan" alt="No content" loading="lazy" /></div>' +
-        '<div class="featured-content"><span class="badge">Featured</span><h3>Coming Soon</h3><p>Bhajans will appear here. 🙏</p></div>';
-      gridContainer.innerHTML = "";
-      return;
-    }
-
-    var docs = snap.docs;
-    docs.sort(function (a, b) {
-      var aDate =
-        a.data().createdAt && a.data().createdAt.toDate
-          ? a.data().createdAt.toDate()
-          : new Date(0);
-      var bDate =
-        b.data().createdAt && b.data().createdAt.toDate
-          ? b.data().createdAt.toDate()
-          : new Date(0);
-      return bDate - aDate;
-    });
-
-    var first = docs[0];
-    var rest = docs.slice(1);
-    var v = first.data();
-
-    featuredContainer.innerHTML =
-      '<div class="featured-image"><img src="https://img.youtube.com/vi/' +
-      extractYouTubeId(v.videoUrl) +
-      '/hqdefault.jpg" alt="' +
-      escapeHtml(v.title) +
-      '" loading="lazy" /></div>' +
-      '<div class="featured-content">' +
-      '<span class="badge">Featured</span>' +
-      "<h3>" +
-      escapeHtml(v.title) +
-      "</h3>" +
-      '<div class="meta"><i class="fas fa-microphone-alt"></i> Bhajan</div>' +
-      "<p>" +
-      escapeHtml(
-        (v.description || "").substring(0, 150) ||
-          "Listen to this devotional bhajan.",
-      ) +
-      "</p>" +
-      '<button class="btn-gold" onclick="openBhajanDetail(\'' +
-      first.id +
-      "')\">Listen Now</button>" +
-      "</div>";
-
-    if (rest.length === 0) {
-      gridContainer.innerHTML = "";
-      return;
-    }
-    var html = "";
-    rest.forEach(function (doc) {
-      var item = doc.data();
-      html +=
-        '<div class="darshan-card" onclick="openBhajanDetail(\'' +
-        doc.id +
-        "')\">" +
-        '<div class="darshan-content">' +
-        '<span class="darshan-badge">🎵 भजन</span>' +
-        "<h3>" +
-        escapeHtml(item.title) +
-        "</h3>" +
-        '<div style="margin-top:0.5rem; background:#000; border-radius:8px; overflow:hidden;">' +
-        '<iframe src="' +
-        item.videoUrl +
-        '?rel=0" style="width:100%; aspect-ratio:16/9;" frameborder="0" allowfullscreen></iframe>' +
-        "</div></div></div>";
-    });
-    gridContainer.innerHTML = html;
-  } catch (err) {
-    console.error("Error loading bhajans:", err);
-    featuredContainer.innerHTML =
-      '<div class="featured-content"><h3>Error</h3><p>Could not load bhajans.</p></div>';
-    gridContainer.innerHTML = "";
-  }
-}
-
-// ----- Open Bhajan Detail -----
-async function openBhajanDetail(id) {
-  var doc = await db.collection("bhajanVideos").doc(id).get();
-  if (!doc.exists) return;
-  var v = doc.data();
-  var html =
-    "<h1>" +
-    escapeHtml(v.title) +
-    "</h1>" +
-    '<div class="video-wrapper"><iframe src="' +
-    v.videoUrl +
-    '?rel=0" frameborder="0" allowfullscreen></iframe></div>' +
-    (v.description
-      ? '<div class="full-text">' + escapeHtml(v.description) + "</div>"
-      : "");
-  openDetailModal(html);
-}
-
-// ----- Extract YouTube ID -----
-function extractYouTubeId(url) {
-  if (!url) return "";
-  var match = url.match(/(?:youtube\.com\/embed\/|youtu\.be\/|v=)([^&?/]+)/);
-  return match ? match[1] : "";
-}
-
-// ----- Science Section -----
 async function loadScience() {
-  var container = document.getElementById("scienceGrid");
-  if (!container) return;
   try {
-    var [cardsSnap, termsSnap] = await Promise.all([
+    const [cardsSnap, termsSnap] = await Promise.all([
       db.collection("scientificCards").where("published", "==", true).get(),
       db.collection("encyclopediaTerms").where("published", "==", true).get(),
     ]);
-    var items = [];
-    cardsSnap.forEach(function (doc) {
-      var data = doc.data();
+
+    let items = [];
+    cardsSnap.forEach((doc) => {
+      const data = doc.data();
       items.push({
         id: doc.id,
         type: "scientific",
-        title: data.title,
-        category: data.category,
-        shortDesc: data.shortDesc,
-        fullContent: data.fullAnalysis,
-        pinned: data.pinned || false,
+        ...data,
         createdAt: data.createdAt?.seconds || 0,
-        imageUrl: data.imageUrl || null,
       });
     });
-    termsSnap.forEach(function (doc) {
-      var data = doc.data();
+    termsSnap.forEach((doc) => {
+      const data = doc.data();
       items.push({
         id: doc.id,
         type: "encyclopedia",
-        title: data.term,
-        category: "ज्ञानकोश",
-        shortDesc: data.meaning,
-        fullContent:
-          "<strong>परंपरागत अर्थ:</strong> " +
-          escapeHtml(data.meaning) +
-          "<br><br><strong>वैज्ञानिक व्याख्या:</strong> " +
-          escapeHtml(data.scientific),
-        pinned: false,
+        term: data.term,
+        meaning: data.meaning,
+        scientific: data.scientific,
         createdAt: 0,
-        imageUrl: null,
+        featured: false,
       });
     });
-    items.sort(function (a, b) {
-      if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+
+    items.sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
       return b.createdAt - a.createdAt;
     });
-    if (items.length === 0) {
-      container.innerHTML =
-        '<div style="grid-column:1/-1; text-align:center; padding:2rem;">⚠️ कोई विश्लेषण उपलब्ध नहीं।</div>';
-      return;
-    }
-    var html = "";
-    items.forEach(function (item) {
-      var tag =
-        item.type === "scientific" ? "🔬 वैज्ञानिक विश्लेषण" : "📖 ज्ञानकोश";
-      var short =
-        item.type === "scientific"
-          ? item.shortDesc
-          : (item.shortDesc || "").substring(0, 120) + "...";
-      var imgHtml = item.imageUrl
-        ? '<img src="' +
-          escapeHtml(item.imageUrl) +
-          '" alt="' +
-          escapeHtml(item.title) +
-          '" class="science-image" />'
-        : "";
-      html +=
-        '<div class="analysis-card" onclick="openScienceDetail(\'' +
-        item.id +
-        "','" +
-        item.type +
-        "')\">" +
-        imgHtml +
-        '<div class="analysis-content">' +
-        '<span class="card-tag">' +
-        tag +
-        "</span>" +
-        "<h3>" +
-        escapeHtml(item.title) +
-        "</h3>" +
-        "<p>" +
-        escapeHtml(short) +
-        "</p>" +
-        '<button class="read-more-btn">पूरा विवरण →</button>' +
-        "</div></div>";
-    });
-    container.innerHTML = html;
+
+    let featuredItem =
+      items.find((i) => i.featured === true) ||
+      (items.length > 0 ? items[0] : null);
+    let restItems = items.filter((i) => i.id !== featuredItem?.id);
+
+    // Render featured
+    renderFeatured(
+      "featuredScienceContainer",
+      featuredItem,
+      "science",
+      "openScienceDetail",
+    );
+
+    // Render grid
+    renderCards("scienceGrid", restItems, "science", "openScienceDetail");
   } catch (err) {
-    console.error(err);
-    container.innerHTML =
-      '<div style="text-align:center;padding:2rem;">त्रुटि: डेटा लोड नहीं हो सका।</div>';
+    console.error("Error loading science:", err);
+    const container = document.getElementById("featuredScienceContainer");
+    if (container) {
+      container.innerHTML = `<div class="featured-content"><h3>Error</h3><p>Could not load science content.</p></div>`;
+    }
+    document.getElementById("scienceGrid").innerHTML = "";
   }
 }
 
-// ----- Open Science Detail -----
+// ==================== DETAIL VIEWS ====================
+
+async function openSantArticle(id) {
+  const doc = await db.collection("santArticles").doc(id).get();
+  if (!doc.exists) return;
+  const a = doc.data();
+  const html = `
+    <h1 class="detail-title">${escapeHtml(a.title)}</h1>
+    <div class="detail-meta">
+      <span><i class="fas fa-user"></i> ${escapeHtml(a.author)}</span>
+      <span><i class="fas fa-clock"></i> ${getReadingTime(a.content)}</span>
+      ${a.authorCredits ? `<span><i class="fas fa-award"></i> ${escapeHtml(a.authorCredits)}</span>` : ""}
+    </div>
+    ${a.imageUrl ? `<img src="${escapeHtml(a.imageUrl)}" alt="${escapeHtml(a.title)}" class="detail-hero" />` : ""}
+    <div class="detail-body-text dropcap">${a.content}</div>
+    <div class="detail-share">
+      <button onclick="shareContent('${escapeHtml(a.title)}','${window.location.href}')"><i class="fas fa-share-alt"></i></button>
+      <button onclick="window.print()"><i class="fas fa-print"></i></button>
+    </div>
+  `;
+  openDetailModal(html);
+}
+
+async function openMandirDetail(id) {
+  const doc = await db.collection("mandirDarshan").doc(id).get();
+  if (!doc.exists) return;
+  const m = doc.data();
+  let videoHtml = m.videoUrl
+    ? `<div class="video-wrapper"><iframe src="${m.videoUrl}?rel=0" frameborder="0" allowfullscreen></iframe></div>`
+    : "";
+  let galleryHtml = "";
+  if (m.gallery && m.gallery.length > 0) {
+    galleryHtml = `<div class="detail-gallery">${m.gallery.map((img) => `<img src="${escapeHtml(img)}" alt="Gallery" loading="lazy" onclick="window.open('${escapeHtml(img)}','_blank')" />`).join("")}</div>`;
+  }
+  const html = `
+    <h1 class="detail-title">${escapeHtml(m.title)}</h1>
+    <div class="detail-meta">
+      <span><i class="fas fa-map-pin"></i> ${escapeHtml(m.location || "Sacred Site")}</span>
+      ${m.established ? `<span><i class="fas fa-calendar-alt"></i> Est. ${escapeHtml(m.established)}</span>` : ""}
+      ${m.altitude ? `<span><i class="fas fa-mountain"></i> ${escapeHtml(m.altitude)} m</span>` : ""}
+    </div>
+    ${m.imageUrl ? `<img src="${escapeHtml(m.imageUrl)}" alt="${escapeHtml(m.title)}" class="detail-hero" />` : ""}
+    <div class="detail-body-text">
+      ${m.description ? `<p>${escapeHtml(m.description)}</p>` : ""}
+      ${m.history ? `<h3>History</h3><p>${escapeHtml(m.history)}</p>` : ""}
+      ${m.architecture ? `<h3>Architecture</h3><p>${escapeHtml(m.architecture)}</p>` : ""}
+      ${m.significance ? `<h3>Religious Importance</h3><p>${escapeHtml(m.significance)}</p>` : ""}
+      ${m.festivals ? `<h3>Festivals</h3><p>${escapeHtml(m.festivals)}</p>` : ""}
+      ${m.travelInfo ? `<h3>Travel Information</h3><p>${escapeHtml(m.travelInfo)}</p>` : ""}
+      ${m.openingHours ? `<h3>Opening Hours</h3><p>${escapeHtml(m.openingHours)}</p>` : ""}
+      ${m.mapLink ? `<p><a href="${escapeHtml(m.mapLink)}" target="_blank" style="color:var(--gold);font-weight:600;"><i class="fas fa-map-marker-alt"></i> View on Map</a></p>` : ""}
+    </div>
+    ${galleryHtml}
+    ${videoHtml}
+    <div class="detail-share">
+      <button onclick="shareContent('${escapeHtml(m.title)}','${window.location.href}')"><i class="fas fa-share-alt"></i></button>
+      <button onclick="window.print()"><i class="fas fa-print"></i></button>
+    </div>
+  `;
+  openDetailModal(html);
+}
+
+async function openBhajanDetail(id) {
+  const doc = await db.collection("bhajanVideos").doc(id).get();
+  if (!doc.exists) return;
+  const v = doc.data();
+  const thumb =
+    v.thumbnail ||
+    (v.videoUrl
+      ? `https://img.youtube.com/vi/${extractYouTubeId(v.videoUrl)}/hqdefault.jpg`
+      : "https://via.placeholder.com/800x600?text=Bhajan");
+
+  let lyricsHtml = "";
+  if (v.lyrics) {
+    lyricsHtml = `
+      <button class="lyrics-toggle" onclick="toggleLyrics()"><i class="fas fa-music"></i> Show Lyrics</button>
+      <div class="lyrics-panel" id="lyricsPanel">${escapeHtml(v.lyrics)}</div>
+    `;
+  }
+  let meaningHtml = "";
+  if (v.meaning) {
+    meaningHtml = `
+      <button class="lyrics-toggle" onclick="toggleMeaning()"><i class="fas fa-book-open"></i> Show Meaning</button>
+      <div class="meaning-panel" id="meaningPanel">${escapeHtml(v.meaning)}</div>
+    `;
+  }
+
+  const html = `
+    <img src="${escapeHtml(thumb)}" alt="${escapeHtml(v.title)}" class="detail-hero" />
+    <h1 class="detail-title">${escapeHtml(v.title)}</h1>
+    ${v.subtitle ? `<p style="color:var(--brown-soft);font-size:1.1rem;font-style:italic;margin-top:-0.3rem;">${escapeHtml(v.subtitle)}</p>` : ""}
+    <div class="detail-meta">
+      ${v.singer ? `<span><i class="fas fa-microphone-alt"></i> Singer: ${escapeHtml(v.singer)}</span>` : ""}
+      ${v.composer ? `<span><i class="fas fa-music"></i> Composer: ${escapeHtml(v.composer)}</span>` : ""}
+      ${v.lyricist ? `<span><i class="fas fa-feather-alt"></i> Lyricist: ${escapeHtml(v.lyricist)}</span>` : ""}
+      ${v.duration ? `<span><i class="fas fa-clock"></i> ${escapeHtml(v.duration)}</span>` : ""}
+      ${v.language ? `<span><i class="fas fa-language"></i> ${escapeHtml(v.language)}</span>` : ""}
+    </div>
+    ${v.description ? `<div class="detail-body-text"><p>${escapeHtml(v.description)}</p></div>` : ""}
+    ${v.videoUrl ? `<div class="video-wrapper"><iframe src="${v.videoUrl}?rel=0" frameborder="0" allowfullscreen></iframe></div>` : ""}
+    ${lyricsHtml}
+    ${meaningHtml}
+    <div class="detail-share">
+      <button onclick="shareContent('${escapeHtml(v.title)}','${window.location.href}')"><i class="fas fa-share-alt"></i></button>
+      <button onclick="window.print()"><i class="fas fa-print"></i></button>
+    </div>
+  `;
+  openDetailModal(html);
+
+  window.toggleLyrics = function () {
+    const el = document.getElementById("lyricsPanel");
+    if (el) el.classList.toggle("open");
+  };
+  window.toggleMeaning = function () {
+    const el = document.getElementById("meaningPanel");
+    if (el) el.classList.toggle("open");
+  };
+}
+
 async function openScienceDetail(id, type) {
-  var data;
-  if (type === "scientific") {
-    var doc = await db.collection("scientificCards").doc(id).get();
+  let html = "";
+  if (type === "scientific" || type === "science") {
+    const doc = await db.collection("scientificCards").doc(id).get();
     if (!doc.exists) return;
-    data = doc.data();
-    var html =
-      "<h1>" +
-      escapeHtml(data.title) +
-      "</h1>" +
-      '<div class="detail-meta">📂 ' +
-      escapeHtml(data.category) +
-      "</div>" +
-      (data.imageUrl
-        ? '<img src="' +
-          escapeHtml(data.imageUrl) +
-          '" alt="' +
-          escapeHtml(data.title) +
-          '" />'
-        : "") +
-      '<div class="full-text">' +
-      data.fullAnalysis +
-      "</div>";
-    openDetailModal(html);
+    const d = doc.data();
+    html = `
+      <h1 class="detail-title">${escapeHtml(d.title)}</h1>
+      <div class="detail-meta">
+        <span><i class="fas fa-user"></i> ${escapeHtml(d.author || "Researcher")}</span>
+        <span><i class="fas fa-tag"></i> ${escapeHtml(d.category || "Science")}</span>
+        <span><i class="fas fa-clock"></i> ${getReadingTime(d.fullAnalysis)}</span>
+      </div>
+      ${d.imageUrl ? `<img src="${escapeHtml(d.imageUrl)}" alt="${escapeHtml(d.title)}" class="detail-hero" />` : ""}
+      <div class="detail-body-text">
+        ${d.shortDesc ? `<p><strong>Summary:</strong> ${escapeHtml(d.shortDesc)}</p>` : ""}
+        ${d.fullAnalysis ? `<h3>Full Analysis</h3><p>${d.fullAnalysis}</p>` : ""}
+        ${d.traditionalRef ? `<h3>Traditional Reference</h3><p>${escapeHtml(d.traditionalRef)}</p>` : ""}
+        ${d.modernExplanation ? `<h3>Modern Explanation</h3><p>${escapeHtml(d.modernExplanation)}</p>` : ""}
+        ${d.references ? `<h3>References</h3><p>${escapeHtml(d.references)}</p>` : ""}
+        ${d.externalLinks ? `<h3>External Sources</h3><p>${escapeHtml(d.externalLinks)}</p>` : ""}
+      </div>
+      <div class="detail-share">
+        <button onclick="shareContent('${escapeHtml(d.title)}','${window.location.href}')"><i class="fas fa-share-alt"></i></button>
+        <button onclick="window.print()"><i class="fas fa-print"></i></button>
+      </div>
+    `;
   } else {
-    var doc = await db.collection("encyclopediaTerms").doc(id).get();
+    const doc = await db.collection("encyclopediaTerms").doc(id).get();
     if (!doc.exists) return;
-    data = doc.data();
-    var html =
-      "<h1>" +
-      escapeHtml(data.term) +
-      "</h1>" +
-      '<div class="full-text">' +
-      "<strong>परंपरागत अर्थ:</strong> " +
-      escapeHtml(data.meaning) +
-      "<br><br>" +
-      "<strong>वैज्ञानिक व्याख्या:</strong> " +
-      escapeHtml(data.scientific) +
-      "</div>";
-    openDetailModal(html);
+    const d = doc.data();
+    html = `
+      <h1 class="detail-title">${escapeHtml(d.term)}</h1>
+      <div class="detail-meta">
+        <span><i class="fas fa-book"></i> Encyclopedia</span>
+        <span><i class="fas fa-clock"></i> ${getReadingTime(d.meaning + " " + d.scientific)}</span>
+      </div>
+      <div class="detail-body-text">
+        <h3>Traditional Meaning</h3>
+        <p>${escapeHtml(d.meaning)}</p>
+        <h3>Scientific Explanation</h3>
+        <p>${escapeHtml(d.scientific)}</p>
+      </div>
+      <div class="detail-share">
+        <button onclick="shareContent('${escapeHtml(d.term)}','${window.location.href}')"><i class="fas fa-share-alt"></i></button>
+        <button onclick="window.print()"><i class="fas fa-print"></i></button>
+      </div>
+    `;
   }
+  openDetailModal(html);
 }
 
-// ----- Community Discussions -----
+// ==================== COMMUNITY ====================
+
 async function loadCommunityDiscussions() {
-  var container = document.getElementById("communityTopicsList");
+  const container = document.getElementById("communityTopicsList");
   if (!container) return;
   try {
-    var snap = await db
+    const snap = await db
       .collection("forumTopics")
       .where("published", "==", true)
       .where("deleted", "==", false)
@@ -643,34 +631,24 @@ async function loadCommunityDiscussions() {
         '<div class="discussion-item"><h4>अभी कोई चर्चा नहीं।</h4><p>पहली चर्चा शुरू करें! 🙏</p></div>';
       return;
     }
-    var html = "";
-    snap.forEach(function (doc) {
-      var t = doc.data();
-      var dateStr = t.createdAt
+    let html = "";
+    snap.forEach((doc) => {
+      const t = doc.data();
+      const dateStr = t.createdAt
         ? new Date(t.createdAt.toDate()).toLocaleString()
         : "";
-      var replyCount = (t.replies && t.replies.length) || 0;
-      html +=
-        '<div class="discussion-item" onclick="openDiscussionDetail(\'' +
-        doc.id +
-        "')\">" +
-        "<h4>" +
-        escapeHtml(t.title) +
-        "</h4>" +
-        "<p>" +
-        escapeHtml((t.content || "").substring(0, 100)) +
-        "...</p>" +
-        '<div class="discussion-meta">' +
-        '<span><i class="fas fa-user"></i> ' +
-        escapeHtml(t.author || "साधक") +
-        "</span>" +
-        '<span><i class="fas fa-calendar-alt"></i> ' +
-        dateStr +
-        "</span>" +
-        '<span><i class="fas fa-comment"></i> ' +
-        replyCount +
-        " replies</span>" +
-        "</div></div>";
+      const replyCount = (t.replies && t.replies.length) || 0;
+      html += `
+        <div class="discussion-item" onclick="openDiscussionDetail('${doc.id}')">
+          <h4>${escapeHtml(t.title)}</h4>
+          <p>${escapeHtml((t.content || "").substring(0, 100))}...</p>
+          <div class="discussion-meta">
+            <span><i class="fas fa-user"></i> ${escapeHtml(t.author || "साधक")}</span>
+            <span><i class="fas fa-calendar-alt"></i> ${dateStr}</span>
+            <span><i class="fas fa-comment"></i> ${replyCount} replies</span>
+          </div>
+        </div>
+      `;
     });
     container.innerHTML = html;
   } catch (err) {
@@ -680,53 +658,91 @@ async function loadCommunityDiscussions() {
   }
 }
 
-// ----- Open Discussion Detail -----
 async function openDiscussionDetail(id) {
-  var doc = await db.collection("forumTopics").doc(id).get();
+  const doc = await db.collection("forumTopics").doc(id).get();
   if (!doc.exists) return;
-  var t = doc.data();
-  var dateStr = t.createdAt
+  const t = doc.data();
+  const dateStr = t.createdAt
     ? new Date(t.createdAt.toDate()).toLocaleString()
     : "";
-  var repliesHtml = "";
+  let repliesHtml = "";
   if (t.replies && t.replies.length > 0) {
     repliesHtml = t.replies
-      .map(function (r) {
-        return (
-          '<div class="reply-item"><strong>' +
-          escapeHtml(r.author || "साधक") +
-          '</strong><span class="reply-date">' +
-          (r.timestamp ? new Date(r.timestamp.toDate()).toLocaleString() : "") +
-          "</span><p>" +
-          escapeHtml(r.content) +
-          "</p></div>"
-        );
-      })
+      .map(
+        (r) => `
+      <div class="reply-item"><strong>${escapeHtml(r.author || "साधक")}</strong><span class="reply-date">${r.timestamp ? new Date(r.timestamp.toDate()).toLocaleString() : ""}</span><p>${escapeHtml(r.content)}</p></div>
+    `,
+      )
       .join("");
   } else {
     repliesHtml = '<p style="color:var(--brown-soft);">अभी कोई उत्तर नहीं।</p>';
   }
-  var html =
-    "<h1>" +
-    escapeHtml(t.title) +
-    "</h1>" +
-    '<div class="detail-meta"><strong>✍️ ' +
-    escapeHtml(t.author || "साधक") +
-    "</strong> · " +
-    dateStr +
-    "</div>" +
-    '<div class="full-text" style="margin:1rem 0 1.5rem;">' +
-    escapeHtml(t.content) +
-    "</div>" +
-    '<h3 style="font-family:var(--font-serif); margin-bottom:0.8rem;">💬 उत्तर</h3>' +
-    repliesHtml +
-    '<div style="margin-top:1.5rem; border-top:1px solid rgba(201,168,76,0.1); padding-top:1.5rem;">' +
-    '<p style="font-size:0.9rem; color:var(--brown-soft);">💡 उत्तर देने के लिए <a href="forum.html" style="color:var(--gold); font-weight:600;">Manthan Forum</a> पर जाएँ।</p>' +
-    "</div>";
+  const html = `
+    <h1 class="detail-title">${escapeHtml(t.title)}</h1>
+    <div class="detail-meta"><strong>✍️ ${escapeHtml(t.author || "साधक")}</strong> · ${dateStr}</div>
+    <div class="detail-body-text" style="margin:1rem 0 1.5rem;">${escapeHtml(t.content)}</div>
+    <h3 style="font-family:var(--font-serif);margin-bottom:0.8rem;">💬 उत्तर</h3>
+    ${repliesHtml}
+    <div style="margin-top:1.5rem;border-top:1px solid rgba(201,168,76,0.1);padding-top:1.5rem;">
+      <p style="font-size:0.9rem;color:var(--brown-soft);">💡 उत्तर देने के लिए <a href="#manthan-section" style="color:var(--gold);font-weight:600;">Manthan Forum</a> पर जाएँ।</p>
+    </div>
+  `;
   openDetailModal(html);
 }
 
+// ==================== SHARE ====================
+
+function shareContent(title, url) {
+  if (navigator.share) {
+    navigator.share({ title, text: title, url }).catch(() => {});
+  } else {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        openModal(
+          "🔗 Link Copied",
+          "The link has been copied to your clipboard.",
+        );
+      })
+      .catch(() => {
+        openModal(
+          "🔗 Share",
+          `<p>Share this: <a href="${url}" target="_blank">${url}</a></p>`,
+        );
+      });
+  }
+}
+
 // ==================== INIT ====================
+
+// Expose all functions globally for inline onclick handlers
+window.openSantArticle = openSantArticle;
+window.openMandirDetail = openMandirDetail;
+window.openBhajanDetail = openBhajanDetail;
+window.openScienceDetail = openScienceDetail;
+window.openDiscussionDetail = openDiscussionDetail;
+window.shareContent = shareContent;
+window.openModal = function (title, html) {
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalMessage").innerHTML = html;
+  document.getElementById("infoModal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+};
+window.closeModal = function () {
+  document.getElementById("infoModal").style.display = "none";
+  document.body.style.overflow = "auto";
+};
+window.openDetailModal = function (html) {
+  document.getElementById("detailBody").innerHTML = html;
+  document.getElementById("detailModal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+};
+window.closeDetailModal = function () {
+  document.getElementById("detailModal").style.display = "none";
+  document.body.style.overflow = "auto";
+};
+
+// Auto-load on DOM ready
 document.addEventListener("DOMContentLoaded", function () {
   loadDailyShlok();
   loadSantArticles();

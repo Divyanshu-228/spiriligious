@@ -9,10 +9,14 @@
     <title>Spiriligious · ज्ञान · अध्यात्म · विज्ञान</title>
     <meta
       name="description"
-      content="Spiriligious – a sacred space where ancient traditions meet modern understanding. Explore Sant Darshan, Mandir Darshan, Bhajan, and community discussions."
+      content="Spiriligious – a sacred space where ancient traditions meet modern understanding."
     />
-
-    <!-- Google Fonts & Icons -->
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2285457582865660"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
       rel="stylesheet"
@@ -21,12 +25,46 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-
-    <!-- Global Styles -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- Page-specific styles -->
     <style>
+      /* ============================================================
+         ROOT – preserved with additions
+         ============================================================ */
+      :root {
+        --primary-green: #234b36;
+        --primary-green-dark: #1a3a2a;
+        --gold: #b9912d;
+        --gold-soft: #d4b06a;
+        --gold-pale: #e8d8b0;
+        --cream: #f8f5ef;
+        --surface: #ffffff;
+        --brown: #2b2b2b;
+        --brown-soft: #5a534c;
+        --brown-light: #8a827a;
+        --gray-50: #f7f4ef;
+        --gray-100: #ede8e0;
+        --gray-200: #dfd8ce;
+        --gray-300: #cbc2b6;
+        --gray-400: #b0a69a;
+        --shadow-soft: 0 8px 30px rgba(47, 43, 39, 0.06);
+        --shadow-medium: 0 12px 40px rgba(47, 43, 39, 0.1);
+        --shadow-heavy: 0 20px 60px rgba(47, 43, 39, 0.15);
+        --shadow-glass: 0 8px 32px rgba(47, 43, 39, 0.12);
+        --radius-lg: 28px;
+        --radius-md: 20px;
+        --radius-sm: 16px;
+        --radius-xs: 12px;
+        --radius-pill: 60px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --font-serif: "Playfair Display", serif;
+        --font-sans: "Inter", "Noto Sans Devanagari", sans-serif;
+        --font-devanagari: "Tiro Devanagari Hindi", serif;
+      }
+
+      /* ============================================================
+         BODY BACKGROUND – temple-bg.jpg with overlay
+         ============================================================ */
       body {
         background: var(--cream);
         background-image: url("images/temple-bg.jpg");
@@ -38,14 +76,16 @@
         padding-top: 70px;
         margin: 0;
       }
+
       .page-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(253, 248, 240, 0.78);
+        background: rgba(248, 245, 239, 0.78);
         backdrop-filter: blur(2px);
         z-index: 0;
         pointer-events: none;
       }
+
       main,
       #header-placeholder,
       #footer-placeholder {
@@ -53,21 +93,419 @@
         z-index: 1;
       }
 
+      .container,
+      .hero,
+      .featured-card,
+      .content-card-unified,
+      .shlok-manuscript,
+      .manthan-grid > *,
+      .coming-card,
+      .premium-footer {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ===== HERO – with mobile crop fix ===== */
+      .hero {
+        position: relative;
+        min-height: 90vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        text-align: center;
+        background: url("images/hero-bg.jpg") center/cover no-repeat fixed;
+        background-size: 115%;
+        padding: 0 0 2rem;
+        margin-top: 0;
+        z-index: 1;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 50% 80%,
+            rgba(185, 145, 45, 0.12) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 30% 70%,
+            rgba(255, 215, 0, 0.06) 0%,
+            transparent 50%
+          ),
+          linear-gradient(
+            135deg,
+            rgba(47, 43, 39, 0.2) 0%,
+            rgba(47, 43, 39, 0.05) 60%,
+            rgba(47, 43, 39, 0.3) 100%
+          );
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(
+          to top,
+          rgba(248, 245, 239, 0.25) 0%,
+          transparent 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, var(--cream), transparent);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding: 0 0 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: 90vh;
+      }
+
+      .hero-nav-spacer {
+        flex: 1;
+        min-height: 5vh;
+        width: 100%;
+      }
+
+      /* ===== LUXURY NAV – with fallback icons ===== */
+      .luxury-nav {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0.2rem 1rem 1.2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .luxury-nav-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 2rem 2.6rem;
+        padding: 0.4rem 0.2rem;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #3d352e;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        gap: 0.35rem;
+        flex: 0 0 auto;
+        width: 72px;
+      }
+      .nav-item:hover {
+        transform: translateY(-4px);
+      }
+
+      .nav-icon-wrap {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(185, 145, 45, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        color: var(--gold);
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 20px rgba(47, 43, 39, 0.04);
+      }
+      .nav-item:hover .nav-icon-wrap {
+        background: rgba(185, 145, 45, 0.12);
+        border-color: var(--gold);
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(185, 145, 45, 0.15);
+      }
+
+      .nav-icon-svg {
+        width: 60px;
+        height: 60px;
+        display: block;
+        object-fit: contain;
+        filter: brightness(20%) saturate(300%) invert(15%) sepia(40%)
+          saturate(347%) hue-rotate(10deg) brightness(88%) contrast(86%)
+          drop-shadow(0 0 10px rgba(255, 215, 0, 0.2));
+        transition:
+          filter 0.4s ease,
+          transform 0.4s ease;
+      }
+      .nav-item:hover .nav-icon-svg {
+        filter: brightness(0) saturate(100%) invert(44%) sepia(45%)
+          saturate(626%) hue-rotate(20deg) brightness(91%) contrast(87%)
+          drop-shadow(0 0 18px rgba(255, 215, 0, 0.35));
+        transform: scale(1.05);
+      }
+
+      .nav-icon-svg {
+        display: none;
+      }
+      .nav-icon-svg.loaded {
+        display: block;
+      }
+      .nav-icon-wrap .fallback-icon {
+        display: flex;
+      }
+      .nav-icon-svg.loaded ~ .fallback-icon {
+        display: none;
+      }
+
+      .nav-title-hindi {
+        font-family: "Tiro Devanagari Hindi", "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #3d352e;
+        letter-spacing: 0.4px;
+        line-height: 1.2;
+        text-align: center;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: block;
+        border-radius: 0;
+        transition: color 0.3s ease;
+      }
+      .nav-item:hover .nav-title-hindi {
+        color: #7a5d2e;
+      }
+
+      @media (max-width: 820px) {
+        .luxury-nav-grid {
+          gap: 1.6rem 1.8rem;
+        }
+        .nav-item {
+          width: 64px;
+        }
+        .nav-icon-wrap {
+          width: 50px;
+          height: 50px;
+          font-size: 1.3rem;
+        }
+        .nav-icon-svg {
+          width: 50px;
+          height: 50px;
+        }
+        .nav-title-hindi {
+          font-size: 0.9rem;
+        }
+        .hero-nav-spacer {
+          min-height: 4vh;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .luxury-nav {
+          padding: 0 0.3rem 0.8rem;
+        }
+        .luxury-nav-grid {
+          gap: 1.2rem 1rem;
+          padding: 0.2rem 0;
+        }
+        .nav-item {
+          flex: 0 0 calc(33.33% - 0.8rem);
+          min-width: 56px;
+          max-width: 80px;
+          width: auto;
+        }
+        .nav-icon-wrap {
+          width: 44px;
+          height: 44px;
+          font-size: 1.1rem;
+        }
+        .nav-icon-svg {
+          width: 44px;
+          height: 44px;
+        }
+        .nav-title-hindi {
+          font-size: 0.75rem;
+        }
+        .hero-nav-spacer {
+          min-height: 2vh;
+        }
+        .hero {
+          min-height: 75vh;
+          background-attachment: scroll;
+          background-size: cover;
+          background-position: center 30%; /* crop to show Radha Krishna */
+          padding-bottom: 0.5rem;
+        }
+        .hero-content {
+          min-height: 65vh;
+        }
+        .hero::after {
+          height: 60px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .luxury-nav-grid {
+          gap: 0.8rem 0.6rem;
+        }
+        .nav-item {
+          flex: 0 0 calc(33.33% - 0.4rem);
+          min-width: 48px;
+        }
+        .nav-icon-wrap {
+          width: 38px;
+          height: 38px;
+          font-size: 0.9rem;
+        }
+        .nav-icon-svg {
+          width: 38px;
+          height: 38px;
+        }
+        .nav-title-hindi {
+          font-size: 0.65rem;
+        }
+        .hero-nav-spacer {
+          min-height: 1.5vh;
+        }
+        .hero {
+          min-height: 70vh;
+          background-position: center 30%;
+        }
+        .hero-content {
+          min-height: 60vh;
+        }
+      }
+
+      /* ===== DAILY SHLOK ===== */
+      .shlok-manuscript {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(185, 145, 45, 0.15);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: var(--shadow-glass);
+        max-width: 800px;
+        margin: 0 auto;
+        min-height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .shlok-text {
+        font-family: var(--font-devanagari);
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--primary-green);
+        white-space: pre-line;
+        line-height: 2;
+        text-align: center;
+        padding: 0 0.5rem;
+      }
+
+      .shlok-line {
+        display: block;
+        line-height: 2;
+        text-align: center;
+        padding: 0 0.5rem;
+      }
+      .shlok-line:not(:last-child) {
+        margin-bottom: 0.2rem;
+      }
+
+      .shlok-meaning {
+        margin-top: 1.2rem;
+        font-size: 1.1rem;
+        color: var(--brown);
+      }
+      .shlok-meaning strong {
+        color: var(--gold);
+        font-weight: 600;
+      }
+      .shlok-source {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--brown-soft);
+        font-style: italic;
+      }
+      .shlok-placeholder {
+        font-size: 1.1rem;
+        color: var(--brown-soft);
+        padding: 1rem 0;
+      }
+      .shlok-fallback {
+        font-family: var(--font-devanagari);
+        font-size: 1.4rem;
+        color: var(--primary-green);
+        line-height: 2;
+      }
+      .shlok-fallback .meaning {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        color: var(--brown-soft);
+        margin-top: 0.8rem;
+      }
+      .shlok-fallback .source {
+        font-size: 0.9rem;
+        color: var(--gold);
+        margin-top: 0.3rem;
+        font-style: italic;
+      }
+
+      /* ============================================================
+         HEADER – preserved
+         ============================================================ */
       .premium-header {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         z-index: 10000 !important;
-        background: #ffffff;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        padding: 0.6rem 0;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 2px 24px rgba(47, 43, 39, 0.04);
+        padding: 0.9rem 0;
         transition:
           transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-          box-shadow 0.3s ease;
+          background 0.4s ease,
+          box-shadow 0.4s ease;
       }
       .premium-header.hidden {
         transform: translateY(-100%);
+      }
+      .premium-header.scrolled {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 32px rgba(47, 43, 39, 0.08);
       }
       .premium-header .container {
         display: flex;
@@ -77,48 +515,56 @@
         margin: 0 auto;
         padding: 0 2rem;
       }
+
       .logo-link {
         display: flex;
         align-items: center;
         gap: 0.6rem;
         text-decoration: none;
         flex-shrink: 0;
+        transition: transform 0.25s ease;
+      }
+      .logo-link:hover {
+        transform: scale(1.02);
       }
       .logo-image {
-        height: 44px;
+        height: 40px;
         width: auto;
         display: block;
+        object-fit: contain;
       }
       .logo-text-inline {
-        font-family: "Playfair Display", serif;
-        font-size: 1.4rem;
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
         font-weight: 700;
         color: var(--primary-green);
         letter-spacing: -0.02em;
         white-space: nowrap;
       }
+
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 2.4rem;
+        margin: 0 2rem;
       }
       .nav-link {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 500;
         color: var(--brown-soft);
         text-decoration: none;
         padding: 0.4rem 0.2rem;
         position: relative;
-        transition:
-          color 0.25s ease,
-          transform 0.2s ease;
         display: flex;
         align-items: center;
         gap: 0.4rem;
         white-space: nowrap;
+        transition:
+          color 0.25s ease,
+          transform 0.2s ease;
       }
       .nav-link i {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         color: var(--gold);
         opacity: 0.5;
         transition:
@@ -160,18 +606,15 @@
       .mobile-menu-btn {
         display: none;
         background: transparent;
-        border: 1px solid rgba(201, 168, 76, 0.2);
-        border-radius: var(--radius-xs);
+        border: 1px solid rgba(185, 145, 45, 0.2);
+        border-radius: 8px;
         padding: 0.5rem 0.6rem;
         cursor: pointer;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        width: 46px;
-        height: 46px;
-        transition: var(--transition);
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(4px);
+        width: 44px;
+        height: 44px;
         gap: 4px;
       }
       .mobile-menu-btn:hover {
@@ -180,7 +623,7 @@
       }
       .mobile-menu-btn .pill {
         display: block;
-        width: 24px;
+        width: 22px;
         height: 3px;
         background: var(--gold);
         border-radius: 3px;
@@ -197,37 +640,18 @@
       .mobile-menu-btn.active .pill:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
       }
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-        }
-        .mobile-menu-btn {
-          display: flex;
-        }
-        .logo-image {
-          height: 36px;
-        }
-        .logo-text-inline {
-          font-size: 1.2rem;
-        }
-        .premium-header .container {
-          padding: 0 1.2rem;
-        }
-      }
 
+      /* Mobile Drawer */
       .mobile-drawer-overlay {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(47, 43, 39, 0.3);
         backdrop-filter: blur(4px);
         z-index: 999998;
-        opacity: 0;
-        transition: opacity 0.4s ease;
       }
       .mobile-drawer-overlay.active {
         display: block;
-        opacity: 1;
       }
       .mobile-drawer {
         position: fixed;
@@ -238,7 +662,7 @@
         height: 100%;
         background: rgba(255, 255, 255, 0.96);
         backdrop-filter: blur(24px);
-        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.08);
+        box-shadow: -8px 0 40px rgba(47, 43, 39, 0.08);
         z-index: 999999;
         transition: right 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         padding: 2rem 1.8rem;
@@ -265,13 +689,13 @@
         width: auto;
       }
       .drawer-logo-text {
-        font-family: "Playfair Display", serif;
+        font-family: var(--font-serif);
         font-size: 1.3rem;
         font-weight: 700;
         color: var(--primary-green);
       }
       .drawer-tagline {
-        font-family: "Tiro Devanagari Hindi", serif;
+        font-family: var(--font-devanagari);
         font-size: 0.9rem;
         color: var(--gold);
         letter-spacing: 1.5px;
@@ -319,6 +743,9 @@
         align-items: center;
         gap: 0.8rem;
         transition: var(--transition);
+        opacity: 0;
+        transform: translateX(20px);
+        animation: drawerLinkIn 0.4s ease forwards;
       }
       .drawer-link i {
         width: 24px;
@@ -327,111 +754,1832 @@
         text-align: center;
       }
       .drawer-link:hover {
-        background: rgba(201, 168, 76, 0.08);
+        background: rgba(185, 145, 45, 0.08);
         transform: translateX(4px);
         color: var(--primary-green);
       }
       .drawer-link.active {
-        background: rgba(201, 168, 76, 0.1);
+        background: rgba(185, 145, 45, 0.1);
         color: var(--primary-green);
         font-weight: 600;
         border-left: 3px solid var(--gold);
       }
+      @keyframes drawerLinkIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
 
-      .hero {
-        position: relative;
-        min-height: 70vh;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
+      /* ============================================================
+         SECTION HEADERS
+         ============================================================ */
+      .section-header-custom {
         text-align: center;
-        background: url("images/hero-bg.jpg") center/cover no-repeat fixed;
-        padding: 0 0 2rem;
-        margin-top: 0;
-        z-index: 1;
+        margin-bottom: 2.5rem;
       }
-      .hero-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 0, 0, 0.25) 0%,
-          rgba(0, 0, 0, 0.1) 60%,
-          rgba(0, 0, 0, 0.4) 100%
-        );
-        z-index: 1;
+      .section-header-custom h2 {
+        font-family: var(--font-serif);
+        font-size: 2.4rem;
+        color: var(--brown);
+        margin: 0.5rem 0 0.2rem;
       }
-      .hero::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
+      .section-header-custom .sub {
+        color: var(--brown-soft);
+        font-size: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* ============================================================
+         UNIFIED FEATURED CARD
+         ============================================================ */
+      .featured-card {
+        display: grid;
+        grid-template-columns: 42% 1fr;
+        gap: 0;
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        margin-bottom: 2.5rem;
+        cursor: pointer;
+      }
+      .featured-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.15);
+      }
+      .featured-card .featured-image {
+        position: relative;
+        overflow: hidden;
+        min-height: 320px;
+        background: var(--gray-200);
+      }
+      .featured-card .featured-image img {
         width: 100%;
-        height: 100px;
-        background: linear-gradient(to top, var(--cream), transparent);
-        z-index: 1;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .featured-card:hover .featured-image img {
+        transform: scale(1.03);
+      }
+      .featured-card .featured-image .featured-badge {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 0.3rem 1rem;
+        border-radius: var(--radius-pill);
+      }
+      .featured-card .featured-content {
+        padding: 2.5rem 2.8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.6rem;
+      }
+      .featured-card .featured-content .category-tag {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: inline-block;
+        padding: 0.15rem 0.8rem;
+        border-radius: var(--radius-pill);
+        background: rgba(185, 145, 45, 0.08);
+        width: fit-content;
+        border: 1px solid rgba(185, 145, 45, 0.1);
+      }
+      .featured-card .featured-content h3 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        color: var(--brown);
+        line-height: 1.2;
+        margin: 0.2rem 0;
+      }
+      .featured-card .featured-content .featured-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+      }
+      .featured-card .featured-content .featured-meta i {
+        color: var(--gold);
+        margin-right: 0.3rem;
+        width: 1.1rem;
+      }
+      .featured-card .featured-content .featured-divider {
+        width: 40px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: 0.3rem 0 0.5rem;
+        opacity: 0.4;
+      }
+      .featured-card .featured-content .featured-desc {
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        max-width: 95%;
+      }
+      .featured-card .featured-content .featured-actions {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 0.4rem;
+        flex-wrap: wrap;
+      }
+      .featured-card .featured-content .btn-primary-featured {
+        background: var(--primary-green);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 1.8rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .featured-card .featured-content .btn-primary-featured:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(35, 75, 54, 0.25);
+      }
+      .featured-card .featured-content .btn-primary-featured i {
+        transition: transform 0.25s ease;
+      }
+      .featured-card .featured-content .btn-primary-featured:hover i {
+        transform: translateX(4px);
+      }
+
+      /* ============================================================
+         UNIFIED CONTENT CARD
+         ============================================================ */
+      .unified-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.8rem;
+      }
+      .unified-grid-2col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .content-card-unified {
+        background: var(--surface);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+        border: 1px solid rgba(185, 145, 45, 0.05);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .content-card-unified:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.2);
+      }
+      .content-card-unified .card-image-wrap {
+        position: relative;
+        overflow: hidden;
+        background: var(--gray-100);
+        aspect-ratio: 16/10;
+      }
+      .content-card-unified .card-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .content-card-unified:hover .card-image-wrap img {
+        transform: scale(1.05);
+      }
+      .content-card-unified .card-image-wrap .card-badge {
+        position: absolute;
+        top: 0.8rem;
+        left: 0.8rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.55rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 0.2rem 0.8rem;
+        border-radius: var(--radius-pill);
+      }
+      .content-card-unified .card-body {
+        padding: 1.4rem 1.6rem 1.6rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.4rem;
+      }
+      .content-card-unified .card-body .card-title {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--brown);
+        line-height: 1.3;
+        margin: 0;
+      }
+      .content-card-unified .card-body .card-desc {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        line-height: 1.5;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .content-card-unified .card-body .card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        font-size: 0.75rem;
+        color: var(--brown-light);
+        margin-top: 0.2rem;
+      }
+      .content-card-unified .card-body .card-meta i {
+        margin-right: 0.2rem;
+        color: var(--gold);
+      }
+      .content-card-unified .card-body .card-action {
+        margin-top: 0.6rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--primary-green);
+        transition: var(--transition);
+        width: fit-content;
+      }
+      .content-card-unified .card-body .card-action i {
+        transition: transform 0.25s ease;
+      }
+      .content-card-unified:hover .card-body .card-action i {
+        transform: translateX(4px);
+      }
+      .content-card-unified .card-body * {
         pointer-events: none;
       }
-      .hero-content {
-        position: relative;
-        z-index: 2;
+
+      /* ============================================================
+         MANTHAN FORUM
+         ============================================================ */
+      .manthan-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+      }
+      .discussions,
+      .create-discussion {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(185, 145, 45, 0.08);
+        border-radius: var(--radius-md);
+        padding: 1.8rem;
+        box-shadow: var(--shadow-soft);
+      }
+      .discussions h3,
+      .create-discussion h3 {
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
+        color: var(--brown);
+        margin-bottom: 1rem;
+      }
+      .manthan-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+      }
+      .manthan-tabs button {
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(185, 145, 45, 0.08);
+        padding: 0.3rem 1rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        color: var(--brown-soft);
+      }
+      .manthan-tabs button.active {
+        background: var(--gold);
+        color: #fff;
+        border-color: var(--gold);
+      }
+      .manthan-tabs button:hover {
+        background: var(--gold-soft);
+        color: #fff;
+      }
+      .discussion-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .discussion-item {
+        padding: 1rem;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.3);
+        border-left: 3px solid var(--gold);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .discussion-item:hover {
+        background: rgba(255, 255, 255, 0.6);
+        transform: translateX(4px);
+      }
+      .discussion-item h4 {
+        font-size: 1rem;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
+      }
+      .discussion-item p {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        margin-bottom: 0.3rem;
+      }
+      .discussion-meta {
+        font-size: 0.75rem;
+        color: var(--brown-soft);
+        display: flex;
+        gap: 1rem;
+      }
+      .discussion-meta i {
+        margin-right: 0.2rem;
+        color: var(--gold);
+      }
+      .discuss-form .form-group {
+        margin-bottom: 0.8rem;
+      }
+      .discuss-form input,
+      .discuss-form textarea {
         width: 100%;
-        padding: 0 0 0.5rem;
+        padding: 0.7rem 1rem;
+        border: 1px solid rgba(185, 145, 45, 0.15);
+        border-radius: var(--radius-sm);
+        font-size: 0.95rem;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        transition: var(--transition);
+        color: var(--brown);
+        font-family: var(--font-sans);
+      }
+      .discuss-form input:focus,
+      .discuss-form textarea:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(185, 145, 45, 0.1);
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .btn-gold:hover {
+        background: #a07a26;
+        transform: scale(1.02);
+      }
+
+      /* ============================================================
+         COMING SOON
+         ============================================================ */
+      .coming-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+      .coming-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(185, 145, 45, 0.08);
+        border-radius: var(--radius-md);
+        padding: 2rem 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow-soft);
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+        cursor: default;
+      }
+      .coming-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.2);
+      }
+      .coming-card i {
+        font-size: 2.5rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+      .coming-card h4 {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        color: var(--brown);
+        margin-bottom: 0.5rem;
+      }
+      .coming-card p {
+        color: var(--brown-soft);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .coming-badge {
+        display: inline-block;
+        background: rgba(185, 145, 45, 0.12);
+        padding: 0.2rem 1rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* ============================================================
+         MODALS
+         ============================================================ */
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(47, 43, 39, 0.7);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        justify-content: center;
+        z-index: 10001;
+      }
+      .modal-card {
+        background: #fff;
+        width: 90%;
+        max-width: 500px;
+        border-radius: var(--radius-md);
+        padding: 2rem;
+        text-align: center;
+      }
+      .modal-card h3 {
+        color: var(--primary-green);
+        margin-bottom: 0.8rem;
+      }
+      .close-modal {
+        background: var(--gray-200);
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: var(--radius-pill);
+        margin-top: 1rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      /* ============================================================
+         DETAIL MODAL – with print optimizations
+         ============================================================ */
+      .detail-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10001;
+        background: rgba(43, 43, 43, 0.55);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        animation: modalFadeIn 0.35s ease;
+      }
+      @keyframes modalFadeIn {
+        0% {
+          opacity: 0;
+          backdrop-filter: blur(0px);
+        }
+        100% {
+          opacity: 1;
+          backdrop-filter: blur(6px);
+        }
+      }
+      .detail-modal-content {
+        background: #ffffff;
+        width: 100%;
+        max-width: 1400px;
+        max-height: 90vh;
+        border-radius: var(--radius-lg);
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        box-shadow:
+          0 30px 80px rgba(43, 43, 43, 0.2),
+          0 10px 30px rgba(43, 43, 43, 0.08);
+        animation: modalContentIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        scroll-behavior: smooth;
+      }
+      @keyframes modalContentIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.96) translateY(24px);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .detail-modal-content::-webkit-scrollbar {
+        width: 6px;
+      }
+      .detail-modal-content::-webkit-scrollbar-track {
+        background: var(--gray-50);
+        border-radius: 6px;
+      }
+      .detail-modal-content::-webkit-scrollbar-thumb {
+        background: var(--gold-soft);
+        border-radius: 6px;
+      }
+
+      .detail-close {
+        position: sticky;
+        top: 1.2rem;
+        right: 1.2rem;
+        float: right;
+        z-index: 20;
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 16px rgba(43, 43, 43, 0.06);
+        color: var(--brown-soft);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        margin: 0 1.2rem 0 0;
+      }
+      .detail-close:hover {
+        background: var(--primary-green);
+        color: #fff;
+        transform: rotate(90deg) scale(1.04);
+        box-shadow: 0 6px 24px rgba(35, 75, 54, 0.2);
+      }
+
+      .detail-modal-inner {
+        padding: 0 2.8rem 2.8rem 2.8rem;
+      }
+
+      .detail-hero-grid {
+        display: grid;
+        grid-template-columns: 42% 1fr;
+        gap: 2.4rem;
+        margin-bottom: 2.8rem;
+        padding-top: 1.2rem;
+      }
+      .detail-hero-image-wrap {
+        position: relative;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background: var(--gray-100);
+        aspect-ratio: 4/3;
+        box-shadow: 0 8px 32px rgba(43, 43, 43, 0.06);
+      }
+      .detail-hero-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s ease;
+      }
+      .detail-hero-image-wrap:hover img {
+        transform: scale(1.02);
+      }
+
+      .detail-quote-icon {
+        position: absolute;
+        bottom: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        box-shadow: 0 6px 24px rgba(185, 145, 45, 0.3);
+        border: 3px solid #fff;
+        transition: var(--transition);
+        z-index: 2;
+      }
+      .detail-hero-image-wrap:hover .detail-quote-icon {
+        transform: translateX(-50%) scale(1.06);
+        box-shadow: 0 8px 32px rgba(185, 145, 45, 0.4);
+      }
+
+      .detail-hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 0.4rem 0;
+      }
+      .detail-category-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(185, 145, 45, 0.08);
+        border: 1px solid rgba(185, 145, 45, 0.15);
+        padding: 0.2rem 1rem 0.2rem 0.8rem;
+        border-radius: var(--radius-pill);
+        width: fit-content;
+      }
+      .detail-category-pill i {
+        font-size: 0.75rem;
+        color: var(--gold);
+      }
+      .detail-title {
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--brown);
+        line-height: 1.2;
+        margin: 0.1rem 0 0.2rem;
+        max-width: 95%;
+      }
+      .detail-title .hindi-title {
+        font-family: var(--font-devanagari);
+        font-weight: 600;
+      }
+      .detail-divider-lotus {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 0.2rem 0 0.5rem;
+        width: 100%;
+        max-width: 280px;
+      }
+      .detail-divider-lotus .divider-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          var(--gold),
+          rgba(185, 145, 45, 0.2)
+        );
+      }
+      .detail-divider-lotus .divider-line:last-child {
+        background: linear-gradient(
+          to left,
+          var(--gold),
+          rgba(185, 145, 45, 0.2)
+        );
+      }
+      .detail-divider-lotus i {
+        color: var(--gold);
+        font-size: 0.9rem;
+        opacity: 0.6;
+      }
+      .detail-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem 1.8rem;
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        margin: 0.2rem 0 0.3rem;
+      }
+      .detail-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .detail-meta i {
+        color: var(--gold);
+        font-size: 0.8rem;
+        width: 1.1rem;
+        text-align: center;
+      }
+      .detail-excerpt {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--brown-soft);
+        max-width: 95%;
+        margin: 0.2rem 0 0.6rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .detail-actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.2rem;
+        margin: 0.4rem 0 0.2rem;
+      }
+      .detail-cta-primary {
+        background: var(--primary-green);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 2rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: var(--transition);
+        font-family: var(--font-sans);
+        letter-spacing: 0.2px;
+      }
+      .detail-cta-primary:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(35, 75, 54, 0.25);
+      }
+      .detail-cta-primary i {
+        transition: transform 0.25s ease;
+      }
+      .detail-cta-primary:hover i {
+        transform: translateX(4px);
+      }
+      .detail-actions-secondary {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .detail-actions-secondary button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(185, 145, 45, 0.12);
+        background: var(--gray-50);
+        color: var(--brown-soft);
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+      .detail-actions-secondary button:hover {
+        background: var(--gold);
+        color: #fff;
+        border-color: var(--gold);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(185, 145, 45, 0.2);
+      }
+
+      /* Audio player */
+      .detail-audio-player {
+        display: none;
+        margin: 0.8rem 0 1.2rem;
+        padding: 1rem 1.5rem;
+        background: rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(185, 145, 45, 0.12);
+        align-items: center;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .detail-audio-player.active {
+        display: flex;
+      }
+      .detail-audio-player .audio-icon {
+        font-size: 1.8rem;
+        color: var(--gold);
+      }
+      .detail-audio-player audio {
+        flex: 1;
+        min-width: 200px;
+        height: 44px;
+        border-radius: var(--radius-pill);
+        background: transparent;
+      }
+      .detail-audio-player audio::-webkit-media-controls-panel {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: var(--radius-pill);
+      }
+
+      .detail-body-grid {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 2.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(185, 145, 45, 0.08);
+      }
+      .detail-body-text {
+        font-size: 1.05rem;
+        line-height: 1.9;
+        color: var(--brown);
+        text-align: justify;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .detail-body-text p {
+        margin-bottom: 1.2rem;
+        text-align: justify;
+      }
+      .detail-body-text .dropcap::first-letter {
+        font-family: var(--font-serif);
+        font-size: 3.8rem;
+        float: left;
+        line-height: 0.9;
+        margin-right: 0.5rem;
+        color: var(--primary-green);
+        font-weight: 700;
+        margin-top: 0.05rem;
+      }
+      .detail-body-text h3 {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--primary-green);
+        margin: 1.8rem 0 0.6rem;
+        font-weight: 600;
+        text-align: left;
+      }
+      .detail-body-text h4 {
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        color: var(--brown);
+        margin: 1.2rem 0 0.4rem;
+        font-weight: 600;
+        text-align: left;
+      }
+      .detail-body-text blockquote {
+        border-left: 4px solid var(--gold);
+        padding-left: 1.5rem;
+        margin: 1.5rem 0;
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        color: var(--brown-soft);
+        font-style: italic;
+        text-align: left;
+      }
+      .detail-body-text ul,
+      .detail-body-text ol {
+        padding-left: 1.5rem;
+        margin: 0.6rem 0 1.2rem;
+        text-align: left;
+      }
+      .detail-body-text ul li,
+      .detail-body-text ol li {
+        margin-bottom: 0.4rem;
+        line-height: 1.8;
+      }
+
+      .detail-sidebar {
+        position: sticky;
+        top: 2rem;
+        align-self: start;
+      }
+      .detail-sidebar-card {
+        background: var(--gray-50);
+        border-radius: var(--radius-md);
+        padding: 1.8rem 1.6rem;
+        border: 1px solid rgba(185, 145, 45, 0.08);
+        box-shadow: 0 4px 20px rgba(43, 43, 43, 0.03);
+      }
+      .detail-sidebar-card h4 {
+        font-family: var(--font-devanagari);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-green);
+        margin: 0 0 1.2rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+      .detail-sidebar-card h4 i {
+        color: var(--gold);
+        font-size: 1rem;
+      }
+      .detail-sidebar-card .sidebar-item {
+        display: flex;
+        gap: 0.8rem;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid rgba(185, 145, 45, 0.06);
+      }
+      .detail-sidebar-card .sidebar-item:last-child {
+        border-bottom: none;
+      }
+      .detail-sidebar-card .sidebar-item .bullet {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(185, 145, 45, 0.12);
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+        margin-top: 0.05rem;
+      }
+      .detail-sidebar-card .sidebar-item .item-content {
+        flex: 1;
+      }
+      .detail-sidebar-card .sidebar-item .item-content .item-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--brown);
+      }
+      .detail-sidebar-card .sidebar-item .item-content .item-desc {
+        font-size: 0.8rem;
+        color: var(--brown-soft);
+        line-height: 1.4;
+        margin-top: 0.05rem;
+      }
+
+      .detail-share-print {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(185, 145, 45, 0.08);
+        flex-wrap: wrap;
+      }
+      .detail-share-print button {
+        background: var(--gray-100);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 0.9rem;
+      }
+      .detail-share-print button:hover {
+        background: var(--gold);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+      .detail-share-print .print-btn {
+        border-radius: var(--radius-pill);
+        padding: 0 1.2rem;
+        width: auto;
+        gap: 0.5rem;
+      }
+
+      /* ============================================================
+         PRINT STYLES – only article with Spiriligious branding
+         ============================================================ */
+      @media print {
+        body {
+          background: #fff !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .page-overlay,
+        .premium-header,
+        .hero,
+        .lotus-divider,
+        .mobile-menu-btn,
+        .detail-close,
+        .detail-actions-row,
+        .detail-share-print,
+        .detail-actions-secondary,
+        .nav-links,
+        .mobile-drawer-overlay,
+        .mobile-drawer,
+        .footer-placeholder,
+        .coming-grid,
+        #footer-placeholder,
+        .shlok-section,
+        #sant-section,
+        #mandir-section,
+        #bhajan-section,
+        #science-section,
+        #manthan-section,
+        .premium-footer,
+        .detail-sidebar,
+        .detail-quote-icon,
+        .detail-audio-player,
+        .detail-modal::before,
+        .detail-modal::after {
+          display: none !important;
+        }
+
+        .detail-modal {
+          display: block !important;
+          position: static !important;
+          background: #fff !important;
+          backdrop-filter: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          animation: none !important;
+          border: none !important;
+          box-shadow: none !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+
+        .detail-modal-content {
+          display: block !important;
+          max-height: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          animation: none !important;
+          overflow: visible !important;
+          background: #fff !important;
+        }
+
+        .detail-modal-inner {
+          padding: 0.5in 0.3in !important;
+          max-width: 100% !important;
+        }
+
+        .detail-hero-grid {
+          display: block !important;
+          margin-bottom: 1.5rem !important;
+        }
+
+        .detail-hero-image-wrap {
+          max-height: 300px !important;
+          margin-bottom: 1.2rem !important;
+          border-radius: 8px !important;
+          box-shadow: none !important;
+          aspect-ratio: 16/9 !important;
+        }
+        .detail-hero-image-wrap img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+        }
+
+        .detail-hero-content {
+          padding: 0 !important;
+        }
+
+        .detail-title {
+          font-size: 28pt !important;
+          line-height: 1.2 !important;
+          max-width: 100% !important;
+          color: #1a1a1a !important;
+        }
+
+        .detail-divider-lotus {
+          max-width: 200px !important;
+          margin: 0.5rem 0 !important;
+        }
+        .detail-divider-lotus .divider-line {
+          background: var(--gold) !important;
+        }
+        .detail-divider-lotus i {
+          color: var(--gold) !important;
+        }
+
+        .detail-meta {
+          font-size: 11pt !important;
+          color: #555 !important;
+        }
+
+        .detail-excerpt {
+          font-size: 12pt !important;
+          -webkit-line-clamp: unset !important;
+          max-width: 100% !important;
+          color: #333 !important;
+        }
+
+        .detail-body-grid {
+          display: block !important;
+          border-top: 2px solid #e8dcc5 !important;
+          padding-top: 1.5rem !important;
+        }
+
+        .detail-body-text {
+          font-size: 11pt !important;
+          line-height: 1.8 !important;
+          color: #1a1a1a !important;
+          text-align: justify !important;
+        }
+
+        .detail-body-text p {
+          text-align: justify !important;
+        }
+
+        .detail-body-text .dropcap::first-letter {
+          font-size: 36pt !important;
+          color: var(--primary-green) !important;
+        }
+
+        .detail-body-text h3 {
+          font-size: 18pt !important;
+          color: var(--primary-green) !important;
+        }
+        .detail-body-text h4 {
+          font-size: 14pt !important;
+        }
+
+        .detail-body-text blockquote {
+          border-left-width: 3px !important;
+          padding-left: 1rem !important;
+          font-size: 12pt !important;
+        }
+
+        /* Print header with Spiriligious branding */
+        .detail-modal-inner::before {
+          content: "Spiriligious · ज्ञान · अध्यात्म · विज्ञान";
+          display: block;
+          font-family: "Playfair Display", serif;
+          font-size: 16pt;
+          font-weight: 700;
+          color: var(--primary-green);
+          text-align: center;
+          padding-bottom: 0.8rem;
+          margin-bottom: 1.2rem;
+          border-bottom: 2px solid var(--gold);
+          letter-spacing: 1px;
+        }
+
+        /* Print footer */
+        .detail-modal-inner::after {
+          content: "© Spiriligious · " attr(data-print-date);
+          display: block;
+          font-family: "Inter", sans-serif;
+          font-size: 9pt;
+          color: #999;
+          text-align: center;
+          padding-top: 1.5rem;
+          margin-top: 2rem;
+          border-top: 1px solid #e0e0e0;
+          letter-spacing: 0.5px;
+        }
+
+        .detail-sidebar {
+          display: none !important;
+        }
+
+        .detail-hero-image-wrap img {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+
+      /* ============================================================
+         RESPONSIVE
+         ============================================================ */
+      @media (max-width: 1024px) {
+        .container {
+          padding: 0 1.5rem;
+        }
+        .detail-hero-grid {
+          grid-template-columns: 1fr;
+          gap: 1.6rem;
+        }
+        .detail-hero-image-wrap {
+          aspect-ratio: 16/9;
+          max-height: 340px;
+        }
+        .detail-hero-content {
+          padding: 0;
+        }
+        .detail-body-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .detail-sidebar {
+          position: static;
+        }
+        .detail-modal-inner {
+          padding: 0 1.8rem 2rem 1.8rem;
+        }
+        .detail-title {
+          font-size: 1.8rem;
+        }
+        .detail-close {
+          top: 0.8rem;
+          right: 0.8rem;
+        }
+        .coming-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .manthan-grid {
+          grid-template-columns: 1fr;
+        }
+        .featured-card {
+          grid-template-columns: 1fr;
+        }
+        .featured-card .featured-image {
+          min-height: 260px;
+        }
+        .featured-card .featured-content {
+          padding: 2rem;
+        }
+        .featured-card .featured-content .featured-desc {
+          max-width: 100%;
+        }
+        .unified-grid-2col {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem 2.5rem;
+        }
+        .footer-brand {
+          grid-column: 1 / -1;
+        }
+        .footer-brand .brand-description {
+          max-width: 100%;
+          text-align: center;
+        }
+        .footer-contact-col {
+          grid-column: 1 / -1;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding-top: 60px;
+        }
+        .container {
+          padding: 0 1.2rem;
+        }
+        .section-header-custom h2 {
+          font-size: 1.8rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .mobile-menu-btn {
+          display: flex;
+        }
+        .logo-image {
+          height: 34px;
+        }
+        .logo-text-inline {
+          font-size: 1.1rem;
+        }
+        .premium-header .container {
+          padding: 0 1.2rem;
+        }
+        .featured-card .featured-content {
+          padding: 1.5rem;
+        }
+        .featured-card .featured-content h3 {
+          font-size: 1.4rem;
+        }
+        .featured-card .featured-content .featured-desc {
+          font-size: 0.88rem;
+        }
+        .featured-card .featured-content .featured-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .featured-card .featured-content .featured-actions button {
+          justify-content: center;
+        }
+        .unified-grid {
+          grid-template-columns: 1fr;
+        }
+        .unified-grid-2col {
+          grid-template-columns: 1fr;
+        }
+        .coming-grid {
+          grid-template-columns: 1fr;
+        }
+        .shlok-manuscript {
+          padding: 1.5rem;
+          min-height: 140px;
+        }
+        .shlok-text {
+          font-size: 1.3rem;
+        }
+        .shlok-fallback {
+          font-size: 1.1rem;
+        }
+
+        .detail-modal {
+          padding: 0;
+          align-items: flex-end;
+        }
+        .detail-modal-content {
+          max-height: 98vh;
+          border-radius: var(--radius-md) var(--radius-md) 0 0;
+          animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes modalSlideUp {
+          0% {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .detail-modal-inner {
+          padding: 0 1.2rem 1.6rem 1.2rem;
+        }
+        .detail-hero-image-wrap {
+          aspect-ratio: 16/10;
+          max-height: 260px;
+        }
+        .detail-quote-icon {
+          width: 44px;
+          height: 44px;
+          font-size: 1rem;
+          bottom: -14px;
+        }
+        .detail-title {
+          font-size: 1.4rem;
+        }
+        .detail-meta {
+          font-size: 0.78rem;
+          gap: 0.6rem 1rem;
+        }
+        .detail-excerpt {
+          font-size: 0.92rem;
+          -webkit-line-clamp: 3;
+        }
+        .detail-actions-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .detail-cta-primary {
+          justify-content: center;
+          padding: 0.7rem 1.5rem;
+        }
+        .detail-actions-secondary {
+          justify-content: center;
+        }
+        .detail-body-text {
+          font-size: 0.96rem;
+        }
+        .detail-body-text .dropcap::first-letter {
+          font-size: 2.8rem;
+        }
+        .detail-sidebar-card {
+          padding: 1.2rem 1rem;
+        }
+        .detail-close {
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
+          top: 0.6rem;
+          right: 0.6rem;
+          margin: 0;
+        }
+        .detail-divider-lotus {
+          max-width: 100%;
+        }
+        .detail-audio-player {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .detail-audio-player audio {
+          width: 100%;
+        }
+
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-brand {
+          text-align: center;
+          align-items: center;
+        }
+        .footer-brand .brand-logo {
+          justify-content: center;
+        }
+        .footer-brand .brand-description {
+          text-align: center;
+        }
+        .footer-col {
+          text-align: center;
+        }
+        .footer-col h4::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .footer-col ul {
+          align-items: center;
+        }
+        .footer-col ul li a {
+          justify-content: center;
+        }
+        .footer-social-col ul.social-links-list li a {
+          justify-content: center;
+        }
+        .footer-contact-col {
+          max-width: 100%;
+        }
+
+        /* Print styles for mobile */
+        @media print {
+          .detail-modal-inner {
+            padding: 0.2in !important;
+          }
+          .detail-title {
+            font-size: 20pt !important;
+          }
+          .detail-hero-image-wrap {
+            max-height: 200px !important;
+          }
+        }
+      }
+
+      @media (max-width: 480px) {
+        .detail-modal-content {
+          border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        }
+        .detail-modal-inner {
+          padding: 0 0.8rem 1.2rem 0.8rem;
+        }
+        .detail-hero-image-wrap {
+          aspect-ratio: 4/3;
+          max-height: 200px;
+        }
+        .detail-title {
+          font-size: 1.2rem;
+        }
+        .detail-category-pill {
+          font-size: 0.6rem;
+          padding: 0.15rem 0.8rem 0.15rem 0.6rem;
+        }
+        .detail-excerpt {
+          font-size: 0.85rem;
+          -webkit-line-clamp: 2;
+        }
+        .detail-body-text {
+          font-size: 0.9rem;
+          line-height: 1.8;
+        }
+        .detail-body-text h3 {
+          font-size: 1.2rem;
+        }
+        .detail-cta-primary {
+          font-size: 0.8rem;
+          padding: 0.6rem 1.2rem;
+        }
+        .detail-actions-secondary button {
+          width: 36px;
+          height: 36px;
+          font-size: 0.75rem;
+        }
+        .detail-quote-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 0.8rem;
+          bottom: -12px;
+        }
+        .shlok-text {
+          font-size: 1.1rem;
+        }
+        .shlok-fallback {
+          font-size: 1rem;
+        }
+        .shlok-fallback .meaning {
+          font-size: 0.85rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+          transform: none !important;
+        }
+        .premium-header.hidden {
+          transform: none !important;
+        }
+        .detail-modal,
+        .detail-modal-content,
+        .detail-close,
+        .detail-hero-image-wrap img,
+        .detail-cta-primary,
+        .detail-actions-secondary button,
+        .featured-card,
+        .content-card-unified {
+          transition: none !important;
+          animation: none !important;
+          transform: none !important;
+        }
+        .detail-modal-content {
+          animation: none !important;
+        }
+        .featured-card:hover .featured-image img,
+        .content-card-unified:hover .card-image-wrap img {
+          transform: none !important;
+        }
+      }
+
+      /* ============================================================
+         FOOTER
+         ============================================================ */
+      .premium-footer {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(185, 145, 45, 0.12);
+        padding: 4rem 0 0;
+        margin-top: 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .premium-footer .container {
+        max-width: 1480px;
+        position: relative;
+        z-index: 1;
+      }
+      .footer-main {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+        gap: 2.5rem;
+        padding-bottom: 2rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-brand .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .footer-logo-image {
+        height: 38px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
+      .footer-brand .logo-text {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+      }
+      .footer-brand .brand-tagline {
+        font-family: var(--font-devanagari);
+        font-size: 1rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+        opacity: 0.8;
+        margin-top: -0.2rem;
+      }
+      .footer-brand .brand-description {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: var(--brown-soft);
+        max-width: 320px;
+        margin: 0.2rem 0 0.4rem;
+        text-align: justify;
+      }
+      .footer-brand .brand-lotus {
+        color: var(--gold);
+        font-size: 1.2rem;
+        opacity: 0.4;
+        margin-top: 0.2rem;
+      }
+      .footer-col h4 {
+        font-family: var(--font-serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--brown);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+      .footer-col h4::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 28px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+      }
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .footer-col ul li a {
+        font-size: 0.9rem;
+        color: var(--brown-soft);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .footer-col ul li a i {
+        width: 18px;
+        font-size: 0.8rem;
+        color: var(--gold);
+        transition: transform 0.25s ease;
+      }
+      .footer-col ul li a:hover {
+        color: var(--primary-green);
+        transform: translateX(4px);
+      }
+      .footer-col ul li a:hover i {
+        transform: scale(1.15);
+      }
+      .footer-social-col ul.social-links-list li a {
+        gap: 0.7rem;
+      }
+      .footer-social-col ul.social-links-list li a i {
+        width: 20px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      .footer-social-col ul.social-links-list li a:hover {
+        color: var(--gold);
+      }
+      .footer-social-col ul.social-links-list li a:hover i {
+        color: var(--gold);
+      }
+      .footer-contact-col {
+        display: flex;
+        align-items: stretch;
+      }
+      .footer-contact-card {
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(185, 145, 45, 0.12);
+        border-radius: var(--radius-md);
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        width: 100%;
+        transition: var(--transition);
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
-        min-height: 60vh;
-      }
-      .icon-grid {
-        display: flex;
-        flex-wrap: wrap;
         justify-content: center;
-        gap: 1.8rem;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
-        padding: 1.2rem 1.8rem;
-        border-radius: var(--radius-pill);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        min-height: 140px;
       }
-      .icon-item {
-        text-align: center;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        color: #fff;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      .footer-contact-card:hover {
+        border-color: rgba(185, 145, 45, 0.25);
+        box-shadow: var(--shadow-soft);
+        transform: translateY(-2px);
       }
-      .icon-item i {
+      .footer-contact-card .contact-icon {
         font-size: 1.6rem;
-        width: 56px;
-        height: 56px;
-        line-height: 56px;
-        background: rgba(255, 255, 255, 0.12);
-        border-radius: 50%;
-        backdrop-filter: blur(4px);
-        transition: var(--transition);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--gold);
+        margin-bottom: 0.2rem;
       }
-      .icon-item:hover {
-        transform: translateY(-4px);
+      .footer-contact-card h4 {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
       }
-      .icon-item:hover i {
-        background: rgba(255, 255, 255, 0.25);
-        border-color: #fff;
-        color: #ffd700;
-      }
-      .icon-item span {
-        display: block;
-        margin-top: 0.4rem;
-        font-size: 0.7rem;
+      .footer-contact-card .contact-email a {
+        font-size: 0.95rem;
         font-weight: 500;
-        letter-spacing: 0.5px;
+        color: var(--primary-green);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-contact-card .contact-email a:hover {
+        color: var(--gold);
+      }
+      .footer-contact-card .contact-response {
+        font-size: 0.75rem;
+        color: var(--brown-soft);
+        margin-top: 0.2rem;
+        opacity: 0.7;
+      }
+      .footer-lotus-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        opacity: 0.5;
+      }
+      .footer-lotus-divider .divider-line {
+        flex: 1;
+        max-width: 80px;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+      }
+      .footer-lotus-divider i {
+        font-size: 1.2rem;
+        color: var(--gold);
+        animation: lotusFloat 4s ease-in-out infinite;
+      }
+      @keyframes lotusFloat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-4px) scale(1.05);
+        }
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(185, 145, 45, 0.08);
+        padding: 1.5rem 0 1.8rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .footer-bottom-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .footer-bottom .copyright {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        opacity: 0.8;
+        margin: 0;
+      }
+      .footer-bottom .copyright .heart {
+        color: #d46a6a;
+        display: inline-block;
+        animation: heartBeat 2s ease-in-out infinite;
+      }
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        15% {
+          transform: scale(1.2);
+        }
+        30% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.15);
+        }
+        60% {
+          transform: scale(1);
+        }
+      }
+      .footer-bottom .credit {
+        font-size: 0.7rem;
+        color: var(--brown-soft);
+        opacity: 0.5;
+        margin: 0;
+        letter-spacing: 0.3px;
+      }
+      .footer-bottom .credit .credit-name {
+        color: var(--gold);
+        font-weight: 500;
+        opacity: 0.8;
       }
     </style>
   </head>
-
   <body>
-    <!-- Background overlay -->
+    <!-- ===== OVERLAY ===== -->
     <div class="page-overlay"></div>
 
     <!-- ===== MODALS ===== -->
@@ -444,12 +2592,148 @@
       </div>
     </div>
 
-    <div id="detailModal" class="modal detail-modal">
+    <!-- ===== DETAIL MODAL ===== -->
+    <div id="detailModal" class="detail-modal">
       <div class="detail-modal-content">
-        <button class="detail-close" onclick="closeDetailModal()">
+        <button
+          class="detail-close"
+          onclick="closeDetailModal()"
+          aria-label="Close article"
+        >
           <i class="fas fa-times"></i>
         </button>
-        <div id="detailBody"></div>
+        <div class="detail-modal-inner" id="detailModalInner">
+          <!-- Hero -->
+          <div class="detail-hero-grid">
+            <div class="detail-hero-image-wrap" id="detailHeroImageWrap">
+              <img
+                id="detailHeroImage"
+                src="images/cover.jpg"
+                alt="Article image"
+                loading="lazy"
+                onerror="this.src = 'images/cover.jpg'"
+              />
+              <div class="detail-quote-icon">
+                <i class="fas fa-quote-right"></i>
+              </div>
+            </div>
+            <div class="detail-hero-content">
+              <div class="detail-category-pill" id="detailCategoryPill">
+                <i class="fas fa-temple"></i>
+                <span id="detailCategoryText">SANT DARSHAN</span>
+              </div>
+              <h1 class="detail-title" id="detailTitle">
+                <span class="hindi-title">Loading...</span>
+              </h1>
+              <div class="detail-divider-lotus">
+                <span class="divider-line"></span>
+                <i class="fas fa-lotus"></i>
+                <span class="divider-line"></span>
+              </div>
+              <div class="detail-meta" id="detailMeta">
+                <span
+                  ><i class="fas fa-user"></i>
+                  <span id="detailAuthor">Loading</span></span
+                >
+                <span
+                  ><i class="fas fa-clock"></i>
+                  <span id="detailReadTime">Loading</span></span
+                >
+                <span
+                  ><i class="fas fa-calendar-alt"></i>
+                  <span id="detailDate">Loading</span></span
+                >
+              </div>
+              <p class="detail-excerpt" id="detailExcerpt">
+                Please wait while we load the article content.
+              </p>
+
+              <!-- Audio player -->
+              <div class="detail-audio-player" id="detailAudioPlayer">
+                <span class="audio-icon"><i class="fas fa-music"></i></span>
+                <audio controls id="detailAudio">
+                  <source src="" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+
+              <div class="detail-actions-row">
+                <button class="detail-cta-primary" id="detailCtaBtn">
+                  <i class="fas fa-book-open"></i> Read Full Article
+                </button>
+                <div class="detail-actions-secondary">
+                  <button
+                    aria-label="Bookmark"
+                    title="Bookmark"
+                    id="detailBookmarkBtn"
+                  >
+                    <i class="fas fa-bookmark"></i>
+                  </button>
+                  <button aria-label="Share" title="Share" id="detailShareBtn">
+                    <i class="fas fa-share-alt"></i>
+                  </button>
+                  <button aria-label="Print" title="Print" id="detailPrintBtn">
+                    <i class="fas fa-print"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="detail-body-grid">
+            <div id="detailBody" class="detail-body-text">
+              <p>Loading article content...</p>
+            </div>
+            <aside class="detail-sidebar" id="detailSidebar">
+              <div class="detail-sidebar-card">
+                <h4><i class="fas fa-list-ul"></i> मुख्य बिंदु</h4>
+                <div id="detailSidebarItems">
+                  <div class="sidebar-item">
+                    <span class="bullet">1</span>
+                    <div class="item-content">
+                      <div class="item-title">Loading...</div>
+                      <div class="item-desc">Please wait for article data.</div>
+                    </div>
+                  </div>
+                  <div class="sidebar-item">
+                    <span class="bullet">2</span>
+                    <div class="item-content">
+                      <div class="item-title">Loading...</div>
+                      <div class="item-desc">Please wait for article data.</div>
+                    </div>
+                  </div>
+                  <div class="sidebar-item">
+                    <span class="bullet">3</span>
+                    <div class="item-content">
+                      <div class="item-title">Loading...</div>
+                      <div class="item-desc">Please wait for article data.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <!-- Share & Print -->
+          <div class="detail-share-print" id="detailSharePrint">
+            <button aria-label="Share on Facebook" data-share="fb">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button aria-label="Share on Twitter" data-share="tw">
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button aria-label="Share on WhatsApp" data-share="wa">
+              <i class="fab fa-whatsapp"></i>
+            </button>
+            <button aria-label="Copy link" data-share="link">
+              <i class="fas fa-link"></i>
+            </button>
+            <button class="print-btn" id="detailPrintBtnBottom">
+              <i class="fas fa-print"></i> Print
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -460,40 +2744,34 @@
           <img src="images/logo.png" alt="Spiriligious" class="logo-image" />
           <span class="logo-text-inline">Spiriligious</span>
         </a>
-
         <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
-          <a href="index.html" class="nav-link active" data-page="index"
+          <a href="index.html" class="nav-link active"
             ><i class="fas fa-home"></i> Home</a
           >
-          <a href="about.html" class="nav-link" data-page="about"
+          <a href="about.html" class="nav-link"
             ><i class="fas fa-info-circle"></i> About</a
           >
-          <a href="team.html" class="nav-link" data-page="team"
+          <a href="team.html" class="nav-link"
             ><i class="fas fa-users"></i> Team</a
           >
-          <a href="forum.html" class="nav-link" data-page="forum"
+          <a href="#manthan-section" class="nav-link"
             ><i class="fas fa-comments"></i> Manthan</a
           >
-          <a href="astro.html" class="nav-link" data-page="astro"
-            ><i class="fas fa-star-of-life"></i> Jyotish</a
+          <a href="astro.html" class="nav-link"
+            ><i class="fas fa-star-of-life"></i> Jyotish · Panchang</a
           >
-          <a href="panchang.html" class="nav-link" data-page="panchang"
-            ><i class="fas fa-calendar-alt"></i> Panchang</a
-          >
-          <a href="contact.html" class="nav-link" data-page="contact"
+          <a href="contact.html" class="nav-link"
             ><i class="fas fa-envelope"></i> Contact</a
           >
         </nav>
-
         <button
           class="mobile-menu-btn"
           id="mobileMenuBtn"
-          aria-label="Toggle navigation menu"
+          aria-label="Toggle navigation"
           aria-expanded="false"
         >
-          <span class="pill"></span>
-          <span class="pill"></span>
-          <span class="pill"></span>
+          <span class="pill"></span><span class="pill"></span
+          ><span class="pill"></span>
         </button>
       </div>
     </header>
@@ -516,32 +2794,29 @@
         <button
           class="drawer-close"
           id="drawerCloseBtn"
-          aria-label="Close navigation menu"
+          aria-label="Close navigation"
         >
           <i class="fas fa-times"></i>
         </button>
         <div class="drawer-divider"></div>
       </div>
       <nav class="drawer-nav">
-        <a href="index.html" class="drawer-link active" data-page="index"
+        <a href="index.html" class="drawer-link active"
           ><i class="fas fa-home"></i> Home</a
         >
-        <a href="about.html" class="drawer-link" data-page="about"
+        <a href="about.html" class="drawer-link"
           ><i class="fas fa-info-circle"></i> About</a
         >
-        <a href="team.html" class="drawer-link" data-page="team"
+        <a href="team.html" class="drawer-link"
           ><i class="fas fa-users"></i> Team</a
         >
-        <a href="forum.html" class="drawer-link" data-page="forum"
+        <a href="#manthan-section" class="drawer-link"
           ><i class="fas fa-comments"></i> Manthan</a
         >
-        <a href="astro.html" class="drawer-link" data-page="astro"
+        <a href="astro.html" class="drawer-link"
           ><i class="fas fa-star-of-life"></i> Jyotish</a
         >
-        <a href="panchang.html" class="drawer-link" data-page="panchang"
-          ><i class="fas fa-calendar-alt"></i> Panchang</a
-        >
-        <a href="contact.html" class="drawer-link" data-page="contact"
+        <a href="contact.html" class="drawer-link"
           ><i class="fas fa-envelope"></i> Contact</a
         >
       </nav>
@@ -553,166 +2828,328 @@
       <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content container">
-          <div class="icon-grid">
-            <div class="icon-item" onclick="scrollToSection('sant-section')">
-              <i class="fas fa-feather-alt"></i><span>संत</span>
-            </div>
-            <div class="icon-item" onclick="scrollToSection('mandir-section')">
-              <i class="fas fa-om"></i><span>मंदिर</span>
-            </div>
-            <div class="icon-item" onclick="scrollToSection('bhajan-section')">
-              <i class="fas fa-music"></i><span>भजन</span>
-            </div>
-            <div class="icon-item" onclick="scrollToSection('science-section')">
-              <i class="fas fa-microscope"></i><span>विज्ञान</span>
-            </div>
-            <div class="icon-item" onclick="scrollToSection('manthan-section')">
-              <i class="fas fa-comments"></i><span>मंथन</span>
-            </div>
-            <div class="icon-item" onclick="openComingSoon()">
-              <i class="fas fa-star-of-life"></i><span>ज्योतिष</span>
-            </div>
+          <div class="hero-nav-spacer"></div>
+          <div class="luxury-nav">
+            <nav class="luxury-nav-grid" aria-label="Explore Spiriligious">
+              <!-- Sant -->
+              <a
+                class="nav-item"
+                href="#sant-section"
+                onclick="scrollToSection('sant-section')"
+              >
+                <div class="nav-icon-wrap">
+                  <img
+                    src="images/icons/sant.svg"
+                    alt="Sant"
+                    class="nav-icon-svg"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span class="fallback-icon"
+                    ><i class="fas fa-user-astronaut"></i
+                  ></span>
+                </div>
+                <span class="nav-title-hindi">संत</span>
+              </a>
+              <!-- Mandir -->
+              <a
+                class="nav-item"
+                href="#mandir-section"
+                onclick="scrollToSection('mandir-section')"
+              >
+                <div class="nav-icon-wrap">
+                  <img
+                    src="images/icons/mandir.svg"
+                    alt="Mandir"
+                    class="nav-icon-svg"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span class="fallback-icon"><i class="fas fa-home"></i></span>
+                </div>
+                <span class="nav-title-hindi">मंदिर</span>
+              </a>
+              <!-- Bhajan -->
+              <a
+                class="nav-item"
+                href="#bhajan-section"
+                onclick="scrollToSection('bhajan-section')"
+              >
+                <div class="nav-icon-wrap">
+                  <img
+                    src="images/icons/bhajan.svg"
+                    alt="Bhajan"
+                    class="nav-icon-svg"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span class="fallback-icon"
+                    ><i class="fas fa-music"></i
+                  ></span>
+                </div>
+                <span class="nav-title-hindi">भजन</span>
+              </a>
+              <!-- Vigyan -->
+              <a
+                class="nav-item"
+                href="#science-section"
+                onclick="scrollToSection('science-section')"
+              >
+                <div class="nav-icon-wrap">
+                  <img
+                    src="images/icons/vigyan.svg"
+                    alt="Vigyan"
+                    class="nav-icon-svg"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span class="fallback-icon"
+                    ><i class="fas fa-microscope"></i
+                  ></span>
+                </div>
+                <span class="nav-title-hindi">विज्ञान</span>
+              </a>
+              <!-- Manthan -->
+              <a
+                class="nav-item"
+                href="#manthan-section"
+                onclick="scrollToSection('manthan-section')"
+              >
+                <div class="nav-icon-wrap">
+                  <img
+                    src="images/icons/manthan.svg"
+                    alt="Manthan"
+                    class="nav-icon-svg"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span class="fallback-icon"
+                    ><i class="fas fa-comments"></i
+                  ></span>
+                </div>
+                <span class="nav-title-hindi">मंथन</span>
+              </a>
+              <!-- Jyotish -->
+              <a
+                class="nav-item"
+                href="javascript:void(0)"
+                onclick="openComingSoon()"
+              >
+                <div class="nav-icon-wrap">
+                  <img
+                    src="images/icons/jyotish.svg"
+                    alt="Jyotish"
+                    class="nav-icon-svg"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span class="fallback-icon"><i class="fas fa-star"></i></span>
+                </div>
+                <span class="nav-title-hindi">ज्योतिष</span>
+              </a>
+            </nav>
           </div>
         </div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== DAILY SHLOK ===== -->
+      <!-- DAILY SHLOK -->
       <section class="container shlok-section reveal" id="shlok-section">
         <div class="shlok-manuscript" id="dailyShlokCard">
-          <div id="shlokContent"><p>🙏 श्लोक लोड हो रहा है...</p></div>
+          <div id="shlokContent">
+            <div class="shlok-fallback" id="shlokFallback">
+              <div>
+                ॐ सह नाववतु ।<br />सह नौ भुनक्तु ।<br />सह वीर्यं करवावहै ।
+              </div>
+              <div class="meaning">
+                Om, may we together be protected. May we together be nourished.
+                May we work together with great vigor.
+              </div>
+              <div class="source">— शुक्ल यजुर्वेद, ६.१९</div>
+            </div>
+            <p
+              class="shlok-placeholder"
+              id="shlokPlaceholder"
+              style="display: none"
+            >
+              🙏 श्लोक लोड हो रहा है...
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== SANT DARSHAN ===== -->
+      <!-- SANT DARSHAN -->
       <section class="container section-spacing reveal" id="sant-section">
         <div class="section-header-custom">
-          <!-- <span class="section-label">Sant Darshan</span> -->
           <h2>Sant Darshan</h2>
           <p class="sub">Wisdom of the great masters, preserved and shared.</p>
         </div>
-        <div id="featuredSantContainer" class="featured-card-horizontal">
+        <div id="featuredSantContainer" class="featured-card">
           <div class="featured-image">
             <img
-              src="https://via.placeholder.com/600x400?text=Sant"
+              src="images/cover.jpg"
               alt="Featured Sant"
               loading="lazy"
+              onerror="this.src = 'images/cover.jpg'"
             />
+            <span class="featured-badge">Featured</span>
           </div>
           <div class="featured-content">
-            <span class="badge">Featured</span>
+            <span class="category-tag">Sant Darshan</span>
             <h3>Loading...</h3>
-            <div class="meta"><i class="fas fa-user"></i> Loading</div>
-            <p>Please wait...</p>
-            <button class="btn-gold" disabled>Read Article</button>
+            <div class="featured-meta">
+              <span><i class="fas fa-user"></i> Loading</span>
+              <span><i class="fas fa-clock"></i> Loading</span>
+            </div>
+            <div class="featured-divider"></div>
+            <p class="featured-desc">
+              Please wait while we load the featured article.
+            </p>
+            <div class="featured-actions">
+              <button class="btn-primary-featured" disabled>
+                <i class="fas fa-book-open"></i> Read Article
+              </button>
+            </div>
           </div>
         </div>
-        <div id="santArticlesGrid" class="grid-cards grid-cards-2col"></div>
+        <div id="santArticlesGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== MANDIR DARSHAN ===== -->
+      <!-- MANDIR DARSHAN -->
       <section class="container section-spacing reveal" id="mandir-section">
         <div class="section-header-custom">
-          <!-- <span class="section-label">Mandir Darshan</span> -->
           <h2>Mandir Darshan</h2>
           <p class="sub">
             Sacred architecture, history, and spiritual significance.
           </p>
         </div>
-        <div id="featuredTempleContainer" class="featured-card-horizontal">
+        <div id="featuredTempleContainer" class="featured-card">
           <div class="featured-image">
             <img
-              src="https://via.placeholder.com/600x400?text=Temple"
+              src="images/cover.jpg"
               alt="Featured Temple"
               loading="lazy"
+              onerror="this.src = 'images/cover.jpg'"
             />
+            <span class="featured-badge">Featured</span>
           </div>
           <div class="featured-content">
-            <span class="badge">Featured</span>
+            <span class="category-tag">Mandir Darshan</span>
             <h3>Loading...</h3>
-            <div class="meta">
-              <i class="fas fa-map-pin"></i> Loading location
+            <div class="featured-meta">
+              <span><i class="fas fa-map-pin"></i> Loading</span>
+              <span><i class="fas fa-clock"></i> Loading</span>
             </div>
-            <p>Please wait...</p>
-            <button class="btn-gold" disabled>Explore Temple</button>
+            <div class="featured-divider"></div>
+            <p class="featured-desc">
+              Please wait while we load the featured temple.
+            </p>
+            <div class="featured-actions">
+              <button class="btn-primary-featured" disabled>
+                <i class="fas fa-landmark"></i> Explore Temple
+              </button>
+            </div>
           </div>
         </div>
-        <div id="mandirGrid" class="grid-cards grid-cards-2col"></div>
+        <div id="mandirGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== BHAJAN DARSHAN ===== -->
+      <!-- BHAJAN -->
       <section class="container section-spacing reveal" id="bhajan-section">
         <div class="section-header-custom">
-          <!-- <span class="section-label">Bhajan Collection</span> -->
-          <h2>Latest Bhajans</h2>
+          <h2>Bhajan Collection</h2>
           <p class="sub">Devotional music to uplift the soul.</p>
         </div>
-        <div id="featuredBhajanContainer" class="featured-card-horizontal">
+        <div id="featuredBhajanContainer" class="featured-card">
           <div class="featured-image">
             <img
-              src="https://via.placeholder.com/600x400?text=Bhajan"
+              src="images/cover.jpg"
               alt="Featured Bhajan"
               loading="lazy"
+              onerror="this.src = 'images/cover.jpg'"
             />
+            <span class="featured-badge">Featured</span>
           </div>
           <div class="featured-content">
-            <span class="badge">Featured</span>
+            <span class="category-tag">Bhajan Collection</span>
             <h3>Loading...</h3>
-            <div class="meta">
-              <i class="fas fa-microphone-alt"></i> Loading
+            <div class="featured-meta">
+              <span><i class="fas fa-microphone-alt"></i> Loading</span>
+              <span><i class="fas fa-clock"></i> Loading</span>
             </div>
-            <p>Please wait...</p>
-            <button class="btn-gold" disabled>Listen Now</button>
+            <div class="featured-divider"></div>
+            <p class="featured-desc">
+              Please wait while we load the featured bhajan.
+            </p>
+            <div class="featured-actions">
+              <button class="btn-primary-featured" disabled>
+                <i class="fas fa-play"></i> Listen Now
+              </button>
+            </div>
           </div>
         </div>
-        <div id="bhajanGrid" class="grid-cards grid-cards-2col"></div>
+        <div id="bhajanGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== SCIENCE SECTION ===== -->
+      <!-- SCIENCE -->
       <section class="container section-spacing reveal" id="science-section">
         <div class="section-header-custom">
-          <!-- <span class="section-label">Science & Knowledge</span> -->
-          <h2>Science & Knowledge</h2>
+          <h2>Science &amp; Knowledge</h2>
           <p class="sub">
             Exploring the logic and science behind ancient traditions.
           </p>
         </div>
-        <div id="scienceGrid" class="grid-cards grid-cards-2col"></div>
+        <div id="featuredScienceContainer" class="featured-card">
+          <div class="featured-image">
+            <img
+              src="images/cover.jpg"
+              alt="Featured Science"
+              loading="lazy"
+              onerror="this.src = 'images/cover.jpg'"
+            />
+            <span class="featured-badge">Featured</span>
+          </div>
+          <div class="featured-content">
+            <span class="category-tag">Science &amp; Knowledge</span>
+            <h3>Loading...</h3>
+            <div class="featured-meta">
+              <span><i class="fas fa-flask"></i> Loading</span>
+              <span><i class="fas fa-clock"></i> Loading</span>
+            </div>
+            <div class="featured-divider"></div>
+            <p class="featured-desc">
+              Please wait while we load the featured article.
+            </p>
+            <div class="featured-actions">
+              <button class="btn-primary-featured" disabled>
+                <i class="fas fa-microscope"></i> Read Analysis
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="scienceGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== MANTHAN FORUM ===== -->
+      <!-- MANTHAN -->
       <section class="container section-spacing reveal" id="manthan-section">
         <div class="section-header-custom">
-          <!-- <span class="section-label">Community</span> -->
           <h2>Manthan Forum</h2>
           <p class="sub">Discuss, ask, and share wisdom with fellow seekers.</p>
         </div>
@@ -768,15 +3205,13 @@
         </div>
       </section>
 
-      <!-- ===== LOTUS DIVIDER ===== -->
       <div class="container">
         <div class="lotus-divider"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- ===== COMING SOON ===== -->
+      <!-- COMING SOON -->
       <section class="container section-spacing reveal">
         <div class="section-header-custom">
-          <!-- <span class="section-label">Coming Soon</span> -->
           <h2>Future Experiences</h2>
           <p class="sub">
             We are expanding — new ways to connect, learn, and grow.
@@ -813,22 +3248,71 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script src="global.js"></script>
     <script src="script.js"></script>
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Load all dynamic content
-        if (typeof loadDailyShlok === "function") loadDailyShlok();
-        if (typeof loadFeaturedSant === "function") loadFeaturedSant();
-        if (typeof loadSantArticles === "function") loadSantArticles();
-        if (typeof loadFeaturedTemple === "function") loadFeaturedTemple();
-        if (typeof loadMandirs === "function") loadMandirs();
-        if (typeof loadFeaturedBhajan === "function") loadFeaturedBhajan();
-        if (typeof loadBhajans === "function") loadBhajans();
-        if (typeof loadScience === "function") loadScience();
-        if (typeof loadCommunityDiscussions === "function")
-          loadCommunityDiscussions();
+        // ── Set print date on modal inner ──
+        var modalInner = document.getElementById("detailModalInner");
+        if (modalInner) {
+          var now = new Date();
+          var dateStr = now.toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+          modalInner.setAttribute("data-print-date", dateStr);
+        }
 
-        // Submit discussion
+        // ── Function to set fallback images on cards ──
+        function setCardImageFallbacks() {
+          // For all .card-image-wrap img and .featured-image img
+          var images = document.querySelectorAll(
+            ".card-image-wrap img, .featured-image img",
+          );
+          images.forEach(function (img) {
+            // If src is empty, set to cover.jpg
+            if (
+              !img.src ||
+              img.src === "" ||
+              img.src === window.location.href
+            ) {
+              img.src = "images/cover.jpg";
+            }
+            // Ensure onerror is set
+            if (!img.onerror) {
+              img.onerror = function () {
+                this.src = "images/cover.jpg";
+              };
+            }
+          });
+        }
+
+        // ── loaders with fallback ──
+        try {
+          if (typeof loadDailyShlok === "function") loadDailyShlok();
+        } catch (e) {
+          console.warn("Shlok load failed", e);
+        }
+        try {
+          if (typeof loadSantArticles === "function") loadSantArticles();
+          if (typeof loadMandirs === "function") loadMandirs();
+          if (typeof loadBhajans === "function") loadBhajans();
+          if (typeof loadScience === "function") loadScience();
+          if (typeof loadCommunityDiscussions === "function")
+            loadCommunityDiscussions();
+        } catch (e) {
+          console.warn("Content loaders failed", e);
+        }
+
+        // ── After content loads, set fallbacks ──
+        setTimeout(setCardImageFallbacks, 1000);
+
+        // Also observe for dynamically added cards
+        var observer = new MutationObserver(function () {
+          setCardImageFallbacks();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // ── discussion submit ──
         document
           .getElementById("submitDiscussionBtn")
           ?.addEventListener("click", async function () {
@@ -843,42 +3327,50 @@
               return;
             }
             try {
-              await db.collection("forumTopics").add({
-                title,
-                content: message,
-                author,
-                published: false,
-                deleted: false,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                replies: [],
-              });
-              openModal(
-                "धन्यवाद! 🙏",
-                "<p>आपकी चर्चा मॉडरेशन के लिए सबमिट कर दी गई है।</p>",
-              );
-              document.getElementById("discussTitle").value = "";
-              document.getElementById("discussMessage").value = "";
-              document.getElementById("discussAuthor").value = "";
-              loadCommunityDiscussions();
+              if (typeof db !== "undefined" && db.collection) {
+                await db.collection("forumTopics").add({
+                  title,
+                  content: message,
+                  author,
+                  published: false,
+                  deleted: false,
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  replies: [],
+                });
+                openModal(
+                  "धन्यवाद! 🙏",
+                  "<p>आपकी चर्चा मॉडरेशन के लिए सबमिट कर दी गई है।</p>",
+                );
+                document.getElementById("discussTitle").value = "";
+                document.getElementById("discussMessage").value = "";
+                document.getElementById("discussAuthor").value = "";
+                if (typeof loadCommunityDiscussions === "function")
+                  loadCommunityDiscussions();
+              } else {
+                openModal(
+                  "⚠️",
+                  "Firebase is not configured. Please check your setup.",
+                );
+              }
             } catch (err) {
               alert("Error: " + err.message);
             }
           });
 
-        // Forum tabs
+        // ── manthan tabs ──
         document.querySelectorAll(".manthan-tabs button").forEach((btn) => {
           btn.addEventListener("click", function () {
             document
               .querySelectorAll(".manthan-tabs button")
               .forEach((b) => b.classList.remove("active"));
             this.classList.add("active");
-            loadCommunityDiscussions();
+            if (typeof loadCommunityDiscussions === "function")
+              loadCommunityDiscussions();
           });
         });
 
-        // Scroll reveal
-        const revealElements = document.querySelectorAll(".reveal");
-        const observer = new IntersectionObserver(
+        // ── reveal observer ──
+        const revealObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -886,17 +3378,342 @@
           },
           { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
         );
-        revealElements.forEach((el) => observer.observe(el));
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => revealObserver.observe(el));
 
-        // Coming soon
+        // ── helpers ──
         window.openComingSoon = function () {
           openModal(
             "आने वाला है",
             "<h3>Coming Soon</h3><p>We are working on this feature. Please stay tuned. 🙏</p>",
           );
         };
+        window.scrollToSection = function (id) {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+        window.openModal = function (title, html) {
+          const m = document.getElementById("infoModal");
+          document.getElementById("modalTitle").innerText = title;
+          document.getElementById("modalMessage").innerHTML = html;
+          m.style.display = "flex";
+          document.body.style.overflow = "hidden";
+        };
+        window.closeModal = function () {
+          document.getElementById("infoModal").style.display = "none";
+          document.body.style.overflow = "auto";
+        };
 
-        // Mobile drawer
+        // ── DETAIL MODAL ──
+        const originalOpenDetailModal = window.openDetailModal;
+
+        window.openDetailModal = function (data) {
+          let html = typeof data === "string" ? data : data.html || "";
+          const audioUrl = typeof data === "object" ? data.audioUrl : null;
+          const contentType = typeof data === "object" ? data.type : null;
+
+          const bodyEl = document.getElementById("detailBody");
+          if (bodyEl) bodyEl.innerHTML = html;
+
+          function extractText(selector, fallback) {
+            const temp = document.createElement("div");
+            temp.innerHTML = html;
+            const el = temp.querySelector(selector);
+            return el ? el.textContent.trim() : fallback;
+          }
+
+          function extractHTML(selector, fallback) {
+            const temp = document.createElement("div");
+            temp.innerHTML = html;
+            const el = temp.querySelector(selector);
+            return el ? el.innerHTML : fallback;
+          }
+
+          const catText = extractText(
+            ".detail-category, .category-tag, [data-category]",
+            "ARTICLE",
+          );
+          const catPill = document.getElementById("detailCategoryText");
+          if (catPill) catPill.textContent = catText.toUpperCase();
+
+          const titleText = extractText(
+            ".detail-title, h1, [data-title]",
+            "Loading...",
+          );
+          const titleEl = document.getElementById("detailTitle");
+          if (titleEl) {
+            const hindiSpan = titleEl.querySelector(".hindi-title") || titleEl;
+            hindiSpan.textContent = titleText;
+          }
+
+          const metaText = extractHTML(".detail-meta, [data-meta]", "");
+          if (metaText) {
+            const metaEl = document.getElementById("detailMeta");
+            if (metaEl) metaEl.innerHTML = metaText;
+          } else {
+            const author = extractText(
+              ".detail-author, [data-author]",
+              "Anonymous",
+            );
+            const readTime = extractText(
+              ".detail-read-time, [data-read-time]",
+              "3 min read",
+            );
+            const date = extractText(".detail-date, [data-date]", "Today");
+            const metaEl = document.getElementById("detailMeta");
+            if (metaEl) {
+              metaEl.innerHTML = `<span><i class="fas fa-user"></i> ${author}</span><span><i class="fas fa-clock"></i> ${readTime}</span><span><i class="fas fa-calendar-alt"></i> ${date}</span>`;
+            }
+          }
+
+          const excerptText = extractText(
+            ".detail-excerpt, .excerpt, p:first-of-type",
+            "Loading article content...",
+          );
+          const excerptEl = document.getElementById("detailExcerpt");
+          if (excerptEl) excerptEl.textContent = excerptText;
+
+          const imgSrc = extractText(
+            ".detail-hero img, .detail-image img, [data-image]",
+            "",
+          );
+          const imgEl = document.getElementById("detailHeroImage");
+          if (imgEl) {
+            if (imgSrc) {
+              imgEl.src = imgSrc;
+              imgEl.alt = titleText || "Article image";
+            } else {
+              imgEl.src = "images/cover.jpg";
+              imgEl.alt = "Article image";
+            }
+            imgEl.onerror = function () {
+              this.src = "images/cover.jpg";
+            };
+          }
+
+          // Sidebar
+          const sidebarItems = document.getElementById("detailSidebarItems");
+          if (sidebarItems) {
+            const temp = document.createElement("div");
+            temp.innerHTML = html;
+            const pointsList = temp.querySelector(
+              ".detail-key-points, .key-points, [data-points]",
+            );
+            if (pointsList) {
+              const items = pointsList.querySelectorAll("li, .point");
+              if (items.length > 0) {
+                let pointsHTML = "";
+                items.forEach((item, idx) => {
+                  const title =
+                    item.querySelector(".point-title, strong")?.textContent ||
+                    item.textContent.trim().split(":")[0] ||
+                    "Point";
+                  const desc =
+                    item.querySelector(".point-desc, span")?.textContent ||
+                    item.textContent.trim().split(":").slice(1).join(":") ||
+                    "";
+                  pointsHTML += `
+                    <div class="sidebar-item">
+                      <span class="bullet">${idx + 1}</span>
+                      <div class="item-content">
+                        <div class="item-title">${title.trim()}</div>
+                        <div class="item-desc">${desc.trim() || "Key insight"}</div>
+                      </div>
+                    </div>
+                  `;
+                });
+                sidebarItems.innerHTML = pointsHTML;
+              }
+            } else {
+              const headings = temp.querySelectorAll("h3, h4");
+              if (headings.length > 0) {
+                let pointsHTML = "";
+                let idx = 0;
+                headings.forEach((h) => {
+                  const next = h.nextElementSibling;
+                  const desc =
+                    next && next.tagName === "P"
+                      ? next.textContent.trim()
+                      : "Key insight";
+                  if (idx < 4) {
+                    pointsHTML += `
+                      <div class="sidebar-item">
+                        <span class="bullet">${idx + 1}</span>
+                        <div class="item-content">
+                          <div class="item-title">${h.textContent.trim()}</div>
+                          <div class="item-desc">${desc}</div>
+                        </div>
+                      </div>
+                    `;
+                    idx++;
+                  }
+                });
+                if (pointsHTML) sidebarItems.innerHTML = pointsHTML;
+              }
+            }
+          }
+
+          // ── Audio player ──
+          const audioPlayer = document.getElementById("detailAudioPlayer");
+          const audioEl = document.getElementById("detailAudio");
+          let finalAudioUrl = audioUrl;
+          if (!finalAudioUrl && contentType === "bhajan") {
+            const temp = document.createElement("div");
+            temp.innerHTML = html;
+            const audioTag = temp.querySelector("audio");
+            if (audioTag) finalAudioUrl = audioTag.getAttribute("src");
+          }
+          if (finalAudioUrl) {
+            audioPlayer.classList.add("active");
+            audioEl.querySelector("source").src = finalAudioUrl;
+            audioEl.load();
+          } else {
+            audioPlayer.classList.remove("active");
+          }
+
+          // Show modal
+          const modal = document.getElementById("detailModal");
+          if (modal) {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+            const content = modal.querySelector(".detail-modal-content");
+            if (content) content.scrollTop = 0;
+          }
+
+          if (
+            typeof originalOpenDetailModal === "function" &&
+            originalOpenDetailModal !== window.openDetailModal
+          ) {
+            // already handled
+          }
+        };
+
+        // ── close modal ──
+        window.closeDetailModal = function () {
+          const modal = document.getElementById("detailModal");
+          if (modal) modal.style.display = "none";
+          document.body.style.overflow = "auto";
+          const audio = document.getElementById("detailAudio");
+          if (audio) audio.pause();
+        };
+
+        document
+          .getElementById("detailModal")
+          ?.addEventListener("click", function (e) {
+            if (e.target === this) closeDetailModal();
+          });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeDetailModal();
+        });
+
+        // CTA scroll to body
+        document
+          .getElementById("detailCtaBtn")
+          ?.addEventListener("click", function () {
+            const bodyEl = document.getElementById("detailBody");
+            const content = document.querySelector(".detail-modal-content");
+            if (bodyEl && content) {
+              const y =
+                bodyEl.getBoundingClientRect().top + content.scrollTop - 60;
+              content.scrollTo({ top: y, behavior: "smooth" });
+            }
+          });
+
+        // ── Share & Print ──
+        function getCurrentArticleUrl() {
+          return window.location.href;
+        }
+
+        function getCurrentArticleTitle() {
+          const titleEl = document.getElementById("detailTitle");
+          return titleEl ? titleEl.textContent.trim() : "Spiriligious Article";
+        }
+
+        document.querySelectorAll("[data-share]").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const type = this.getAttribute("data-share");
+            const url = getCurrentArticleUrl();
+            const title = getCurrentArticleTitle();
+            let shareUrl = "";
+            switch (type) {
+              case "fb":
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+              case "tw":
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                break;
+              case "wa":
+                shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + " " + url)}`;
+                break;
+              case "link":
+                if (navigator.clipboard) {
+                  navigator.clipboard
+                    .writeText(url)
+                    .then(() => {
+                      openModal(
+                        "Link Copied",
+                        "Article link copied to clipboard!",
+                      );
+                    })
+                    .catch(() => {
+                      const textarea = document.createElement("textarea");
+                      textarea.value = url;
+                      document.body.appendChild(textarea);
+                      textarea.select();
+                      document.execCommand("copy");
+                      document.body.removeChild(textarea);
+                      openModal(
+                        "Link Copied",
+                        "Article link copied to clipboard!",
+                      );
+                    });
+                } else {
+                  const textarea = document.createElement("textarea");
+                  textarea.value = url;
+                  document.body.appendChild(textarea);
+                  textarea.select();
+                  document.execCommand("copy");
+                  document.body.removeChild(textarea);
+                  openModal("Link Copied", "Article link copied to clipboard!");
+                }
+                return;
+              default:
+                return;
+            }
+            if (shareUrl)
+              window.open(shareUrl, "_blank", "width=600,height=400");
+          });
+        });
+
+        // Print buttons
+        document
+          .getElementById("detailPrintBtn")
+          ?.addEventListener("click", function (e) {
+            e.stopPropagation();
+            window.print();
+          });
+        document
+          .getElementById("detailPrintBtnBottom")
+          ?.addEventListener("click", function (e) {
+            e.stopPropagation();
+            window.print();
+          });
+
+        // Bookmark
+        document
+          .getElementById("detailBookmarkBtn")
+          ?.addEventListener("click", function (e) {
+            e.stopPropagation();
+            openModal(
+              "Bookmark",
+              "Article saved to your bookmarks! (feature coming soon)",
+            );
+          });
+
+        // ── mobile menu ──
         const menuBtn = document.getElementById("mobileMenuBtn");
         const drawer = document.getElementById("mobileDrawer");
         const overlay = document.getElementById("mobileDrawerOverlay");
@@ -909,6 +3726,7 @@
             menuBtn.setAttribute("aria-expanded", "true");
             document.body.style.overflow = "hidden";
           }
+
           function closeDrawer() {
             drawer.classList.remove("open");
             overlay.classList.remove("active");
@@ -926,12 +3744,12 @@
             if (e.key === "Escape" && drawer.classList.contains("open"))
               closeDrawer();
           });
-          drawer.querySelectorAll(".drawer-link").forEach((link) => {
-            link.addEventListener("click", closeDrawer);
-          });
+          drawer
+            .querySelectorAll(".drawer-link")
+            .forEach((link) => link.addEventListener("click", closeDrawer));
         }
 
-        // Navbar scroll hide/show
+        // ── header scroll ──
         const header = document.querySelector(".premium-header");
         let lastScrollY = 0;
         window.addEventListener(
@@ -939,72 +3757,84 @@
           function () {
             const currentScrollY = window.scrollY;
             const delta = currentScrollY - lastScrollY;
-            if (delta > 10 && currentScrollY > 100) {
+            if (delta > 10 && currentScrollY > 100)
               header.classList.add("hidden");
-            } else if (delta < -5 || currentScrollY < 50) {
+            else if (delta < -5 || currentScrollY < 50)
               header.classList.remove("hidden");
-            }
             lastScrollY = currentScrollY;
+            if (currentScrollY > 100) header.classList.add("scrolled");
+            else header.classList.remove("scrolled");
           },
           { passive: true },
         );
 
-        // Highlight active nav links
-        const currentPage =
-          window.location.pathname.split("/").pop() || "index.html";
-        document.querySelectorAll(".nav-link, .drawer-link").forEach((link) => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === currentPage,
-          );
+        // ── card clickability ──
+        document.querySelectorAll(".featured-card").forEach((card) => {
+          card.style.cursor = "pointer";
+          card.addEventListener("click", function (e) {
+            if (e.target.closest("button")) return;
+            const btn = this.querySelector(".btn-primary-featured");
+            if (btn && !btn.disabled) btn.click();
+          });
         });
 
-        // Modal functions (if not already defined)
-        window.openModal = function (title, msgHtml) {
-          const modal = document.getElementById("infoModal");
-          const modalTitle = document.getElementById("modalTitle");
-          const modalMessage = document.getElementById("modalMessage");
-          if (modal && modalTitle && modalMessage) {
-            modalTitle.innerText = title;
-            modalMessage.innerHTML = msgHtml;
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden";
+        // ── nav icon fallback ──
+        document.querySelectorAll(".nav-icon-svg").forEach((img) => {
+          if (!img.complete) {
+            img.addEventListener("error", function () {
+              this.style.display = "none";
+              const wrap = this.closest(".nav-icon-wrap");
+              if (wrap) {
+                const fallback = wrap.querySelector(".fallback-icon");
+                if (fallback) fallback.style.display = "flex";
+              }
+            });
+          } else if (img.naturalWidth === 0 || img.naturalHeight === 0) {
+            img.style.display = "none";
+            const wrap = img.closest(".nav-icon-wrap");
+            if (wrap) {
+              const fallback = wrap.querySelector(".fallback-icon");
+              if (fallback) fallback.style.display = "flex";
+            }
           }
-        };
-        window.closeModal = function () {
-          const modal = document.getElementById("infoModal");
-          if (modal) {
-            modal.style.display = "none";
-            document.body.style.overflow = "auto";
-          }
-        };
-        document
-          .getElementById("infoModal")
-          ?.addEventListener("click", function (e) {
-            if (e.target === this) closeModal();
-          });
+        });
 
-        window.openDetailModal = function (html) {
-          const modal = document.getElementById("detailModal");
-          const body = document.getElementById("detailBody");
-          if (modal && body) {
-            body.innerHTML = html;
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden";
-          }
-        };
-        window.closeDetailModal = function () {
-          const modal = document.getElementById("detailModal");
-          if (modal) {
-            modal.style.display = "none";
-            document.body.style.overflow = "auto";
-          }
-        };
-        document
-          .getElementById("detailModal")
-          ?.addEventListener("click", function (e) {
-            if (e.target === this) closeDetailModal();
+        // ── bhajan audio interception ──
+        const bhajanGrid = document.getElementById("bhajanGrid");
+        if (bhajanGrid) {
+          bhajanGrid.addEventListener("click", function (e) {
+            const card = e.target.closest(".content-card-unified");
+            if (!card) return;
+            const audioUrl = card.dataset.audio;
+            if (audioUrl) {
+              if (e.target.closest("button")) return;
+              const title =
+                card.querySelector(".card-title")?.textContent || "Bhajan";
+              const desc = card.querySelector(".card-desc")?.textContent || "";
+              const img =
+                card
+                  .querySelector(".card-image-wrap img")
+                  ?.getAttribute("src") || "images/cover.jpg";
+              const htmlContent = `
+                <div class="detail-title">${title}</div>
+                <div class="detail-excerpt">${desc}</div>
+                <div class="detail-hero"><img src="${img}" alt="Bhajan" /></div>
+                <div class="detail-body-text"><p>Listen to this beautiful bhajan.</p></div>
+              `;
+              openDetailModal({
+                html: htmlContent,
+                audioUrl: audioUrl,
+                type: "bhajan",
+              });
+              e.preventDefault();
+              e.stopPropagation();
+            }
           });
+        }
+
+        console.log(
+          "✨ Spiriligious with hero crop, cover fallback, and print optimization loaded.",
+        );
       });
     </script>
   </body>

@@ -8,6 +8,11 @@
       name="description"
       content="Connect with Spiriligious — share your questions, research contributions, suggestions, or partnership ideas. Knowledge grows through dialogue."
     />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2285457582865660"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Google Fonts & Icons -->
     <link
@@ -793,8 +798,103 @@
       </div>
     </div>
 
-    <!-- Header -->
-    <div id="header-placeholder"></div>
+    <!-- ===== HEADER ===== -->
+    <header class="premium-header" role="banner">
+      <div class="container">
+        <a href="index.html" class="logo-link" aria-label="Spiriligious – Home">
+          <img src="images/logo.png" alt="Spiriligious" class="logo-image" />
+          <span class="logo-text-inline">Spiriligious</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+          <a href="index.html" class="nav-link active" data-page="index"
+            ><i class="fas fa-home"></i> Home</a
+          >
+          <a href="about.html" class="nav-link" data-page="about"
+            ><i class="fas fa-info-circle"></i> About</a
+          >
+          <a href="team.html" class="nav-link" data-page="team"
+            ><i class="fas fa-users"></i> Team</a
+          >
+          <a
+            href="index.html#manthan-section"
+            class="nav-link"
+            data-page="forum"
+            ><i class="fas fa-comments"></i> Manthan</a
+          >
+          <a href="astro.html" class="nav-link" data-page="astro"
+            ><i class="fas fa-star-of-life"></i> Jyotish . Panchang</a
+          >
+
+          <a href="contact.html" class="nav-link" data-page="contact"
+            ><i class="fas fa-envelope"></i> Contact</a
+          >
+        </nav>
+
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <span class="pill"></span>
+          <span class="pill"></span>
+          <span class="pill"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div
+      class="mobile-drawer"
+      id="mobileDrawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="drawer-header">
+        <a href="index.html" class="drawer-logo-link">
+          <img src="images/logo.png" alt="Spiriligious" class="drawer-logo" />
+          <span class="drawer-logo-text">Spiriligious</span>
+        </a>
+        <p class="drawer-tagline">ज्ञान · अध्यात्म · विज्ञान</p>
+        <button
+          class="drawer-close"
+          id="drawerCloseBtn"
+          aria-label="Close navigation menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="drawer-divider"></div>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link active" data-page="index"
+          ><i class="fas fa-home"></i> Home</a
+        >
+        <a href="about.html" class="drawer-link" data-page="about"
+          ><i class="fas fa-info-circle"></i> About</a
+        >
+        <a href="team.html" class="drawer-link" data-page="team"
+          ><i class="fas fa-users"></i> Team</a
+        >
+        <a
+          href="index.html#manthan-section"
+          class="drawer-link"
+          data-page="forum"
+          ><i class="fas fa-comments"></i> Manthan</a
+        >
+        <a href="astro.html" class="drawer-link" data-page="astro"
+          ><i class="fas fa-star-of-life"></i> Jyotish</a
+        >
+        <!-- <a href="panchang.html" class="drawer-link" data-page="panchang"
+          ><i class="fas fa-calendar-alt"></i> Panchang</a
+        > -->
+        <a href="contact.html" class="drawer-link" data-page="contact"
+          ><i class="fas fa-envelope"></i> Contact</a
+        >
+      </nav>
+    </div>
 
     <!-- Main -->
     <main>

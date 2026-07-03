@@ -14,8 +14,9 @@
     />
 
     <style>
-      /* ... (your existing CSS – I've kept it compact here, but you can paste your full styles) ... */
-      /* For brevity, I'm using the same CSS as before – no changes needed */
+      /* ============================================================
+       PREMIUM ADMIN STYLES
+    ============================================================ */
       :root {
         --primary-green: #2a5e3a;
         --primary-green-dark: #1c4028;
@@ -44,22 +45,24 @@
         --font-sans: "Inter", sans-serif;
         --font-serif: "Playfair Display", serif;
       }
+
       body.dark-theme {
-        --cream: #1a1e2a;
-        --cream-dark: #141824;
-        --ivory: #1e2332;
-        --gray-50: #1e2332;
-        --gray-100: #2a2f42;
-        --gray-200: #3a4058;
-        --gray-300: #5a6180;
-        --gray-400: #8a93b0;
-        --brown: #e2e8f0;
-        --brown-soft: #b0b8c8;
-        --brown-light: #8a93b0;
-        --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.3);
-        --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.4);
-        --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.5);
+        --cream: #1a1a1a;
+        --cream-dark: #121212;
+        --ivory: #222222;
+        --gray-50: #1a1a1a;
+        --gray-100: #2a2a2a;
+        --gray-200: #3a3a3a;
+        --gray-300: #5a5a5a;
+        --gray-400: #8a8a8a;
+        --brown: #e8e0d8;
+        --brown-soft: #b8b0a8;
+        --brown-light: #9a928a;
+        --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.4);
+        --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.5);
+        --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.6);
       }
+
       * {
         margin: 0;
         padding: 0;
@@ -76,6 +79,8 @@
         display: flex;
         flex-direction: column;
       }
+
+      /* ===== LOGIN ===== */
       .login-wrapper {
         min-height: 100vh;
         display: flex;
@@ -96,7 +101,7 @@
         text-align: center;
       }
       body.dark-theme .login-card {
-        background: rgba(30, 35, 50, 0.8);
+        background: rgba(30, 30, 30, 0.8);
         border-color: rgba(201, 168, 76, 0.2);
       }
       .login-card .logo-icon {
@@ -124,8 +129,8 @@
         font-size: 0.75rem;
         font-weight: 600;
         color: var(--brown-soft);
-        letter-spacing: 0.5px;
         text-transform: uppercase;
+        letter-spacing: 0.5px;
         display: block;
         margin-bottom: 0.2rem;
       }
@@ -140,10 +145,15 @@
         transition: var(--transition);
         color: var(--brown);
       }
+      .login-card .input-group input::placeholder {
+        color: var(--gray-400);
+        font-weight: 300;
+        font-size: 0.85rem;
+      }
       body.dark-theme .login-card .input-group input {
         background: rgba(255, 255, 255, 0.05);
         border-color: var(--gray-300);
-        color: #e2e8f0;
+        color: var(--brown);
       }
       .login-card .input-group input:focus {
         outline: none;
@@ -156,6 +166,38 @@
         top: 38px;
         cursor: pointer;
         color: var(--gray-400);
+        transition: var(--transition);
+      }
+      .login-card .input-group .password-toggle:hover {
+        color: var(--gold);
+      }
+      .login-card .remember-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.2rem 0 1rem;
+        font-size: 0.8rem;
+      }
+      .login-card .remember-row label {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+      }
+      .login-card .remember-row label input[type="checkbox"] {
+        accent-color: var(--primary-green);
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+      .login-card .remember-row a {
+        color: var(--gold);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .login-card .remember-row a:hover {
+        text-decoration: underline;
       }
       .login-card .btn-login {
         width: 100%;
@@ -168,21 +210,68 @@
         font-size: 1rem;
         cursor: pointer;
         transition: var(--transition);
-        margin-top: 0.5rem;
+        margin-top: 0.3rem;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
+        position: relative;
       }
-      .login-card .btn-login:hover {
+      .login-card .btn-login:hover:not(:disabled) {
         background: var(--primary-green-dark);
         transform: translateY(-2px);
         box-shadow: 0 8px 24px rgba(42, 94, 58, 0.25);
       }
+      .login-card .btn-login:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+      .login-card .btn-login .spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      .login-card .btn-login.loading .spinner {
+        display: inline-block;
+      }
+      .login-card .btn-login.loading .btn-text {
+        display: none;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .login-error {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-xs);
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+        display: none;
+        text-align: left;
+      }
+      body.dark-theme .login-error {
+        background: #3a1e1e;
+        color: #f8a5a5;
+      }
+      .login-error.show {
+        display: block;
+      }
+
+      /* ===== ADMIN LAYOUT ===== */
       .admin-wrapper {
         display: flex;
         min-height: 100vh;
       }
+
+      /* Sidebar */
       .sidebar {
         width: var(--sidebar-width);
         background: rgba(255, 255, 255, 0.6);
@@ -197,10 +286,10 @@
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.3rem;
       }
       body.dark-theme .sidebar {
-        background: rgba(30, 35, 50, 0.7);
+        background: rgba(30, 30, 30, 0.7);
         border-color: rgba(201, 168, 76, 0.1);
       }
       .sidebar .brand {
@@ -213,7 +302,12 @@
         color: var(--primary-green);
         padding-bottom: 1.2rem;
         border-bottom: 1px solid rgba(201, 168, 76, 0.1);
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
+      }
+      .sidebar .brand img {
+        height: 32px;
+        width: auto;
+        display: block;
       }
       .sidebar .brand i {
         color: var(--gold);
@@ -248,7 +342,136 @@
       .sidebar .nav-item i {
         width: 20px;
         font-size: 1rem;
+        text-align: center;
       }
+
+      /* Mobile hamburger */
+      .mobile-menu-toggle {
+        display: none;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 1000;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        box-shadow: var(--shadow-soft);
+        color: var(--brown);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+      .mobile-menu-toggle:hover {
+        border-color: var(--gold);
+        background: var(--gray-100);
+      }
+      body.dark-theme .mobile-menu-toggle {
+        background: rgba(30, 30, 30, 0.85);
+        border-color: rgba(201, 168, 76, 0.1);
+        color: var(--brown-soft);
+      }
+
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        z-index: 998;
+      }
+      .sidebar-overlay.active {
+        display: block;
+      }
+
+      .sidebar-mobile {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100%;
+        background: var(--cream);
+        box-shadow: var(--shadow-heavy);
+        z-index: 999;
+        transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        padding: 1.5rem 1rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      body.dark-theme .sidebar-mobile {
+        background: var(--cream-dark);
+      }
+      .sidebar-mobile.open {
+        left: 0;
+      }
+      .sidebar-mobile .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        margin-bottom: 0.8rem;
+      }
+      .sidebar-mobile .brand img {
+        height: 32px;
+        width: auto;
+        display: block;
+      }
+      .sidebar-mobile .close-sidebar {
+        margin-left: auto;
+        background: none;
+        border: none;
+        font-size: 1.3rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+        padding: 0.2rem 0.5rem;
+      }
+      .sidebar-mobile .close-sidebar:hover {
+        color: var(--gold);
+      }
+      .sidebar-mobile .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.7rem 1rem;
+        border-radius: var(--radius-sm);
+        color: var(--brown-soft);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: var(--transition);
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        font-family: var(--font-sans);
+      }
+      .sidebar-mobile .nav-item:hover {
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--brown);
+      }
+      .sidebar-mobile .nav-item.active {
+        background: rgba(201, 168, 76, 0.12);
+        color: var(--primary-green);
+        font-weight: 600;
+      }
+      .sidebar-mobile .nav-item i {
+        width: 20px;
+        font-size: 1rem;
+        text-align: center;
+      }
+
       .main-content {
         flex: 1;
         padding: 2rem 2.5rem;
@@ -263,6 +486,7 @@
         margin-bottom: 2rem;
         flex-wrap: wrap;
         gap: 1rem;
+        padding-left: 52px;
       }
       .topbar .page-title {
         font-family: var(--font-serif);
@@ -273,7 +497,8 @@
       .topbar .actions {
         display: flex;
         align-items: center;
-        gap: 0.8rem;
+        gap: 0.6rem;
+        flex-wrap: wrap;
       }
       .topbar .actions .btn-icon {
         background: none;
@@ -299,23 +524,6 @@
       body.dark-theme .topbar .actions .btn-icon:hover {
         background: var(--gray-200);
       }
-      .topbar .actions .theme-toggle {
-        background: var(--primary-green);
-        color: white;
-        border: none;
-        padding: 0.5rem 1.2rem;
-        border-radius: 60px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-        transition: var(--transition);
-      }
-      .topbar .actions .theme-toggle:hover {
-        background: var(--primary-green-dark);
-        transform: translateY(-2px);
-      }
       .topbar .actions .logout-btn {
         background: transparent;
         border: 1px solid var(--gray-200);
@@ -325,14 +533,18 @@
         color: var(--brown-soft);
         cursor: pointer;
         transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
       }
       .topbar .actions .logout-btn:hover {
-        background: #f0e6dc;
+        background: var(--gray-100);
         border-color: var(--brown-soft);
       }
       body.dark-theme .topbar .actions .logout-btn:hover {
         background: var(--gray-200);
       }
+
       .stats-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -352,7 +564,7 @@
         gap: 1rem;
       }
       body.dark-theme .stat-card {
-        background: rgba(30, 35, 50, 0.5);
+        background: rgba(30, 30, 30, 0.5);
         border-color: rgba(201, 168, 76, 0.05);
       }
       .stat-card:hover {
@@ -388,6 +600,7 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
+
       .section-container {
         margin-bottom: 3rem;
       }
@@ -427,19 +640,23 @@
         background: rgba(255, 255, 255, 0.4);
         backdrop-filter: blur(4px);
         font-size: 0.85rem;
-        width: 200px;
+        width: 180px;
         transition: var(--transition);
         color: var(--brown);
+      }
+      .section-header .section-actions .search-box input::placeholder {
+        color: var(--gray-400);
+        font-weight: 300;
       }
       body.dark-theme .section-header .section-actions .search-box input {
         background: rgba(255, 255, 255, 0.05);
         border-color: var(--gray-300);
-        color: #e2e8f0;
+        color: var(--brown);
       }
       .section-header .section-actions .search-box input:focus {
         outline: none;
         border-color: var(--gold);
-        width: 260px;
+        width: 240px;
         box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
       }
       .section-header .section-actions .search-box i {
@@ -449,6 +666,7 @@
         transform: translateY(-50%);
         color: var(--gray-400);
       }
+
       .btn-primary {
         background: var(--primary-green);
         color: white;
@@ -482,6 +700,43 @@
       .btn-secondary:hover {
         background: var(--gray-300);
       }
+      .btn-sm {
+        padding: 0.2rem 0.8rem;
+        border-radius: 40px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        background: var(--gray-100);
+        color: var(--brown-soft);
+      }
+      .btn-sm:hover {
+        background: var(--gray-200);
+        transform: translateY(-1px);
+      }
+      .btn-sm.primary {
+        background: var(--primary-green);
+        color: white;
+      }
+      .btn-sm.primary:hover {
+        background: var(--primary-green-dark);
+      }
+      .btn-sm.danger {
+        background: #dc3545;
+        color: white;
+      }
+      .btn-sm.danger:hover {
+        background: #c82333;
+      }
+      .btn-sm.warning {
+        background: #ffc107;
+        color: #212529;
+      }
+      .btn-sm.warning:hover {
+        background: #e0a800;
+      }
+
       .filter-chips {
         display: flex;
         gap: 0.5rem;
@@ -498,6 +753,7 @@
         border: 1px solid transparent;
         cursor: pointer;
         transition: var(--transition);
+        user-select: none;
       }
       .filter-chip.active {
         background: rgba(201, 168, 76, 0.15);
@@ -507,6 +763,7 @@
       .filter-chip:hover {
         background: var(--gray-200);
       }
+
       .content-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -525,7 +782,7 @@
         gap: 0.4rem;
       }
       body.dark-theme .content-card {
-        background: rgba(30, 35, 50, 0.4);
+        background: rgba(30, 30, 30, 0.4);
         border-color: rgba(201, 168, 76, 0.04);
       }
       .content-card:hover {
@@ -609,42 +866,7 @@
         margin-top: 0.4rem;
         flex-wrap: wrap;
       }
-      .content-card .card-actions .btn-sm {
-        padding: 0.2rem 0.8rem;
-        border-radius: 40px;
-        font-size: 0.7rem;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-        transition: var(--transition);
-        background: var(--gray-100);
-        color: var(--brown-soft);
-      }
-      .content-card .card-actions .btn-sm:hover {
-        background: var(--gray-200);
-        transform: translateY(-1px);
-      }
-      .content-card .card-actions .btn-sm.primary {
-        background: var(--primary-green);
-        color: white;
-      }
-      .content-card .card-actions .btn-sm.primary:hover {
-        background: var(--primary-green-dark);
-      }
-      .content-card .card-actions .btn-sm.danger {
-        background: #dc3545;
-        color: white;
-      }
-      .content-card .card-actions .btn-sm.danger:hover {
-        background: #c82333;
-      }
-      .content-card .card-actions .btn-sm.warning {
-        background: #ffc107;
-        color: #212529;
-      }
-      .content-card .card-actions .btn-sm.warning:hover {
-        background: #e0a800;
-      }
+
       .moderation-list {
         display: flex;
         flex-direction: column;
@@ -664,7 +886,7 @@
         transition: var(--transition);
       }
       body.dark-theme .mod-item {
-        background: rgba(30, 35, 50, 0.3);
+        background: rgba(30, 30, 30, 0.3);
         border-color: rgba(201, 168, 76, 0.04);
       }
       .mod-item:hover {
@@ -686,13 +908,22 @@
         display: flex;
         gap: 0.4rem;
         flex-wrap: wrap;
+        align-items: center;
       }
+      .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: var(--brown-soft);
+        font-style: italic;
+      }
+
+      /* ===== SLIDE-OVER ===== */
       .slide-over {
         position: fixed;
         top: 0;
         right: -100%;
         width: 100%;
-        max-width: 640px;
+        max-width: 760px;
         height: 100%;
         background: var(--cream);
         box-shadow: var(--shadow-heavy);
@@ -726,6 +957,12 @@
         font-size: 1.5rem;
         color: var(--brown-soft);
         cursor: pointer;
+        transition: var(--transition);
+        padding: 0.2rem;
+      }
+      .slide-over .slide-header .close-slide:hover {
+        color: var(--gold);
+        transform: rotate(90deg);
       }
       .slide-over .form-group {
         margin-bottom: 1.2rem;
@@ -751,13 +988,20 @@
         font-size: 0.95rem;
         transition: var(--transition);
         color: var(--brown);
+        font-family: var(--font-sans);
+      }
+      .slide-over .form-group input::placeholder,
+      .slide-over .form-group textarea::placeholder {
+        color: var(--gray-400);
+        font-weight: 300;
+        font-size: 0.85rem;
       }
       body.dark-theme .slide-over .form-group input,
       body.dark-theme .slide-over .form-group textarea,
       body.dark-theme .slide-over .form-group select {
         background: rgba(255, 255, 255, 0.05);
         border-color: var(--gray-300);
-        color: #e2e8f0;
+        color: var(--brown);
       }
       .slide-over .form-group input:focus,
       .slide-over .form-group textarea:focus {
@@ -765,15 +1009,92 @@
         border-color: var(--gold);
         box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
       }
+      .slide-over .form-group textarea {
+        resize: vertical;
+        min-height: 60px;
+      }
       .slide-over .form-group .checkbox-group {
         display: flex;
         align-items: center;
         gap: 0.6rem;
+        padding: 0.2rem 0;
       }
       .slide-over .form-group .checkbox-group input[type="checkbox"] {
         width: auto;
+        width: 18px;
+        height: 18px;
         accent-color: var(--primary-green);
+        cursor: pointer;
+        flex-shrink: 0;
       }
+      .slide-over .form-group .checkbox-group label {
+        text-transform: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin: 0;
+      }
+      .slide-over .form-group .helper-text {
+        font-size: 0.7rem;
+        color: var(--brown-light);
+        margin-top: 0.2rem;
+        font-style: italic;
+      }
+
+      /* Gallery image list */
+      .gallery-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.3rem;
+      }
+      .gallery-item {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+      }
+      .gallery-item input {
+        flex: 1;
+      }
+      .gallery-item .remove-gallery-btn {
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        flex-shrink: 0;
+      }
+      .gallery-item .remove-gallery-btn:hover {
+        background: #c82333;
+        transform: scale(1.05);
+      }
+      .add-gallery-btn {
+        background: var(--gray-100);
+        border: 1px dashed var(--gray-300);
+        border-radius: var(--radius-sm);
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        font-size: 0.8rem;
+        color: var(--brown-soft);
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.3rem;
+      }
+      .add-gallery-btn:hover {
+        border-color: var(--gold);
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--brown);
+      }
+
       .slide-over .form-actions {
         display: flex;
         gap: 0.8rem;
@@ -781,6 +1102,7 @@
         margin-top: 1.5rem;
         border-top: 1px solid rgba(201, 168, 76, 0.1);
         padding-top: 1.5rem;
+        flex-wrap: wrap;
       }
       .slide-over .form-actions .btn {
         padding: 0.6rem 1.6rem;
@@ -789,6 +1111,10 @@
         border: none;
         cursor: pointer;
         transition: var(--transition);
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
       }
       .slide-over .form-actions .btn-primary {
         background: var(--primary-green);
@@ -797,6 +1123,7 @@
       .slide-over .form-actions .btn-primary:hover {
         background: var(--primary-green-dark);
         transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(42, 94, 58, 0.2);
       }
       .slide-over .form-actions .btn-secondary {
         background: var(--gray-200);
@@ -805,6 +1132,7 @@
       .slide-over .form-actions .btn-secondary:hover {
         background: var(--gray-300);
       }
+
       .overlay {
         position: fixed;
         inset: 0;
@@ -816,6 +1144,8 @@
       .overlay.active {
         display: block;
       }
+
+      /* ===== TOAST ===== */
       .toast {
         position: fixed;
         bottom: 2rem;
@@ -831,11 +1161,21 @@
         opacity: 0;
         transition: all 0.3s ease;
         pointer-events: none;
+        max-width: 400px;
       }
       .toast.show {
         transform: translateY(0);
         opacity: 1;
       }
+      .toast.error {
+        background: #dc3545;
+      }
+      .toast.warning {
+        background: #ffc107;
+        color: #212529;
+      }
+
+      /* ===== RESPONSIVE ===== */
       @media (max-width: 1024px) {
         .sidebar {
           width: 72px;
@@ -854,6 +1194,12 @@
         .main-content {
           padding: 1.5rem;
         }
+        .topbar {
+          padding-left: 0;
+        }
+        .mobile-menu-toggle {
+          display: flex !important;
+        }
       }
       @media (max-width: 768px) {
         .sidebar {
@@ -861,6 +1207,27 @@
         }
         .main-content {
           padding: 1rem;
+          padding-top: 60px;
+        }
+        .topbar {
+          padding-left: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.6rem;
+        }
+        .topbar .page-title {
+          font-size: 1.4rem;
+        }
+        .topbar .actions {
+          justify-content: flex-end;
+        }
+        .mobile-menu-toggle {
+          display: flex !important;
+          top: 10px;
+          left: 10px;
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
         }
         .stats-grid {
           grid-template-columns: repeat(2, 1fr);
@@ -878,12 +1245,15 @@
         .section-header .section-actions .search-box input {
           width: 100%;
         }
+        .section-header .section-actions .search-box input:focus {
+          width: 100%;
+        }
         .slide-over {
           max-width: 100%;
           padding: 1.5rem;
         }
-        .topbar .page-title {
-          font-size: 1.4rem;
+        .login-card {
+          padding: 2rem 1.5rem;
         }
       }
       @media (max-width: 480px) {
@@ -892,6 +1262,26 @@
         }
         .topbar .actions {
           flex-wrap: wrap;
+          justify-content: center;
+        }
+        .login-card {
+          padding: 1.5rem 1rem;
+        }
+        .login-card .remember-row {
+          flex-direction: column;
+          gap: 0.4rem;
+          align-items: flex-start;
+        }
+        .mobile-menu-toggle {
+          top: 8px;
+          left: 8px;
+          width: 36px;
+          height: 36px;
+          font-size: 0.9rem;
+        }
+        .sidebar-mobile {
+          width: 260px;
+          left: -260px;
         }
       }
       .skeleton {
@@ -918,7 +1308,8 @@
       <div class="login-card">
         <div class="logo-icon"><i class="fas fa-om"></i></div>
         <h2>Spiriligious</h2>
-        <p class="sub">Admin Access</p>
+        <p class="sub">Admin Access · Content Management</p>
+        <div class="login-error" id="loginError"></div>
         <div class="input-group">
           <label>Email</label>
           <input
@@ -932,19 +1323,84 @@
           <input type="password" id="adminPassword" placeholder="••••••••" />
           <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
         </div>
+        <div class="remember-row">
+          <label><input type="checkbox" id="rememberMe" /> Remember me</label>
+          <a href="#" onclick="alert('Contact admin to reset password.')"
+            >Forgot password?</a
+          >
+        </div>
         <button class="btn-login" id="loginBtn">
-          <i class="fas fa-lock-open"></i> Login
+          <span class="spinner"></span>
+          <span class="btn-text"><i class="fas fa-lock-open"></i> Login</span>
         </button>
       </div>
     </div>
 
     <!-- ===== ADMIN PANEL ===== -->
     <div id="adminPanel" style="display: none">
+      <!-- Mobile menu toggle -->
+      <button
+        class="mobile-menu-toggle"
+        id="mobileMenuToggle"
+        aria-label="Toggle menu"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Sidebar overlay for mobile -->
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+      <!-- Mobile sidebar -->
+      <div class="sidebar-mobile" id="sidebarMobile">
+        <div class="brand">
+          <img src="images/logo.png" alt="Spiriligious" />
+          <span>Spiriligious</span>
+          <button class="close-sidebar" id="closeSidebarBtn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <button class="nav-item active" data-section="dashboard">
+          <i class="fas fa-th-large"></i>Dashboard
+        </button>
+        <button class="nav-item" data-section="shlok">
+          <i class="fas fa-praying-hands"></i>Daily Shlok
+        </button>
+        <button class="nav-item" data-section="sant-articles">
+          <i class="fas fa-feather-alt"></i>Sant Articles
+        </button>
+        <button class="nav-item" data-section="sant-darshan">
+          <i class="fas fa-user-astronaut"></i>Sant Darshan
+        </button>
+        <button class="nav-item" data-section="mandir">
+          <i class="fas fa-om"></i>Mandir Darshan
+        </button>
+        <button class="nav-item" data-section="bhajan">
+          <i class="fas fa-music"></i>Bhajan Videos
+        </button>
+        <button class="nav-item" data-section="encyclopedia">
+          <i class="fas fa-book"></i>Encyclopedia
+        </button>
+        <button class="nav-item" data-section="scientificCards">
+          <i class="fas fa-flask"></i>Science Cards
+        </button>
+        <button class="nav-item" data-section="community">
+          <i class="fas fa-comments"></i>Community
+        </button>
+        <button class="nav-item" data-section="podcast">
+          <i class="fas fa-microphone-alt"></i>Podcasts
+        </button>
+        <div style="flex: 1"></div>
+        <button class="nav-item" id="logoutSidebarMobileBtn">
+          <i class="fas fa-sign-out-alt"></i>Logout
+        </button>
+      </div>
+
       <div class="admin-wrapper">
-        <!-- Sidebar -->
+        <!-- Desktop Sidebar -->
         <aside class="sidebar" id="sidebar">
           <div class="brand">
-            <i class="fas fa-om"></i><span>Spiriligious</span>
+            <img src="images/logo.png" alt="Spiriligious" />
+            <span>Spiriligious</span>
           </div>
           <button class="nav-item active" data-section="dashboard">
             <i class="fas fa-th-large"></i><span>Dashboard</span>
@@ -967,6 +1423,9 @@
           <button class="nav-item" data-section="encyclopedia">
             <i class="fas fa-book"></i><span>Encyclopedia</span>
           </button>
+          <button class="nav-item" data-section="scientificCards">
+            <i class="fas fa-flask"></i><span>Science Cards</span>
+          </button>
           <button class="nav-item" data-section="community">
             <i class="fas fa-comments"></i><span>Community</span>
           </button>
@@ -981,11 +1440,10 @@
 
         <!-- Main Content -->
         <main class="main-content" id="mainContent">
-          <!-- Top Bar -->
           <div class="topbar">
             <h1 class="page-title" id="pageTitle">Dashboard</h1>
             <div class="actions">
-              <button class="btn-icon" id="themeToggleBtn">
+              <button class="btn-icon" id="themeToggleBtn" title="Toggle theme">
                 <i class="fas fa-moon"></i>
               </button>
               <button class="logout-btn" id="logoutTopBtn">
@@ -1029,12 +1487,21 @@
                   <button class="btn-primary" onclick="openSlideOver('mandir')">
                     <i class="fas fa-plus"></i> Add Temple
                   </button>
+                  <button class="btn-primary" onclick="openSlideOver('bhajan')">
+                    <i class="fas fa-plus"></i> Add Bhajan
+                  </button>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('podcast')"
+                  >
+                    <i class="fas fa-plus"></i> Add Podcast
+                  </button>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Shlok Section -->
+          <!-- Shlok -->
           <section id="shlokSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1064,7 +1531,7 @@
             </div>
           </section>
 
-          <!-- Sant Articles Section -->
+          <!-- Sant Articles -->
           <section id="sant-articlesSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1097,7 +1564,7 @@
             </div>
           </section>
 
-          <!-- Sant Darshan Section -->
+          <!-- Sant Darshan -->
           <section id="sant-darshanSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1131,7 +1598,7 @@
             </div>
           </section>
 
-          <!-- Mandir Section -->
+          <!-- Mandir -->
           <section id="mandirSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1161,7 +1628,7 @@
             </div>
           </section>
 
-          <!-- Bhajan Section -->
+          <!-- Bhajan -->
           <section id="bhajanSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1191,7 +1658,7 @@
             </div>
           </section>
 
-          <!-- Encyclopedia Section -->
+          <!-- Encyclopedia -->
           <section id="encyclopediaSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1224,7 +1691,40 @@
             </div>
           </section>
 
-          <!-- Community Section -->
+          <!-- Scientific Cards -->
+          <section id="scientificCardsSection" style="display: none">
+            <div class="section-container">
+              <div class="section-header">
+                <h2><i class="fas fa-flask"></i> Science Cards</h2>
+                <div class="section-actions">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i
+                    ><input
+                      type="text"
+                      placeholder="Search science..."
+                      id="scienceSearch"
+                    />
+                  </div>
+                  <button
+                    class="btn-primary"
+                    onclick="openSlideOver('scientificCards')"
+                  >
+                    <i class="fas fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+              <div class="filter-chips" id="scienceFilters">
+                <span class="filter-chip active" data-filter="all">All</span>
+                <span class="filter-chip" data-filter="published"
+                  >Published</span
+                >
+                <span class="filter-chip" data-filter="draft">Draft</span>
+              </div>
+              <div id="scienceList" class="content-grid"></div>
+            </div>
+          </section>
+
+          <!-- Community -->
           <section id="communitySection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1258,7 +1758,7 @@
             </div>
           </section>
 
-          <!-- Podcast Section -->
+          <!-- Podcast -->
           <section id="podcastSection" style="display: none">
             <div class="section-container">
               <div class="section-header">
@@ -1316,7 +1816,7 @@
 
     <script>
       // ============================================================
-      // FIREBASE CONFIG
+      // FIREBASE CONFIG & INIT
       // ============================================================
       const firebaseConfig = {
         apiKey: "AIzaSyC8h_NLwFq54mFSrZhG-gQnWJRIAr0zc5c",
@@ -1337,6 +1837,16 @@
       let currentSection = "dashboard";
       let editingId = null;
       let editingType = null;
+      // Store all data for filtering/searching
+      let allShloks = [];
+      let allSantArticles = [];
+      let allSants = [];
+      let allMandirs = [];
+      let allVideos = [];
+      let allTerms = [];
+      let allScience = [];
+      let allForumTopics = [];
+      let allPodcasts = [];
 
       // ============================================================
       // HELPERS
@@ -1348,10 +1858,12 @@
         });
       }
 
-      function showToast(msg, duration) {
+      function showToast(msg, duration, type) {
         duration = duration || 3000;
         var t = document.getElementById("toast");
         t.textContent = msg;
+        t.className = "toast";
+        if (type) t.classList.add(type);
         t.classList.add("show");
         clearTimeout(t._timeout);
         t._timeout = setTimeout(function () {
@@ -1376,12 +1888,49 @@
         );
       }
 
+      function getStatusFromData(data) {
+        if (data.published === true) return "published";
+        if (data.published === false && data.held === true) return "held";
+        if (data.published === false) return "draft";
+        return "pending";
+      }
+
+      // ============================================================
+      // FILTER & SEARCH HELPERS
+      // ============================================================
+      function filterItems(items, filter, searchTerm, statusKey) {
+        let filtered = items;
+        if (filter && filter !== "all") {
+          filtered = filtered.filter(function (item) {
+            var data = item.data || item;
+            var status = statusKey ? data[statusKey] : getStatusFromData(data);
+            return status === filter;
+          });
+        }
+        if (searchTerm && searchTerm.trim()) {
+          var term = searchTerm.trim().toLowerCase();
+          filtered = filtered.filter(function (item) {
+            var data = item.data || item;
+            var title = (
+              data.title ||
+              data.name ||
+              data.term ||
+              data.text ||
+              ""
+            ).toLowerCase();
+            return title.indexOf(term) !== -1;
+          });
+        }
+        return filtered;
+      }
+
       // ============================================================
       // AUTH
       // ============================================================
       var loginBtn = document.getElementById("loginBtn");
       var togglePwd = document.getElementById("togglePassword");
       var pwdInput = document.getElementById("adminPassword");
+      var loginError = document.getElementById("loginError");
 
       togglePwd.addEventListener("click", function () {
         var type = pwdInput.type === "password" ? "text" : "password";
@@ -1391,20 +1940,67 @@
       });
 
       loginBtn.addEventListener("click", function () {
-        var email = document.getElementById("adminEmail").value;
+        var email = document.getElementById("adminEmail").value.trim();
         var password = document.getElementById("adminPassword").value;
+        loginError.classList.remove("show");
+        loginError.textContent = "";
+        if (!email || !password) {
+          loginError.textContent = "Please enter both email and password.";
+          loginError.classList.add("show");
+          return;
+        }
+        loginBtn.disabled = true;
+        loginBtn.classList.add("loading");
         auth
           .signInWithEmailAndPassword(email, password)
-          .then(function () {
+          .then(function (userCredential) {
+            loginBtn.disabled = false;
+            loginBtn.classList.remove("loading");
             document.getElementById("loginContainer").style.display = "none";
             document.getElementById("adminPanel").style.display = "block";
             loadAllData();
-            showToast("Welcome back, Admin!");
+            if (document.getElementById("rememberMe").checked) {
+              localStorage.setItem("adminEmail", email);
+            } else {
+              localStorage.removeItem("adminEmail");
+            }
+            showToast(
+              "Welcome back, " +
+                (userCredential.user.displayName || "Admin") +
+                "!",
+            );
           })
           .catch(function (err) {
-            alert("Login failed: " + err.message);
+            loginBtn.disabled = false;
+            loginBtn.classList.remove("loading");
+            var msg = "Login failed. Please check your credentials.";
+            if (err.code === "auth/user-not-found")
+              msg = "No account found with this email.";
+            else if (err.code === "auth/wrong-password")
+              msg = "Incorrect password. Please try again.";
+            else if (err.code === "auth/invalid-email")
+              msg = "Please enter a valid email address.";
+            else if (err.code === "auth/too-many-requests")
+              msg = "Too many failed attempts. Please try again later.";
+            loginError.textContent = msg;
+            loginError.classList.add("show");
           });
       });
+
+      pwdInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") loginBtn.click();
+      });
+      document
+        .getElementById("adminEmail")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter") loginBtn.click();
+        });
+
+      var savedEmail = localStorage.getItem("adminEmail");
+      if (savedEmail) {
+        document.getElementById("adminEmail").value = savedEmail;
+        document.getElementById("rememberMe").checked = true;
+      }
 
       document
         .getElementById("logoutTopBtn")
@@ -1418,11 +2014,50 @@
           auth.signOut();
           location.reload();
         });
+      document
+        .getElementById("logoutSidebarMobileBtn")
+        .addEventListener("click", function () {
+          auth.signOut();
+          location.reload();
+        });
+
+      // ============================================================
+      // MOBILE SIDEBAR
+      // ============================================================
+      var mobileToggle = document.getElementById("mobileMenuToggle");
+      var sidebarMobile = document.getElementById("sidebarMobile");
+      var sidebarOverlay = document.getElementById("sidebarOverlay");
+      var closeSidebarBtn = document.getElementById("closeSidebarBtn");
+
+      function openMobileSidebar() {
+        sidebarMobile.classList.add("open");
+        sidebarOverlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMobileSidebar() {
+        sidebarMobile.classList.remove("open");
+        sidebarOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      mobileToggle.addEventListener("click", openMobileSidebar);
+      closeSidebarBtn.addEventListener("click", closeMobileSidebar);
+      sidebarOverlay.addEventListener("click", closeMobileSidebar);
+
+      // Also close when a nav item is clicked
+      sidebarMobile.querySelectorAll(".nav-item").forEach(function (item) {
+        item.addEventListener("click", function () {
+          // Let the nav handler do its work, then close
+          setTimeout(closeMobileSidebar, 100);
+        });
+      });
 
       // ============================================================
       // THEME TOGGLE
       // ============================================================
       var themeBtn = document.getElementById("themeToggleBtn");
+
       function applyTheme(theme) {
         if (theme === "dark") {
           document.body.classList.add("dark-theme");
@@ -1442,7 +2077,7 @@
       });
 
       // ============================================================
-      // SIDEBAR NAVIGATION – FIXED
+      // SIDEBAR NAVIGATION
       // ============================================================
       var sections = {
         dashboard: "Dashboard",
@@ -1452,43 +2087,137 @@
         mandir: "Mandir Darshan",
         bhajan: "Bhajan Videos",
         encyclopedia: "Encyclopedia",
+        scientificCards: "Science Cards",
         community: "Community",
         podcast: "Podcasts",
       };
+
+      function navigateToSection(section) {
+        document.querySelectorAll(".nav-item").forEach(function (n) {
+          n.classList.remove("active");
+        });
+        document
+          .querySelectorAll(".nav-item[data-section='" + section + "']")
+          .forEach(function (el) {
+            el.classList.add("active");
+          });
+        document
+          .querySelectorAll("#mainContent > section")
+          .forEach(function (s) {
+            s.style.display = "none";
+          });
+        var target = document.getElementById(section + "Section");
+        if (target) target.style.display = "block";
+        else
+          document.getElementById("dashboardSection").style.display = "block";
+        document.getElementById("pageTitle").textContent =
+          sections[section] || "Dashboard";
+        currentSection = section;
+        // Load data
+        if (section === "shlok") renderShloks();
+        else if (section === "sant-articles") renderSantArticles();
+        else if (section === "sant-darshan") renderSants();
+        else if (section === "mandir") renderMandirs();
+        else if (section === "bhajan") renderVideos();
+        else if (section === "encyclopedia") renderTerms();
+        else if (section === "scientificCards") renderScienceCards();
+        else if (section === "community") renderForumTopics();
+        else if (section === "podcast") renderPodcasts();
+        else if (section === "dashboard") loadDashboard();
+      }
 
       document
         .querySelectorAll(".nav-item[data-section]")
         .forEach(function (item) {
           item.addEventListener("click", function () {
             var section = this.dataset.section;
-            document.querySelectorAll(".nav-item").forEach(function (n) {
-              n.classList.remove("active");
-            });
-            this.classList.add("active");
-            document
-              .querySelectorAll("#mainContent > section")
-              .forEach(function (s) {
-                s.style.display = "none";
-              });
-            var target = document.getElementById(section + "Section");
-            if (target) target.style.display = "block";
-            else
-              document.getElementById("dashboardSection").style.display =
-                "block";
-            document.getElementById("pageTitle").textContent =
-              sections[section] || "Dashboard";
-            currentSection = section;
-            if (section === "shlok") loadShloks();
-            else if (section === "sant-articles") loadSantArticles();
-            else if (section === "sant-darshan") loadSants();
-            else if (section === "mandir") loadMandirs();
-            else if (section === "bhajan") loadVideos();
-            else if (section === "encyclopedia") loadTerms();
-            else if (section === "community") loadForumTopics();
-            else if (section === "podcast") loadPodcasts();
-            else if (section === "dashboard") loadDashboard();
+            navigateToSection(section);
           });
         });
+
+      // ============================================================
+      // GALLERY UI HELPERS
+      // ============================================================
+      function buildGalleryUI(containerId, values) {
+        var container = document.getElementById(containerId);
+        if (!container) return;
+        values = values || [""];
+        if (!Array.isArray(values)) values = [];
+        if (values.length === 0) values = [""];
+
+        function render() {
+          var html = '<div class="gallery-list">';
+          values.forEach(function (val, idx) {
+            html += '<div class="gallery-item">';
+            html +=
+              '<input type="text" value="' +
+              escapeHtml(val) +
+              '" placeholder="Image URL ' +
+              (idx + 1) +
+              '" class="gallery-input" data-index="' +
+              idx +
+              '" />';
+            if (values.length > 1) {
+              html +=
+                '<button class="remove-gallery-btn" data-index="' +
+                idx +
+                '" title="Remove"><i class="fas fa-times"></i></button>';
+            }
+            html += "</div>";
+          });
+          html += "</div>";
+          html +=
+            '<button class="add-gallery-btn" id="addGalleryBtn"><i class="fas fa-plus"></i> Add Image</button>';
+          container.innerHTML = html;
+
+          // Add event listeners
+          container
+            .querySelectorAll(".gallery-input")
+            .forEach(function (input) {
+              input.addEventListener("change", function () {
+                var idx = parseInt(this.dataset.index);
+                values[idx] = this.value;
+              });
+              input.addEventListener("input", function () {
+                var idx = parseInt(this.dataset.index);
+                values[idx] = this.value;
+              });
+            });
+
+          container
+            .querySelectorAll(".remove-gallery-btn")
+            .forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                var idx = parseInt(this.dataset.index);
+                values.splice(idx, 1);
+                if (values.length === 0) values = [""];
+                render();
+              });
+            });
+
+          var addBtn = container.querySelector("#addGalleryBtn");
+          if (addBtn) {
+            addBtn.addEventListener("click", function () {
+              values.push("");
+              render();
+            });
+          }
+        }
+
+        render();
+        return values;
+      }
+
+      function getGalleryValues(containerId) {
+        var container = document.getElementById(containerId);
+        if (!container) return [];
+        var inputs = container.querySelectorAll(".gallery-input");
+        var vals = [];
+        inputs.forEach(function (inp) {
+          if (inp.value.trim()) vals.push(inp.value.trim());
+        });
+        return vals;
+      }
 
       // ============================================================
       // SLIDE-OVER EDITOR
@@ -1503,105 +2232,158 @@
         var isEdit = !!editingId;
         var html = "";
 
+        // ----- SHLOK -----
         if (type === "shlok") {
           title.textContent = isEdit ? "Edit Daily Shlok" : "Add Daily Shlok";
           html = `
-      <div class="form-group">
-        <label>Shlok Text</label>
-        <textarea id="shlokText" rows="3" placeholder="Enter shlok..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Meaning</label>
-        <input type="text" id="shlokMeaning" placeholder="Meaning / translation" />
-      </div>
-      <div class="form-group">
-        <label>Source (optional)</label>
-        <input type="text" id="shlokSource" placeholder="e.g., Bhagavad Gita" />
-      </div>
-      <div class="form-group">
-        <label>Date</label>
-        <input type="date" id="shlokDate" />
-      </div>
-      <div class="form-group checkbox-group">
-        <input type="checkbox" id="shlokPublished" checked />
-        <label for="shlokPublished">Publish immediately</label>
-      </div>
-    `;
-        } else if (type === "sant-articles") {
+            <div class="form-group"><label>Shlok Text <span style="color:#dc3545;">*</span></label><textarea id="shlokText" rows="4" placeholder="Enter the shlok in Devanagari script..."></textarea></div>
+            <div class="form-group"><label>Meaning / Translation</label><input type="text" id="shlokMeaning" placeholder="e.g., 'That which is real in all beings...'" /></div>
+            <div class="form-group"><label>Source (optional)</label><input type="text" id="shlokSource" placeholder="e.g., Bhagavad Gita 2.47" /></div>
+            <div class="form-group"><label>Date</label><input type="date" id="shlokDate" /></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="shlokPublished" checked /><label for="shlokPublished">Publish immediately</label></div>
+          `;
+        }
+        // ----- SANT ARTICLES -----
+        else if (type === "sant-articles") {
           title.textContent = isEdit ? "Edit Sant Article" : "Add Sant Article";
           html = `
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text" id="santArticleTitle" placeholder="Article title" />
-      </div>
-      <div class="form-group">
-        <label>Author</label>
-        <input type="text" id="santArticleAuthor" placeholder="Author name" />
-      </div>
-      <div class="form-group">
-        <label>Author Credits (optional)</label>
-        <input type="text" id="santArticleCredits" placeholder="e.g., PhD" />
-      </div>
-      <div class="form-group">
-        <label>Image URL</label>
-        <input type="text" id="santArticleImage" placeholder="https://..." />
-      </div>
-      <div class="form-group">
-        <label>Content (HTML allowed)</label>
-        <textarea id="santArticleContent" rows="12" placeholder="Paste the full article here. Use HTML tags for formatting..."></textarea>
-        <small style="color: var(--brown-soft); font-size: 0.75rem; display: block; margin-top: 0.3rem; background: rgba(201,168,76,0.06); padding: 0.5rem 0.8rem; border-radius: var(--radius-xs); border-left: 3px solid var(--gold);">
-          💡 <b>HTML tips:</b> &lt;p&gt;Paragraph&lt;/p&gt; &bull; &lt;br&gt; line break &bull; &lt;b&gt;bold&lt;/b&gt; &bull; &lt;i&gt;italic&lt;/i&gt; &bull; &lt;ul&gt;&lt;li&gt;list items&lt;/li&gt;&lt;/ul&gt; &bull; &lt;h3&gt;Heading&lt;/h3&gt;
-        </small>
-      </div>
-      <div class="form-group checkbox-group">
-        <input type="checkbox" id="santArticlePublished" checked />
-        <label for="santArticlePublished">Publish</label>
-      </div>
-    `;
-        } else if (type === "sant-darshan") {
+            <div class="form-group"><label>Title <span style="color:#dc3545;">*</span></label><input type="text" id="santArticleTitle" placeholder="e.g., भक्तों के हनुमान: बाबा नीब करोरी जी महाराज" /></div>
+            <div class="form-group"><label>Author</label><input type="text" id="santArticleAuthor" placeholder="e.g., श्री रवि जोशी" /></div>
+            <div class="form-group"><label>Author Credits</label><input type="text" id="santArticleCredits" placeholder="e.g., Ph.D., Scholar" /></div>
+            <div class="form-group"><label>Hero Image URL <span style="color:#b9912d;font-size:0.7rem;">(main article image)</span></label><input type="text" id="santArticleImage" placeholder="https://example.com/hero.jpg" /></div>
+            <div class="form-group"><label>Content (HTML) <span style="color:#dc3545;">*</span></label><textarea id="santArticleContent" rows="12" placeholder="Full article content with HTML formatting..."></textarea></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="santArticleFeatured" /><label for="santArticleFeatured">Featured</label></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="santArticlePublished" checked /><label for="santArticlePublished">Publish</label></div>
+          `;
+        }
+        // ----- MANDIR -----
+        else if (type === "mandir") {
+          title.textContent = isEdit ? "Edit Temple" : "Add Temple";
+          html = `
+            <div class="form-group"><label>Temple Name <span style="color:#dc3545;">*</span></label><input type="text" id="mandirTitle" placeholder="e.g., Kashi Vishwanath Temple" /></div>
+            <div class="form-group"><label>Location</label><input type="text" id="mandirLocation" placeholder="e.g., Varanasi, Uttar Pradesh" /></div>
+            <div class="form-group"><label>Established Year</label><input type="text" id="mandirEstablished" placeholder="e.g., 1200 CE" /></div>
+            <div class="form-group"><label>Altitude (meters)</label><input type="text" id="mandirAltitude" placeholder="e.g., 1800" /></div>
+            <div class="form-group"><label>Hero Image URL <span style="color:#b9912d;font-size:0.7rem;">(main temple image)</span></label><input type="text" id="mandirImage" placeholder="https://example.com/temple.jpg" /></div>
+            <div class="form-group"><label>Gallery Images <span style="color:#b9912d;font-size:0.7rem;">(click + to add more)</span></label><div id="mandirGalleryContainer"></div></div>
+            <div class="form-group"><label>Description</label><textarea id="mandirDescription" rows="4" placeholder="Brief description of the temple..."></textarea></div>
+            <div class="form-group"><label>History</label><textarea id="mandirHistory" rows="4" placeholder="Historical background..."></textarea></div>
+            <div class="form-group"><label>Architecture</label><textarea id="mandirArchitecture" rows="4" placeholder="Architectural details..."></textarea></div>
+            <div class="form-group"><label>Religious Significance</label><textarea id="mandirSignificance" rows="4" placeholder="Spiritual importance..."></textarea></div>
+            <div class="form-group"><label>Festivals</label><textarea id="mandirFestivals" rows="4" placeholder="Major festivals celebrated..."></textarea></div>
+            <div class="form-group"><label>Travel Information</label><textarea id="mandirTravelInfo" rows="4" placeholder="How to reach..."></textarea></div>
+            <div class="form-group"><label>Opening Hours</label><input type="text" id="mandirOpeningHours" placeholder="e.g., 6:00 AM – 8:00 PM" /></div>
+            <div class="form-group"><label>Google Maps Link</label><input type="text" id="mandirMapLink" placeholder="https://maps.google.com/..." /></div>
+            <div class="form-group"><label>YouTube Video URL</label><input type="text" id="mandirVideo" placeholder="https://www.youtube.com/embed/..." /></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="mandirFeatured" /><label for="mandirFeatured">Featured</label></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="mandirPublished" checked /><label for="mandirPublished">Published</label></div>
+          `;
+        }
+        // ----- BHAJAN -----
+        else if (type === "bhajan") {
+          title.textContent = isEdit ? "Edit Bhajan" : "Add Bhajan";
+          html = `
+            <div class="form-group"><label>Title <span style="color:#dc3545;">*</span></label><input type="text" id="videoTitle" placeholder="e.g., रघुपति राघव राजा राम" /></div>
+            <div class="form-group"><label>Subtitle</label><input type="text" id="videoSubtitle" placeholder="e.g., A devotional hymn" /></div>
+            <div class="form-group"><label>Singer</label><input type="text" id="videoSinger" placeholder="e.g., Pandit Bhimsen Joshi" /></div>
+            <div class="form-group"><label>Composer</label><input type="text" id="videoComposer" placeholder="e.g., Traditional" /></div>
+            <div class="form-group"><label>Lyricist</label><input type="text" id="videoLyricist" placeholder="e.g., Tulsidas" /></div>
+            <div class="form-group"><label>Language</label><input type="text" id="videoLanguage" placeholder="e.g., Hindi, Sanskrit" /></div>
+            <div class="form-group"><label>Duration</label><input type="text" id="videoDuration" placeholder="e.g., 4:32" /></div>
+            <div class="form-group"><label>Thumbnail URL <span style="color:#b9912d;font-size:0.7rem;">(cover image)</span></label><input type="text" id="videoThumbnail" placeholder="https://example.com/thumbnail.jpg" /></div>
+            <div class="form-group"><label>YouTube Embed URL</label><input type="text" id="videoUrlInput" placeholder="https://www.youtube.com/embed/..." /></div>
+            <div class="form-group"><label>Audio URL <span style="color:#b9912d;font-size:0.7rem;">(for audio-only playback)</span></label><input type="text" id="videoAudioUrl" placeholder="https://example.com/bhajan.mp3" /></div>
+            <div class="form-group"><label>Description</label><textarea id="videoDesc" rows="3" placeholder="Short description..."></textarea></div>
+            <div class="form-group"><label>Lyrics</label><textarea id="videoLyrics" rows="8" placeholder="Full lyrics..."></textarea></div>
+            <div class="form-group"><label>Meaning / Translation</label><textarea id="videoMeaning" rows="4" placeholder="Meaning of the bhajan..."></textarea></div>
+            <div class="form-group"><label>Category</label><input type="text" id="videoCategory" placeholder="e.g., Devotional, Classical" /></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="videoFeatured" /><label for="videoFeatured">Featured</label></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="videoPublished" checked /><label for="videoPublished">Published</label></div>
+          `;
+        }
+        // ----- SANT DARSHAN -----
+        else if (type === "sant-darshan") {
           title.textContent = isEdit ? "Edit Sant" : "Add Sant";
           html = `
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" id="santName" placeholder="Sant name" />
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="santDesc" rows="4" placeholder="Description..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Image URL</label>
-        <input type="text" id="santImage" placeholder="https://..." />
-      </div>
-      <div class="form-group">
-        <label>YouTube Video URL</label>
-        <input type="text" id="santVideo" placeholder="https://www.youtube.com/watch?v=..." />
-      </div>
-      <div class="form-group">
-        <label>Status</label>
-        <select id="santStatus">
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
-          <option value="held">Held</option>
-        </select>
-      </div>
-    `;
-        } else if (type === "mandir") {
-          // ... similar
-        } else if (type === "bhajan") {
-          // ...
-        } else if (type === "encyclopedia") {
-          // ...
-        } else if (type === "community") {
-          // ...
-        } else if (type === "podcast") {
-          // ...
+            <div class="form-group"><label>Name <span style="color:#dc3545;">*</span></label><input type="text" id="santName" placeholder="e.g., Sant Kabir" /></div>
+            <div class="form-group"><label>Description</label><textarea id="santDesc" rows="4" placeholder="Description of the saint..."></textarea></div>
+            <div class="form-group"><label>Image URL <span style="color:#b9912d;font-size:0.7rem;">(hero image)</span></label><input type="text" id="santImage" placeholder="https://example.com/sant.jpg" /></div>
+            <div class="form-group"><label>YouTube Video URL</label><input type="text" id="santVideo" placeholder="https://www.youtube.com/embed/..." /></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="santFeatured" /><label for="santFeatured">Featured</label></div>
+            <div class="form-group"><label>Status</label><select id="santStatus"><option value="published">Published</option><option value="draft">Draft</option><option value="held">Held</option></select></div>
+          `;
+        }
+        // ----- SCIENTIFIC CARDS -----
+        else if (type === "scientificCards") {
+          title.textContent = isEdit
+            ? "Edit Science Article"
+            : "Add Science Article";
+          html = `
+            <div class="form-group"><label>Title <span style="color:#dc3545;">*</span></label><input type="text" id="scienceTitle" placeholder="e.g., The Science of Meditation" /></div>
+            <div class="form-group"><label>Author</label><input type="text" id="scienceAuthor" placeholder="e.g., Dr. Ananya Sharma" /></div>
+            <div class="form-group"><label>Category</label><input type="text" id="scienceCategory" placeholder="e.g., Astronomy, Yoga" /></div>
+            <div class="form-group"><label>Cover Image URL <span style="color:#b9912d;font-size:0.7rem;">(hero image)</span></label><input type="text" id="scienceImage" placeholder="https://example.com/cover.jpg" /></div>
+            <div class="form-group"><label>Short Summary</label><textarea id="scienceShortDesc" rows="3" placeholder="Brief summary..."></textarea></div>
+            <div class="form-group"><label>Full Analysis (HTML)</label><textarea id="scienceFullAnalysis" rows="10" placeholder="Full article content..."></textarea></div>
+            <div class="form-group"><label>Traditional Reference</label><textarea id="scienceTraditionalRef" rows="4" placeholder="Traditional texts or references..."></textarea></div>
+            <div class="form-group"><label>Modern Explanation</label><textarea id="scienceModernExplanation" rows="4" placeholder="Modern scientific explanation..."></textarea></div>
+            <div class="form-group"><label>References</label><textarea id="scienceReferences" rows="3" placeholder="Sources and references..."></textarea></div>
+            <div class="form-group"><label>External Links</label><textarea id="scienceExternalLinks" rows="3" placeholder="Relevant external URLs..."></textarea></div>
+            <div class="form-group"><label>Tags (comma separated)</label><input type="text" id="scienceTags" placeholder="yoga, meditation, science" /></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="scienceFeatured" /><label for="scienceFeatured">Featured</label></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="sciencePublished" checked /><label for="sciencePublished">Published</label></div>
+          `;
+        }
+        // ----- ENCYCLOPEDIA -----
+        else if (type === "encyclopedia") {
+          title.textContent = isEdit ? "Edit Term" : "Add Term";
+          html = `
+            <div class="form-group"><label>Term <span style="color:#dc3545;">*</span></label><input type="text" id="termName" placeholder="e.g., ॐ (Om)" /></div>
+            <div class="form-group"><label>Traditional Meaning</label><textarea id="termMeaning" rows="3" placeholder="Traditional meaning..."></textarea></div>
+            <div class="form-group"><label>Scientific Explanation</label><textarea id="termScientific" rows="4" placeholder="Scientific interpretation..."></textarea></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="termFeatured" /><label for="termFeatured">Featured</label></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="termPublished" checked /><label for="termPublished">Published</label></div>
+          `;
+        }
+        // ----- COMMUNITY -----
+        else if (type === "community") {
+          title.textContent = isEdit ? "Edit Topic" : "Add Topic";
+          html = `
+            <div class="form-group"><label>Title <span style="color:#dc3545;">*</span></label><input type="text" id="topicTitle" placeholder="e.g., What is the meaning of Dharma?" /></div>
+            <div class="form-group"><label>Content <span style="color:#dc3545;">*</span></label><textarea id="topicContent" rows="5" placeholder="Discussion content..."></textarea></div>
+            <div class="form-group"><label>Author</label><input type="text" id="topicAuthor" placeholder="e.g., साधक" /></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="topicPublished" checked /><label for="topicPublished">Published</label></div>
+          `;
+        }
+        // ----- PODCAST -----
+        else if (type === "podcast") {
+          title.textContent = isEdit ? "Edit Podcast" : "Add Podcast";
+          html = `
+            <div class="form-group"><label>Title <span style="color:#dc3545;">*</span></label><input type="text" id="podcastTitle" placeholder="e.g., The Science of Bhakti" /></div>
+            <div class="form-group"><label>YouTube Embed URL</label><input type="text" id="podcastVideo" placeholder="https://www.youtube.com/embed/..." /></div>
+            <div class="form-group"><label>Description</label><textarea id="podcastDesc" rows="3" placeholder="Description..."></textarea></div>
+            <div class="form-group checkbox-group"><input type="checkbox" id="podcastPublished" checked /><label for="podcastPublished">Published</label></div>
+          `;
         }
 
         body.innerHTML = html;
-        if (isEdit) loadEditData(type, editingId);
-        overlay.classList.add("active");
-        editor.classList.add("open");
+
+        // Initialize gallery UI for Mandir
+        if (type === "mandir") {
+          setTimeout(function () {
+            var galleryContainer = document.getElementById(
+              "mandirGalleryContainer",
+            );
+            if (galleryContainer) {
+              var galleryValues = isEdit ? [] : [""];
+              buildGalleryUI("mandirGalleryContainer", galleryValues);
+            }
+          }, 50);
+        }
+
+        if (isEdit) {
+          loadEditData(type, editingId);
+        }
 
         var saveBtn = document.createElement("button");
         saveBtn.className = "btn btn-primary";
@@ -1618,6 +2400,9 @@
         actions.appendChild(cancelBtn);
         actions.appendChild(saveBtn);
         body.appendChild(actions);
+
+        overlay.classList.add("active");
+        editor.classList.add("open");
       }
 
       function closeSlideOver() {
@@ -1634,99 +2419,190 @@
         .getElementById("slideOverlay")
         .addEventListener("click", closeSlideOver);
 
+      // ============================================================
+      // LOAD EDIT DATA
+      // ============================================================
       async function loadEditData(type, id) {
-        var doc;
-        if (type === "shlok")
-          doc = await db.collection("dailyShlok").doc(id).get();
-        else if (type === "sant-articles")
-          doc = await db.collection("santArticles").doc(id).get();
-        else if (type === "sant-darshan")
-          doc = await db.collection("santDarshan").doc(id).get();
-        else if (type === "mandir")
-          doc = await db.collection("mandirDarshan").doc(id).get();
-        else if (type === "bhajan")
-          doc = await db.collection("bhajanVideos").doc(id).get();
-        else if (type === "encyclopedia")
-          doc = await db.collection("encyclopediaTerms").doc(id).get();
-        else if (type === "community")
-          doc = await db.collection("forumTopics").doc(id).get();
-        else if (type === "podcast")
-          doc = await db.collection("podcasts").doc(id).get();
-        if (!doc.exists) return;
-        var data = doc.data();
+        try {
+          var doc;
+          if (type === "shlok")
+            doc = await db.collection("dailyShlok").doc(id).get();
+          else if (type === "sant-articles")
+            doc = await db.collection("santArticles").doc(id).get();
+          else if (type === "sant-darshan")
+            doc = await db.collection("santDarshan").doc(id).get();
+          else if (type === "mandir")
+            doc = await db.collection("mandirDarshan").doc(id).get();
+          else if (type === "bhajan")
+            doc = await db.collection("bhajanVideos").doc(id).get();
+          else if (type === "encyclopedia")
+            doc = await db.collection("encyclopediaTerms").doc(id).get();
+          else if (type === "scientificCards")
+            doc = await db.collection("scientificCards").doc(id).get();
+          else if (type === "community")
+            doc = await db.collection("forumTopics").doc(id).get();
+          else if (type === "podcast")
+            doc = await db.collection("podcasts").doc(id).get();
 
-        var map = {
-          shlok: [
-            "shlokText",
-            "shlokMeaning",
-            "shlokSource",
-            "shlokDate",
-            "shlokPublished",
-          ],
-          "sant-articles": [
-            "santArticleTitle",
-            "santArticleAuthor",
-            "santArticleCredits",
-            "santArticleImage",
-            "santArticleContent",
-            "santArticlePublished",
-          ],
-          "sant-darshan": [
-            "santName",
-            "santDesc",
-            "santImage",
-            "santVideo",
-            "santStatus",
-          ],
-          mandir: [
-            "mandirTitle",
-            "mandirDescription",
-            "mandirImage",
-            "mandirVideo",
-            "mandirPublished",
-          ],
-          bhajan: [
-            "videoTitle",
-            "videoUrlInput",
-            "videoDesc",
-            "videoPublished",
-          ],
-          encyclopedia: [
-            "termName",
-            "termMeaning",
-            "termScientific",
-            "termPublished",
-          ],
-          community: [
-            "topicTitle",
-            "topicContent",
-            "topicAuthor",
-            "topicPublished",
-          ],
-          podcast: [
-            "podcastTitle",
-            "podcastVideo",
-            "podcastDesc",
-            "podcastPublished",
-          ],
-        };
-        var fields = map[type] || [];
-        fields.forEach(function (f) {
-          var el = document.getElementById(f);
-          if (!el) return;
-          if (el.type === "checkbox") {
-            el.checked = data[f.replace("Published", "")] === true;
-          } else if (el.type === "date" && data.date) {
-            var d = data.date.toDate();
-            el.value = d.toISOString().slice(0, 10);
-          } else if (el.tagName === "SELECT") {
-            el.value = data[f] || "draft";
-          } else {
-            el.value = data[f] || "";
+          if (!doc.exists) {
+            showToast("Document not found.", 3000, "error");
+            return;
           }
-        });
+          var data = doc.data();
+
+          var mappings = {
+            shlok: [
+              ["shlokText", "text"],
+              ["shlokMeaning", "meaning"],
+              ["shlokSource", "source"],
+              ["shlokDate", "date", true],
+              ["shlokPublished", "published", true],
+            ],
+            "sant-articles": [
+              ["santArticleTitle", "title"],
+              ["santArticleAuthor", "author"],
+              ["santArticleCredits", "authorCredits"],
+              ["santArticleImage", "imageUrl"],
+              ["santArticleContent", "content"],
+              ["santArticleFeatured", "featured", true],
+              ["santArticlePublished", "published", true],
+            ],
+            "sant-darshan": [
+              ["santName", "name"],
+              ["santDesc", "description"],
+              ["santImage", "imageUrl"],
+              ["santVideo", "videoUrl"],
+              ["santFeatured", "featured", true],
+              ["santStatus", "status", false, false, true],
+            ],
+            mandir: [
+              ["mandirTitle", "title"],
+              ["mandirLocation", "location"],
+              ["mandirEstablished", "established"],
+              ["mandirAltitude", "altitude"],
+              ["mandirImage", "imageUrl"],
+              ["mandirDescription", "description"],
+              ["mandirHistory", "history"],
+              ["mandirArchitecture", "architecture"],
+              ["mandirSignificance", "significance"],
+              ["mandirFestivals", "festivals"],
+              ["mandirTravelInfo", "travelInfo"],
+              ["mandirOpeningHours", "openingHours"],
+              ["mandirMapLink", "mapLink"],
+              ["mandirVideo", "videoUrl"],
+              ["mandirFeatured", "featured", true],
+              ["mandirPublished", "published", true],
+            ],
+            bhajan: [
+              ["videoTitle", "title"],
+              ["videoSubtitle", "subtitle"],
+              ["videoSinger", "singer"],
+              ["videoComposer", "composer"],
+              ["videoLyricist", "lyricist"],
+              ["videoLanguage", "language"],
+              ["videoDuration", "duration"],
+              ["videoThumbnail", "thumbnail"],
+              ["videoUrlInput", "videoUrl"],
+              ["videoAudioUrl", "audioUrl"],
+              ["videoDesc", "description"],
+              ["videoLyrics", "lyrics"],
+              ["videoMeaning", "meaning"],
+              ["videoCategory", "category"],
+              ["videoFeatured", "featured", true],
+              ["videoPublished", "published", true],
+            ],
+            encyclopedia: [
+              ["termName", "term"],
+              ["termMeaning", "meaning"],
+              ["termScientific", "scientific"],
+              ["termFeatured", "featured", true],
+              ["termPublished", "published", true],
+            ],
+            scientificCards: [
+              ["scienceTitle", "title"],
+              ["scienceAuthor", "author"],
+              ["scienceCategory", "category"],
+              ["scienceImage", "imageUrl"],
+              ["scienceShortDesc", "shortDesc"],
+              ["scienceFullAnalysis", "fullAnalysis"],
+              ["scienceTraditionalRef", "traditionalRef"],
+              ["scienceModernExplanation", "modernExplanation"],
+              ["scienceReferences", "references"],
+              ["scienceExternalLinks", "externalLinks"],
+              ["scienceTags", "tags"],
+              ["scienceFeatured", "featured", true],
+              ["sciencePublished", "published", true],
+            ],
+            community: [
+              ["topicTitle", "title"],
+              ["topicContent", "content"],
+              ["topicAuthor", "author"],
+              ["topicPublished", "published", true],
+            ],
+            podcast: [
+              ["podcastTitle", "title"],
+              ["podcastVideo", "videoUrl"],
+              ["podcastDesc", "description"],
+              ["podcastPublished", "published", true],
+            ],
+          };
+
+          var fields = mappings[type] || [];
+          fields.forEach(function (mapping) {
+            var fieldId = mapping[0];
+            var dataKey = mapping[1];
+            var isCheckbox = mapping[2] || false;
+            var isDate = mapping[3] || false;
+            var isSelect = mapping[4] || false;
+            var el = document.getElementById(fieldId);
+            if (!el) return;
+            var value = data[dataKey];
+            if (isCheckbox) {
+              el.checked = value === true;
+            } else if (isDate && value) {
+              if (value.toDate) {
+                var d = value.toDate();
+                el.value = d.toISOString().slice(0, 10);
+              } else if (typeof value === "string") {
+                el.value = value;
+              }
+            } else if (isSelect) {
+              el.value = value || "draft";
+            } else if (Array.isArray(value)) {
+              el.value = value.join(", ");
+            } else {
+              el.value = value || "";
+            }
+          });
+
+          // Gallery for Mandir
+          if (type === "mandir" && data.gallery) {
+            var galleryContainer = document.getElementById(
+              "mandirGalleryContainer",
+            );
+            if (galleryContainer) {
+              var galleryVals = Array.isArray(data.gallery) ? data.gallery : [];
+              if (galleryVals.length === 0) galleryVals = [""];
+              buildGalleryUI("mandirGalleryContainer", galleryVals);
+            }
+          }
+
+          // Tags for Science
+          if (type === "scientificCards" && data.tags) {
+            var tagsEl = document.getElementById("scienceTags");
+            if (tagsEl && Array.isArray(data.tags)) {
+              tagsEl.value = data.tags.join(", ");
+            }
+          }
+        } catch (err) {
+          console.error("Load edit data error:", err);
+          showToast("Error loading data: " + err.message, 4000, "error");
+        }
       }
 
+      // ============================================================
+      // SAVE SLIDE-OVER
+      // ============================================================
       async function saveSlideOver(type) {
         var isEdit = !!editingId;
         var payload = {};
@@ -1740,14 +2616,22 @@
         };
 
         try {
+          // ----- SHLOK -----
           if (type === "shlok") {
+            var text = getVal("shlokText").trim();
+            if (!text) {
+              showToast("Shlok text is required.", 3000, "error");
+              return;
+            }
             payload = {
-              text: getVal("shlokText"),
+              text: text,
               meaning: getVal("shlokMeaning"),
               source: getVal("shlokSource"),
-              date: firebase.firestore.Timestamp.fromDate(
-                new Date(getVal("shlokDate") || Date.now()),
-              ),
+              date: getVal("shlokDate")
+                ? firebase.firestore.Timestamp.fromDate(
+                    new Date(getVal("shlokDate")),
+                  )
+                : firebase.firestore.FieldValue.serverTimestamp(),
               published: getCheck("shlokPublished"),
             };
             if (!isEdit)
@@ -1757,13 +2641,21 @@
             if (isEdit)
               await db.collection("dailyShlok").doc(editingId).update(payload);
             else await db.collection("dailyShlok").add(payload);
-          } else if (type === "sant-articles") {
+          }
+          // ----- SANT ARTICLES -----
+          else if (type === "sant-articles") {
+            var title = getVal("santArticleTitle").trim();
+            if (!title) {
+              showToast("Title is required.", 3000, "error");
+              return;
+            }
             payload = {
-              title: getVal("santArticleTitle"),
+              title: title,
               author: getVal("santArticleAuthor"),
               authorCredits: getVal("santArticleCredits"),
               imageUrl: getVal("santArticleImage"),
               content: getVal("santArticleContent"),
+              featured: getCheck("santArticleFeatured"),
               published: getCheck("santArticlePublished"),
             };
             if (!isEdit)
@@ -1776,13 +2668,95 @@
                 .doc(editingId)
                 .update(payload);
             else await db.collection("santArticles").add(payload);
-          } else if (type === "sant-darshan") {
+          }
+          // ----- MANDIR -----
+          else if (type === "mandir") {
+            var mandirTitle = getVal("mandirTitle").trim();
+            if (!mandirTitle) {
+              showToast("Temple name is required.", 3000, "error");
+              return;
+            }
+            var gallery = getGalleryValues("mandirGalleryContainer");
+            payload = {
+              title: mandirTitle,
+              location: getVal("mandirLocation"),
+              established: getVal("mandirEstablished"),
+              altitude: getVal("mandirAltitude"),
+              imageUrl: getVal("mandirImage"),
+              gallery: gallery,
+              description: getVal("mandirDescription"),
+              history: getVal("mandirHistory"),
+              architecture: getVal("mandirArchitecture"),
+              significance: getVal("mandirSignificance"),
+              festivals: getVal("mandirFestivals"),
+              travelInfo: getVal("mandirTravelInfo"),
+              openingHours: getVal("mandirOpeningHours"),
+              mapLink: getVal("mandirMapLink"),
+              videoUrl: getVal("mandirVideo"),
+              featured: getCheck("mandirFeatured"),
+              published: getCheck("mandirPublished"),
+            };
+            if (!isEdit)
+              payload.createdAt =
+                firebase.firestore.FieldValue.serverTimestamp();
+            payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+            if (isEdit)
+              await db
+                .collection("mandirDarshan")
+                .doc(editingId)
+                .update(payload);
+            else await db.collection("mandirDarshan").add(payload);
+          }
+          // ----- BHAJAN -----
+          else if (type === "bhajan") {
+            var bhajanTitle = getVal("videoTitle").trim();
+            if (!bhajanTitle) {
+              showToast("Title is required.", 3000, "error");
+              return;
+            }
+            payload = {
+              title: bhajanTitle,
+              subtitle: getVal("videoSubtitle"),
+              singer: getVal("videoSinger"),
+              composer: getVal("videoComposer"),
+              lyricist: getVal("videoLyricist"),
+              language: getVal("videoLanguage"),
+              duration: getVal("videoDuration"),
+              thumbnail: getVal("videoThumbnail"),
+              videoUrl: getVal("videoUrlInput"),
+              audioUrl: getVal("videoAudioUrl"),
+              description: getVal("videoDesc"),
+              lyrics: getVal("videoLyrics"),
+              meaning: getVal("videoMeaning"),
+              category: getVal("videoCategory"),
+              featured: getCheck("videoFeatured"),
+              published: getCheck("videoPublished"),
+            };
+            if (!isEdit)
+              payload.createdAt =
+                firebase.firestore.FieldValue.serverTimestamp();
+            payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+            if (isEdit)
+              await db
+                .collection("bhajanVideos")
+                .doc(editingId)
+                .update(payload);
+            else await db.collection("bhajanVideos").add(payload);
+          }
+          // ----- SANT DARSHAN -----
+          else if (type === "sant-darshan") {
+            var santName = getVal("santName").trim();
+            if (!santName) {
+              showToast("Sant name is required.", 3000, "error");
+              return;
+            }
             var status = getVal("santStatus") || "draft";
             payload = {
-              name: getVal("santName"),
+              name: santName,
               description: getVal("santDesc"),
               imageUrl: getVal("santImage"),
               videoUrl: getVal("santVideo"),
+              featured: getCheck("santFeatured"),
               published: status === "published",
               held: status === "held",
             };
@@ -1793,25 +2767,123 @@
             if (isEdit)
               await db.collection("santDarshan").doc(editingId).update(payload);
             else await db.collection("santDarshan").add(payload);
-          } else if (type === "mandir") {
-            // similar to sant-articles
-          } else if (type === "bhajan") {
-            // ...
-          } else if (type === "encyclopedia") {
-            // ...
-          } else if (type === "community") {
-            // ...
-          } else if (type === "podcast") {
-            // ...
+          }
+          // ----- SCIENTIFIC CARDS -----
+          else if (type === "scientificCards") {
+            var sciTitle = getVal("scienceTitle").trim();
+            if (!sciTitle) {
+              showToast("Title is required.", 3000, "error");
+              return;
+            }
+            var tags = getVal("scienceTags")
+              .split(",")
+              .map(function (s) {
+                return s.trim();
+              })
+              .filter(function (s) {
+                return s;
+              });
+            payload = {
+              title: sciTitle,
+              author: getVal("scienceAuthor"),
+              category: getVal("scienceCategory"),
+              imageUrl: getVal("scienceImage"),
+              shortDesc: getVal("scienceShortDesc"),
+              fullAnalysis: getVal("scienceFullAnalysis"),
+              traditionalRef: getVal("scienceTraditionalRef"),
+              modernExplanation: getVal("scienceModernExplanation"),
+              references: getVal("scienceReferences"),
+              externalLinks: getVal("scienceExternalLinks"),
+              tags: tags,
+              featured: getCheck("scienceFeatured"),
+              published: getCheck("sciencePublished"),
+            };
+            if (!isEdit)
+              payload.createdAt =
+                firebase.firestore.FieldValue.serverTimestamp();
+            payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+            if (isEdit)
+              await db
+                .collection("scientificCards")
+                .doc(editingId)
+                .update(payload);
+            else await db.collection("scientificCards").add(payload);
+          }
+          // ----- ENCYCLOPEDIA -----
+          else if (type === "encyclopedia") {
+            var term = getVal("termName").trim();
+            if (!term) {
+              showToast("Term is required.", 3000, "error");
+              return;
+            }
+            payload = {
+              term: term,
+              meaning: getVal("termMeaning"),
+              scientific: getVal("termScientific"),
+              featured: getCheck("termFeatured"),
+              published: getCheck("termPublished"),
+            };
+            if (isEdit)
+              await db
+                .collection("encyclopediaTerms")
+                .doc(editingId)
+                .update(payload);
+            else await db.collection("encyclopediaTerms").add(payload);
+          }
+          // ----- COMMUNITY -----
+          else if (type === "community") {
+            var topicTitle = getVal("topicTitle").trim();
+            var topicContent = getVal("topicContent").trim();
+            if (!topicTitle || !topicContent) {
+              showToast("Title and content are required.", 3000, "error");
+              return;
+            }
+            payload = {
+              title: topicTitle,
+              content: topicContent,
+              author: getVal("topicAuthor") || "Anonymous",
+              published: getCheck("topicPublished"),
+              deleted: false,
+              replies: [],
+            };
+            if (!isEdit)
+              payload.createdAt =
+                firebase.firestore.FieldValue.serverTimestamp();
+            payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+            if (isEdit)
+              await db.collection("forumTopics").doc(editingId).update(payload);
+            else await db.collection("forumTopics").add(payload);
+          }
+          // ----- PODCAST -----
+          else if (type === "podcast") {
+            var podTitle = getVal("podcastTitle").trim();
+            if (!podTitle) {
+              showToast("Title is required.", 3000, "error");
+              return;
+            }
+            payload = {
+              title: podTitle,
+              videoUrl: getVal("podcastVideo"),
+              description: getVal("podcastDesc"),
+              published: getCheck("podcastPublished"),
+            };
+            if (!isEdit)
+              payload.createdAt =
+                firebase.firestore.FieldValue.serverTimestamp();
+            payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+            if (isEdit)
+              await db.collection("podcasts").doc(editingId).update(payload);
+            else await db.collection("podcasts").add(payload);
           }
 
           closeSlideOver();
-          showToast(isEdit ? "Updated successfully!" : "Created successfully!");
+          showToast(
+            isEdit ? "✅ Updated successfully!" : "✅ Created successfully!",
+          );
           refreshCurrentSection();
         } catch (err) {
           console.error("Save error:", err);
-          alert("Error saving: " + err.message);
-          showToast("Error! Check console.", 5000);
+          showToast("❌ Error: " + err.message, 4000, "error");
         }
       }
 
@@ -1823,13 +2895,14 @@
         else if (section === "mandir") loadMandirs();
         else if (section === "bhajan") loadVideos();
         else if (section === "encyclopedia") loadTerms();
+        else if (section === "scientificCards") loadScienceCards();
         else if (section === "community") loadForumTopics();
         else if (section === "podcast") loadPodcasts();
         else if (section === "dashboard") loadDashboard();
       }
 
       // ============================================================
-      // DATA LOADING FUNCTIONS
+      // DATA LOADING FUNCTIONS (store all data for filtering)
       // ============================================================
 
       async function loadDashboard() {
@@ -1841,6 +2914,7 @@
           "mandirDarshan",
           "bhajanVideos",
           "encyclopediaTerms",
+          "scientificCards",
           "forumTopics",
           "podcasts",
         ];
@@ -1857,15 +2931,16 @@
         var pending = pendingSnap.size;
 
         grid.innerHTML = `
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-praying-hands"></i></div><div class="stat-info"><span class="number">${stats.dailyShlok || 0}</span><div class="label">Shlok</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-feather-alt"></i></div><div class="stat-info"><span class="number">${stats.santArticles || 0}</span><div class="label">Sant Articles</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-user-astronaut"></i></div><div class="stat-info"><span class="number">${stats.santDarshan || 0}</span><div class="label">Sants</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-om"></i></div><div class="stat-info"><span class="number">${stats.mandirDarshan || 0}</span><div class="label">Temples</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-info"><span class="number">${stats.bhajanVideos || 0}</span><div class="label">Bhajans</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-info"><span class="number">${stats.encyclopediaTerms || 0}</span><div class="label">Terms</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-comments"></i></div><div class="stat-info"><span class="number">${pending}</span><div class="label">Pending Posts</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><i class="fas fa-file-alt"></i></div><div class="stat-info"><span class="number">${stats.podcasts || 0}</span><div class="label">Podcasts</div></div></div>
-  `;
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-praying-hands"></i></div><div class="stat-info"><span class="number">${stats.dailyShlok || 0}</span><div class="label">Shlok</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-feather-alt"></i></div><div class="stat-info"><span class="number">${stats.santArticles || 0}</span><div class="label">Sant Articles</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-user-astronaut"></i></div><div class="stat-info"><span class="number">${stats.santDarshan || 0}</span><div class="label">Sants</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-om"></i></div><div class="stat-info"><span class="number">${stats.mandirDarshan || 0}</span><div class="label">Temples</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-music"></i></div><div class="stat-info"><span class="number">${stats.bhajanVideos || 0}</span><div class="label">Bhajans</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-info"><span class="number">${stats.encyclopediaTerms || 0}</span><div class="label">Terms</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-flask"></i></div><div class="stat-info"><span class="number">${stats.scientificCards || 0}</span><div class="label">Science Cards</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-comments"></i></div><div class="stat-info"><span class="number">${pending}</span><div class="label">Pending Posts</div></div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-file-alt"></i></div><div class="stat-info"><span class="number">${stats.podcasts || 0}</span><div class="label">Podcasts</div></div></div>
+        `;
 
         var recent = [];
         for (var j = 0; j < collections.length; j++) {
@@ -1912,137 +2987,500 @@
       // --- Shlok ---
       async function loadShloks() {
         var snap = await db.collection("dailyShlok").get();
-        var container = document.getElementById("shlokList");
-        container.innerHTML = "";
+        allShloks = [];
         snap.forEach(function (doc) {
           var data = doc.data();
-          var status = data.published ? "published" : "draft";
-          var dateStr = data.date?.toDate?.()?.toLocaleDateString() || "";
-          container.innerHTML += `
-      <div class="content-card">
-        <div class="card-top">
-          <span class="title">${escapeHtml(data.text?.substring(0, 60))}</span>
-          ${getStatusBadge(status)}
-        </div>
-        <div class="card-meta"><i class="far fa-calendar-alt"></i> ${dateStr}</div>
-        <div class="card-actions">
-          <button class="btn-sm primary" onclick="openSlideOver('shlok','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
-          <button class="btn-sm" onclick="togglePublish('dailyShlok','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
-          <button class="btn-sm danger" onclick="deleteItem('dailyShlok','${doc.id}')"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-    `;
+          allShloks.push({ id: doc.id, data: data });
         });
+        renderShloks();
+      }
+
+      function renderShloks() {
+        var filter = document.querySelector(
+          "#shlokFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("shlokSearch")?.value || "";
+        var filtered = filterItems(allShloks, filterVal, searchVal);
+        var container = document.getElementById("shlokList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No shlok found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            var dateStr = data.date?.toDate?.()?.toLocaleDateString() || "";
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml((data.text || "").substring(0, 60))}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="far fa-calendar-alt"></i> ${dateStr}</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('shlok','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('dailyShlok','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('dailyShlok','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
       }
 
       // --- Sant Articles ---
       async function loadSantArticles() {
         var snap = await db.collection("santArticles").get();
-        var container = document.getElementById("santArticlesList");
-        container.innerHTML = "";
+        allSantArticles = [];
         snap.forEach(function (doc) {
           var data = doc.data();
-          var status = data.published ? "published" : "draft";
-          container.innerHTML += `
-      <div class="content-card">
-        <div class="card-top">
-          <span class="title">${escapeHtml(data.title)}</span>
-          ${getStatusBadge(status)}
-        </div>
-        <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.author)}</div>
-        <div class="card-actions">
-          <button class="btn-sm primary" onclick="openSlideOver('sant-articles','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
-          <button class="btn-sm" onclick="togglePublish('santArticles','${doc.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
-          <button class="btn-sm danger" onclick="deleteItem('santArticles','${doc.id}')"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-    `;
+          allSantArticles.push({ id: doc.id, data: data });
         });
+        renderSantArticles();
       }
 
-      // --- Sant Darshan (with Held status) ---
+      function renderSantArticles() {
+        var filter = document.querySelector(
+          "#santArticleFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal =
+          document.getElementById("santArticleSearch")?.value || "";
+        var filtered = filterItems(allSantArticles, filterVal, searchVal);
+        var container = document.getElementById("santArticlesList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No articles found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.title || "Untitled")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.author || "Unknown")}</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('sant-articles','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('santArticles','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('santArticles','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      // --- Sant Darshan ---
       async function loadSants() {
         var snap = await db.collection("santDarshan").get();
-        var container = document.getElementById("santList");
-        container.innerHTML = "";
+        allSants = [];
         snap.forEach(function (doc) {
           var data = doc.data();
-          var status = data.published
-            ? "published"
-            : data.held
-              ? "held"
-              : "draft";
-          container.innerHTML += `
-      <div class="content-card">
-        <div class="card-top">
-          <span class="title">${escapeHtml(data.name)}</span>
-          ${getStatusBadge(status)}
-        </div>
-        <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml((data.description || "").substring(0, 50))}...</div>
-        <div class="card-actions">
-          <button class="btn-sm primary" onclick="openSlideOver('sant-darshan','${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
-          <button class="btn-sm" onclick="toggleSantStatus('${doc.id}','published')">Publish</button>
-          <button class="btn-sm warning" onclick="toggleSantStatus('${doc.id}','held')">Hold</button>
-          <button class="btn-sm" onclick="toggleSantStatus('${doc.id}','draft')">Draft</button>
-          <button class="btn-sm danger" onclick="deleteItem('santDarshan','${doc.id}')"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-    `;
+          allSants.push({ id: doc.id, data: data });
         });
+        renderSants();
+      }
+
+      function renderSants() {
+        var filter = document.querySelector("#santFilters .filter-chip.active");
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("santSearch")?.value || "";
+        var filtered = filterItems(allSants, filterVal, searchVal);
+        var container = document.getElementById("santList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No sants found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.name || "Unnamed")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml((data.description || "").substring(0, 50))}...</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('sant-darshan','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="toggleSantStatus('${item.id}','published')">Publish</button>
+              <button class="btn-sm warning" onclick="toggleSantStatus('${item.id}','held')">Hold</button>
+              <button class="btn-sm" onclick="toggleSantStatus('${item.id}','draft')">Draft</button>
+              <button class="btn-sm danger" onclick="deleteItem('santDarshan','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
       }
 
       // --- Mandir ---
       async function loadMandirs() {
-        /* same as before */
+        var snap = await db.collection("mandirDarshan").get();
+        allMandirs = [];
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          allMandirs.push({ id: doc.id, data: data });
+        });
+        renderMandirs();
       }
+
+      function renderMandirs() {
+        var filter = document.querySelector(
+          "#mandirFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("mandirSearch")?.value || "";
+        var filtered = filterItems(allMandirs, filterVal, searchVal);
+        var container = document.getElementById("mandirList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No temples found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.title || "Untitled")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fas fa-map-pin"></i> ${escapeHtml((data.location || "").substring(0, 50))}</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('mandir','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('mandirDarshan','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('mandirDarshan','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      // --- Bhajan Videos ---
       async function loadVideos() {
-        /* same as before */
+        var snap = await db.collection("bhajanVideos").get();
+        allVideos = [];
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          allVideos.push({ id: doc.id, data: data });
+        });
+        renderVideos();
       }
+
+      function renderVideos() {
+        var filter = document.querySelector(
+          "#bhajanFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("bhajanSearch")?.value || "";
+        var filtered = filterItems(allVideos, filterVal, searchVal);
+        var container = document.getElementById("videosList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No bhajans found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.title || "Untitled")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.singer || "Unknown")} ${data.audioUrl ? "🎵" : "📹"}</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('bhajan','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('bhajanVideos','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('bhajanVideos','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      // --- Encyclopedia ---
       async function loadTerms() {
-        /* same as before */
+        var snap = await db.collection("encyclopediaTerms").get();
+        allTerms = [];
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          allTerms.push({ id: doc.id, data: data });
+        });
+        renderTerms();
       }
+
+      function renderTerms() {
+        var filter = document.querySelector("#termFilters .filter-chip.active");
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("termSearch")?.value || "";
+        var filtered = filterItems(allTerms, filterVal, searchVal);
+        var container = document.getElementById("termsList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No terms found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.term || "Untitled")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fas fa-book-open"></i> ${escapeHtml((data.meaning || "").substring(0, 50))}...</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('encyclopedia','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('encyclopediaTerms','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('encyclopediaTerms','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      // --- Scientific Cards ---
+      async function loadScienceCards() {
+        var snap = await db.collection("scientificCards").get();
+        allScience = [];
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          allScience.push({ id: doc.id, data: data });
+        });
+        renderScienceCards();
+      }
+
+      function renderScienceCards() {
+        var filter = document.querySelector(
+          "#scienceFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("scienceSearch")?.value || "";
+        var filtered = filterItems(allScience, filterVal, searchVal);
+        var container = document.getElementById("scienceList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No science articles found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.title || "Untitled")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.author || "Unknown")}</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('scientificCards','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('scientificCards','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('scientificCards','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      // --- Community ---
       async function loadForumTopics() {
-        /* same as before */
+        var snap = await db
+          .collection("forumTopics")
+          .where("deleted", "==", false)
+          .get();
+        allForumTopics = [];
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          allForumTopics.push({ id: doc.id, data: data });
+        });
+        renderForumTopics();
       }
+
+      function renderForumTopics() {
+        var filter = document.querySelector(
+          "#topicFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("topicSearch")?.value || "";
+        var filtered = filterItems(allForumTopics, filterVal, searchVal);
+        var container = document.getElementById("forumTopicsList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No topics found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="mod-item">
+            <div class="mod-info">
+              <h4>${escapeHtml(data.title || "Untitled")}</h4>
+              <p>${escapeHtml((data.content || "").substring(0, 80))}...</p>
+              <div class="card-meta"><i class="fas fa-user"></i> ${escapeHtml(data.author || "Anonymous")} · ${data.createdAt?.toDate?.()?.toLocaleString() || ""}</div>
+            </div>
+            <div class="mod-actions">
+              ${getStatusBadge(status)}
+              <button class="btn-sm" onclick="togglePublish('forumTopics','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('forumTopics','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      // --- Podcasts ---
       async function loadPodcasts() {
-        /* same as before */
+        var snap = await db.collection("podcasts").get();
+        allPodcasts = [];
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          allPodcasts.push({ id: doc.id, data: data });
+        });
+        renderPodcasts();
+      }
+
+      function renderPodcasts() {
+        var filter = document.querySelector(
+          "#podcastFilters .filter-chip.active",
+        );
+        var filterVal = filter ? filter.dataset.filter : "all";
+        var searchVal = document.getElementById("podcastSearch")?.value || "";
+        var filtered = filterItems(allPodcasts, filterVal, searchVal);
+        var container = document.getElementById("podcastsList");
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state">No podcasts found.</div>';
+          return;
+        }
+        container.innerHTML = filtered
+          .map(function (item) {
+            var data = item.data;
+            var status = getStatusFromData(data);
+            return `<div class="content-card">
+            <div class="card-top"><span class="title">${escapeHtml(data.title || "Untitled")}</span>${getStatusBadge(status)}</div>
+            <div class="card-meta"><i class="fab fa-youtube"></i> ${escapeHtml((data.videoUrl || "").substring(0, 40))}</div>
+            <div class="card-actions">
+              <button class="btn-sm primary" onclick="openSlideOver('podcast','${item.id}')"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn-sm" onclick="togglePublish('podcasts','${item.id}',${!data.published})">${data.published ? "Unpublish" : "Publish"}</button>
+              <button class="btn-sm danger" onclick="deleteItem('podcasts','${item.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+          })
+          .join("");
       }
 
       // ============================================================
       // GENERIC CRUD HELPERS
       // ============================================================
       window.togglePublish = async function (collection, id, newStatus) {
-        await db
-          .collection(collection)
-          .doc(id)
-          .update({ published: newStatus });
-        refreshCurrentSection();
-        showToast("Status updated to " + (newStatus ? "Published" : "Draft"));
+        try {
+          await db
+            .collection(collection)
+            .doc(id)
+            .update({ published: newStatus });
+          refreshCurrentSection();
+          showToast("Status updated to " + (newStatus ? "Published" : "Draft"));
+        } catch (err) {
+          showToast("Error: " + err.message, 3000, "error");
+        }
       };
 
       window.toggleSantStatus = async function (id, newStatus) {
-        var updates = {
-          published: newStatus === "published",
-          held: newStatus === "held",
-        };
-        await db.collection("santDarshan").doc(id).update(updates);
-        refreshCurrentSection();
-        showToast("Status updated to " + newStatus);
+        try {
+          var updates = {
+            published: newStatus === "published",
+            held: newStatus === "held",
+          };
+          await db.collection("santDarshan").doc(id).update(updates);
+          refreshCurrentSection();
+          showToast("Status updated to " + newStatus);
+        } catch (err) {
+          showToast("Error: " + err.message, 3000, "error");
+        }
       };
 
       window.deleteItem = async function (collection, id) {
         if (!confirm("Delete this item?")) return;
-        if (collection === "forumTopics") {
-          await db.collection(collection).doc(id).update({ deleted: true });
-        } else {
-          await db.collection(collection).doc(id).delete();
+        try {
+          if (collection === "forumTopics") {
+            await db.collection(collection).doc(id).update({ deleted: true });
+          } else {
+            await db.collection(collection).doc(id).delete();
+          }
+          refreshCurrentSection();
+          showToast("Deleted successfully.");
+        } catch (err) {
+          showToast("Error: " + err.message, 3000, "error");
         }
-        refreshCurrentSection();
-        showToast("Deleted successfully.");
       };
 
       // ============================================================
-      // INITIAL LOAD
+      // SETUP SEARCH & FILTER EVENT LISTENERS
+      // ============================================================
+      function setupSearchAndFilters() {
+        // Search inputs
+        var searchMap = {
+          shlokSearch: "shlok",
+          santArticleSearch: "sant-articles",
+          santSearch: "sant-darshan",
+          mandirSearch: "mandir",
+          bhajanSearch: "bhajan",
+          termSearch: "encyclopedia",
+          scienceSearch: "scientificCards",
+          topicSearch: "community",
+          podcastSearch: "podcast",
+        };
+
+        Object.keys(searchMap).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) {
+            el.addEventListener("input", function () {
+              var section = searchMap[id];
+              if (section === "shlok") renderShloks();
+              else if (section === "sant-articles") renderSantArticles();
+              else if (section === "sant-darshan") renderSants();
+              else if (section === "mandir") renderMandirs();
+              else if (section === "bhajan") renderVideos();
+              else if (section === "encyclopedia") renderTerms();
+              else if (section === "scientificCards") renderScienceCards();
+              else if (section === "community") renderForumTopics();
+              else if (section === "podcast") renderPodcasts();
+            });
+          }
+        });
+
+        // Filter chips - delegate
+        document
+          .querySelectorAll(".filter-chips")
+          .forEach(function (chipContainer) {
+            chipContainer.addEventListener("click", function (e) {
+              var chip = e.target.closest(".filter-chip");
+              if (!chip) return;
+              chipContainer
+                .querySelectorAll(".filter-chip")
+                .forEach(function (c) {
+                  c.classList.remove("active");
+                });
+              chip.classList.add("active");
+              var section = chipContainer.id.replace("Filters", "");
+              // Map section IDs
+              var sectionMap = {
+                shlok: "shlok",
+                santArticle: "sant-articles",
+                sant: "sant-darshan",
+                mandir: "mandir",
+                bhajan: "bhajan",
+                term: "encyclopedia",
+                science: "scientificCards",
+                topic: "community",
+                podcast: "podcast",
+              };
+              var target = sectionMap[section] || section;
+              if (target === "shlok") renderShloks();
+              else if (target === "sant-articles") renderSantArticles();
+              else if (target === "sant-darshan") renderSants();
+              else if (target === "mandir") renderMandirs();
+              else if (target === "bhajan") renderVideos();
+              else if (target === "encyclopedia") renderTerms();
+              else if (target === "scientificCards") renderScienceCards();
+              else if (target === "community") renderForumTopics();
+              else if (target === "podcast") renderPodcasts();
+            });
+          });
+      }
+
+      // ============================================================
+      // INIT
       // ============================================================
       async function loadAllData() {
         await loadDashboard();
@@ -2053,9 +3491,11 @@
           loadMandirs(),
           loadVideos(),
           loadTerms(),
+          loadScienceCards(),
           loadForumTopics(),
           loadPodcasts(),
         ]);
+        setupSearchAndFilters();
       }
 
       auth.onAuthStateChanged(function (user) {
@@ -2063,6 +3503,9 @@
           document.getElementById("loginContainer").style.display = "none";
           document.getElementById("adminPanel").style.display = "block";
           loadAllData();
+          setTimeout(function () {
+            showToast("Welcome, " + (user.displayName || "Admin") + "! 🙏");
+          }, 500);
         } else {
           document.getElementById("loginContainer").style.display = "flex";
           document.getElementById("adminPanel").style.display = "none";
