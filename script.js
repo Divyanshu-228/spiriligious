@@ -44,9 +44,9 @@ function formatDate(timestamp) {
  * @param {string} containerId - The DOM id of the featured container
  * @param {Object} item - The featured item data
  * @param {string} type - 'sant', 'mandir', 'bhajan', 'science'
- * @param {string} detailFn - The function name to call on click (string)
+ * @param {string} onclickStr - The onclick attribute value (e.g., "openSantArticle('id')")
  */
-function renderFeatured(containerId, item, type, detailFn) {
+function renderFeatured(containerId, item, type, onclickStr) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
@@ -142,7 +142,7 @@ function renderFeatured(containerId, item, type, detailFn) {
       <div class="featured-divider"></div>
       <p class="featured-desc">${escapeHtml((cfg.desc || "").substring(0, 180))}...</p>
       <div class="featured-actions">
-        <button class="btn-primary-featured" onclick="${detailFn}('${item.id}')">
+        <button class="btn-primary-featured" onclick="${onclickStr || ""}">
           <i class="fas ${cfg.btnIcon}"></i> ${cfg.btnText}
         </button>
       </div>
@@ -155,9 +155,9 @@ function renderFeatured(containerId, item, type, detailFn) {
  * @param {string} containerId - DOM id of the grid container
  * @param {Array} items - Array of item objects
  * @param {string} type - 'sant', 'mandir', 'bhajan', 'science'
- * @param {string} detailFn - Function name to call on click
+ * @param {Function} onclickFn - Function that takes an item and returns the onclick string
  */
-function renderCards(containerId, items, type, detailFn) {
+function renderCards(containerId, items, type, onclickFn) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
@@ -225,9 +225,10 @@ function renderCards(containerId, items, type, detailFn) {
     const title = typeof cfg.title === "function" ? cfg.title(item) : cfg.title;
     const desc = typeof cfg.desc === "function" ? cfg.desc(item) : cfg.desc;
     const meta = typeof cfg.meta === "function" ? cfg.meta(item) : cfg.meta;
+    const onclick = typeof onclickFn === "function" ? onclickFn(item) : "";
 
     html += `
-      <div class="content-card-unified" onclick="${detailFn}('${item.id}')">
+      <div class="content-card-unified" onclick="${onclick}">
         <div class="card-image-wrap">
           <img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="lazy" />
           <span class="card-badge">${escapeHtml(badge)}</span>
@@ -296,7 +297,7 @@ async function loadCollection(
   featuredId,
   gridId,
   type,
-  detailFn,
+  onclickFn, // Function that takes an item and returns onclick string
   transformFn,
 ) {
   try {
@@ -306,7 +307,6 @@ async function loadCollection(
       .get();
     const docs = snap.docs;
 
-    // Sort by createdAt descending
     docs.sort((a, b) => {
       const aDate = a.data().createdAt?.toDate
         ? a.data().createdAt.toDate()
@@ -317,23 +317,28 @@ async function loadCollection(
       return bDate - aDate;
     });
 
-    // Find featured: either explicit featured flag or first doc
     let featuredDoc =
       docs.find((d) => d.data().featured === true) ||
       (docs.length > 0 ? docs[0] : null);
     let rest = docs.filter((d) => d.id !== featuredDoc?.id);
 
-    // Transform data
     const transform = transformFn || ((doc) => ({ id: doc.id, ...doc.data() }));
 
     let featuredItem = featuredDoc ? transform(featuredDoc) : null;
     let restItems = rest.map((d) => transform(d));
 
-    // Render featured
-    renderFeatured(featuredId, featuredItem, type, detailFn);
+    // Generate onclick string for featured item
+    const featuredOnclick = featuredItem
+      ? typeof onclickFn === "function"
+        ? onclickFn(featuredItem)
+        : ""
+      : "";
+
+    // Render featured with the onclick string
+    renderFeatured(featuredId, featuredItem, type, featuredOnclick);
 
     // Render grid
-    renderCards(gridId, restItems, type, detailFn);
+    renderCards(gridId, restItems, type, onclickFn);
 
     return { featured: featuredItem, items: restItems };
   } catch (err) {
@@ -355,7 +360,7 @@ function loadSantArticles() {
     "featuredSantContainer",
     "santArticlesGrid",
     "sant",
-    "openSantArticle",
+    (item) => `openSantArticle('${item.id}')`,
     (doc) => ({ id: doc.id, ...doc.data() }),
   );
 }
@@ -366,7 +371,7 @@ function loadMandirs() {
     "featuredTempleContainer",
     "mandirGrid",
     "mandir",
-    "openMandirDetail",
+    (item) => `openMandirDetail('${item.id}')`,
     (doc) => ({ id: doc.id, ...doc.data() }),
   );
 }
@@ -377,7 +382,7 @@ function loadBhajans() {
     "featuredBhajanContainer",
     "bhajanGrid",
     "bhajan",
-    "openBhajanDetail",
+    (item) => `openBhajanDetail('${item.id}')`,
     (doc) => ({ id: doc.id, ...doc.data() }),
   );
 }
@@ -422,16 +427,25 @@ async function loadScience() {
       (items.length > 0 ? items[0] : null);
     let restItems = items.filter((i) => i.id !== featuredItem?.id);
 
-    // Render featured
+    // Featured onclick
+    const featuredOnclick = featuredItem
+      ? `openScienceDetail('${featuredItem.id}', '${featuredItem.type}')`
+      : "";
+
     renderFeatured(
       "featuredScienceContainer",
       featuredItem,
       "science",
-      "openScienceDetail",
+      featuredOnclick,
     );
 
-    // Render grid
-    renderCards("scienceGrid", restItems, "science", "openScienceDetail");
+    // Grid – each card gets its own onclick with type
+    renderCards(
+      "scienceGrid",
+      restItems,
+      "science",
+      (item) => `openScienceDetail('${item.id}', '${item.type}')`,
+    );
   } catch (err) {
     console.error("Error loading science:", err);
     const container = document.getElementById("featuredScienceContainer");
