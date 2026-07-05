@@ -36,6 +36,25 @@ function formatDate(timestamp) {
   if (!timestamp || !timestamp.toDate) return "";
   return new Date(timestamp.toDate()).toLocaleString();
 }
+function convertToEmbedUrl(url) {
+  if (!url) return "";
+  // Already an embed URL
+  if (url.includes("/embed/")) return url;
+  // youtu.be short links
+  let match = url.match(/youtu\.be\/([^?&]+)/);
+  if (match) return "https://www.youtube.com/embed/" + match[1];
+  // watch?v= or other with v= parameter
+  match = url.match(/v=([^&]+)/);
+  if (match) return "https://www.youtube.com/embed/" + match[1];
+  // /shorts/
+  match = url.match(/\/shorts\/([^?&]+)/);
+  if (match) return "https://www.youtube.com/embed/" + match[1];
+  // /live/
+  match = url.match(/\/live\/([^?&]+)/);
+  if (match) return "https://www.youtube.com/embed/" + match[1];
+  // fallback – return as is
+  return url;
+}
 
 // ==================== UNIFIED RENDER FUNCTIONS ====================
 
@@ -99,7 +118,7 @@ function renderFeatured(containerId, item, type, onclickStr) {
       image:
         item.thumbnail ||
         (item.videoUrl
-          ? `https://img.youtube.com/vi/${extractYouTubeId(item.videoUrl)}/hqdefault.jpg`
+          ? convertToEmbedUrl(item.videoUrl)
           : "https://via.placeholder.com/800x600?text=Bhajan"),
       btnText: "Listen Now",
       btnIcon: "fa-play",
@@ -484,7 +503,7 @@ async function openMandirDetail(id) {
   if (!doc.exists) return;
   const m = doc.data();
   let videoHtml = m.videoUrl
-    ? `<div class="video-wrapper"><iframe src="${m.videoUrl}?rel=0" frameborder="0" allowfullscreen></iframe></div>`
+    ? `<div class="video-wrapper"><iframe src="${convertToEmbedUrl(m.videoUrl)}?rel=0" frameborder="0" allowfullscreen></iframe></div>`
     : "";
   let galleryHtml = "";
   if (m.gallery && m.gallery.length > 0) {
@@ -555,7 +574,7 @@ async function openBhajanDetail(id) {
       ${v.language ? `<span><i class="fas fa-language"></i> ${escapeHtml(v.language)}</span>` : ""}
     </div>
     ${v.description ? `<div class="detail-body-text"><p>${escapeHtml(v.description)}</p></div>` : ""}
-    ${v.videoUrl ? `<div class="video-wrapper"><iframe src="${v.videoUrl}?rel=0" frameborder="0" allowfullscreen></iframe></div>` : ""}
+    ${v.videoUrl ? `<div class="video-wrapper"><iframe src="${convertToEmbedUrl(v.videoUrl)}?rel=0" frameborder="0" allowfullscreen></iframe></div>` : ""}
     ${lyricsHtml}
     ${meaningHtml}
     <div class="detail-share">

@@ -2603,6 +2603,20 @@
       // ============================================================
       // SAVE SLIDE-OVER
       // ============================================================
+      function convertToEmbedUrl(url) {
+        if (!url) return "";
+        if (url.includes("/embed/")) return url;
+        let match = url.match(/youtu\.be\/([^?&]+)/);
+        if (match) return "https://www.youtube.com/embed/" + match[1];
+        match = url.match(/v=([^&]+)/);
+        if (match) return "https://www.youtube.com/embed/" + match[1];
+        match = url.match(/\/shorts\/([^?&]+)/);
+        if (match) return "https://www.youtube.com/embed/" + match[1];
+        match = url.match(/\/live\/([^?&]+)/);
+        if (match) return "https://www.youtube.com/embed/" + match[1];
+        return url;
+      }
+
       async function saveSlideOver(type) {
         var isEdit = !!editingId;
         var payload = {};
@@ -2692,7 +2706,7 @@
               travelInfo: getVal("mandirTravelInfo"),
               openingHours: getVal("mandirOpeningHours"),
               mapLink: getVal("mandirMapLink"),
-              videoUrl: getVal("mandirVideo"),
+              videoUrl: convertToEmbedUrl(getVal("mandirVideo")),
               featured: getCheck("mandirFeatured"),
               published: getCheck("mandirPublished"),
             };
@@ -2723,7 +2737,7 @@
               language: getVal("videoLanguage"),
               duration: getVal("videoDuration"),
               thumbnail: getVal("videoThumbnail"),
-              videoUrl: getVal("videoUrlInput"),
+              videoUrl: convertToEmbedUrl(getVal("videoUrlInput")),
               audioUrl: getVal("videoAudioUrl"),
               description: getVal("videoDesc"),
               lyrics: getVal("videoLyrics"),

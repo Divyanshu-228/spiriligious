@@ -28,8 +28,8 @@
     <link rel="stylesheet" href="style.css" />
     <style>
       /* ============================================================
-         ROOT – preserved with additions
-         ============================================================ */
+           ROOT
+           ============================================================ */
       :root {
         --primary-green: #234b36;
         --primary-green-dark: #1a3a2a;
@@ -63,8 +63,8 @@
       }
 
       /* ============================================================
-         BODY BACKGROUND – temple-bg.jpg with overlay
-         ============================================================ */
+           BODY – temple-bg.jpg with overlay
+           ============================================================ */
       body {
         background: var(--cream);
         background-image: url("images/temple-bg.jpg");
@@ -73,7 +73,7 @@
         background-attachment: fixed;
         position: relative;
         min-height: 100vh;
-        padding-top: 0px; /* Adjusted for floating navbar */
+        padding-top: 0px;
         margin: 0;
       }
 
@@ -105,7 +105,9 @@
         z-index: 2;
       }
 
-      /* ===== FLOATING NAVBAR – rounded rectangle, centered, not touching edges ===== */
+      /* ============================================================
+           FLOATING NAVBAR
+           ============================================================ */
       .premium-header {
         position: fixed;
         top: 20px;
@@ -228,7 +230,6 @@
         color: var(--gold);
       }
 
-      /* Mobile Menu Button */
       .mobile-menu-btn {
         display: none;
         background: transparent;
@@ -267,21 +268,19 @@
         transform: translateY(-7px) rotate(-45deg);
       }
 
-      /* ===== HERO – with refined cropping ===== */
+      /* ============================================================
+           HERO – no spacer, image flush to top
+           ============================================================ */
       .hero {
         position: relative;
-        min-height: 90vh;
+        min-height: 85vh;
         display: flex;
         align-items: flex-end;
         justify-content: center;
         text-align: center;
-        background: url("images/hero-bg.jpg");
-        background-size: cover;
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        padding: 0 0 2rem;
-        margin-top: 0;
+        background: url("images/hero-bg.jpg") center top / cover no-repeat;
+        padding: 0;
+        margin: 0;
         z-index: 1;
       }
 
@@ -341,26 +340,20 @@
         position: relative;
         z-index: 2;
         width: 100%;
-        padding: 0 0 0.5rem;
+        padding: 0 0 1.6rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-        min-height: 90vh;
+        min-height: 85vh;
       }
 
-      .hero-nav-spacer {
-        flex: 1;
-        min-height: 5vh;
-        width: 100%;
-      }
-
-      /* ===== LUXURY NAV – Premium Hero Navicons ===== */
+      /* luxury nav – flush at bottom with padding */
       .luxury-nav {
         width: 100%;
         max-width: 1100px;
         margin: 0 auto;
-        padding: 0.2rem 1rem 1.2rem;
+        padding: 0.2rem 1rem 0.4rem;
         position: relative;
         z-index: 2;
       }
@@ -391,7 +384,6 @@
         transform: translateY(-6px);
       }
 
-      /* Premium Icon Circles */
       .nav-icon-wrap {
         width: 72px;
         height: 72px;
@@ -415,7 +407,6 @@
         transform: scale(1.05) translateY(-4px);
         box-shadow: 0 12px 40px rgba(185, 145, 45, 0.15);
       }
-      /* Gold dot indicator below icon */
       .nav-item::after {
         content: "";
         position: absolute;
@@ -438,7 +429,7 @@
       .nav-icon-svg {
         width: 60px;
         height: 60px;
-        display: block;
+        display: none;
         object-fit: contain;
         filter: brightness(20%) saturate(300%) invert(15%) sepia(40%)
           saturate(347%) hue-rotate(10deg) brightness(88%) contrast(86%)
@@ -447,6 +438,9 @@
           filter 0.4s ease,
           transform 0.4s ease;
       }
+      .nav-icon-svg.loaded {
+        display: block;
+      }
       .nav-item:hover .nav-icon-svg {
         filter: brightness(0) saturate(100%) invert(44%) sepia(45%)
           saturate(626%) hue-rotate(20deg) brightness(91%) contrast(87%)
@@ -454,11 +448,8 @@
         transform: scale(1.05);
       }
 
-      .nav-icon-svg {
+      .nav-icon-svg.loaded ~ .fallback-icon {
         display: none;
-      }
-      .nav-icon-svg.loaded {
-        display: block;
       }
       .nav-icon-wrap .fallback-icon {
         display: flex;
@@ -471,9 +462,6 @@
       .nav-item:hover .fallback-icon {
         color: #7a5d2e;
         transform: scale(1.1);
-      }
-      .nav-icon-svg.loaded ~ .fallback-icon {
-        display: none;
       }
 
       .nav-title-hindi {
@@ -499,6 +487,9 @@
         color: #7a5d2e;
       }
 
+      /* ============================================================
+           RESPONSIVE – hero
+           ============================================================ */
       @media (max-width: 820px) {
         .luxury-nav-grid {
           gap: 1.6rem 1.8rem;
@@ -518,8 +509,11 @@
         .nav-title-hindi {
           font-size: 0.9rem;
         }
-        .hero-nav-spacer {
-          min-height: 4vh;
+        .hero {
+          min-height: 78vh;
+        }
+        .hero-content {
+          min-height: 78vh;
         }
       }
 
@@ -541,7 +535,7 @@
         }
 
         .luxury-nav {
-          padding: 0 0.3rem 0.8rem;
+          padding: 0 0.3rem 0.2rem;
         }
         .luxury-nav-grid {
           gap: 1.2rem 1rem;
@@ -565,19 +559,14 @@
         .nav-title-hindi {
           font-size: 0.75rem;
         }
-        .hero-nav-spacer {
-          min-height: 2vh;
-        }
         .hero {
-          min-height: 75vh;
-          background-attachment: scroll;
-          background-size: cover;
+          min-height: 70vh;
           background-position: center 30%;
-          /* background-size: 155; */
-          padding-bottom: 0.5rem;
+          padding-bottom: 0;
         }
         .hero-content {
-          min-height: 65vh;
+          min-height: 70vh;
+          padding: 0 0 0.8rem;
         }
         .hero::after {
           height: 60px;
@@ -601,15 +590,17 @@
           font-size: 0.65rem;
         }
         .hero {
-          min-height: 70vh;
+          min-height: 65vh;
           background-position: center 30%;
         }
         .hero-content {
-          min-height: 60vh;
+          min-height: 65vh;
         }
       }
 
-      /* ===== DAILY SHLOK ===== */
+      /* ============================================================
+           DAILY SHLOK
+           ============================================================ */
       .shlok-manuscript {
         background: rgba(255, 255, 255, 0.4);
         backdrop-filter: blur(12px);
@@ -688,12 +679,8 @@
       }
 
       /* ============================================================
-         (Removed duplicate .premium-header styles)
-         ============================================================ */
-
-      /* ============================================================
-         SECTION HEADERS
-         ============================================================ */
+           SECTION HEADERS
+           ============================================================ */
       .section-header-custom {
         text-align: center;
         margin-bottom: 2.5rem;
@@ -712,8 +699,8 @@
       }
 
       /* ============================================================
-         UNIFIED FEATURED CARD
-         ============================================================ */
+           UNIFIED FEATURED CARD
+           ============================================================ */
       .featured-card {
         display: grid;
         grid-template-columns: 42% 1fr;
@@ -848,8 +835,8 @@
       }
 
       /* ============================================================
-         UNIFIED CONTENT CARD
-         ============================================================ */
+           UNIFIED CONTENT CARD
+           ============================================================ */
       .unified-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -964,8 +951,8 @@
       }
 
       /* ============================================================
-         MANTHAN FORUM
-         ============================================================ */
+           MANTHAN FORUM
+           ============================================================ */
       .manthan-grid {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -1090,8 +1077,8 @@
       }
 
       /* ============================================================
-         COMING SOON
-         ============================================================ */
+           COMING SOON
+           ============================================================ */
       .coming-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1144,8 +1131,8 @@
       }
 
       /* ============================================================
-         MODALS
-         ============================================================ */
+           MODALS
+           ============================================================ */
       .modal {
         display: none;
         position: fixed;
@@ -1179,8 +1166,8 @@
       }
 
       /* ============================================================
-         DETAIL MODAL – with print optimizations
-         ============================================================ */
+           DETAIL MODAL – print optimizations
+           ============================================================ */
       .detail-modal {
         display: none;
         position: fixed;
@@ -1483,7 +1470,6 @@
         box-shadow: 0 4px 16px rgba(185, 145, 45, 0.2);
       }
 
-      /* Audio player */
       .detail-audio-player {
         display: none;
         margin: 0.8rem 0 1.2rem;
@@ -1681,15 +1667,14 @@
       }
 
       /* ============================================================
-         PRINT STYLES – only article with Spiriligious branding
-         ============================================================ */
+           PRINT STYLES
+           ============================================================ */
       @media print {
         body {
           background: #fff !important;
           padding: 0 !important;
           margin: 0 !important;
         }
-
         .page-overlay,
         .premium-header,
         .hero,
@@ -1719,7 +1704,6 @@
         .detail-modal::after {
           display: none !important;
         }
-
         .detail-modal {
           display: block !important;
           position: static !important;
@@ -1733,7 +1717,6 @@
           max-height: none !important;
           overflow: visible !important;
         }
-
         .detail-modal-content {
           display: block !important;
           max-height: none !important;
@@ -1745,17 +1728,14 @@
           overflow: visible !important;
           background: #fff !important;
         }
-
         .detail-modal-inner {
           padding: 0.5in 0.3in !important;
           max-width: 100% !important;
         }
-
         .detail-hero-grid {
           display: block !important;
           margin-bottom: 1.5rem !important;
         }
-
         .detail-hero-image-wrap {
           max-height: 300px !important;
           margin-bottom: 1.2rem !important;
@@ -1768,18 +1748,15 @@
           height: 100% !important;
           object-fit: cover !important;
         }
-
         .detail-hero-content {
           padding: 0 !important;
         }
-
         .detail-title {
           font-size: 28pt !important;
           line-height: 1.2 !important;
           max-width: 100% !important;
           color: #1a1a1a !important;
         }
-
         .detail-divider-lotus {
           max-width: 200px !important;
           margin: 0.5rem 0 !important;
@@ -1790,41 +1767,34 @@
         .detail-divider-lotus i {
           color: var(--gold) !important;
         }
-
         .detail-meta {
           font-size: 11pt !important;
           color: #555 !important;
         }
-
         .detail-excerpt {
           font-size: 12pt !important;
           -webkit-line-clamp: unset !important;
           max-width: 100% !important;
           color: #333 !important;
         }
-
         .detail-body-grid {
           display: block !important;
           border-top: 2px solid #e8dcc5 !important;
           padding-top: 1.5rem !important;
         }
-
         .detail-body-text {
           font-size: 11pt !important;
           line-height: 1.8 !important;
           color: #1a1a1a !important;
           text-align: justify !important;
         }
-
         .detail-body-text p {
           text-align: justify !important;
         }
-
         .detail-body-text .dropcap::first-letter {
           font-size: 36pt !important;
           color: var(--primary-green) !important;
         }
-
         .detail-body-text h3 {
           font-size: 18pt !important;
           color: var(--primary-green) !important;
@@ -1832,14 +1802,11 @@
         .detail-body-text h4 {
           font-size: 14pt !important;
         }
-
         .detail-body-text blockquote {
           border-left-width: 3px !important;
           padding-left: 1rem !important;
           font-size: 12pt !important;
         }
-
-        /* Print header with Spiriligious branding */
         .detail-modal-inner::before {
           content: "Spiriligious · ज्ञान · अध्यात्म · विज्ञान";
           display: block;
@@ -1853,8 +1820,6 @@
           border-bottom: 2px solid var(--gold);
           letter-spacing: 1px;
         }
-
-        /* Print footer */
         .detail-modal-inner::after {
           content: "© Spiriligious · " attr(data-print-date);
           display: block;
@@ -1867,11 +1832,9 @@
           border-top: 1px solid #e0e0e0;
           letter-spacing: 0.5px;
         }
-
         .detail-sidebar {
           display: none !important;
         }
-
         .detail-hero-image-wrap img {
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
@@ -1879,8 +1842,8 @@
       }
 
       /* ============================================================
-         RESPONSIVE
-         ============================================================ */
+           RESPONSIVE
+           ============================================================ */
       @media (max-width: 1024px) {
         .container {
           padding: 0 1.5rem;
@@ -2012,7 +1975,6 @@
         .shlok-fallback {
           font-size: 1.1rem;
         }
-
         .detail-modal {
           padding: 0;
           align-items: flex-end;
@@ -2094,7 +2056,6 @@
         .detail-audio-player audio {
           width: 100%;
         }
-
         .footer-main {
           grid-template-columns: 1fr;
           gap: 2rem;
@@ -2128,8 +2089,6 @@
         .footer-contact-col {
           max-width: 100%;
         }
-
-        /* Print styles for mobile */
         @media print {
           .detail-modal-inner {
             padding: 0.2in !important;
@@ -2229,8 +2188,8 @@
       }
 
       /* ============================================================
-         FOOTER
-         ============================================================ */
+           FOOTER
+           ============================================================ */
       .premium-footer {
         background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(16px);
@@ -2496,6 +2455,177 @@
         font-weight: 500;
         opacity: 0.8;
       }
+
+      /* ============================================================
+           MOBILE DRAWER
+           ============================================================ */
+      .mobile-drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(43, 43, 43, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+      }
+      .mobile-drawer-overlay.active {
+        display: block;
+      }
+
+      .mobile-drawer {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        max-width: 85vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: -8px 0 40px rgba(43, 43, 43, 0.08);
+        z-index: 10000;
+        padding: 2rem 1.8rem 1.8rem;
+        transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        border-left: 1px solid rgba(185, 145, 45, 0.08);
+      }
+      .mobile-drawer.open {
+        right: 0;
+      }
+
+      .drawer-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+      }
+      .drawer-logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+      }
+      .drawer-logo {
+        height: 32px;
+        width: auto;
+        object-fit: contain;
+      }
+      .drawer-logo-text {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+      }
+      .drawer-tagline {
+        font-family: var(--font-devanagari);
+        font-size: 0.8rem;
+        color: var(--gold);
+        opacity: 0.7;
+        margin: 0.1rem 0 0;
+        letter-spacing: 1px;
+      }
+      .drawer-divider {
+        width: 40px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: 0.4rem 0 0.2rem;
+        opacity: 0.3;
+      }
+      .drawer-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: transparent;
+        border: none;
+        font-size: 1.4rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+        padding: 0.2rem;
+        transition: var(--transition);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+      .drawer-close:hover {
+        background: rgba(185, 145, 45, 0.08);
+        color: var(--gold);
+        transform: rotate(90deg);
+      }
+
+      .drawer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+        padding-top: 0.4rem;
+      }
+      .drawer-link {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.7rem 0.6rem;
+        border-radius: var(--radius-sm);
+        color: var(--brown-soft);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+      .drawer-link i {
+        width: 22px;
+        font-size: 1rem;
+        color: var(--gold);
+        opacity: 0.6;
+        transition: var(--transition);
+      }
+      .drawer-link:hover {
+        background: rgba(185, 145, 45, 0.06);
+        color: var(--primary-green);
+        transform: translateX(4px);
+      }
+      .drawer-link:hover i {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .drawer-link.active {
+        color: var(--primary-green);
+        font-weight: 600;
+        background: rgba(185, 145, 45, 0.06);
+      }
+      .drawer-link.active i {
+        opacity: 1;
+      }
+
+      .lotus-divider {
+        display: flex;
+        justify-content: center;
+        padding: 1.8rem 0 1.2rem;
+        color: var(--gold);
+        font-size: 1.2rem;
+        opacity: 0.25;
+        letter-spacing: 4px;
+      }
+      .section-spacing {
+        padding: 2.5rem 0 3rem;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body>
@@ -2568,7 +2698,6 @@
                 Please wait while we load the article content.
               </p>
 
-              <!-- Audio player -->
               <div class="detail-audio-player" id="detailAudioPlayer">
                 <span class="audio-icon"><i class="fas fa-music"></i></span>
                 <audio controls id="detailAudio">
@@ -2744,11 +2873,10 @@
 
     <!-- ===== MAIN ===== -->
     <main>
-      <!-- HERO -->
+      <!-- HERO – spacer removed, image flush to top -->
       <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content container">
-          <div class="hero-nav-spacer"></div>
           <div class="luxury-nav">
             <nav class="luxury-nav-grid" aria-label="Explore Spiriligious">
               <!-- Sant -->
@@ -3182,28 +3310,25 @@
           modalInner.setAttribute("data-print-date", dateStr);
         }
 
-        // ── Function to set fallback images on cards ──
+        // ── card image fallback ──
         function setCardImageFallbacks() {
-          var images = document.querySelectorAll(
-            ".card-image-wrap img, .featured-image img",
-          );
-          images.forEach(function (img) {
-            if (
-              !img.src ||
-              img.src === "" ||
-              img.src === window.location.href
-            ) {
-              img.src = "images/cover.jpg";
-            }
-            if (!img.onerror) {
-              img.onerror = function () {
-                this.src = "images/cover.jpg";
-              };
-            }
-          });
+          document
+            .querySelectorAll(".card-image-wrap img, .featured-image img")
+            .forEach(function (img) {
+              if (
+                !img.src ||
+                img.src === "" ||
+                img.src === window.location.href
+              )
+                img.src = "images/cover.jpg";
+              if (!img.onerror)
+                img.onerror = function () {
+                  this.src = "images/cover.jpg";
+                };
+            });
         }
 
-        // ── loaders with fallback ──
+        // ── loaders ──
         try {
           if (typeof loadDailyShlok === "function") loadDailyShlok();
         } catch (e) {
@@ -3221,10 +3346,7 @@
         }
 
         setTimeout(setCardImageFallbacks, 1000);
-
-        var observer = new MutationObserver(function () {
-          setCardImageFallbacks();
-        });
+        var observer = new MutationObserver(setCardImageFallbacks);
         observer.observe(document.body, { childList: true, subtree: true });
 
         // ── discussion submit ──
@@ -3272,28 +3394,33 @@
             }
           });
 
-        document.querySelectorAll(".manthan-tabs button").forEach((btn) => {
-          btn.addEventListener("click", function () {
-            document
-              .querySelectorAll(".manthan-tabs button")
-              .forEach((b) => b.classList.remove("active"));
-            this.classList.add("active");
-            if (typeof loadCommunityDiscussions === "function")
-              loadCommunityDiscussions();
+        document
+          .querySelectorAll(".manthan-tabs button")
+          .forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              document
+                .querySelectorAll(".manthan-tabs button")
+                .forEach(function (b) {
+                  b.classList.remove("active");
+                });
+              this.classList.add("active");
+              if (typeof loadCommunityDiscussions === "function")
+                loadCommunityDiscussions();
+            });
           });
-        });
 
-        const revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
+        // ── reveal observer ──
+        var revealObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
               if (entry.isIntersecting) entry.target.classList.add("visible");
             });
           },
           { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
         );
-        document
-          .querySelectorAll(".reveal")
-          .forEach((el) => revealObserver.observe(el));
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          revealObserver.observe(el);
+        });
 
         window.openComingSoon = function () {
           openModal(
@@ -3302,11 +3429,11 @@
           );
         };
         window.scrollToSection = function (id) {
-          const el = document.getElementById(id);
+          var el = document.getElementById(id);
           if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
         };
         window.openModal = function (title, html) {
-          const m = document.getElementById("infoModal");
+          var m = document.getElementById("infoModal");
           document.getElementById("modalTitle").innerText = title;
           document.getElementById("modalMessage").innerHTML = html;
           m.style.display = "flex";
@@ -3318,79 +3445,78 @@
         };
 
         // ── DETAIL MODAL ──
-        const originalOpenDetailModal = window.openDetailModal;
-
+        var originalOpenDetailModal = window.openDetailModal;
         window.openDetailModal = function (data) {
-          let html = typeof data === "string" ? data : data.html || "";
-          const audioUrl = typeof data === "object" ? data.audioUrl : null;
-          const contentType = typeof data === "object" ? data.type : null;
+          var html = typeof data === "string" ? data : data.html || "";
+          var audioUrl = typeof data === "object" ? data.audioUrl : null;
+          var contentType = typeof data === "object" ? data.type : null;
 
-          const bodyEl = document.getElementById("detailBody");
+          var bodyEl = document.getElementById("detailBody");
           if (bodyEl) bodyEl.innerHTML = html;
 
           function extractText(selector, fallback) {
-            const temp = document.createElement("div");
+            var temp = document.createElement("div");
             temp.innerHTML = html;
-            const el = temp.querySelector(selector);
+            var el = temp.querySelector(selector);
             return el ? el.textContent.trim() : fallback;
           }
 
           function extractHTML(selector, fallback) {
-            const temp = document.createElement("div");
+            var temp = document.createElement("div");
             temp.innerHTML = html;
-            const el = temp.querySelector(selector);
+            var el = temp.querySelector(selector);
             return el ? el.innerHTML : fallback;
           }
 
-          const catText = extractText(
+          var catText = extractText(
             ".detail-category, .category-tag, [data-category]",
             "ARTICLE",
           );
-          const catPill = document.getElementById("detailCategoryText");
+          var catPill = document.getElementById("detailCategoryText");
           if (catPill) catPill.textContent = catText.toUpperCase();
 
-          const titleText = extractText(
+          var titleText = extractText(
             ".detail-title, h1, [data-title]",
             "Loading...",
           );
-          const titleEl = document.getElementById("detailTitle");
+          var titleEl = document.getElementById("detailTitle");
           if (titleEl) {
-            const hindiSpan = titleEl.querySelector(".hindi-title") || titleEl;
+            var hindiSpan = titleEl.querySelector(".hindi-title") || titleEl;
             hindiSpan.textContent = titleText;
           }
 
-          const metaText = extractHTML(".detail-meta, [data-meta]", "");
+          var metaText = extractHTML(".detail-meta, [data-meta]", "");
           if (metaText) {
-            const metaEl = document.getElementById("detailMeta");
+            var metaEl = document.getElementById("detailMeta");
             if (metaEl) metaEl.innerHTML = metaText;
           } else {
-            const author = extractText(
+            var author = extractText(
               ".detail-author, [data-author]",
               "Anonymous",
             );
-            const readTime = extractText(
+            var readTime = extractText(
               ".detail-read-time, [data-read-time]",
               "3 min read",
             );
-            const date = extractText(".detail-date, [data-date]", "Today");
-            const metaEl = document.getElementById("detailMeta");
-            if (metaEl) {
-              metaEl.innerHTML = `<span><i class="fas fa-user"></i> ${author}</span><span><i class="fas fa-clock"></i> ${readTime}</span><span><i class="fas fa-calendar-alt"></i> ${date}</span>`;
+            var date = extractText(".detail-date, [data-date]", "Today");
+            var metaEl2 = document.getElementById("detailMeta");
+            if (metaEl2) {
+              metaEl2.innerHTML = `<span><i class="fas fa-user"></i> ${author}</span><span><i class="fas fa-clock"></i> ${readTime}</span><span><i class="fas fa-calendar-alt"></i> ${date}</span>`;
             }
           }
 
-          const excerptText = extractText(
+          var excerptText = extractText(
             ".detail-excerpt, .excerpt, p:first-of-type",
             "Loading article content...",
           );
-          const excerptEl = document.getElementById("detailExcerpt");
+          var excerptEl = document.getElementById("detailExcerpt");
           if (excerptEl) excerptEl.textContent = excerptText;
 
-          const imgSrc = extractText(
+          var imgSrc = extractText(
             ".detail-hero img, .detail-image img, [data-image]",
             "",
           );
-          const imgEl = document.getElementById("detailHeroImage");
+          var imgEl = document.getElementById("detailHeroImage");
           if (imgEl) {
             if (imgSrc) {
               imgEl.src = imgSrc;
@@ -3404,74 +3530,58 @@
             };
           }
 
-          const sidebarItems = document.getElementById("detailSidebarItems");
+          var sidebarItems = document.getElementById("detailSidebarItems");
           if (sidebarItems) {
-            const temp = document.createElement("div");
+            var temp = document.createElement("div");
             temp.innerHTML = html;
-            const pointsList = temp.querySelector(
+            var pointsList = temp.querySelector(
               ".detail-key-points, .key-points, [data-points]",
             );
             if (pointsList) {
-              const items = pointsList.querySelectorAll("li, .point");
+              var items = pointsList.querySelectorAll("li, .point");
               if (items.length > 0) {
-                let pointsHTML = "";
-                items.forEach((item, idx) => {
-                  const title =
+                var pointsHTML = "";
+                items.forEach(function (item, idx) {
+                  var title =
                     item.querySelector(".point-title, strong")?.textContent ||
                     item.textContent.trim().split(":")[0] ||
                     "Point";
-                  const desc =
+                  var desc =
                     item.querySelector(".point-desc, span")?.textContent ||
                     item.textContent.trim().split(":").slice(1).join(":") ||
                     "";
-                  pointsHTML += `
-                    <div class="sidebar-item">
-                      <span class="bullet">${idx + 1}</span>
-                      <div class="item-content">
-                        <div class="item-title">${title.trim()}</div>
-                        <div class="item-desc">${desc.trim() || "Key insight"}</div>
-                      </div>
-                    </div>
-                  `;
+                  pointsHTML += `<div class="sidebar-item"><span class="bullet">${idx + 1}</span><div class="item-content"><div class="item-title">${title.trim()}</div><div class="item-desc">${desc.trim() || "Key insight"}</div></div></div>`;
                 });
                 sidebarItems.innerHTML = pointsHTML;
               }
             } else {
-              const headings = temp.querySelectorAll("h3, h4");
+              var headings = temp.querySelectorAll("h3, h4");
               if (headings.length > 0) {
-                let pointsHTML = "";
-                let idx = 0;
-                headings.forEach((h) => {
-                  const next = h.nextElementSibling;
-                  const desc =
+                var pointsHTML2 = "";
+                var idx2 = 0;
+                headings.forEach(function (h) {
+                  var next = h.nextElementSibling;
+                  var desc =
                     next && next.tagName === "P"
                       ? next.textContent.trim()
                       : "Key insight";
-                  if (idx < 4) {
-                    pointsHTML += `
-                      <div class="sidebar-item">
-                        <span class="bullet">${idx + 1}</span>
-                        <div class="item-content">
-                          <div class="item-title">${h.textContent.trim()}</div>
-                          <div class="item-desc">${desc}</div>
-                        </div>
-                      </div>
-                    `;
-                    idx++;
+                  if (idx2 < 4) {
+                    pointsHTML2 += `<div class="sidebar-item"><span class="bullet">${idx2 + 1}</span><div class="item-content"><div class="item-title">${h.textContent.trim()}</div><div class="item-desc">${desc}</div></div></div>`;
+                    idx2++;
                   }
                 });
-                if (pointsHTML) sidebarItems.innerHTML = pointsHTML;
+                if (pointsHTML2) sidebarItems.innerHTML = pointsHTML2;
               }
             }
           }
 
-          const audioPlayer = document.getElementById("detailAudioPlayer");
-          const audioEl = document.getElementById("detailAudio");
-          let finalAudioUrl = audioUrl;
+          var audioPlayer = document.getElementById("detailAudioPlayer");
+          var audioEl = document.getElementById("detailAudio");
+          var finalAudioUrl = audioUrl;
           if (!finalAudioUrl && contentType === "bhajan") {
-            const temp = document.createElement("div");
-            temp.innerHTML = html;
-            const audioTag = temp.querySelector("audio");
+            var temp2 = document.createElement("div");
+            temp2.innerHTML = html;
+            var audioTag = temp2.querySelector("audio");
             if (audioTag) finalAudioUrl = audioTag.getAttribute("src");
           }
           if (finalAudioUrl) {
@@ -3482,27 +3592,20 @@
             audioPlayer.classList.remove("active");
           }
 
-          const modal = document.getElementById("detailModal");
+          var modal = document.getElementById("detailModal");
           if (modal) {
             modal.style.display = "flex";
             document.body.style.overflow = "hidden";
-            const content = modal.querySelector(".detail-modal-content");
+            var content = modal.querySelector(".detail-modal-content");
             if (content) content.scrollTop = 0;
-          }
-
-          if (
-            typeof originalOpenDetailModal === "function" &&
-            originalOpenDetailModal !== window.openDetailModal
-          ) {
-            // already handled
           }
         };
 
         window.closeDetailModal = function () {
-          const modal = document.getElementById("detailModal");
+          var modal = document.getElementById("detailModal");
           if (modal) modal.style.display = "none";
           document.body.style.overflow = "auto";
-          const audio = document.getElementById("detailAudio");
+          var audio = document.getElementById("detailAudio");
           if (audio) audio.pause();
         };
 
@@ -3511,7 +3614,6 @@
           ?.addEventListener("click", function (e) {
             if (e.target === this) closeDetailModal();
           });
-
         document.addEventListener("keydown", function (e) {
           if (e.key === "Escape") closeDetailModal();
         });
@@ -3519,10 +3621,10 @@
         document
           .getElementById("detailCtaBtn")
           ?.addEventListener("click", function () {
-            const bodyEl = document.getElementById("detailBody");
-            const content = document.querySelector(".detail-modal-content");
+            var bodyEl = document.getElementById("detailBody");
+            var content = document.querySelector(".detail-modal-content");
             if (bodyEl && content) {
-              const y =
+              var y =
                 bodyEl.getBoundingClientRect().top + content.scrollTop - 60;
               content.scrollTo({ top: y, behavior: "smooth" });
             }
@@ -3534,17 +3636,17 @@
         }
 
         function getCurrentArticleTitle() {
-          const titleEl = document.getElementById("detailTitle");
+          var titleEl = document.getElementById("detailTitle");
           return titleEl ? titleEl.textContent.trim() : "Spiriligious Article";
         }
 
-        document.querySelectorAll("[data-share]").forEach((btn) => {
+        document.querySelectorAll("[data-share]").forEach(function (btn) {
           btn.addEventListener("click", function (e) {
             e.stopPropagation();
-            const type = this.getAttribute("data-share");
-            const url = getCurrentArticleUrl();
-            const title = getCurrentArticleTitle();
-            let shareUrl = "";
+            var type = this.getAttribute("data-share");
+            var url = getCurrentArticleUrl();
+            var title = getCurrentArticleTitle();
+            var shareUrl = "";
             switch (type) {
               case "fb":
                 shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
@@ -3559,14 +3661,14 @@
                 if (navigator.clipboard) {
                   navigator.clipboard
                     .writeText(url)
-                    .then(() => {
+                    .then(function () {
                       openModal(
                         "Link Copied",
                         "Article link copied to clipboard!",
                       );
                     })
-                    .catch(() => {
-                      const textarea = document.createElement("textarea");
+                    .catch(function () {
+                      var textarea = document.createElement("textarea");
                       textarea.value = url;
                       document.body.appendChild(textarea);
                       textarea.select();
@@ -3578,12 +3680,12 @@
                       );
                     });
                 } else {
-                  const textarea = document.createElement("textarea");
-                  textarea.value = url;
-                  document.body.appendChild(textarea);
-                  textarea.select();
+                  var textarea2 = document.createElement("textarea");
+                  textarea2.value = url;
+                  document.body.appendChild(textarea2);
+                  textarea2.select();
                   document.execCommand("copy");
-                  document.body.removeChild(textarea);
+                  document.body.removeChild(textarea2);
                   openModal("Link Copied", "Article link copied to clipboard!");
                 }
                 return;
@@ -3607,7 +3709,6 @@
             e.stopPropagation();
             window.print();
           });
-
         document
           .getElementById("detailBookmarkBtn")
           ?.addEventListener("click", function (e) {
@@ -3619,10 +3720,10 @@
           });
 
         // ── mobile menu ──
-        const menuBtn = document.getElementById("mobileMenuBtn");
-        const drawer = document.getElementById("mobileDrawer");
-        const overlay = document.getElementById("mobileDrawerOverlay");
-        const closeBtn = document.getElementById("drawerCloseBtn");
+        var menuBtn = document.getElementById("mobileMenuBtn");
+        var drawer = document.getElementById("mobileDrawer");
+        var overlay = document.getElementById("mobileDrawerOverlay");
+        var closeBtn = document.getElementById("drawerCloseBtn");
         if (menuBtn && drawer && overlay && closeBtn) {
           function openDrawer() {
             drawer.classList.add("open");
@@ -3639,29 +3740,29 @@
             menuBtn.setAttribute("aria-expanded", "false");
             document.body.style.overflow = "";
           }
-          menuBtn.addEventListener("click", (e) => {
+          menuBtn.addEventListener("click", function (e) {
             e.stopPropagation();
             drawer.classList.contains("open") ? closeDrawer() : openDrawer();
           });
           closeBtn.addEventListener("click", closeDrawer);
           overlay.addEventListener("click", closeDrawer);
-          document.addEventListener("keydown", (e) => {
+          document.addEventListener("keydown", function (e) {
             if (e.key === "Escape" && drawer.classList.contains("open"))
               closeDrawer();
           });
-          drawer
-            .querySelectorAll(".drawer-link")
-            .forEach((link) => link.addEventListener("click", closeDrawer));
+          drawer.querySelectorAll(".drawer-link").forEach(function (link) {
+            link.addEventListener("click", closeDrawer);
+          });
         }
 
         // ── header scroll ──
-        const header = document.querySelector(".premium-header");
-        let lastScrollY = 0;
+        var header = document.querySelector(".premium-header");
+        var lastScrollY = 0;
         window.addEventListener(
           "scroll",
           function () {
-            const currentScrollY = window.scrollY;
-            const delta = currentScrollY - lastScrollY;
+            var currentScrollY = window.scrollY;
+            var delta = currentScrollY - lastScrollY;
             if (delta > 10 && currentScrollY > 100)
               header.classList.add("hidden");
             else if (delta < -5 || currentScrollY < 50)
@@ -3674,58 +3775,53 @@
         );
 
         // ── card clickability ──
-        document.querySelectorAll(".featured-card").forEach((card) => {
+        document.querySelectorAll(".featured-card").forEach(function (card) {
           card.style.cursor = "pointer";
           card.addEventListener("click", function (e) {
             if (e.target.closest("button")) return;
-            const btn = this.querySelector(".btn-primary-featured");
+            var btn = this.querySelector(".btn-primary-featured");
             if (btn && !btn.disabled) btn.click();
           });
         });
 
         // ── nav icon fallback ──
-        document.querySelectorAll(".nav-icon-svg").forEach((img) => {
+        document.querySelectorAll(".nav-icon-svg").forEach(function (img) {
           if (!img.complete) {
             img.addEventListener("error", function () {
               this.style.display = "none";
-              const wrap = this.closest(".nav-icon-wrap");
+              var wrap = this.closest(".nav-icon-wrap");
               if (wrap) {
-                const fallback = wrap.querySelector(".fallback-icon");
+                var fallback = wrap.querySelector(".fallback-icon");
                 if (fallback) fallback.style.display = "flex";
               }
             });
           } else if (img.naturalWidth === 0 || img.naturalHeight === 0) {
             img.style.display = "none";
-            const wrap = img.closest(".nav-icon-wrap");
-            if (wrap) {
-              const fallback = wrap.querySelector(".fallback-icon");
-              if (fallback) fallback.style.display = "flex";
+            var wrap2 = img.closest(".nav-icon-wrap");
+            if (wrap2) {
+              var fallback2 = wrap2.querySelector(".fallback-icon");
+              if (fallback2) fallback2.style.display = "flex";
             }
           }
         });
 
         // ── bhajan audio interception ──
-        const bhajanGrid = document.getElementById("bhajanGrid");
+        var bhajanGrid = document.getElementById("bhajanGrid");
         if (bhajanGrid) {
           bhajanGrid.addEventListener("click", function (e) {
-            const card = e.target.closest(".content-card-unified");
+            var card = e.target.closest(".content-card-unified");
             if (!card) return;
-            const audioUrl = card.dataset.audio;
+            var audioUrl = card.dataset.audio;
             if (audioUrl) {
               if (e.target.closest("button")) return;
-              const title =
+              var title =
                 card.querySelector(".card-title")?.textContent || "Bhajan";
-              const desc = card.querySelector(".card-desc")?.textContent || "";
-              const img =
+              var desc = card.querySelector(".card-desc")?.textContent || "";
+              var img =
                 card
                   .querySelector(".card-image-wrap img")
                   ?.getAttribute("src") || "images/cover.jpg";
-              const htmlContent = `
-                <div class="detail-title">${title}</div>
-                <div class="detail-excerpt">${desc}</div>
-                <div class="detail-hero"><img src="${img}" alt="Bhajan" /></div>
-                <div class="detail-body-text"><p>Listen to this beautiful bhajan.</p></div>
-              `;
+              var htmlContent = `<div class="detail-title">${title}</div><div class="detail-excerpt">${desc}</div><div class="detail-hero"><img src="${img}" alt="Bhajan" /></div><div class="detail-body-text"><p>Listen to this beautiful bhajan.</p></div>`;
               openDetailModal({
                 html: htmlContent,
                 audioUrl: audioUrl,
@@ -3738,7 +3834,7 @@
         }
 
         console.log(
-          "✨ Spiriligious with floating navbar, hero crop, cover fallback, and print optimization loaded.",
+          "✨ Spiriligious – hero spacer removed, image flush to top.",
         );
       });
     </script>
