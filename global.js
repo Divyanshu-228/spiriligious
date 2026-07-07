@@ -100,7 +100,7 @@ function loadFooter() {
           </div>
 
           <div class="footer-col footer-social-col">
-            <h4>Follow Us</h4>
+            <h4>Social Links</h4>
             <ul class="social-links-list">
               <li><a href="https://www.youtube.com/@spiriligious" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a></li>
               <li><a href="https://instagram.com/spiriligious" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a></li>
@@ -111,8 +111,20 @@ function loadFooter() {
           <div class="footer-col footer-contact-col">
             <div class="footer-contact-card">
               <i class="fas fa-envelope contact-icon"></i>
-              <h4>Get in Touch</h4>
+              <h4>Contact</h4>
               <p class="contact-email"><a href="mailto:info@spiriligious.in">info@spiriligious.in</a></p>
+              <p class="contact-response">For collaborations, corrections, and community queries.</p>
+            </div>
+          </div>
+
+          <div class="footer-col footer-newsletter-col">
+            <div class="footer-newsletter-card">
+              <h4>Newsletter</h4>
+              <p>Receive thoughtful essays, new articles, and platform updates.</p>
+              <form class="footer-newsletter-form" action="javascript:void(0)" aria-label="Newsletter signup">
+                <input type="email" placeholder="Email address" aria-label="Email address" />
+                <button type="submit" aria-label="Join newsletter"><i class="fas fa-arrow-right"></i></button>
+              </form>
             </div>
           </div>
         </div>
