@@ -117,15 +117,7 @@ function loadFooter() {
             </div>
           </div>
 
-          <div class="footer-col footer-newsletter-col">
-            <div class="footer-newsletter-card">
-              <h4>Newsletter</h4>
-              <p>Receive thoughtful essays, new articles, and platform updates.</p>
-              <form class="footer-newsletter-form" action="javascript:void(0)" aria-label="Newsletter signup">
-                <input type="email" placeholder="Email address" aria-label="Email address" />
-                <button type="submit" aria-label="Join newsletter"><i class="fas fa-arrow-right"></i></button>
-              </form>
-            </div>
+          
           </div>
         </div>
 
