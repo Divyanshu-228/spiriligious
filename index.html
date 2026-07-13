@@ -3732,7 +3732,7 @@
             let featuredItem = featuredDoc ? transform(featuredDoc) : null;
             let restItems = rest.map((d) => transform(d));
             const featuredOnclick = featuredItem
-              ? `openSantArticle('${featuredItem.id}')`
+              ? `location.href='Articles.html?article=${featuredItem.id}'`
               : "";
             renderFeatured(
               "featuredSantContainer",
@@ -3744,7 +3744,7 @@
               "santArticlesGrid",
               restItems,
               "sant",
-              (item) => `openSantArticle('${item.id}')`,
+              (item) => `location.href='Articles.html?article=${item.id}'`,
             );
           } catch (e) {
             console.warn("Sant load failed", e);
@@ -3775,7 +3775,7 @@
             let featuredItem = featuredDoc ? transform(featuredDoc) : null;
             let restItems = rest.map((d) => transform(d));
             const featuredOnclick = featuredItem
-              ? `openMandirDetail('${featuredItem.id}')`
+              ? `location.href='mandir.html?mandir=${featuredItem.id}'`
               : "";
             renderFeatured(
               "featuredTempleContainer",
@@ -3787,7 +3787,7 @@
               "mandirGrid",
               restItems,
               "mandir",
-              (item) => `openMandirDetail('${item.id}')`,
+              (item) => `location.href='mandir.html?mandir=${item.id}'`,
             );
           } catch (e) {
             console.warn("Mandir load failed", e);
@@ -3818,7 +3818,7 @@
             let featuredItem = featuredDoc ? transform(featuredDoc) : null;
             let restItems = rest.map((d) => transform(d));
             const featuredOnclick = featuredItem
-              ? `openBhajanDetail('${featuredItem.id}')`
+              ? `location.href='bhajan.html?bhajan=${featuredItem.id}'`
               : "";
             renderFeatured(
               "featuredBhajanContainer",
@@ -3830,7 +3830,7 @@
               "bhajanGrid",
               restItems,
               "bhajan",
-              (item) => `openBhajanDetail('${item.id}')`,
+              (item) => `location.href='bhajan.html?bhajan=${item.id}'`,
             );
           } catch (e) {
             console.warn("Bhajan load failed", e);
@@ -3882,7 +3882,7 @@
               .filter((i) => i.id !== featuredItem?.id)
               .slice(0, 3);
             const featuredOnclick = featuredItem
-              ? `openScienceDetail('${featuredItem.id}', '${featuredItem.type}')`
+              ? `location.href='science.html?science=${featuredItem.id}'`
               : "";
             renderFeatured(
               "featuredScienceContainer",
@@ -3894,7 +3894,7 @@
               "scienceGrid",
               restItems,
               "science",
-              (item) => `openScienceDetail('${item.id}', '${item.type}')`,
+              (item) => `location.href='science.html?science=${item.id}'`,
             );
           } catch (e) {
             console.warn("Science load failed", e);
