@@ -1,0 +1,3286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Spiriligious · Articles</title>
+    <meta
+      name="description"
+      content="Explore timeless wisdom, ancient knowledge, and modern insights — a curated collection of articles on Sanatan Dharma, philosophy, science, and culture."
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon1.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="images/favicon1.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="images/favicon1.svg" />
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2285457582865660"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ============================================================
+         ARTICLES PAGE – PREMIUM EDITORIAL STYLES
+         ============================================================ */
+      :root {
+        --primary-green: #234b36;
+        --primary-green-dark: #1a3a2a;
+        --gold: #b9912d;
+        --gold-soft: #d4b06a;
+        --gold-pale: #e8d8b0;
+        --cream: #f8f5ef;
+        --surface: #ffffff;
+        --brown: #2b2b2b;
+        --brown-soft: #5a534c;
+        --brown-light: #8a827a;
+        --gray-50: #f7f4ef;
+        --gray-100: #ede8e0;
+        --gray-200: #dfd8ce;
+        --gray-300: #cbc2b6;
+        --gray-400: #b0a69a;
+        --shadow-soft: 0 8px 30px rgba(47, 43, 39, 0.05);
+        --shadow-medium: 0 12px 48px rgba(47, 43, 39, 0.09);
+        --shadow-heavy: 0 20px 60px rgba(47, 43, 39, 0.14);
+        --shadow-glass: 0 8px 32px rgba(47, 43, 39, 0.08);
+        --shadow-featured: 0 16px 56px rgba(47, 43, 39, 0.07);
+        --radius-lg: 28px;
+        --radius-md: 20px;
+        --radius-sm: 16px;
+        --radius-xs: 12px;
+        --radius-pill: 60px;
+        --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --transition-smooth: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        --font-serif: "EB Garamond", serif;
+        --font-sans: "Inter", sans-serif;
+        --font-devanagari: "Tiro Devanagari Hindi", serif;
+      }
+
+      body {
+        background: var(--cream);
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        position: relative;
+        min-height: 100vh;
+        padding-top: 0px;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(238, 220, 191, 0.712);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ── Floating Navbar ── */
+      .premium-header {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 40px);
+        max-width: 1280px;
+        border-radius: 60px;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(20px) saturate(1.1);
+        -webkit-backdrop-filter: blur(20px) saturate(1.1);
+        box-shadow: 0 8px 32px rgba(47, 43, 39, 0.05);
+        padding: 0.4rem 1.5rem;
+        z-index: 10000 !important;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      .premium-header.hidden {
+        transform: translateX(-50%) translateY(-120%);
+        opacity: 0;
+      }
+      .premium-header.scrolled {
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 12px 48px rgba(47, 43, 39, 0.07);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .premium-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      /* ============================================================
+         SEARCH BAR
+         ============================================================ */
+      .search-section {
+        padding: 1.5rem 0 1.5rem;
+      }
+      .search-bar-wrap {
+        max-width: 1280px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-lg);
+        padding: 0.6rem 0.6rem 0.6rem 1.8rem;
+        box-shadow: var(--shadow-glass);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition:
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .search-bar-wrap:focus-within {
+        box-shadow: 0 12px 48px rgba(47, 43, 39, 0.06);
+        border-color: rgba(185, 145, 45, 0.15);
+      }
+      .search-bar-wrap .search-icon {
+        color: var(--brown-light);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .search-bar-wrap input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 0.8rem 0;
+        font-size: 1rem;
+        font-family: var(--font-sans);
+        color: var(--brown);
+        min-width: 160px;
+        outline: none;
+      }
+      .search-bar-wrap input::placeholder {
+        color: var(--gray-400);
+        font-weight: 300;
+      }
+
+      /* ============================================================
+         HERO
+         ============================================================ */
+      .hero-section {
+        padding: 90px 2rem 0;
+      }
+      .hero-desktop,
+      .hero-mobile {
+        position: relative;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-medium);
+      }
+      .hero-desktop img,
+      .hero-mobile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .hero-desktop {
+        aspect-ratio: 16/4.8;
+        max-height: 650px;
+      }
+      .hero-desktop .hero-text-left {
+        position: absolute;
+        top: 50%;
+        left: 3.5rem;
+        transform: translateY(-50%);
+        color: #fff;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        max-width: 480px;
+      }
+      .hero-desktop .hero-text-left h1 {
+        font-family: var(--font-serif);
+        font-size: 3.6rem;
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+        line-height: 1.1;
+      }
+      .hero-desktop .hero-text-left p {
+        font-family: var(--font-sans);
+        font-size: 1.1rem;
+        font-weight: 300;
+        opacity: 0.9;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .hero-desktop::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 45%;
+        background: linear-gradient(to top, var(--gold-soft), transparent);
+        pointer-events: none;
+      }
+
+      .hero-mobile {
+        aspect-ratio: 16/11;
+        max-height: 520px;
+        display: none;
+      }
+      .hero-mobile .hero-text-bottom {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: #fff;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 360px;
+      }
+      .hero-mobile .hero-text-bottom h1 {
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0 0 0.2rem;
+        line-height: 1.1;
+      }
+      .hero-mobile .hero-text-bottom p {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 300;
+        opacity: 0.9;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .hero-mobile::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(to top, var(--gold-soft), transparent);
+        pointer-events: none;
+      }
+
+      /* ============================================================
+         CATEGORY PILLS
+         ============================================================ */
+      .category-pills {
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.5rem 0 2rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex-wrap: nowrap;
+      }
+      .category-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .category-pills .pill {
+        flex-shrink: 0;
+        padding: 0.4rem 1.2rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.8rem;
+        font-weight: 500;
+        font-family: var(--font-sans);
+        border: 1.5px solid var(--gray-200);
+        background: transparent;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .category-pills .pill:hover {
+        border-color: var(--gold);
+        color: var(--brown);
+        background: rgba(185, 145, 45, 0.04);
+      }
+      .category-pills .pill.active {
+        background: var(--primary-green);
+        border-color: var(--primary-green);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(35, 75, 54, 0.15);
+      }
+      .category-pills .pill.active:hover {
+        background: var(--primary-green-dark);
+        border-color: var(--primary-green-dark);
+      }
+
+      /* ============================================================
+         FEATURED CARD – fully clickable
+         ============================================================ */
+      .featured-card {
+        display: grid;
+        grid-template-columns: 44% 1fr;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px) saturate(1.05);
+        -webkit-backdrop-filter: blur(8px) saturate(1.05);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-featured);
+        transition:
+          transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.4s ease;
+        border: 1px solid rgba(185, 145, 45, 0.05);
+        margin-bottom: 2.8rem;
+        cursor: pointer;
+        min-height: 380px;
+      }
+      .featured-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 24px 72px rgba(47, 43, 39, 0.08);
+        border-color: rgba(185, 145, 45, 0.12);
+      }
+      .featured-card .featured-image {
+        position: relative;
+        overflow: hidden;
+        min-height: 380px;
+        background: var(--gray-200);
+      }
+      .featured-card .featured-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .featured-card:hover .featured-image img {
+        transform: scale(1.04);
+      }
+      .featured-card .featured-image .featured-badge {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.55rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.3rem 1.2rem;
+        border-radius: var(--radius-pill);
+        box-shadow: 0 4px 16px rgba(185, 145, 45, 0.2);
+        backdrop-filter: blur(4px);
+      }
+      .featured-card .featured-content {
+        padding: 2.8rem 3.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.7rem;
+      }
+      .featured-card .featured-content .category-tag {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: inline-block;
+        padding: 0.2rem 1.2rem;
+        border-radius: var(--radius-pill);
+        background: rgba(185, 145, 45, 0.06);
+        width: fit-content;
+        border: 1px solid rgba(185, 145, 45, 0.06);
+      }
+      .featured-card .featured-content h3 {
+        font-family: var(--font-serif);
+        font-size: 2.1rem;
+        color: var(--brown);
+        line-height: 1.2;
+        margin: 0.2rem 0;
+        font-weight: 700;
+      }
+      .featured-card .featured-content .featured-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        opacity: 0.8;
+      }
+      .featured-card .featured-content .featured-meta i {
+        color: var(--gold);
+        margin-right: 0.3rem;
+        width: 1.1rem;
+        opacity: 0.7;
+      }
+      .featured-card .featured-content .featured-divider {
+        width: 48px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: 0.2rem 0 0.6rem;
+        opacity: 0.3;
+      }
+      .featured-card .featured-content .featured-desc {
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        max-width: 95%;
+        opacity: 0.85;
+      }
+      .featured-card .featured-content .featured-actions {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .featured-card .featured-content .btn-primary-featured {
+        background: var(--primary-green);
+        color: #fff;
+        border: none;
+        padding: 0.7rem 2.2rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-sans);
+        letter-spacing: 0.2px;
+        box-shadow: 0 4px 16px rgba(35, 75, 54, 0.1);
+      }
+      .featured-card .featured-content .btn-primary-featured:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(35, 75, 54, 0.2);
+      }
+
+      /* ============================================================
+         ARTICLE GRID
+         ============================================================ */
+      .articles-grid-section {
+        padding: 0.5rem 0 3rem;
+      }
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+      }
+      .article-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px) saturate(1.02);
+        -webkit-backdrop-filter: blur(8px) saturate(1.02);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition:
+          transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.4s ease;
+        border: 1px solid rgba(185, 145, 45, 0.03);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        margin-left: 0.9rem;
+        margin-right: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .article-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.1);
+      }
+      .article-card .card-image {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16/10;
+        background: var(--gray-100);
+      }
+      .article-card .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .article-card:hover .card-image img {
+        transform: scale(1.05);
+      }
+      .article-card .card-image .card-badge {
+        position: absolute;
+        top: 0.8rem;
+        left: 0.8rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.5rem;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        padding: 0.2rem 0.8rem;
+        border-radius: var(--radius-pill);
+        box-shadow: 0 2px 12px rgba(185, 145, 45, 0.15);
+        backdrop-filter: blur(4px);
+      }
+      .article-card .card-image .bookmark-btn {
+        position: absolute;
+        top: 0.8rem;
+        right: 0.8rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(4px);
+        color: var(--brown-soft);
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .article-card .card-image .bookmark-btn:hover {
+        background: var(--gold);
+        color: #fff;
+        transform: scale(1.05);
+      }
+      .article-card .card-body {
+        padding: 1.2rem 1.4rem 1.4rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.3rem;
+      }
+      .article-card .card-body .card-category {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: inline-block;
+        width: fit-content;
+      }
+      .article-card .card-body .card-title {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--brown);
+        line-height: 1.3;
+        margin: 0.1rem 0 0.1rem;
+        font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .article-card .card-body .card-meta {
+        display: flex;
+        gap: 0.8rem;
+        font-size: 0.7rem;
+        color: var(--brown-light);
+        opacity: 0.7;
+        flex-wrap: wrap;
+      }
+      .article-card .card-body .card-meta i {
+        color: var(--gold);
+        opacity: 0.5;
+        margin-right: 0.2rem;
+        font-size: 0.6rem;
+      }
+      .article-card .card-body .card-desc {
+        font-size: 0.82rem;
+        color: var(--brown-soft);
+        line-height: 1.6;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        opacity: 0.8;
+        margin: 0.2rem 0 0.2rem;
+      }
+      .article-card .card-body .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.4rem;
+        padding-top: 0.6rem;
+        border-top: 1px solid rgba(185, 145, 45, 0.04);
+      }
+      .article-card .card-body .card-footer .read-link {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--primary-green);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.3s ease;
+      }
+      .article-card .card-body .card-footer .read-link i {
+        transition: transform 0.3s ease;
+        font-size: 0.7rem;
+      }
+      .article-card:hover .card-body .card-footer .read-link i {
+        transform: translateX(4px);
+      }
+      .article-card .card-body .card-footer .reading-time {
+        font-size: 0.7rem;
+        color: var(--brown-light);
+        opacity: 0.6;
+      }
+
+      /* ============================================================
+         CONTACT CTA
+         ============================================================ */
+      .contact-cta-section {
+        padding: 2rem 0 4rem;
+      }
+      .contact-cta-card {
+        max-width: 1280px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-lg);
+        padding: 1.8rem 2.5rem;
+        box-shadow: var(--shadow-glass);
+        transition:
+          box-shadow 0.4s ease,
+          border-color 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .contact-cta-card:hover {
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.12);
+      }
+      .contact-cta-card .cta-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .contact-cta-card .cta-left .cta-icon {
+        font-size: 2.2rem;
+        color: var(--gold);
+        opacity: 0.7;
+      }
+      .contact-cta-card .cta-left h3 {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        color: var(--brown);
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .contact-cta-card .cta-text {
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        margin: 0;
+        flex: 1;
+        text-align: center;
+        padding: 0 1rem;
+        opacity: 0.8;
+        line-height: 1.5;
+        min-width: 120px;
+      }
+      .contact-cta-card .btn-contact {
+        background: var(--primary-green);
+        color: #fff;
+        border: none;
+        padding: 0.7rem 2.2rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-sans);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(35, 75, 54, 0.1);
+        flex-shrink: 0;
+      }
+      .contact-cta-card .btn-contact:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(35, 75, 54, 0.2);
+      }
+      .contact-cta-card .btn-contact i {
+        font-size: 0.8rem;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+         ============================================================ */
+      @media (max-width: 1200px) {
+        .articles-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .hero-desktop .hero-text-left h1 {
+          font-size: 2.8rem;
+        }
+        .hero-desktop .hero-text-left p {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .search-bar-wrap {
+          padding: 0.6rem 1rem;
+          flex-wrap: wrap;
+        }
+        .search-bar-wrap input {
+          width: 100%;
+          min-width: auto;
+        }
+        .hero-desktop {
+          display: none;
+        }
+        .hero-mobile {
+          display: block;
+        }
+        .hero-section {
+          padding: 80px 1rem 0;
+        }
+        .featured-card {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+        .featured-card .featured-image {
+          min-height: 260px;
+        }
+        .featured-card .featured-content {
+          padding: 2rem 2.2rem;
+        }
+        .featured-card .featured-content .featured-desc {
+          max-width: 100%;
+        }
+        .articles-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.4rem;
+        }
+        .category-pills {
+          padding: 0.5rem 0 1.5rem;
+          gap: 0.5rem;
+        }
+        .category-pills .pill {
+          font-size: 0.7rem;
+          padding: 0.3rem 1rem;
+        }
+        .contact-cta-card {
+          flex-direction: column;
+          text-align: center;
+          padding: 2rem 1.5rem;
+        }
+        .contact-cta-card .cta-left {
+          justify-content: center;
+        }
+        .contact-cta-card .cta-text {
+          padding: 0.5rem 0;
+        }
+        .contact-cta-card .btn-contact {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding-top: 68px;
+        }
+        .container {
+          padding: 0 1rem;
+        }
+        .hero-mobile .hero-text-bottom h1 {
+          font-size: 1.8rem;
+        }
+        .hero-mobile .hero-text-bottom p {
+          font-size: 0.85rem;
+        }
+        .hero-section {
+          padding: 70px 0.5rem 0;
+        }
+        .articles-grid {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+        .article-card .card-image {
+          aspect-ratio: 16/9;
+        }
+        .category-pills {
+          gap: 0.4rem;
+          padding: 0.5rem 0 1rem;
+        }
+        .category-pills .pill {
+          font-size: 0.65rem;
+          padding: 0.25rem 0.8rem;
+        }
+        .featured-card .featured-content {
+          padding: 1.6rem 1.8rem;
+        }
+        .featured-card .featured-content h3 {
+          font-size: 1.5rem;
+        }
+        .featured-card .featured-content .featured-desc {
+          font-size: 0.88rem;
+        }
+        .featured-card .featured-content .featured-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .featured-card .featured-content .featured-actions button {
+          justify-content: center;
+        }
+        .contact-cta-card {
+          padding: 1.5rem 1rem;
+          gap: 1rem;
+        }
+        .contact-cta-card .cta-left .cta-icon {
+          font-size: 1.8rem;
+        }
+        .contact-cta-card .cta-left h3 {
+          font-size: 1.2rem;
+        }
+        .contact-cta-card .cta-text {
+          font-size: 0.85rem;
+        }
+        .contact-cta-card .btn-contact {
+          font-size: 0.8rem;
+          padding: 0.6rem 1.5rem;
+        }
+        .search-bar-wrap {
+          padding: 0.8rem 1rem;
+          border-radius: var(--radius-md);
+        }
+        .search-bar-wrap input {
+          font-size: 0.9rem;
+          padding: 0.5rem 0;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-mobile .hero-text-bottom h1 {
+          font-size: 1.4rem;
+        }
+        .hero-mobile .hero-text-bottom p {
+          font-size: 0.75rem;
+        }
+        .article-card .card-body {
+          padding: 1rem;
+        }
+        .article-card .card-body .card-title {
+          font-size: 1rem;
+        }
+        .article-card .card-body .card-desc {
+          font-size: 0.78rem;
+        }
+        .search-bar-wrap {
+          padding: 0.6rem 0.8rem;
+        }
+        .search-bar-wrap input {
+          font-size: 0.85rem;
+        }
+        .category-pills .pill {
+          font-size: 0.6rem;
+          padding: 0.2rem 0.7rem;
+        }
+        .contact-cta-card .cta-left {
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+        .contact-cta-card .cta-left .cta-icon {
+          font-size: 1.6rem;
+        }
+        .contact-cta-card .cta-left h3 {
+          font-size: 1rem;
+        }
+      }
+
+      /* ============================================================
+         ARTICLE OVERLAY – PREMIUM FULL-SCREEN
+         ============================================================ */
+      .article-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 1.5rem;
+        scroll-behavior: smooth;
+      }
+      .article-overlay.open {
+        display: block;
+        opacity: 1;
+      }
+
+      .article-overlay-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: var(--cream);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        position: relative;
+        animation: overlaySlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        min-height: 95vh;
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+      @keyframes overlaySlideIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.97) translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .article-overlay-container::-webkit-scrollbar {
+        width: 6px;
+      }
+      .article-overlay-container::-webkit-scrollbar-track {
+        background: var(--gray-50);
+      }
+      .article-overlay-container::-webkit-scrollbar-thumb {
+        background: var(--gold-soft);
+        border-radius: 6px;
+      }
+
+      /* ── Overlay Top Bar ── */
+      .overlay-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2.5rem;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(185, 145, 45, 0.04);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .overlay-topbar .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .overlay-topbar .topbar-left .back-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: none;
+        border: none;
+        color: var(--brown-soft);
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
+        font-family: var(--font-sans);
+        padding: 0.3rem 0.6rem;
+        border-radius: var(--radius-pill);
+      }
+      .overlay-topbar .topbar-left .back-btn:hover {
+        color: var(--primary-green);
+        transform: translateX(-3px);
+      }
+      .overlay-topbar .topbar-left .back-btn i {
+        font-size: 0.9rem;
+      }
+      .overlay-topbar .topbar-left .article-title-preview {
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        color: var(--brown);
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        opacity: 0.6;
+        padding-left: 0.8rem;
+        border-left: 1px solid var(--gray-200);
+      }
+      .overlay-topbar .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .overlay-topbar .topbar-right .icon-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        color: var(--brown-soft);
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .overlay-topbar .topbar-right .icon-btn:hover {
+        background: rgba(185, 145, 45, 0.1);
+        color: var(--gold);
+        transform: scale(1.05);
+      }
+      .overlay-topbar .topbar-right .icon-btn.close-btn {
+        background: rgba(220, 53, 69, 0.08);
+        color: #dc3545;
+      }
+      .overlay-topbar .topbar-right .icon-btn.close-btn:hover {
+        background: rgba(220, 53, 69, 0.15);
+        transform: rotate(90deg) scale(1.05);
+      }
+
+      /* ── Overlay Content ── */
+      .overlay-content {
+        padding: 0 3rem 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* ── Hero Image ── */
+      .overlay-hero {
+        margin: 0 -3rem 2rem;
+        position: relative;
+        height: 45vh;
+        min-height: 320px;
+        max-height: 520px;
+        overflow: hidden;
+        background: var(--gray-200);
+      }
+      .overlay-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .overlay-hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(to top, var(--cream), transparent);
+        pointer-events: none;
+      }
+      .overlay-hero .hero-category-badge {
+        position: absolute;
+        bottom: 1.8rem;
+        left: 2.5rem;
+        background: rgba(185, 145, 45, 0.9);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        padding: 0.3rem 1.2rem;
+        border-radius: var(--radius-pill);
+        z-index: 2;
+      }
+
+      /* ── Article Header ── */
+      .overlay-article-header {
+        margin-bottom: 2.5rem;
+      }
+      .overlay-article-header .article-title {
+        font-family: var(--font-serif);
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: var(--brown);
+        line-height: 1.1;
+        margin: 0 0 0.4rem;
+        letter-spacing: -0.02em;
+      }
+      .overlay-article-header .article-title .hindi {
+        font-family: var(--font-devanagari);
+        font-weight: 600;
+        display: block;
+        font-size: 2.2rem;
+        color: var(--primary-green);
+        margin-top: 0.2rem;
+      }
+      .overlay-article-header .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 2rem;
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        margin: 0.6rem 0 0.8rem;
+        opacity: 0.8;
+      }
+      .overlay-article-header .article-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .overlay-article-header .article-meta i {
+        color: var(--gold);
+        font-size: 0.75rem;
+        opacity: 0.6;
+        width: 1rem;
+        text-align: center;
+      }
+      .overlay-article-header .lotus-divider-sm {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 0.6rem 0 0.2rem;
+        max-width: 200px;
+      }
+      .overlay-article-header .lotus-divider-sm .line {
+        flex: 1;
+        height: 1.5px;
+        background: linear-gradient(to right, var(--gold), transparent);
+      }
+      .overlay-article-header .lotus-divider-sm i {
+        color: var(--gold);
+        font-size: 0.8rem;
+        opacity: 0.5;
+      }
+
+      /* ── Article Body ── */
+      .overlay-article-body {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 3rem;
+      }
+      .overlay-article-body .main-content {
+        max-width: 100%;
+      }
+      .overlay-article-body .main-content .intro-text {
+        font-size: 1.2rem;
+        line-height: 1.9;
+        color: var(--brown);
+        margin-bottom: 1.8rem;
+        font-weight: 400;
+        opacity: 0.9;
+      }
+      .overlay-article-body .main-content .intro-text .dropcap::first-letter {
+        font-family: var(--font-serif);
+        font-size: 4.2rem;
+        float: left;
+        line-height: 0.85;
+        margin-right: 0.6rem;
+        color: var(--primary-green);
+        font-weight: 700;
+        margin-top: 0.08rem;
+      }
+      .overlay-article-body .main-content .content-text {
+        font-size: 1.05rem;
+        line-height: 1.9;
+        color: var(--brown);
+        text-align: justify;
+      }
+      .overlay-article-body .main-content .content-text p {
+        margin-bottom: 1.2rem;
+        text-align: justify;
+      }
+      .overlay-article-body .main-content .content-text h3 {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        color: var(--primary-green);
+        margin: 2rem 0 0.8rem;
+        font-weight: 600;
+      }
+      .overlay-article-body .main-content .content-text h4 {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        color: var(--brown);
+        margin: 1.4rem 0 0.4rem;
+        font-weight: 600;
+      }
+      .overlay-article-body .main-content .content-text blockquote {
+        border-left: 4px solid var(--gold);
+        padding-left: 1.8rem;
+        margin: 1.8rem 0;
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        color: var(--brown-soft);
+        font-style: italic;
+        opacity: 0.85;
+      }
+      .overlay-article-body .main-content .content-text ul,
+      .overlay-article-body .main-content .content-text ol {
+        padding-left: 1.5rem;
+        margin: 0.6rem 0 1.2rem;
+      }
+      .overlay-article-body .main-content .content-text ul li,
+      .overlay-article-body .main-content .content-text ol li {
+        margin-bottom: 0.4rem;
+        line-height: 1.8;
+      }
+
+      /* ── Featured Quote Card ── */
+      .quote-card {
+        background: rgba(185, 145, 45, 0.04);
+        border: 1px solid rgba(185, 145, 45, 0.08);
+        border-radius: var(--radius-md);
+        padding: 2.5rem 2.5rem 2rem;
+        margin: 2rem 0;
+        text-align: center;
+        position: relative;
+      }
+      .quote-card .quote-icon {
+        font-size: 2.8rem;
+        color: var(--gold);
+        opacity: 0.3;
+        position: absolute;
+        top: 0.8rem;
+        left: 1.5rem;
+        font-family: var(--font-serif);
+        line-height: 1;
+      }
+      .quote-card .quote-icon-right {
+        font-size: 2.8rem;
+        color: var(--gold);
+        opacity: 0.3;
+        position: absolute;
+        bottom: 0.8rem;
+        right: 1.5rem;
+        font-family: var(--font-serif);
+        line-height: 1;
+        transform: rotate(180deg);
+      }
+      .quote-card blockquote {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--brown);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0 1rem;
+      }
+      .quote-card .quote-attribution {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--gold);
+        margin-top: 0.8rem;
+        font-style: normal;
+        letter-spacing: 0.5px;
+      }
+
+      /* ── Sidebar (no TOC) ── */
+      .overlay-sidebar {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .overlay-sidebar .sidebar-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(185, 145, 45, 0.04);
+        border-radius: var(--radius-md);
+        padding: 1.5rem 1.5rem 1.2rem;
+      }
+      .overlay-sidebar .sidebar-card h5 {
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        color: var(--brown);
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .overlay-sidebar .sidebar-card h5 i {
+        color: var(--gold);
+        font-size: 0.8rem;
+        opacity: 0.6;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item {
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.4rem 0;
+        border-bottom: 1px solid rgba(185, 145, 45, 0.04);
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item:last-child {
+        border-bottom: none;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item:hover {
+        color: var(--primary-green);
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item .bullet {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(185, 145, 45, 0.06);
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: 700;
+        margin-top: 0.05rem;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item .item-text {
+        flex: 1;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item .item-text .title {
+        font-weight: 500;
+        color: var(--brown);
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item .item-text .sub {
+        font-size: 0.75rem;
+        opacity: 0.6;
+      }
+
+      /* ── Continue Journey ── */
+      .continue-journey {
+        margin-top: 3.5rem;
+        padding-top: 2.5rem;
+        border-top: 2px solid rgba(185, 145, 45, 0.08);
+      }
+      .continue-journey .journey-title {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        color: var(--brown);
+        text-align: center;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+      }
+      .continue-journey .journey-sub {
+        text-align: center;
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        opacity: 0.6;
+        margin-bottom: 2rem;
+      }
+      .journey-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+      }
+      .journey-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid rgba(185, 145, 45, 0.03);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      .journey-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.1);
+      }
+      .journey-card .journey-img {
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        background: var(--gray-100);
+      }
+      .journey-card .journey-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .journey-card:hover .journey-img img {
+        transform: scale(1.04);
+      }
+      .journey-card .journey-body {
+        padding: 0.8rem 1rem 1rem;
+      }
+      .journey-card .journey-body .j-category {
+        font-size: 0.5rem;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .journey-card .journey-body .j-title {
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+        color: var(--brown);
+        font-weight: 600;
+        margin: 0.1rem 0 0.2rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .journey-card .journey-body .j-meta {
+        font-size: 0.65rem;
+        color: var(--brown-light);
+        opacity: 0.6;
+      }
+      .journey-card .journey-body .j-meta i {
+        color: var(--gold);
+        opacity: 0.4;
+        margin-right: 0.2rem;
+      }
+
+      /* ── Bottom Nav ── */
+      .overlay-bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(185, 145, 45, 0.06);
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .overlay-bottom-nav .nav-btn {
+        background: none;
+        border: none;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--radius-pill);
+      }
+      .overlay-bottom-nav .nav-btn:hover {
+        color: var(--primary-green);
+        transform: translateX(-3px);
+      }
+      .overlay-bottom-nav .nav-btn.next:hover {
+        transform: translateX(3px);
+      }
+      .overlay-bottom-nav .nav-btn i {
+        font-size: 0.8rem;
+      }
+      .overlay-bottom-nav .nav-btn.back-to-articles {
+        background: rgba(185, 145, 45, 0.06);
+        padding: 0.4rem 1.2rem;
+        border: 1px solid rgba(185, 145, 45, 0.06);
+      }
+      .overlay-bottom-nav .nav-btn.back-to-articles:hover {
+        background: rgba(185, 145, 45, 0.1);
+        border-color: rgba(185, 145, 45, 0.15);
+        transform: translateY(-2px);
+      }
+
+      /* ── Print Styles ── */
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        .article-overlay,
+        .article-overlay * {
+          visibility: visible;
+        }
+        .article-overlay {
+          position: fixed;
+          inset: 0;
+          background: #fff !important;
+          backdrop-filter: none !important;
+          padding: 0 !important;
+          opacity: 1 !important;
+          display: block !important;
+          z-index: 999999 !important;
+          overflow: visible !important;
+        }
+        .article-overlay-container {
+          max-height: none !important;
+          min-height: auto !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          overflow: visible !important;
+          background: #fff !important;
+          animation: none !important;
+        }
+        .overlay-topbar {
+          display: none !important;
+        }
+        .overlay-hero {
+          margin: 0 !important;
+          height: 300px !important;
+          max-height: 300px !important;
+          min-height: 200px !important;
+          border-radius: 0 !important;
+        }
+        .overlay-hero::after {
+          display: none !important;
+        }
+        .overlay-content {
+          padding: 1rem 2rem 2rem !important;
+          max-width: 100% !important;
+        }
+        .overlay-article-body {
+          display: block !important;
+        }
+        .overlay-sidebar {
+          display: none !important;
+        }
+        .continue-journey {
+          display: none !important;
+        }
+        .overlay-bottom-nav {
+          display: none !important;
+        }
+        .quote-card {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .overlay-article-header .article-title {
+          font-size: 28pt !important;
+        }
+        .overlay-article-header .article-title .hindi {
+          font-size: 18pt !important;
+        }
+        .overlay-article-body .main-content .content-text {
+          font-size: 11pt !important;
+        }
+        .overlay-article-body .main-content .intro-text {
+          font-size: 12pt !important;
+        }
+        .overlay-article-body .main-content .content-text h3 {
+          font-size: 16pt !important;
+        }
+        .overlay-hero .hero-category-badge {
+          position: static !important;
+          display: inline-block !important;
+          margin-bottom: 0.5rem !important;
+          background: var(--gold) !important;
+          color: #fff !important;
+          padding: 0.2rem 1rem !important;
+          border-radius: 60px !important;
+          font-size: 9pt !important;
+        }
+      }
+
+      /* ── Mobile Responsive Overlay ── */
+      @media (max-width: 1024px) {
+        .article-overlay {
+          padding: 0.8rem;
+        }
+        .article-overlay-container {
+          max-height: 98vh;
+          border-radius: var(--radius-md);
+        }
+        .overlay-topbar {
+          padding: 0.8rem 1.2rem;
+        }
+        .overlay-topbar .topbar-left .article-title-preview {
+          display: none;
+        }
+        .overlay-content {
+          padding: 0 1.5rem 2rem;
+        }
+        .overlay-hero {
+          margin: 0 -1.5rem 1.5rem;
+          height: 35vh;
+          min-height: 240px;
+          max-height: 400px;
+        }
+        .overlay-hero .hero-category-badge {
+          left: 1.5rem;
+          bottom: 1.2rem;
+        }
+        .overlay-article-header .article-title {
+          font-size: 2.4rem;
+        }
+        .overlay-article-header .article-title .hindi {
+          font-size: 1.6rem;
+        }
+        .overlay-article-body {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .overlay-sidebar {
+          position: static;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .journey-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .overlay-bottom-nav {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .article-overlay {
+          padding: 0.4rem;
+        }
+        .article-overlay-container {
+          border-radius: var(--radius-sm);
+          max-height: 100vh;
+        }
+        .overlay-topbar {
+          padding: 0.6rem 1rem;
+          flex-wrap: nowrap;
+        }
+        .overlay-topbar .topbar-left .back-btn span {
+          display: none;
+        }
+        .overlay-topbar .topbar-right .icon-btn {
+          width: 32px;
+          height: 32px;
+          font-size: 0.75rem;
+        }
+        .overlay-content {
+          padding: 0 1rem 1.5rem;
+        }
+        .overlay-hero {
+          margin: 0 -1rem 1.2rem;
+          height: 30vh;
+          min-height: 180px;
+          max-height: 320px;
+        }
+        .overlay-hero .hero-category-badge {
+          left: 1rem;
+          bottom: 0.8rem;
+          font-size: 0.5rem;
+          padding: 0.2rem 0.8rem;
+        }
+        .overlay-article-header .article-title {
+          font-size: 1.8rem;
+        }
+        .overlay-article-header .article-title .hindi {
+          font-size: 1.3rem;
+        }
+        .overlay-article-header .article-meta {
+          font-size: 0.75rem;
+          gap: 0.8rem 1.2rem;
+        }
+        .overlay-article-body .main-content .intro-text {
+          font-size: 1rem;
+        }
+        .overlay-article-body .main-content .content-text {
+          font-size: 0.95rem;
+        }
+        .overlay-article-body .main-content .content-text h3 {
+          font-size: 1.3rem;
+        }
+        .quote-card blockquote {
+          font-size: 1.1rem;
+        }
+        .overlay-sidebar {
+          grid-template-columns: 1fr;
+          gap: 0.8rem;
+        }
+        .journey-grid {
+          grid-template-columns: 1fr;
+        }
+        .continue-journey .journey-title {
+          font-size: 1.4rem;
+        }
+        .overlay-bottom-nav .nav-btn {
+          font-size: 0.75rem;
+        }
+        .overlay-bottom-nav .nav-btn.back-to-articles {
+          order: -1;
+          width: 100%;
+          justify-content: center;
+        }
+        .overlay-topbar .topbar-right .icon-btn {
+          width: 28px;
+          height: 28px;
+          font-size: 0.65rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .overlay-article-header .article-title {
+          font-size: 1.4rem;
+        }
+        .overlay-article-header .article-title .hindi {
+          font-size: 1.1rem;
+        }
+        .overlay-hero {
+          height: 25vh;
+          min-height: 150px;
+        }
+        .quote-card {
+          padding: 1.5rem 1rem 1.2rem;
+        }
+        .quote-card blockquote {
+          font-size: 0.95rem;
+        }
+        .overlay-topbar .topbar-right .icon-btn {
+          width: 28px;
+          height: 28px;
+          font-size: 0.65rem;
+        }
+      }
+
+      /* ── Footer ── */
+      .premium-footer {
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(16px) saturate(1.05);
+        -webkit-backdrop-filter: blur(16px) saturate(1.05);
+        border-top: 1px solid rgba(185, 145, 45, 0.08);
+        padding: 3.5rem 0 0;
+        margin-top: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .premium-footer .container {
+        max-width: 1480px;
+        position: relative;
+        z-index: 1;
+        padding: 0 1.5rem;
+      }
+      .footer-main {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+        gap: 2.5rem;
+        padding-bottom: 2rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-brand .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .footer-logo-image {
+        height: 38px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
+      .footer-brand .logo-text {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+      }
+      .footer-brand .brand-tagline {
+        font-family: var(--font-devanagari);
+        font-size: 1rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+        opacity: 0.7;
+        margin-top: -0.2rem;
+      }
+      .footer-brand .brand-description {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: var(--brown-soft);
+        max-width: 320px;
+        margin: 0.2rem 0 0.4rem;
+        text-align: justify;
+        opacity: 0.85;
+      }
+      .footer-brand .brand-lotus {
+        color: var(--gold);
+        font-size: 1.2rem;
+        opacity: 0.3;
+        margin-top: 0.2rem;
+      }
+      .footer-col h4 {
+        font-family: var(--font-serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--brown);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+      .footer-col h4::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 28px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        opacity: 0.5;
+      }
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .footer-col ul li a {
+        font-size: 0.9rem;
+        color: var(--brown-soft);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        opacity: 0.8;
+      }
+      .footer-col ul li a i {
+        width: 18px;
+        font-size: 0.8rem;
+        color: var(--gold);
+        transition: transform 0.3s ease;
+        opacity: 0.6;
+      }
+      .footer-col ul li a:hover {
+        color: var(--primary-green);
+        transform: translateX(4px);
+        opacity: 1;
+      }
+      .footer-col ul li a:hover i {
+        transform: scale(1.15);
+        opacity: 1;
+      }
+      .footer-social-col ul.social-links-list li a {
+        gap: 0.7rem;
+      }
+      .footer-social-col ul.social-links-list li a i {
+        width: 20px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      .footer-social-col ul.social-links-list li a:hover {
+        color: var(--gold);
+      }
+      .footer-social-col ul.social-links-list li a:hover i {
+        color: var(--gold);
+      }
+      .footer-contact-col {
+        display: flex;
+        align-items: stretch;
+      }
+      .footer-contact-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-md);
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        width: 100%;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 140px;
+      }
+      .footer-contact-card:hover {
+        border-color: rgba(185, 145, 45, 0.15);
+        box-shadow: var(--shadow-soft);
+        transform: translateY(-2px);
+      }
+      .footer-contact-card .contact-icon {
+        font-size: 1.6rem;
+        color: var(--gold);
+        margin-bottom: 0.2rem;
+        opacity: 0.7;
+      }
+      .footer-contact-card h4 {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
+      }
+      .footer-contact-card .contact-email a {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--primary-green);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .footer-contact-card .contact-email a:hover {
+        color: var(--gold);
+      }
+      .footer-contact-card .contact-response {
+        font-size: 0.75rem;
+        color: var(--brown-soft);
+        margin-top: 0.2rem;
+        opacity: 0.6;
+      }
+      .footer-lotus-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        opacity: 0.3;
+      }
+      .footer-lotus-divider .divider-line {
+        flex: 1;
+        max-width: 80px;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+      }
+      .footer-lotus-divider i {
+        font-size: 1.2rem;
+        color: var(--gold);
+        animation: lotusFloat 4s ease-in-out infinite;
+      }
+      @keyframes lotusFloat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-4px) scale(1.05);
+        }
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(185, 145, 45, 0.05);
+        padding: 1.5rem 0 1.8rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .footer-bottom-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .footer-bottom .copyright {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        opacity: 0.7;
+        margin: 0;
+      }
+      .footer-bottom .copyright .heart {
+        color: #d46a6a;
+        display: inline-block;
+        animation: heartBeat 2s ease-in-out infinite;
+      }
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        15% {
+          transform: scale(1.2);
+        }
+        30% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.15);
+        }
+        60% {
+          transform: scale(1);
+        }
+      }
+      .footer-bottom .credit {
+        font-size: 0.7rem;
+        color: var(--brown-soft);
+        opacity: 0.4;
+        margin: 0;
+        letter-spacing: 0.3px;
+      }
+      .footer-bottom .credit .credit-name {
+        color: var(--gold);
+        font-weight: 500;
+        opacity: 0.7;
+      }
+
+      /* ── Reveal animation ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Mobile Drawer ── */
+      .mobile-drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(43, 43, 43, 0.35);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+      }
+      .mobile-drawer-overlay.active {
+        display: block;
+      }
+
+      .mobile-drawer {
+        position: fixed;
+        top: 0;
+        right: -340px;
+        width: 320px;
+        max-width: 85vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(24px) saturate(1.1);
+        -webkit-backdrop-filter: blur(24px) saturate(1.1);
+        box-shadow: -8px 0 48px rgba(43, 43, 43, 0.06);
+        z-index: 10000;
+        padding: 2rem 1.8rem 1.8rem;
+        transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        border-left: 1px solid rgba(185, 145, 45, 0.04);
+      }
+      .mobile-drawer.open {
+        right: 0;
+      }
+
+      .drawer-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+      }
+      .drawer-logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+      }
+      .drawer-logo {
+        height: 32px;
+        width: auto;
+        object-fit: contain;
+      }
+      .drawer-logo-text {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+      }
+      .drawer-tagline {
+        font-family: var(--font-devanagari);
+        font-size: 0.8rem;
+        color: var(--gold);
+        opacity: 0.6;
+        margin: 0.1rem 0 0;
+        letter-spacing: 1px;
+      }
+      .drawer-divider {
+        width: 40px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: 0.4rem 0 0.2rem;
+        opacity: 0.2;
+      }
+      .drawer-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: transparent;
+        border: none;
+        font-size: 1.4rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+        padding: 0.2rem;
+        transition: all 0.35s ease;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+      .drawer-close:hover {
+        background: rgba(185, 145, 45, 0.06);
+        color: var(--gold);
+        transform: rotate(90deg);
+      }
+
+      .drawer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+        padding-top: 0.4rem;
+      }
+      .drawer-link {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.7rem 0.6rem;
+        border-radius: var(--radius-sm);
+        color: var(--brown-soft);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.35s ease;
+      }
+      .drawer-link i {
+        width: 22px;
+        font-size: 1rem;
+        color: var(--gold);
+        opacity: 0.5;
+        transition: all 0.35s ease;
+      }
+      .drawer-link:hover {
+        background: rgba(185, 145, 45, 0.04);
+        color: var(--primary-green);
+        transform: translateX(4px);
+      }
+      .drawer-link:hover i {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .drawer-link.active {
+        color: var(--primary-green);
+        font-weight: 600;
+        background: rgba(185, 145, 45, 0.04);
+      }
+      .drawer-link.active i {
+        opacity: 1;
+      }
+
+      /* ── Prevent body scroll when overlay is open ── */
+      body.overlay-open {
+        overflow: hidden;
+      }
+
+      @media (max-width: 1024px) {
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-brand {
+          grid-column: 1 / -1;
+          text-align: center;
+          align-items: center;
+        }
+        .footer-brand .brand-description {
+          max-width: 100%;
+          text-align: center;
+        }
+        .footer-contact-col {
+          grid-column: 1 / -1;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+      @media (max-width: 768px) {
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          text-align: center;
+        }
+        .footer-brand {
+          text-align: center;
+          align-items: center;
+        }
+        .footer-brand .brand-logo {
+          justify-content: center;
+        }
+        .footer-brand .brand-description {
+          text-align: center;
+          max-width: 100%;
+        }
+        .footer-col {
+          text-align: center;
+        }
+        .footer-col h4::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .footer-col ul {
+          align-items: center;
+        }
+        .footer-col ul li a {
+          justify-content: center;
+        }
+        .footer-social-col ul.social-links-list li a {
+          justify-content: center;
+        }
+        .footer-contact-col {
+          max-width: 100%;
+        }
+        .footer-contact-card {
+          min-height: auto;
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== OVERLAY ===== -->
+    <div class="page-overlay"></div>
+
+    <!-- ===== MODALS ===== -->
+    <div id="infoModal" class="modal">
+      <div class="modal-card">
+        <i class="fas fa-om" style="font-size: 2rem; color: #2a5e3a"></i>
+        <h3 id="modalTitle">शीर्षक</h3>
+        <p id="modalMessage">विवरण</p>
+        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
+      </div>
+    </div>
+
+    <!-- ===== ARTICLE OVERLAY ===== -->
+    <div class="article-overlay" id="articleOverlay">
+      <div class="article-overlay-container" id="overlayContainer">
+        <!-- Top Bar -->
+        <div class="overlay-topbar">
+          <div class="topbar-left">
+            <button class="back-btn" onclick="closeArticleOverlay()">
+              <i class="fas fa-arrow-left"></i> <span>Back</span>
+            </button>
+            <span class="article-title-preview" id="overlayTitlePreview"
+              >Loading...</span
+            >
+          </div>
+          <div class="topbar-right">
+            <button
+              class="icon-btn"
+              onclick="toggleBookmarkOverlay()"
+              aria-label="Bookmark"
+            >
+              <i class="far fa-bookmark" id="overlayBookmarkIcon"></i>
+            </button>
+            <button
+              class="icon-btn"
+              onclick="shareArticle()"
+              aria-label="Share"
+            >
+              <i class="fas fa-share-alt"></i>
+            </button>
+            <button
+              class="icon-btn"
+              onclick="window.print()"
+              aria-label="Print"
+            >
+              <i class="fas fa-print"></i>
+            </button>
+            <button
+              class="icon-btn close-btn"
+              onclick="closeArticleOverlay()"
+              aria-label="Close"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="overlay-content" id="overlayContent">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="premium-header" role="banner">
+      <div class="container">
+        <a href="index.html" class="logo-link" aria-label="Spiriligious – Home">
+          <img src="images/logo.png" alt="Spiriligious" class="logo-image" />
+          <span class="logo-text-inline">Spiriligious</span>
+        </a>
+        <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+          <a href="index.html" class="nav-link active"
+            ><i class="fas fa-home"></i> Home</a
+          >
+          <a href="about.html" class="nav-link"
+            ><i class="fas fa-info-circle"></i> About</a
+          >
+          <a href="team.html" class="nav-link"
+            ><i class="fas fa-users"></i> Team</a
+          >
+          <a href="#manthan-section" class="nav-link"
+            ><i class="fas fa-comments"></i> Manthan</a
+          >
+          <a href="astro.html" class="nav-link"
+            ><i class="fas fa-star-of-life"></i> Jyotish · Panchang</a
+          >
+          <a href="contact.html" class="nav-link"
+            ><i class="fas fa-envelope"></i> Contact</a
+          >
+        </nav>
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span class="pill"></span><span class="pill"></span
+          ><span class="pill"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div
+      class="mobile-drawer"
+      id="mobileDrawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="drawer-header">
+        <a href="index.html" class="drawer-logo-link">
+          <img src="images/logo.png" alt="Spiriligious" class="drawer-logo" />
+          <span class="drawer-logo-text">Spiriligious</span>
+        </a>
+        <p class="drawer-tagline">ज्ञान · अध्यात्म · विज्ञान</p>
+        <button
+          class="drawer-close"
+          id="drawerCloseBtn"
+          aria-label="Close navigation"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="drawer-divider"></div>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link active"
+          ><i class="fas fa-home"></i> Home</a
+        >
+        <a href="about.html" class="drawer-link"
+          ><i class="fas fa-info-circle"></i> About</a
+        >
+        <a href="team.html" class="drawer-link"
+          ><i class="fas fa-users"></i> Team</a
+        >
+        <a href="#manthan-section" class="drawer-link"
+          ><i class="fas fa-comments"></i> Manthan</a
+        >
+        <a href="astro.html" class="drawer-link"
+          ><i class="fas fa-star-of-life"></i> Jyotish</a
+        >
+        <a href="contact.html" class="drawer-link"
+          ><i class="fas fa-envelope"></i> Contact</a
+        >
+      </nav>
+    </div>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+      <!-- HERO -->
+      <section class="hero-section reveal">
+        <div class="hero-desktop">
+          <img
+            src="images/cover-desk.png"
+            alt="Spiritual landscape"
+            loading="lazy"
+            onerror="
+              this.src =
+                'https://placehold.co/1400x650/e8d8b0/5a534c?text=Spiriligious'
+            "
+          />
+          <div class="hero-text-left">
+            <h1>Articles</h1>
+            <p>
+              Explore timeless wisdom, ancient knowledge and modern insights.
+            </p>
+          </div>
+        </div>
+        <div class="hero-mobile">
+          <img
+            src="images/cover-phone.png"
+            alt="Spiritual journey"
+            loading="lazy"
+            onerror="
+              this.src =
+                'https://placehold.co/800x600/e8d8b0/5a534c?text=Spiriligious'
+            "
+          />
+          <div class="hero-text-bottom">
+            <h1>Articles</h1>
+            <p>
+              Explore timeless wisdom, ancient knowledge and modern insights.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEARCH BAR -->
+      <section class="search-section container reveal">
+        <div class="search-bar-wrap">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" placeholder="Search articles…" id="searchInput" />
+        </div>
+      </section>
+
+      <!-- CATEGORY PILLS -->
+      <section class="container reveal">
+        <div class="category-pills" id="categoryPills">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </section>
+
+      <!-- FEATURED ARTICLE -->
+      <section class="container reveal">
+        <div id="featuredArticleContainer" class="featured-card">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ARTICLES GRID -->
+      <section class="articles-grid-section container">
+        <div class="articles-grid" id="articlesGrid">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </section>
+
+      <!-- CONTACT CTA -->
+      <section class="contact-cta-section container reveal">
+        <div class="contact-cta-card">
+          <div class="cta-left">
+            <i class="fas fa-envelope cta-icon"></i>
+            <h3>Contact Us</h3>
+          </div>
+          <p class="cta-text">
+            Have questions, suggestions, or contributions? We'd love to hear
+            from you.
+          </p>
+          <a href="contact.html" class="btn-contact">
+            <i class="fas fa-paper-plane"></i> Get in Touch
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="global.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // ── Global helpers ──
+        window.openModal = function (title, html) {
+          document.getElementById("modalTitle").innerText = title;
+          document.getElementById("modalMessage").innerHTML = html;
+          document.getElementById("infoModal").style.display = "flex";
+          document.body.style.overflow = "hidden";
+        };
+        window.closeModal = function () {
+          document.getElementById("infoModal").style.display = "none";
+          document.body.style.overflow = "auto";
+        };
+        document
+          .getElementById("infoModal")
+          .addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+          });
+
+        // ── Category filtering state ──
+        let currentCategory = "all";
+        let allArticles = [];
+
+        // ── Render functions ──
+        function renderFeatured(item) {
+          const container = document.getElementById("featuredArticleContainer");
+          if (!item) {
+            container.innerHTML = `
+              <div class="featured-content" style="padding:2rem;text-align:center;grid-column:1/-1;">
+                <h3>No Featured Article</h3>
+                <p>Please check back later. 🙏</p>
+              </div>
+            `;
+            return;
+          }
+          const desc = (item.content || item.description || "")
+            .replace(/<[^>]*>/g, "")
+            .substring(0, 180);
+          container.innerHTML = `
+            <div class="featured-image">
+              <img src="${item.imageUrl || "images/cover.jpg"}" alt="${item.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+              <span class="featured-badge">Featured</span>
+            </div>
+            <div class="featured-content">
+              <span class="category-tag">${item.categoryLabel || "Sant Darshan"}</span>
+              <h3>${item.title}</h3>
+              <div class="featured-meta">
+                <span><i class="fas fa-user"></i> ${item.author || "Unknown"}</span>
+                <span><i class="fas fa-clock"></i> ${item.readTime || "3 min read"}</span>
+              </div>
+              <div class="featured-divider"></div>
+              <p class="featured-desc">${desc}...</p>
+              <div class="featured-actions">
+                <button class="btn-primary-featured" onclick="openArticleOverlay('${item.id}')">
+                  <i class="fas fa-book-open"></i> Read Article
+                </button>
+              </div>
+            </div>
+          `;
+          // Make the entire featured card clickable
+          container.style.cursor = "pointer";
+          container.onclick = function (e) {
+            if (!e.target.closest("button")) {
+              openArticleOverlay(item.id);
+            }
+          };
+        }
+
+        function renderGrid(articles) {
+          const container = document.getElementById("articlesGrid");
+          if (!articles || articles.length === 0) {
+            container.innerHTML = `
+              <div style="grid-column:1/-1;text-align:center;padding:4rem 0;color:var(--brown-soft);">
+                <i class="fas fa-search" style="font-size:2rem;opacity:0.3;display:block;margin-bottom:0.8rem;"></i>
+                <p style="font-size:1.1rem;">No articles match your criteria.</p>
+              </div>
+            `;
+            return;
+          }
+          container.innerHTML = articles
+            .map((item) => {
+              const desc = (item.content || item.description || "")
+                .replace(/<[^>]*>/g, "")
+                .substring(0, 120);
+              return `
+              <div class="article-card" onclick="openArticleOverlay('${item.id}')">
+                <div class="card-image">
+                  <img src="${item.imageUrl || "images/cover.jpg"}" alt="${item.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+                  <span class="card-badge">${item.categoryLabel || "Sant"}</span>
+                  <button class="bookmark-btn" onclick="event.stopPropagation();toggleBookmark('${item.id}')" aria-label="Bookmark">
+                    <i class="far fa-bookmark"></i>
+                  </button>
+                </div>
+                <div class="card-body">
+                  <span class="card-category">${item.categoryLabel || "Sant Darshan"}</span>
+                  <h3 class="card-title">${item.title}</h3>
+                  <div class="card-meta">
+                    <span><i class="far fa-calendar-alt"></i> ${item.date || ""}</span>
+                    <span><i class="far fa-clock"></i> ${item.readTime || "3 min read"}</span>
+                  </div>
+                  <p class="card-desc">${desc}...</p>
+                  <div class="card-footer">
+                    <span class="read-link">Read Article <i class="fas fa-arrow-right"></i></span>
+                    <span class="reading-time">${item.readTime || "3 min read"}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+            })
+            .join("");
+        }
+
+        function renderCategoryPills(categories) {
+          const container = document.getElementById("categoryPills");
+          let html = "";
+          categories.forEach((cat) => {
+            const active = cat === "all" ? " active" : "";
+            const label =
+              cat === "all"
+                ? "All"
+                : cat.charAt(0).toUpperCase() + cat.slice(1);
+            html += `<span class="pill${active}" data-category="${cat}">${label}</span>`;
+          });
+          container.innerHTML = html;
+
+          container.querySelectorAll(".pill").forEach((pill) => {
+            pill.addEventListener("click", function () {
+              container
+                .querySelectorAll(".pill")
+                .forEach((p) => p.classList.remove("active"));
+              this.classList.add("active");
+              currentCategory = this.dataset.category;
+              filterAndRender();
+            });
+          });
+        }
+
+        function filterAndRender() {
+          const searchTerm = document
+            .getElementById("searchInput")
+            .value.toLowerCase()
+            .trim();
+          let filtered = [...allArticles];
+
+          if (currentCategory !== "all") {
+            filtered = filtered.filter(
+              (a) =>
+                (a.category || "sant").toLowerCase() ===
+                currentCategory.toLowerCase(),
+            );
+          }
+
+          if (searchTerm) {
+            filtered = filtered.filter(
+              (a) =>
+                (a.title || "").toLowerCase().includes(searchTerm) ||
+                (a.content || "").toLowerCase().includes(searchTerm) ||
+                (a.author || "").toLowerCase().includes(searchTerm),
+            );
+          }
+
+          const featured = filtered.length > 0 ? filtered.shift() : null;
+          renderFeatured(featured);
+          renderGrid(filtered);
+        }
+
+        // ── Firebase load ──
+        async function loadArticles() {
+          try {
+            const snap = await db
+              .collection("santArticles")
+              .where("published", "==", true)
+              .get();
+
+            let articles = [];
+            if (!snap.empty) {
+              snap.forEach((doc) => {
+                const data = doc.data();
+                articles.push({
+                  id: doc.id,
+                  ...data,
+                  category: data.category || "sant",
+                  categoryLabel:
+                    data.categoryLabel ||
+                    data.category?.charAt(0).toUpperCase() +
+                      data.category?.slice(1) ||
+                    "Sant Darshan",
+                  date:
+                    data.date ||
+                    new Date(data.createdAt?.seconds * 1000).toLocaleDateString(
+                      "en-US",
+                      { month: "short", day: "numeric", year: "numeric" },
+                    ),
+                  readTime: data.readTime || "3 min read",
+                  imageUrl: data.imageUrl || "images/cover.jpg",
+                });
+              });
+            } else {
+              // Fallback sample data
+              articles = [
+                {
+                  id: "1",
+                  title: "The Eternal Wisdom of the Bhagavad Gita",
+                  category: "bhagavad-gita",
+                  categoryLabel: "Bhagavad Gita",
+                  date: "Apr 12, 2026",
+                  readTime: "5 min read",
+                  content:
+                    "<p>Discover the profound teachings of the Gita — a timeless guide to living with purpose, clarity, and devotion.</p>",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop&crop=center&q=80",
+                  author: "Dr. Hemant Kumar Joshi",
+                },
+                {
+                  id: "2",
+                  title: "Kashi Vishwanath: The Eternal City of Light",
+                  category: "mandir",
+                  categoryLabel: "Mandir Darshan",
+                  date: "Apr 10, 2026",
+                  readTime: "4 min read",
+                  content:
+                    "<p>Explore the spiritual significance, history, and architectural grandeur of the Kashi Vishwanath temple.</p>",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&h=400&fit=crop&crop=center&q=80",
+                  author: "Dibyanshu Sanyal",
+                },
+                {
+                  id: "3",
+                  title: "Ancient Indian Astronomy: The Science of the Sages",
+                  category: "science",
+                  categoryLabel: "Science",
+                  date: "Apr 8, 2026",
+                  readTime: "6 min read",
+                  content:
+                    "<p>How ancient Indian astronomers mapped the cosmos with astonishing precision — long before modern telescopes.</p>",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=400&fit=crop&crop=center&q=80",
+                  author: "Dr. Alap Mahar",
+                },
+                {
+                  id: "4",
+                  title: "Adi Shankaracharya: The Philosopher Who United India",
+                  category: "sant",
+                  categoryLabel: "Sant Darshan",
+                  date: "Apr 6, 2026",
+                  readTime: "7 min read",
+                  content:
+                    "<p>The life, teachings, and enduring legacy of Adi Shankaracharya — the great philosopher who revitalized Sanatan Dharma.</p>",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1500485035595-bbe6f645feb1?w=600&h=400&fit=crop&crop=center&q=80",
+                  author: "Dr. Hemant Kumar Joshi",
+                },
+                {
+                  id: "5",
+                  title: "The Upanishadic Vision: Beyond the Mind",
+                  category: "upanishads",
+                  categoryLabel: "Upanishads",
+                  date: "Apr 4, 2026",
+                  readTime: "5 min read",
+                  content:
+                    "<p>An exploration of the Upanishads — the philosophical core of the Vedas — and their vision of the ultimate reality.</p>",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop&crop=center&q=80",
+                  author: "Dibyanshu Sanyal",
+                },
+                {
+                  id: "6",
+                  title: "Yoga: The Science of Union",
+                  category: "philosophy",
+                  categoryLabel: "Philosophy",
+                  date: "Apr 2, 2026",
+                  readTime: "4 min read",
+                  content:
+                    "<p>Yoga is more than asanas — it is a complete system for physical, mental, and spiritual well-being.</p>",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&crop=center&q=80",
+                  author: "Dr. Alap Mahar",
+                },
+              ];
+            }
+
+            articles.sort(
+              (a, b) =>
+                (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+            );
+
+            allArticles = articles;
+
+            const categorySet = new Set();
+            categorySet.add("all");
+            allArticles.forEach((a) => {
+              if (a.category) categorySet.add(a.category);
+            });
+            renderCategoryPills(Array.from(categorySet));
+            filterAndRender();
+
+            // Check URL for article param on load
+            const articleId = new URLSearchParams(window.location.search).get(
+              "article",
+            );
+            if (articleId) {
+              const article = allArticles.find((a) => a.id === articleId);
+              if (article) {
+                setTimeout(() => openArticleOverlay(articleId), 300);
+              }
+            }
+          } catch (err) {
+            console.error("Error loading articles:", err);
+            // Use fallback
+            const fallback = [
+              {
+                id: "1",
+                title: "The Eternal Wisdom of the Bhagavad Gita",
+                category: "bhagavad-gita",
+                categoryLabel: "Bhagavad Gita",
+                date: "Apr 12, 2026",
+                readTime: "5 min read",
+                content:
+                  "<p>Discover the profound teachings of the Gita — a timeless guide to living with purpose, clarity, and devotion.</p>",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop&crop=center&q=80",
+                author: "Dr. Hemant Kumar Joshi",
+              },
+              {
+                id: "2",
+                title: "Kashi Vishwanath: The Eternal City of Light",
+                category: "mandir",
+                categoryLabel: "Mandir Darshan",
+                date: "Apr 10, 2026",
+                readTime: "4 min read",
+                content:
+                  "<p>Explore the spiritual significance, history, and architectural grandeur of the Kashi Vishwanath temple.</p>",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&h=400&fit=crop&crop=center&q=80",
+                author: "Dibyanshu Sanyal",
+              },
+              {
+                id: "3",
+                title: "Ancient Indian Astronomy: The Science of the Sages",
+                category: "science",
+                categoryLabel: "Science",
+                date: "Apr 8, 2026",
+                readTime: "6 min read",
+                content:
+                  "<p>How ancient Indian astronomers mapped the cosmos with astonishing precision — long before modern telescopes.</p>",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=400&fit=crop&crop=center&q=80",
+                author: "Dr. Alap Mahar",
+              },
+              {
+                id: "4",
+                title: "Adi Shankaracharya: The Philosopher Who United India",
+                category: "sant",
+                categoryLabel: "Sant Darshan",
+                date: "Apr 6, 2026",
+                readTime: "7 min read",
+                content:
+                  "<p>The life, teachings, and enduring legacy of Adi Shankaracharya — the great philosopher who revitalized Sanatan Dharma.</p>",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1500485035595-bbe6f645feb1?w=600&h=400&fit=crop&crop=center&q=80",
+                author: "Dr. Hemant Kumar Joshi",
+              },
+              {
+                id: "5",
+                title: "The Upanishadic Vision: Beyond the Mind",
+                category: "upanishads",
+                categoryLabel: "Upanishads",
+                date: "Apr 4, 2026",
+                readTime: "5 min read",
+                content:
+                  "<p>An exploration of the Upanishads — the philosophical core of the Vedas — and their vision of the ultimate reality.</p>",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop&crop=center&q=80",
+                author: "Dibyanshu Sanyal",
+              },
+              {
+                id: "6",
+                title: "Yoga: The Science of Union",
+                category: "philosophy",
+                categoryLabel: "Philosophy",
+                date: "Apr 2, 2026",
+                readTime: "4 min read",
+                content:
+                  "<p>Yoga is more than asanas — it is a complete system for physical, mental, and spiritual well-being.</p>",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&crop=center&q=80",
+                author: "Dr. Alap Mahar",
+              },
+            ];
+            allArticles = fallback;
+            const catSet = new Set();
+            catSet.add("all");
+            allArticles.forEach((a) => {
+              if (a.category) catSet.add(a.category);
+            });
+            renderCategoryPills(Array.from(catSet));
+            filterAndRender();
+
+            const articleId = new URLSearchParams(window.location.search).get(
+              "article",
+            );
+            if (articleId) {
+              const article = allArticles.find((a) => a.id === articleId);
+              if (article) {
+                setTimeout(() => openArticleOverlay(articleId), 300);
+              }
+            }
+          }
+        }
+
+        // ── Search ──
+        document
+          .getElementById("searchInput")
+          .addEventListener("input", filterAndRender);
+
+        // ── Bookmark toggle (card) ──
+        window.toggleBookmark = function (id) {
+          const btn = document.querySelector(`.article-card .bookmark-btn i`);
+          if (btn) {
+            btn.classList.toggle("far");
+            btn.classList.toggle("fas");
+            btn.style.color = btn.classList.contains("fas")
+              ? "var(--gold)"
+              : "";
+          }
+          openModal("Bookmark", "<p>Article bookmarked! 🙏</p>");
+        };
+
+        // ── Bookmark toggle (overlay) ──
+        let overlayBookmarked = false;
+        window.toggleBookmarkOverlay = function () {
+          overlayBookmarked = !overlayBookmarked;
+          const icon = document.getElementById("overlayBookmarkIcon");
+          if (icon) {
+            icon.classList.toggle("far");
+            icon.classList.toggle("fas");
+            icon.style.color = overlayBookmarked ? "var(--gold)" : "";
+          }
+          openModal(
+            overlayBookmarked ? "Bookmarked" : "Removed",
+            overlayBookmarked
+              ? "<p>Article saved to your bookmarks! 🙏</p>"
+              : "<p>Article removed from bookmarks. 🙏</p>",
+          );
+        };
+
+        // ── Share ──
+        window.shareArticle = function () {
+          const currentId = new URLSearchParams(window.location.search).get(
+            "article",
+          );
+          const shareUrl = currentId
+            ? window.location.origin +
+              window.location.pathname +
+              "?article=" +
+              currentId
+            : window.location.href;
+          const title =
+            document.querySelector("#overlayContent .article-title")
+              ?.textContent || "Spiriligious Article";
+
+          if (navigator.share) {
+            navigator
+              .share({
+                title: title,
+                url: shareUrl,
+              })
+              .catch(() => {});
+          } else {
+            navigator.clipboard
+              .writeText(shareUrl)
+              .then(() => {
+                openModal(
+                  "🔗 Link Copied",
+                  "<p>Article link copied to your clipboard.</p>",
+                );
+              })
+              .catch(() => {
+                openModal(
+                  "🔗 Share",
+                  `<p>Share this article: <a href="${shareUrl}" target="_blank">${shareUrl}</a></p>`,
+                );
+              });
+          }
+        };
+
+        // ── Open Article Overlay ──
+        window.openArticleOverlay = function (id, scrollToTop = true) {
+          const article = allArticles.find((a) => a.id === id);
+          if (!article) {
+            openModal("Error", "<p>Article not found. 🙏</p>");
+            return;
+          }
+
+          // Update title preview
+          document.getElementById("overlayTitlePreview").textContent =
+            article.title;
+
+          // Build content
+          const content = document.getElementById("overlayContent");
+          const desc = (article.content || article.description || "")
+            .replace(/<[^>]*>/g, "")
+            .substring(0, 300);
+
+          // Get related articles (same category, excluding current)
+          const related = allArticles
+            .filter((a) => a.id !== id && a.category === article.category)
+            .slice(0, 4);
+
+          // Build related cards HTML
+          let relatedHtml = "";
+          if (related.length > 0) {
+            relatedHtml = related
+              .map(
+                (r) => `
+                <div class="journey-card" onclick="openArticleOverlay('${r.id}')">
+                  <div class="journey-img">
+                    <img src="${r.imageUrl || "images/cover.jpg"}" alt="${r.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+                  </div>
+                  <div class="journey-body">
+                    <div class="j-category">${r.categoryLabel || "Sant"}</div>
+                    <div class="j-title">${r.title}</div>
+                    <div class="j-meta"><i class="far fa-clock"></i> ${r.readTime || "3 min read"}</div>
+                  </div>
+                </div>
+              `,
+              )
+              .join("");
+          } else {
+            const fallbackRelated = allArticles
+              .filter((a) => a.id !== id)
+              .slice(0, 4);
+            relatedHtml = fallbackRelated
+              .map(
+                (r) => `
+                <div class="journey-card" onclick="openArticleOverlay('${r.id}')">
+                  <div class="journey-img">
+                    <img src="${r.imageUrl || "images/cover.jpg"}" alt="${r.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+                  </div>
+                  <div class="journey-body">
+                    <div class="j-category">${r.categoryLabel || "Sant"}</div>
+                    <div class="j-title">${r.title}</div>
+                    <div class="j-meta"><i class="far fa-clock"></i> ${r.readTime || "3 min read"}</div>
+                  </div>
+                </div>
+              `,
+              )
+              .join("");
+          }
+
+          content.innerHTML = `
+            <!-- Hero -->
+            <div class="overlay-hero">
+              <img src="${article.imageUrl || "images/cover.jpg"}" alt="${article.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+              <span class="hero-category-badge">${article.categoryLabel || "Sant Darshan"}</span>
+            </div>
+
+            <!-- Header -->
+            <div class="overlay-article-header">
+              <h1 class="article-title">
+                ${article.title}
+                <span class="hindi">${article.hindiTitle || ""}</span>
+              </h1>
+              <div class="article-meta">
+                <span><i class="fas fa-user"></i> ${article.author || "Unknown"}</span>
+                <span><i class="far fa-calendar-alt"></i> ${article.date || "Today"}</span>
+                <span><i class="far fa-clock"></i> ${article.readTime || "3 min read"}</span>
+                <span><i class="fas fa-eye"></i> ${article.views || "1.2k"} views</span>
+              </div>
+              <div class="lotus-divider-sm">
+                <span class="line"></span>
+                <i class="fas fa-lotus"></i>
+                <span class="line"></span>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="overlay-article-body">
+              <div class="main-content">
+                <div class="intro-text">
+                  <span class="dropcap">${desc.substring(0, 1)}</span>${desc.substring(1)}
+                </div>
+                <div class="content-text">
+                  ${article.content || `<p>${desc}</p><p>This article explores the profound wisdom of ${article.title}.</p>`}
+
+                  <!-- Quote Card -->
+                  <div class="quote-card">
+                    <span class="quote-icon">"</span>
+                    <blockquote>
+                      जिस व्यक्ति के पास सच्ची भक्ति, अटूट विश्वास और प्रेम होता है,
+                      प्रकृति भी उसकी सहायता बन जाती है।
+                    </blockquote>
+                    <div class="quote-attribution">— Ancient Wisdom</div>
+                    <span class="quote-icon-right">"</span>
+                  </div>
+
+                  <p>Continue reading to discover more insights from this article. The full text would delve deeper into the subject, offering both traditional understanding and modern perspectives.</p>
+                  <h3>Key Insights</h3>
+                  <ul>
+                    <li><strong>Timeless Wisdom:</strong> The teachings remain relevant across centuries.</li>
+                    <li><strong>Practical Application:</strong> Ancient knowledge can be applied in daily life.</li>
+                    <li><strong>Spiritual Growth:</strong> Understanding these principles leads to inner transformation.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Sidebar -->
+              <div class="overlay-sidebar">
+                <div class="sidebar-card">
+                  <h5><i class="fas fa-key"></i> Key Takeaways</h5>
+                  <div class="sidebar-item"><span class="bullet">•</span><div class="item-text"><div class="title">Timeless wisdom for modern life</div></div></div>
+                  <div class="sidebar-item"><span class="bullet">•</span><div class="item-text"><div class="title">Practical spiritual guidance</div></div></div>
+                  <div class="sidebar-item"><span class="bullet">•</span><div class="item-text"><div class="title">Deep connection to tradition</div></div></div>
+                </div>
+                <div class="sidebar-card">
+                  <h5><i class="fas fa-link"></i> Related</h5>
+                  <div class="sidebar-item"><span class="bullet">🛕</span><div class="item-text"><div class="title">Kainchi Dham</div></div></div>
+                  <div class="sidebar-item"><span class="bullet">📿</span><div class="item-text"><div class="title">Hanuman Chalisa</div></div></div>
+                  <div class="sidebar-item"><span class="bullet">🧘</span><div class="item-text"><div class="title">Ramakrishna Paramahansa</div></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Continue Journey -->
+            <div class="continue-journey">
+              <h3 class="journey-title">Continue Your Journey</h3>
+              <p class="journey-sub">Explore more articles on similar topics</p>
+              <div class="journey-grid">
+                ${relatedHtml}
+              </div>
+            </div>
+
+            <!-- Bottom Nav -->
+            <div class="overlay-bottom-nav">
+              <button class="nav-btn" onclick="openPrevArticle()">
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button class="nav-btn back-to-articles" onclick="closeArticleOverlay()">
+                <i class="fas fa-th-large"></i> Back to Articles
+              </button>
+              <button class="nav-btn next" onclick="openNextArticle()">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          `;
+
+          // Show overlay
+          const overlay = document.getElementById("articleOverlay");
+          overlay.classList.add("open");
+          document.body.classList.add("overlay-open");
+
+          // Scroll to top of the overlay container
+          const overlayContainer = document.getElementById("overlayContainer");
+          if (scrollToTop && overlayContainer) {
+            overlayContainer.scrollTop = 0;
+          }
+
+          // Update URL
+          const url = new URL(window.location);
+          url.searchParams.set("article", id);
+          history.pushState({ article: id }, "", url);
+
+          // Reset bookmark icon
+          overlayBookmarked = false;
+          const icon = document.getElementById("overlayBookmarkIcon");
+          if (icon) {
+            icon.className = "far fa-bookmark";
+            icon.style.color = "";
+          }
+        };
+
+        // ── Close Overlay ──
+        window.closeArticleOverlay = function () {
+          const overlay = document.getElementById("articleOverlay");
+          overlay.classList.remove("open");
+          document.body.classList.remove("overlay-open");
+
+          const url = new URL(window.location);
+          url.searchParams.delete("article");
+          history.pushState({}, "", url);
+        };
+
+        // ── Navigate articles ──
+        window.openPrevArticle = function () {
+          const ids = allArticles.map((a) => a.id);
+          const currentId = new URLSearchParams(window.location.search).get(
+            "article",
+          );
+          const idx = ids.indexOf(currentId);
+          if (idx > 0) {
+            openArticleOverlay(ids[idx - 1], true);
+          } else {
+            openModal("End of List", "<p>You're at the first article. 🙏</p>");
+          }
+        };
+        window.openNextArticle = function () {
+          const ids = allArticles.map((a) => a.id);
+          const currentId = new URLSearchParams(window.location.search).get(
+            "article",
+          );
+          const idx = ids.indexOf(currentId);
+          if (idx < ids.length - 1) {
+            openArticleOverlay(ids[idx + 1], true);
+          } else {
+            openModal(
+              "End of List",
+              "<p>You've reached the last article. 🙏</p>",
+            );
+          }
+        };
+
+        // ── Handle back/forward with URL ──
+        window.addEventListener("popstate", function (e) {
+          const articleId = new URLSearchParams(window.location.search).get(
+            "article",
+          );
+          if (articleId) {
+            const article = allArticles.find((a) => a.id === articleId);
+            if (article) {
+              // Don't scroll to top when using back/forward
+              openArticleOverlay(articleId, false);
+            }
+          } else {
+            closeArticleOverlay();
+          }
+        });
+
+        // ── Init ──
+        loadArticles();
+
+        // ── Reveal observer ──
+        const revealObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+        );
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          revealObserver.observe(el);
+        });
+
+        // ── Header scroll ──
+        const header = document.querySelector(".premium-header");
+        let lastScrollY = 0;
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!header) return;
+            const currentScrollY = window.scrollY;
+            const delta = currentScrollY - lastScrollY;
+            if (delta > 10 && currentScrollY > 100)
+              header.classList.add("hidden");
+            else if (delta < -5 || currentScrollY < 50)
+              header.classList.remove("hidden");
+            lastScrollY = currentScrollY;
+            if (currentScrollY > 100) header.classList.add("scrolled");
+            else header.classList.remove("scrolled");
+          },
+          { passive: true },
+        );
+
+        console.log(
+          "✨ Spiriligious – Articles page with premium overlay loaded.",
+        );
+      });
+    </script>
+  </body>
+</html>

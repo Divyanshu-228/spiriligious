@@ -1,0 +1,3248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Spiriligious · Scientific Analysis</title>
+    <meta
+      name="description"
+      content="Exploring the logic and science behind ancient traditions — research, analysis, and insights into India's scientific heritage."
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon1.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="images/favicon1.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="images/favicon1.svg" />
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2285457582865660"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ============================================================
+         SCIENTIFIC CARDS PAGE – PREMIUM EDITORIAL STYLES
+         ============================================================ */
+      :root {
+        --primary-green: #234b36;
+        --primary-green-dark: #1a3a2a;
+        --gold: #b9912d;
+        --gold-soft: #d4b06a;
+        --gold-pale: #e8d8b0;
+        --cream: #f8f5ef;
+        --surface: #ffffff;
+        --brown: #2b2b2b;
+        --brown-soft: #5a534c;
+        --brown-light: #8a827a;
+        --gray-50: #f7f4ef;
+        --gray-100: #ede8e0;
+        --gray-200: #dfd8ce;
+        --gray-300: #cbc2b6;
+        --gray-400: #b0a69a;
+        --shadow-soft: 0 8px 30px rgba(47, 43, 39, 0.05);
+        --shadow-medium: 0 12px 48px rgba(47, 43, 39, 0.09);
+        --shadow-heavy: 0 20px 60px rgba(47, 43, 39, 0.14);
+        --shadow-glass: 0 8px 32px rgba(47, 43, 39, 0.08);
+        --shadow-featured: 0 16px 56px rgba(47, 43, 39, 0.07);
+        --radius-lg: 28px;
+        --radius-md: 20px;
+        --radius-sm: 16px;
+        --radius-xs: 12px;
+        --radius-pill: 60px;
+        --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --transition-smooth: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        --font-serif: "EB Garamond", serif;
+        --font-sans: "Inter", sans-serif;
+        --font-devanagari: "Tiro Devanagari Hindi", serif;
+      }
+
+      body {
+        background: var(--cream);
+        background-image: url("images/temple-bg.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        position: relative;
+        min-height: 100vh;
+        padding-top: 0px;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(248, 245, 239, 0.82);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      main,
+      #header-placeholder,
+      #footer-placeholder {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ── Floating Navbar ── */
+      .premium-header {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 40px);
+        max-width: 1280px;
+        border-radius: 60px;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(20px) saturate(1.1);
+        -webkit-backdrop-filter: blur(20px) saturate(1.1);
+        box-shadow: 0 8px 32px rgba(47, 43, 39, 0.05);
+        padding: 0.4rem 1.5rem;
+        z-index: 10000 !important;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      .premium-header.hidden {
+        transform: translateX(-50%) translateY(-120%);
+        opacity: 0;
+      }
+      .premium-header.scrolled {
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 12px 48px rgba(47, 43, 39, 0.07);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .premium-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      /* ============================================================
+         SEARCH BAR
+         ============================================================ */
+      .search-section {
+        padding: 1.5rem 0 1.5rem;
+      }
+      .search-bar-wrap {
+        max-width: 1280px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-lg);
+        padding: 0.6rem 0.6rem 0.6rem 1.8rem;
+        box-shadow: var(--shadow-glass);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition:
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .search-bar-wrap:focus-within {
+        box-shadow: 0 12px 48px rgba(47, 43, 39, 0.06);
+        border-color: rgba(185, 145, 45, 0.15);
+      }
+      .search-bar-wrap .search-icon {
+        color: var(--brown-light);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .search-bar-wrap input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 0.8rem 0;
+        font-size: 1rem;
+        font-family: var(--font-sans);
+        color: var(--brown);
+        min-width: 160px;
+        outline: none;
+      }
+      .search-bar-wrap input::placeholder {
+        color: var(--gray-400);
+        font-weight: 300;
+      }
+
+      /* ============================================================
+         HERO
+         ============================================================ */
+      .hero-section {
+        padding: 90px 2rem 0;
+      }
+      .hero-desktop,
+      .hero-mobile {
+        position: relative;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-medium);
+      }
+      .hero-desktop img,
+      .hero-mobile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .hero-desktop {
+        aspect-ratio: 16/4.8;
+        max-height: 650px;
+      }
+      .hero-desktop .hero-text-left {
+        position: absolute;
+        top: 50%;
+        left: 3.5rem;
+        transform: translateY(-50%);
+        color: #fff;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        max-width: 480px;
+      }
+      .hero-desktop .hero-text-left h1 {
+        font-family: var(--font-serif);
+        font-size: 3.6rem;
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+        line-height: 1.1;
+      }
+      .hero-desktop .hero-text-left p {
+        font-family: var(--font-sans);
+        font-size: 1.1rem;
+        font-weight: 300;
+        opacity: 0.9;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .hero-desktop::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 45%;
+        background: linear-gradient(to top, var(--gold-soft), transparent);
+        pointer-events: none;
+      }
+
+      .hero-mobile {
+        aspect-ratio: 16/11;
+        max-height: 520px;
+        display: none;
+      }
+      .hero-mobile .hero-text-bottom {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: #fff;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 360px;
+      }
+      .hero-mobile .hero-text-bottom h1 {
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0 0 0.2rem;
+        line-height: 1.1;
+      }
+      .hero-mobile .hero-text-bottom p {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 300;
+        opacity: 0.9;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .hero-mobile::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(to top, var(--gold-soft), transparent);
+        pointer-events: none;
+      }
+
+      /* ============================================================
+         CATEGORY PILLS
+         ============================================================ */
+      .category-pills {
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.5rem 0 2rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex-wrap: nowrap;
+      }
+      .category-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .category-pills .pill {
+        flex-shrink: 0;
+        padding: 0.4rem 1.2rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.8rem;
+        font-weight: 500;
+        font-family: var(--font-sans);
+        border: 1.5px solid var(--gray-200);
+        background: transparent;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .category-pills .pill:hover {
+        border-color: var(--gold);
+        color: var(--brown);
+        background: rgba(185, 145, 45, 0.04);
+      }
+      .category-pills .pill.active {
+        background: var(--primary-green);
+        border-color: var(--primary-green);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(35, 75, 54, 0.15);
+      }
+      .category-pills .pill.active:hover {
+        background: var(--primary-green-dark);
+        border-color: var(--primary-green-dark);
+      }
+
+      /* ============================================================
+         FEATURED CARD – fully clickable
+         ============================================================ */
+      .featured-card {
+        display: grid;
+        grid-template-columns: 44% 1fr;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px) saturate(1.05);
+        -webkit-backdrop-filter: blur(8px) saturate(1.05);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-featured);
+        transition:
+          transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.4s ease;
+        border: 1px solid rgba(185, 145, 45, 0.05);
+        margin-bottom: 2.8rem;
+        cursor: pointer;
+        min-height: 380px;
+      }
+      .featured-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 24px 72px rgba(47, 43, 39, 0.08);
+        border-color: rgba(185, 145, 45, 0.12);
+      }
+      .featured-card .featured-image {
+        position: relative;
+        overflow: hidden;
+        min-height: 380px;
+        background: var(--gray-200);
+      }
+      .featured-card .featured-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .featured-card:hover .featured-image img {
+        transform: scale(1.04);
+      }
+      .featured-card .featured-image .featured-badge {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.55rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.3rem 1.2rem;
+        border-radius: var(--radius-pill);
+        box-shadow: 0 4px 16px rgba(185, 145, 45, 0.2);
+        backdrop-filter: blur(4px);
+      }
+      .featured-card .featured-content {
+        padding: 2.8rem 3.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.7rem;
+      }
+      .featured-card .featured-content .category-tag {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: inline-block;
+        padding: 0.2rem 1.2rem;
+        border-radius: var(--radius-pill);
+        background: rgba(185, 145, 45, 0.06);
+        width: fit-content;
+        border: 1px solid rgba(185, 145, 45, 0.06);
+      }
+      .featured-card .featured-content h3 {
+        font-family: var(--font-serif);
+        font-size: 2.1rem;
+        color: var(--brown);
+        line-height: 1.2;
+        margin: 0.2rem 0;
+        font-weight: 700;
+      }
+      .featured-card .featured-content .featured-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        opacity: 0.8;
+      }
+      .featured-card .featured-content .featured-meta i {
+        color: var(--gold);
+        margin-right: 0.3rem;
+        width: 1.1rem;
+        opacity: 0.7;
+      }
+      .featured-card .featured-content .featured-divider {
+        width: 48px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: 0.2rem 0 0.6rem;
+        opacity: 0.3;
+      }
+      .featured-card .featured-content .featured-desc {
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        max-width: 95%;
+        opacity: 0.85;
+      }
+      .featured-card .featured-content .featured-actions {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .featured-card .featured-content .btn-primary-featured {
+        background: var(--primary-green);
+        color: #fff;
+        border: none;
+        padding: 0.7rem 2.2rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-sans);
+        letter-spacing: 0.2px;
+        box-shadow: 0 4px 16px rgba(35, 75, 54, 0.1);
+      }
+      .featured-card .featured-content .btn-primary-featured:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(35, 75, 54, 0.2);
+      }
+
+      /* ============================================================
+         GRID CARDS
+         ============================================================ */
+      .grid-section {
+        padding: 0.5rem 0 3rem;
+      }
+      .grid-3col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.8rem;
+        margin-top: 0.5rem;
+      }
+      .card-item {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px) saturate(1.02);
+        -webkit-backdrop-filter: blur(8px) saturate(1.02);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition:
+          transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.4s ease;
+        border: 1px solid rgba(185, 145, 45, 0.03);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .card-item:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.1);
+      }
+      .card-item .card-image {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16/10;
+        background: var(--gray-100);
+      }
+      .card-item .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .card-item:hover .card-image img {
+        transform: scale(1.05);
+      }
+      .card-item .card-image .card-badge {
+        position: absolute;
+        top: 0.8rem;
+        left: 0.8rem;
+        background: var(--gold);
+        color: #fff;
+        font-size: 0.5rem;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        padding: 0.2rem 0.8rem;
+        border-radius: var(--radius-pill);
+        box-shadow: 0 2px 12px rgba(185, 145, 45, 0.15);
+        backdrop-filter: blur(4px);
+      }
+      .card-item .card-image .bookmark-btn {
+        position: absolute;
+        top: 0.8rem;
+        right: 0.8rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(4px);
+        color: var(--brown-soft);
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card-item .card-image .bookmark-btn:hover {
+        background: var(--gold);
+        color: #fff;
+        transform: scale(1.05);
+      }
+      .card-item .card-body {
+        padding: 1.2rem 1.4rem 1.4rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.3rem;
+      }
+      .card-item .card-body .card-category {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: inline-block;
+        width: fit-content;
+      }
+      .card-item .card-body .card-title {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--brown);
+        line-height: 1.3;
+        margin: 0.1rem 0;
+        font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-item .card-body .card-meta {
+        display: flex;
+        gap: 0.8rem;
+        font-size: 0.7rem;
+        color: var(--brown-light);
+        opacity: 0.7;
+        flex-wrap: wrap;
+      }
+      .card-item .card-body .card-meta i {
+        color: var(--gold);
+        opacity: 0.5;
+        margin-right: 0.2rem;
+        font-size: 0.6rem;
+      }
+      .card-item .card-body .card-desc {
+        font-size: 0.82rem;
+        color: var(--brown-soft);
+        line-height: 1.6;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        opacity: 0.8;
+        margin: 0.2rem 0;
+      }
+      .card-item .card-body .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.4rem;
+        padding-top: 0.6rem;
+        border-top: 1px solid rgba(185, 145, 45, 0.04);
+      }
+      .card-item .card-body .card-footer .read-link {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--primary-green);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.3s ease;
+      }
+      .card-item .card-body .card-footer .read-link i {
+        transition: transform 0.3s ease;
+        font-size: 0.7rem;
+      }
+      .card-item:hover .card-body .card-footer .read-link i {
+        transform: translateX(4px);
+      }
+      .card-item .card-body .card-footer .meta-time {
+        font-size: 0.7rem;
+        color: var(--brown-light);
+        opacity: 0.6;
+      }
+
+      /* ============================================================
+         CONTACT CTA
+         ============================================================ */
+      .contact-cta-section {
+        padding: 2rem 0 4rem;
+      }
+      .contact-cta-card {
+        max-width: 1280px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-lg);
+        padding: 1.8rem 2.5rem;
+        box-shadow: var(--shadow-glass);
+        transition:
+          box-shadow 0.4s ease,
+          border-color 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .contact-cta-card:hover {
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.12);
+      }
+      .contact-cta-card .cta-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .contact-cta-card .cta-left .cta-icon {
+        font-size: 2.2rem;
+        color: var(--gold);
+        opacity: 0.7;
+      }
+      .contact-cta-card .cta-left h3 {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        color: var(--brown);
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .contact-cta-card .cta-text {
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        margin: 0;
+        flex: 1;
+        text-align: center;
+        padding: 0 1rem;
+        opacity: 0.8;
+        line-height: 1.5;
+        min-width: 120px;
+      }
+      .contact-cta-card .btn-contact {
+        background: var(--primary-green);
+        color: #fff;
+        border: none;
+        padding: 0.7rem 2.2rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-sans);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(35, 75, 54, 0.1);
+        flex-shrink: 0;
+      }
+      .contact-cta-card .btn-contact:hover {
+        background: var(--primary-green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(35, 75, 54, 0.2);
+      }
+      .contact-cta-card .btn-contact i {
+        font-size: 0.8rem;
+      }
+
+      /* ============================================================
+         RESPONSIVE – base layout
+         ============================================================ */
+      @media (max-width: 1200px) {
+        .grid-3col {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .hero-desktop .hero-text-left h1 {
+          font-size: 2.8rem;
+        }
+        .hero-desktop .hero-text-left p {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .search-bar-wrap {
+          padding: 0.6rem 1rem;
+          flex-wrap: wrap;
+        }
+        .search-bar-wrap input {
+          width: 100%;
+          min-width: auto;
+        }
+        .hero-desktop {
+          display: none;
+        }
+        .hero-mobile {
+          display: block;
+        }
+        .hero-section {
+          padding: 80px 1rem 0;
+        }
+        .featured-card {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+        .featured-card .featured-image {
+          min-height: 260px;
+        }
+        .featured-card .featured-content {
+          padding: 2rem 2.2rem;
+        }
+        .featured-card .featured-content .featured-desc {
+          max-width: 100%;
+        }
+        .grid-3col {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.4rem;
+        }
+        .category-pills {
+          padding: 0.5rem 0 1.5rem;
+          gap: 0.5rem;
+        }
+        .category-pills .pill {
+          font-size: 0.7rem;
+          padding: 0.3rem 1rem;
+        }
+        .contact-cta-card {
+          flex-direction: column;
+          text-align: center;
+          padding: 2rem 1.5rem;
+        }
+        .contact-cta-card .cta-left {
+          justify-content: center;
+        }
+        .contact-cta-card .cta-text {
+          padding: 0.5rem 0;
+        }
+        .contact-cta-card .btn-contact {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding-top: 68px;
+        }
+        .container {
+          padding: 0 1rem;
+        }
+        .hero-mobile .hero-text-bottom h1 {
+          font-size: 1.8rem;
+        }
+        .hero-mobile .hero-text-bottom p {
+          font-size: 0.85rem;
+        }
+        .hero-section {
+          padding: 70px 0.5rem 0;
+        }
+        .grid-3col {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+        .card-item .card-image {
+          aspect-ratio: 16/9;
+        }
+        .category-pills {
+          gap: 0.4rem;
+          padding: 0.5rem 0 1rem;
+        }
+        .category-pills .pill {
+          font-size: 0.65rem;
+          padding: 0.25rem 0.8rem;
+        }
+        .featured-card .featured-content {
+          padding: 1.6rem 1.8rem;
+        }
+        .featured-card .featured-content h3 {
+          font-size: 1.5rem;
+        }
+        .featured-card .featured-content .featured-desc {
+          font-size: 0.88rem;
+        }
+        .featured-card .featured-content .featured-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .featured-card .featured-content .featured-actions button {
+          justify-content: center;
+        }
+        .contact-cta-card {
+          padding: 1.5rem 1rem;
+          gap: 1rem;
+        }
+        .contact-cta-card .cta-left .cta-icon {
+          font-size: 1.8rem;
+        }
+        .contact-cta-card .cta-left h3 {
+          font-size: 1.2rem;
+        }
+        .contact-cta-card .cta-text {
+          font-size: 0.85rem;
+        }
+        .contact-cta-card .btn-contact {
+          font-size: 0.8rem;
+          padding: 0.6rem 1.5rem;
+        }
+        .search-bar-wrap {
+          padding: 0.8rem 1rem;
+          border-radius: var(--radius-md);
+        }
+        .search-bar-wrap input {
+          font-size: 0.9rem;
+          padding: 0.5rem 0;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-mobile .hero-text-bottom h1 {
+          font-size: 1.4rem;
+        }
+        .hero-mobile .hero-text-bottom p {
+          font-size: 0.75rem;
+        }
+        .card-item .card-body {
+          padding: 1rem;
+        }
+        .card-item .card-body .card-title {
+          font-size: 1rem;
+        }
+        .card-item .card-body .card-desc {
+          font-size: 0.78rem;
+        }
+        .search-bar-wrap {
+          padding: 0.6rem 0.8rem;
+        }
+        .search-bar-wrap input {
+          font-size: 0.85rem;
+        }
+        .category-pills .pill {
+          font-size: 0.6rem;
+          padding: 0.2rem 0.7rem;
+        }
+        .contact-cta-card .cta-left {
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+        .contact-cta-card .cta-left .cta-icon {
+          font-size: 1.6rem;
+        }
+        .contact-cta-card .cta-left h3 {
+          font-size: 1rem;
+        }
+      }
+
+      /* ============================================================
+         SCIENTIFIC OVERLAY – PREMIUM FULL-SCREEN
+         ============================================================ */
+      .science-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 1.5rem;
+        scroll-behavior: smooth;
+      }
+      .science-overlay.open {
+        display: block;
+        opacity: 1;
+      }
+
+      .science-overlay-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: var(--cream);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        position: relative;
+        animation: overlaySlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        min-height: 95vh;
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+      @keyframes overlaySlideIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.97) translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .science-overlay-container::-webkit-scrollbar {
+        width: 6px;
+      }
+      .science-overlay-container::-webkit-scrollbar-track {
+        background: var(--gray-50);
+      }
+      .science-overlay-container::-webkit-scrollbar-thumb {
+        background: var(--gold-soft);
+        border-radius: 6px;
+      }
+
+      /* ── Top Bar ── */
+      .overlay-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2.5rem;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(185, 145, 45, 0.04);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .overlay-topbar .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .overlay-topbar .topbar-left .back-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: none;
+        border: none;
+        color: var(--brown-soft);
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
+        font-family: var(--font-sans);
+        padding: 0.3rem 0.6rem;
+        border-radius: var(--radius-pill);
+      }
+      .overlay-topbar .topbar-left .back-btn:hover {
+        color: var(--primary-green);
+        transform: translateX(-3px);
+      }
+      .overlay-topbar .topbar-left .back-btn i {
+        font-size: 0.9rem;
+      }
+      .overlay-topbar .topbar-left .title-preview {
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        color: var(--brown);
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        opacity: 0.6;
+        padding-left: 0.8rem;
+        border-left: 1px solid var(--gray-200);
+      }
+      .overlay-topbar .topbar-center {
+        font-family: var(--font-serif);
+        font-size: 0.8rem;
+        color: var(--brown-soft);
+        opacity: 0.5;
+        letter-spacing: 1px;
+        font-weight: 500;
+      }
+      .overlay-topbar .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .overlay-topbar .topbar-right .icon-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+        color: var(--brown-soft);
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .overlay-topbar .topbar-right .icon-btn:hover {
+        background: rgba(185, 145, 45, 0.1);
+        color: var(--gold);
+        transform: scale(1.05);
+      }
+      .overlay-topbar .topbar-right .icon-btn.close-btn {
+        background: rgba(220, 53, 69, 0.08);
+        color: #dc3545;
+      }
+      .overlay-topbar .topbar-right .icon-btn.close-btn:hover {
+        background: rgba(220, 53, 69, 0.15);
+        transform: rotate(90deg) scale(1.05);
+      }
+
+      /* ── Overlay Content ── */
+      .overlay-content {
+        padding: 0 3rem 3rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      /* ── Hero Image ── */
+      .overlay-hero {
+        margin: 0 -3rem 2rem;
+        position: relative;
+        height: 45vh;
+        min-height: 320px;
+        max-height: 520px;
+        overflow: hidden;
+        background: var(--gray-200);
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      }
+      .overlay-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .overlay-hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(to top, var(--cream), transparent);
+        pointer-events: none;
+      }
+      .overlay-hero .hero-category-badge {
+        position: absolute;
+        bottom: 1.8rem;
+        left: 2.5rem;
+        background: rgba(185, 145, 45, 0.9);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        padding: 0.3rem 1.2rem;
+        border-radius: var(--radius-pill);
+        z-index: 2;
+      }
+
+      /* ── Header ── */
+      .overlay-header {
+        margin-bottom: 1.5rem;
+      }
+      .overlay-header .science-title {
+        font-family: var(--font-serif);
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: var(--brown);
+        line-height: 1.1;
+        margin: 0 0 0.2rem;
+        letter-spacing: -0.02em;
+      }
+      .overlay-header .science-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 2rem;
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        margin: 0.4rem 0 0.6rem;
+        opacity: 0.8;
+      }
+      .overlay-header .science-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .overlay-header .science-meta i {
+        color: var(--gold);
+        font-size: 0.75rem;
+        opacity: 0.6;
+        width: 1rem;
+        text-align: center;
+      }
+      .overlay-header .lotus-divider-sm {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 0.4rem 0 0.2rem;
+        max-width: 200px;
+      }
+      .overlay-header .lotus-divider-sm .line {
+        flex: 1;
+        height: 1.5px;
+        background: linear-gradient(to right, var(--gold), transparent);
+      }
+      .overlay-header .lotus-divider-sm i {
+        color: var(--gold);
+        font-size: 0.8rem;
+        opacity: 0.5;
+      }
+
+      /* ── Primary Actions ── */
+      .primary-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin: 1.5rem 0 2rem;
+        align-items: center;
+      }
+      .primary-actions .btn-icon-action {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid rgba(185, 145, 45, 0.08);
+        background: rgba(255, 255, 255, 0.3);
+        color: var(--brown-soft);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+      }
+      .primary-actions .btn-icon-action:hover {
+        background: rgba(185, 145, 45, 0.08);
+        border-color: rgba(185, 145, 45, 0.2);
+        color: var(--gold);
+        transform: scale(1.05);
+      }
+
+      /* ── Body ── */
+      .overlay-body {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 3rem;
+        margin-top: 1rem;
+      }
+      .overlay-body .main-content {
+        max-width: 100%;
+      }
+      .overlay-body .main-content .intro-text {
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: var(--brown);
+        margin-bottom: 1.8rem;
+        font-weight: 400;
+        opacity: 0.9;
+      }
+      .overlay-body .main-content .content-text {
+        font-size: 1.05rem;
+        line-height: 1.9;
+        color: var(--brown);
+        text-align: justify;
+      }
+      .overlay-body .main-content .content-text p {
+        margin-bottom: 1.2rem;
+        text-align: justify;
+      }
+      .overlay-body .main-content .content-text h3 {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        color: var(--primary-green);
+        margin: 2rem 0 0.8rem;
+        font-weight: 600;
+      }
+      .overlay-body .main-content .content-text .ref-block {
+        background: rgba(35, 75, 54, 0.04);
+        border-radius: var(--radius-sm);
+        padding: 1.5rem;
+        border-left: 3px solid var(--primary-green);
+        margin: 1.5rem 0;
+      }
+      .overlay-body .main-content .content-text .ref-block strong {
+        color: var(--primary-green);
+      }
+      .overlay-body .main-content .content-text .external-link {
+        color: var(--gold);
+        text-decoration: underline;
+        word-break: break-all;
+      }
+
+      /* ── Sidebar ── */
+      .overlay-sidebar {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .overlay-sidebar .sidebar-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(185, 145, 45, 0.04);
+        border-radius: var(--radius-md);
+        padding: 1.5rem 1.5rem 1.2rem;
+      }
+      .overlay-sidebar .sidebar-card h5 {
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        color: var(--brown);
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .overlay-sidebar .sidebar-card h5 i {
+        color: var(--gold);
+        font-size: 0.8rem;
+        opacity: 0.6;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item {
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.3rem 0;
+        border-bottom: 1px solid rgba(185, 145, 45, 0.04);
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item:last-child {
+        border-bottom: none;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item .label {
+        font-weight: 500;
+        color: var(--brown);
+        min-width: 70px;
+      }
+      .overlay-sidebar .sidebar-card .sidebar-item .value {
+        opacity: 0.8;
+      }
+
+      /* ── Related ── */
+      .related-section {
+        margin-top: 3rem;
+        padding-top: 2.5rem;
+        border-top: 2px solid rgba(185, 145, 45, 0.08);
+      }
+      .related-section .related-title {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        color: var(--brown);
+        text-align: center;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+      }
+      .related-section .related-sub {
+        text-align: center;
+        color: var(--brown-soft);
+        font-size: 0.95rem;
+        opacity: 0.6;
+        margin-bottom: 2rem;
+      }
+      .related-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+      }
+      .related-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid rgba(185, 145, 45, 0.03);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      .related-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(185, 145, 45, 0.1);
+      }
+      .related-card .rel-img {
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        background: var(--gray-100);
+      }
+      .related-card .rel-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .related-card:hover .rel-img img {
+        transform: scale(1.04);
+      }
+      .related-card .rel-body {
+        padding: 0.8rem 1rem 1rem;
+      }
+      .related-card .rel-body .rel-category {
+        font-size: 0.5rem;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .related-card .rel-body .rel-title {
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+        color: var(--brown);
+        font-weight: 600;
+        margin: 0.1rem 0 0.2rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .related-card .rel-body .rel-meta {
+        font-size: 0.65rem;
+        color: var(--brown-light);
+        opacity: 0.6;
+      }
+      .related-card .rel-body .rel-meta i {
+        color: var(--gold);
+        opacity: 0.4;
+        margin-right: 0.2rem;
+      }
+
+      /* ── Bottom Nav ── */
+      .overlay-bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(185, 145, 45, 0.06);
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .overlay-bottom-nav .nav-btn {
+        background: none;
+        border: none;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--brown-soft);
+        cursor: pointer;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--radius-pill);
+      }
+      .overlay-bottom-nav .nav-btn:hover {
+        color: var(--primary-green);
+        transform: translateX(-3px);
+      }
+      .overlay-bottom-nav .nav-btn.next:hover {
+        transform: translateX(3px);
+      }
+      .overlay-bottom-nav .nav-btn i {
+        font-size: 0.8rem;
+      }
+      .overlay-bottom-nav .nav-btn.back-to-list {
+        background: rgba(185, 145, 45, 0.06);
+        padding: 0.4rem 1.2rem;
+        border: 1px solid rgba(185, 145, 45, 0.06);
+      }
+      .overlay-bottom-nav .nav-btn.back-to-list:hover {
+        background: rgba(185, 145, 45, 0.1);
+        border-color: rgba(185, 145, 45, 0.15);
+        transform: translateY(-2px);
+      }
+
+      /* ── Print Styles ── */
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        .science-overlay,
+        .science-overlay * {
+          visibility: visible;
+        }
+        .science-overlay {
+          position: fixed;
+          inset: 0;
+          background: #fff !important;
+          backdrop-filter: none !important;
+          padding: 0 !important;
+          opacity: 1 !important;
+          display: block !important;
+          z-index: 999999 !important;
+          overflow: visible !important;
+        }
+        .science-overlay-container {
+          max-height: none !important;
+          min-height: auto !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          overflow: visible !important;
+          background: #fff !important;
+          animation: none !important;
+        }
+        .overlay-topbar {
+          display: none !important;
+        }
+        .overlay-hero {
+          margin: 0 !important;
+          height: 300px !important;
+          max-height: 300px !important;
+          min-height: 200px !important;
+          border-radius: 0 !important;
+        }
+        .overlay-hero::after {
+          display: none !important;
+        }
+        .overlay-content {
+          padding: 1rem 2rem 2rem !important;
+          max-width: 100% !important;
+        }
+        .overlay-body {
+          display: block !important;
+        }
+        .overlay-sidebar {
+          display: none !important;
+        }
+        .related-section {
+          display: none !important;
+        }
+        .overlay-bottom-nav {
+          display: none !important;
+        }
+        .primary-actions {
+          display: none !important;
+        }
+        .overlay-header .science-title {
+          font-size: 28pt !important;
+        }
+        .overlay-body .main-content .content-text {
+          font-size: 11pt !important;
+        }
+        .overlay-body .main-content .intro-text {
+          font-size: 12pt !important;
+        }
+        .overlay-body .main-content .content-text h3 {
+          font-size: 16pt !important;
+        }
+        .overlay-hero .hero-category-badge {
+          position: static !important;
+          display: inline-block !important;
+          margin-bottom: 0.5rem !important;
+          background: var(--gold) !important;
+          color: #fff !important;
+          padding: 0.2rem 1rem !important;
+          border-radius: 60px !important;
+          font-size: 9pt !important;
+        }
+      }
+
+      /* ── Mobile Overlay ── */
+      @media (max-width: 1024px) {
+        .science-overlay {
+          padding: 0.8rem;
+        }
+        .science-overlay-container {
+          max-height: 98vh;
+          border-radius: var(--radius-md);
+        }
+        .overlay-topbar {
+          padding: 0.8rem 1.2rem;
+        }
+        .overlay-topbar .topbar-left .title-preview {
+          display: none;
+        }
+        .overlay-topbar .topbar-center {
+          display: none;
+        }
+        .overlay-content {
+          padding: 0 1.5rem 2rem;
+        }
+        .overlay-hero {
+          margin: 0 -1.5rem 1.5rem;
+          height: 35vh;
+          min-height: 240px;
+          max-height: 400px;
+        }
+        .overlay-hero .hero-category-badge {
+          left: 1.5rem;
+          bottom: 1.2rem;
+        }
+        .overlay-header .science-title {
+          font-size: 2.4rem;
+        }
+        .overlay-body {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .overlay-sidebar {
+          position: static;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .related-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .overlay-bottom-nav {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .primary-actions {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .science-overlay {
+          padding: 0.4rem;
+        }
+        .science-overlay-container {
+          border-radius: var(--radius-sm);
+          max-height: 100vh;
+        }
+        .overlay-topbar {
+          padding: 0.6rem 1rem;
+          flex-wrap: nowrap;
+        }
+        .overlay-topbar .topbar-left .back-btn span {
+          display: none;
+        }
+        .overlay-topbar .topbar-right .icon-btn {
+          width: 32px;
+          height: 32px;
+          font-size: 0.75rem;
+        }
+        .overlay-content {
+          padding: 0 1rem 1.5rem;
+        }
+        .overlay-hero {
+          margin: 0 -1rem 1.2rem;
+          height: 30vh;
+          min-height: 180px;
+          max-height: 320px;
+        }
+        .overlay-hero .hero-category-badge {
+          left: 1rem;
+          bottom: 0.8rem;
+          font-size: 0.5rem;
+          padding: 0.2rem 0.8rem;
+        }
+        .overlay-header .science-title {
+          font-size: 1.8rem;
+        }
+        .overlay-header .science-meta {
+          font-size: 0.75rem;
+          gap: 0.8rem 1.2rem;
+        }
+        .overlay-sidebar {
+          grid-template-columns: 1fr;
+          gap: 0.8rem;
+        }
+        .related-grid {
+          grid-template-columns: 1fr;
+        }
+        .overlay-bottom-nav .nav-btn {
+          font-size: 0.75rem;
+        }
+        .overlay-bottom-nav .nav-btn.back-to-list {
+          order: -1;
+          width: 100%;
+          justify-content: center;
+        }
+        .primary-actions .btn-icon-action {
+          width: 42px;
+          height: 42px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .overlay-header .science-title {
+          font-size: 1.4rem;
+        }
+        .overlay-hero {
+          height: 25vh;
+          min-height: 150px;
+        }
+        .overlay-body .main-content .content-text {
+          font-size: 0.9rem;
+        }
+        .overlay-body .main-content .intro-text {
+          font-size: 1rem;
+        }
+        .primary-actions .btn-icon-action {
+          width: 36px;
+          height: 36px;
+          font-size: 0.7rem;
+        }
+      }
+
+      /* ── Footer ── */
+      .premium-footer {
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(16px) saturate(1.05);
+        -webkit-backdrop-filter: blur(16px) saturate(1.05);
+        border-top: 1px solid rgba(185, 145, 45, 0.08);
+        padding: 3.5rem 0 0;
+        margin-top: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .premium-footer .container {
+        max-width: 1480px;
+        position: relative;
+        z-index: 1;
+        padding: 0 1.5rem;
+      }
+      .footer-main {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+        gap: 2.5rem;
+        padding-bottom: 2rem;
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-brand .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .footer-logo-image {
+        height: 38px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
+      .footer-brand .logo-text {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+      }
+      .footer-brand .brand-tagline {
+        font-family: var(--font-devanagari);
+        font-size: 1rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+        opacity: 0.7;
+        margin-top: -0.2rem;
+      }
+      .footer-brand .brand-description {
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: var(--brown-soft);
+        max-width: 320px;
+        margin: 0.2rem 0 0.4rem;
+        text-align: justify;
+        opacity: 0.85;
+      }
+      .footer-brand .brand-lotus {
+        color: var(--gold);
+        font-size: 1.2rem;
+        opacity: 0.3;
+        margin-top: 0.2rem;
+      }
+      .footer-col h4 {
+        font-family: var(--font-serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--brown);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+      .footer-col h4::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 28px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        opacity: 0.5;
+      }
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .footer-col ul li a {
+        font-size: 0.9rem;
+        color: var(--brown-soft);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        opacity: 0.8;
+      }
+      .footer-col ul li a i {
+        width: 18px;
+        font-size: 0.8rem;
+        color: var(--gold);
+        transition: transform 0.3s ease;
+        opacity: 0.6;
+      }
+      .footer-col ul li a:hover {
+        color: var(--primary-green);
+        transform: translateX(4px);
+        opacity: 1;
+      }
+      .footer-col ul li a:hover i {
+        transform: scale(1.15);
+        opacity: 1;
+      }
+      .footer-social-col ul.social-links-list li a {
+        gap: 0.7rem;
+      }
+      .footer-social-col ul.social-links-list li a i {
+        width: 20px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      .footer-social-col ul.social-links-list li a:hover {
+        color: var(--gold);
+      }
+      .footer-social-col ul.social-links-list li a:hover i {
+        color: var(--gold);
+      }
+      .footer-contact-col {
+        display: flex;
+        align-items: stretch;
+      }
+      .footer-contact-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid rgba(185, 145, 45, 0.06);
+        border-radius: var(--radius-md);
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        width: 100%;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 140px;
+      }
+      .footer-contact-card:hover {
+        border-color: rgba(185, 145, 45, 0.15);
+        box-shadow: var(--shadow-soft);
+        transform: translateY(-2px);
+      }
+      .footer-contact-card .contact-icon {
+        font-size: 1.6rem;
+        color: var(--gold);
+        margin-bottom: 0.2rem;
+        opacity: 0.7;
+      }
+      .footer-contact-card h4 {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--brown);
+        margin-bottom: 0.2rem;
+      }
+      .footer-contact-card .contact-email a {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--primary-green);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .footer-contact-card .contact-email a:hover {
+        color: var(--gold);
+      }
+      .footer-contact-card .contact-response {
+        font-size: 0.75rem;
+        color: var(--brown-soft);
+        margin-top: 0.2rem;
+        opacity: 0.6;
+      }
+      .footer-lotus-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
+        opacity: 0.3;
+      }
+      .footer-lotus-divider .divider-line {
+        flex: 1;
+        max-width: 80px;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+      }
+      .footer-lotus-divider i {
+        font-size: 1.2rem;
+        color: var(--gold);
+        animation: lotusFloat 4s ease-in-out infinite;
+      }
+      @keyframes lotusFloat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-4px) scale(1.05);
+        }
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(185, 145, 45, 0.05);
+        padding: 1.5rem 0 1.8rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .footer-bottom-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .footer-bottom .copyright {
+        font-size: 0.85rem;
+        color: var(--brown-soft);
+        opacity: 0.7;
+        margin: 0;
+      }
+      .footer-bottom .copyright .heart {
+        color: #d46a6a;
+        display: inline-block;
+        animation: heartBeat 2s ease-in-out infinite;
+      }
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        15% {
+          transform: scale(1.2);
+        }
+        30% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.15);
+        }
+        60% {
+          transform: scale(1);
+        }
+      }
+      .footer-bottom .credit {
+        font-size: 0.7rem;
+        color: var(--brown-soft);
+        opacity: 0.4;
+        margin: 0;
+        letter-spacing: 0.3px;
+      }
+      .footer-bottom .credit .credit-name {
+        color: var(--gold);
+        font-weight: 500;
+        opacity: 0.7;
+      }
+
+      /* ── Reveal animation ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Mobile Drawer ── */
+      .mobile-drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(43, 43, 43, 0.35);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+      }
+      .mobile-drawer-overlay.active {
+        display: block;
+      }
+      .mobile-drawer {
+        position: fixed;
+        top: 0;
+        right: -340px;
+        width: 320px;
+        max-width: 85vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(24px) saturate(1.1);
+        -webkit-backdrop-filter: blur(24px) saturate(1.1);
+        box-shadow: -8px 0 48px rgba(43, 43, 43, 0.06);
+        z-index: 10000;
+        padding: 2rem 1.8rem 1.8rem;
+        transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        border-left: 1px solid rgba(185, 145, 45, 0.04);
+      }
+      .mobile-drawer.open {
+        right: 0;
+      }
+      .drawer-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+      }
+      .drawer-logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+      }
+      .drawer-logo {
+        height: 32px;
+        width: auto;
+        object-fit: contain;
+      }
+      .drawer-logo-text {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        letter-spacing: -0.02em;
+      }
+      .drawer-tagline {
+        font-family: var(--font-devanagari);
+        font-size: 0.8rem;
+        color: var(--gold);
+        opacity: 0.6;
+        margin: 0.1rem 0 0;
+        letter-spacing: 1px;
+      }
+      .drawer-divider {
+        width: 40px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: 0.4rem 0 0.2rem;
+        opacity: 0.2;
+      }
+      .drawer-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: transparent;
+        border: none;
+        font-size: 1.4rem;
+        color: var(--brown-soft);
+        cursor: pointer;
+        padding: 0.2rem;
+        transition: all 0.35s ease;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+      .drawer-close:hover {
+        background: rgba(185, 145, 45, 0.06);
+        color: var(--gold);
+        transform: rotate(90deg);
+      }
+      .drawer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+        padding-top: 0.4rem;
+      }
+      .drawer-link {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.7rem 0.6rem;
+        border-radius: var(--radius-sm);
+        color: var(--brown-soft);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.35s ease;
+      }
+      .drawer-link i {
+        width: 22px;
+        font-size: 1rem;
+        color: var(--gold);
+        opacity: 0.5;
+        transition: all 0.35s ease;
+      }
+      .drawer-link:hover {
+        background: rgba(185, 145, 45, 0.04);
+        color: var(--primary-green);
+        transform: translateX(4px);
+      }
+      .drawer-link:hover i {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .drawer-link.active {
+        color: var(--primary-green);
+        font-weight: 600;
+        background: rgba(185, 145, 45, 0.04);
+      }
+      .drawer-link.active i {
+        opacity: 1;
+      }
+
+      body.overlay-open {
+        overflow: hidden;
+      }
+
+      @media (max-width: 1024px) {
+        .footer-main {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-brand {
+          grid-column: 1 / -1;
+          text-align: center;
+          align-items: center;
+        }
+        .footer-brand .brand-description {
+          max-width: 100%;
+          text-align: center;
+        }
+        .footer-contact-col {
+          grid-column: 1 / -1;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+      @media (max-width: 768px) {
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          text-align: center;
+        }
+        .footer-brand {
+          text-align: center;
+          align-items: center;
+        }
+        .footer-brand .brand-logo {
+          justify-content: center;
+        }
+        .footer-brand .brand-description {
+          text-align: center;
+          max-width: 100%;
+        }
+        .footer-col {
+          text-align: center;
+        }
+        .footer-col h4::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .footer-col ul {
+          align-items: center;
+        }
+        .footer-col ul li a {
+          justify-content: center;
+        }
+        .footer-social-col ul.social-links-list li a {
+          justify-content: center;
+        }
+        .footer-contact-col {
+          max-width: 100%;
+        }
+        .footer-contact-card {
+          min-height: auto;
+          padding: 1rem;
+        }
+        
+        /* Add these styles to the science.html page */
+        .grid-section.container {
+          padding-left: 2.5rem;
+          padding-right: 2.5rem;
+        }
+
+        .grid-3col {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.4rem;
+          margin-top: 0.5rem;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 1024px) {
+          .grid-section.container {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+          }
+          .grid-3col {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .grid-section.container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+          .grid-3col {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== OVERLAY ===== -->
+    <div class="page-overlay"></div>
+
+    <!-- ===== MODALS ===== -->
+    <div id="infoModal" class="modal">
+      <div class="modal-card">
+        <i class="fas fa-om" style="font-size: 2rem; color: #2a5e3a"></i>
+        <h3 id="modalTitle">शीर्षक</h3>
+        <p id="modalMessage">विवरण</p>
+        <button class="close-modal" onclick="closeModal()">समझ गया 🙏</button>
+      </div>
+    </div>
+
+    <!-- ===== SCIENTIFIC OVERLAY ===== -->
+    <div class="science-overlay" id="scienceOverlay">
+      <div class="science-overlay-container" id="overlayContainer">
+        <!-- Top Bar -->
+        <div class="overlay-topbar">
+          <div class="topbar-left">
+            <button class="back-btn" onclick="closeScienceOverlay()">
+              <i class="fas fa-arrow-left"></i> <span>Back to Science</span>
+            </button>
+            <span class="title-preview" id="overlayTitlePreview"
+              >Loading...</span
+            >
+          </div>
+          <span class="topbar-center">Scientific Analysis</span>
+          <div class="topbar-right">
+            <button
+              class="icon-btn"
+              onclick="toggleBookmarkOverlay()"
+              aria-label="Save"
+            >
+              <i class="far fa-bookmark" id="overlayBookmarkIcon"></i>
+            </button>
+            <button
+              class="icon-btn"
+              onclick="shareScience()"
+              aria-label="Share"
+            >
+              <i class="fas fa-share-alt"></i>
+            </button>
+            <button
+              class="icon-btn"
+              onclick="window.print()"
+              aria-label="Print"
+            >
+              <i class="fas fa-print"></i>
+            </button>
+            <button
+              class="icon-btn close-btn"
+              onclick="closeScienceOverlay()"
+              aria-label="Close"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="overlay-content" id="overlayContent">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="premium-header" role="banner">
+      <div class="container">
+        <a href="index.html" class="logo-link" aria-label="Spiriligious – Home">
+          <img src="images/logo.png" alt="Spiriligious" class="logo-image" />
+          <span class="logo-text-inline">Spiriligious</span>
+        </a>
+        <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+          <a href="index.html" class="nav-link active"
+            ><i class="fas fa-home"></i> Home</a
+          >
+          <a href="about.html" class="nav-link"
+            ><i class="fas fa-info-circle"></i> About</a
+          >
+          <a href="team.html" class="nav-link"
+            ><i class="fas fa-users"></i> Team</a
+          >
+          <a href="#manthan-section" class="nav-link"
+            ><i class="fas fa-comments"></i> Manthan</a
+          >
+          <a href="astro.html" class="nav-link"
+            ><i class="fas fa-star-of-life"></i> Jyotish · Panchang</a
+          >
+          <a href="contact.html" class="nav-link"
+            ><i class="fas fa-envelope"></i> Contact</a
+          >
+        </nav>
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span class="pill"></span><span class="pill"></span
+          ><span class="pill"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div
+      class="mobile-drawer"
+      id="mobileDrawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="drawer-header">
+        <a href="index.html" class="drawer-logo-link">
+          <img src="images/logo.png" alt="Spiriligious" class="drawer-logo" />
+          <span class="drawer-logo-text">Spiriligious</span>
+        </a>
+        <p class="drawer-tagline">ज्ञान · अध्यात्म · विज्ञान</p>
+        <button
+          class="drawer-close"
+          id="drawerCloseBtn"
+          aria-label="Close navigation"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="drawer-divider"></div>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link active"
+          ><i class="fas fa-home"></i> Home</a
+        >
+        <a href="about.html" class="drawer-link"
+          ><i class="fas fa-info-circle"></i> About</a
+        >
+        <a href="team.html" class="drawer-link"
+          ><i class="fas fa-users"></i> Team</a
+        >
+        <a href="#manthan-section" class="drawer-link"
+          ><i class="fas fa-comments"></i> Manthan</a
+        >
+        <a href="astro.html" class="drawer-link"
+          ><i class="fas fa-star-of-life"></i> Jyotish</a
+        >
+        <a href="contact.html" class="drawer-link"
+          ><i class="fas fa-envelope"></i> Contact</a
+        >
+      </nav>
+    </div>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+      <!-- HERO -->
+      <section class="hero-section reveal">
+        <div class="hero-desktop">
+          <img
+            src="images/cover-desk.png"
+            alt="Spiritual landscape"
+            loading="lazy"
+            onerror="
+              this.src =
+                'https://placehold.co/1400x650/e8d8b0/5a534c?text=Spiriligious'
+            "
+          />
+          <div class="hero-text-left">
+            <h1>Science &amp; Knowledge</h1>
+            <p>
+              Exploring the logic and science behind ancient traditions —
+              research, analysis, and insights.
+            </p>
+          </div>
+        </div>
+        <div class="hero-mobile">
+          <img
+            src="images/cover-phone.png"
+            alt="Spiritual journey"
+            loading="lazy"
+            onerror="
+              this.src =
+                'https://placehold.co/800x600/e8d8b0/5a534c?text=Spiriligious'
+            "
+          />
+          <div class="hero-text-bottom">
+            <h1>Science &amp; Knowledge</h1>
+            <p>
+              Exploring the logic and science behind ancient traditions —
+              research, analysis, and insights.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEARCH BAR -->
+      <section class="search-section container reveal">
+        <div class="search-bar-wrap">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" placeholder="Search science…" id="searchInput" />
+        </div>
+      </section>
+
+      <!-- CATEGORY PILLS -->
+      <section class="container reveal">
+        <div class="category-pills" id="categoryPills">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </section>
+
+      <!-- FEATURED -->
+      <section class="container reveal">
+        <div id="featuredContainer" class="featured-card">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </section>
+
+      <!-- GRID -->
+      <section class="grid-section container">
+        <div class="grid-3col" id="scienceGrid">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </section>
+
+      <!-- CONTACT CTA -->
+      <section class="contact-cta-section container reveal">
+        <div class="contact-cta-card">
+          <div class="cta-left">
+            <i class="fas fa-envelope cta-icon"></i>
+            <h3>Contact Us</h3>
+          </div>
+          <p class="cta-text">
+            Have questions, suggestions, or contributions? We'd love to hear
+            from you.
+          </p>
+          <a href="contact.html" class="btn-contact">
+            <i class="fas fa-paper-plane"></i> Get in Touch
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="global.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // ── Global helpers ──
+        window.openModal = function (title, html) {
+          document.getElementById("modalTitle").innerText = title;
+          document.getElementById("modalMessage").innerHTML = html;
+          document.getElementById("infoModal").style.display = "flex";
+          document.body.style.overflow = "hidden";
+        };
+        window.closeModal = function () {
+          document.getElementById("infoModal").style.display = "none";
+          document.body.style.overflow = "auto";
+        };
+        document
+          .getElementById("infoModal")
+          .addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+          });
+
+        // ── State ──
+        let currentCategory = "all";
+        let allScience = [];
+
+        // ── Render functions ──
+        function renderFeatured(item) {
+          const container = document.getElementById("featuredContainer");
+          if (!item) {
+            container.innerHTML = `
+              <div class="featured-content" style="padding:2rem;text-align:center;grid-column:1/-1;">
+                <h3>No Featured Article</h3>
+                <p>Please check back later. 🙏</p>
+              </div>
+            `;
+            return;
+          }
+          const desc = (item.shortDesc || "")
+            .replace(/<[^>]*>/g, "")
+            .substring(0, 180);
+          container.innerHTML = `
+            <div class="featured-image">
+              <img src="${item.imageUrl || "images/cover.jpg"}" alt="${item.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+              <span class="featured-badge">Featured</span>
+            </div>
+            <div class="featured-content">
+              <span class="category-tag">${item.category || "Science"}</span>
+              <h3>${item.title}</h3>
+              <div class="featured-meta">
+                <span><i class="fas fa-user"></i> ${item.author || "Researcher"}</span>
+                <span><i class="fas fa-clock"></i> ${item.readTime || "5 min read"}</span>
+              </div>
+              <div class="featured-divider"></div>
+              <p class="featured-desc">${desc}...</p>
+              <div class="featured-actions">
+                <button class="btn-primary-featured" onclick="openScienceOverlay('${item.id}')">
+                  <i class="fas fa-microscope"></i> Read Analysis
+                </button>
+              </div>
+            </div>
+          `;
+          container.style.cursor = "pointer";
+          container.onclick = function (e) {
+            if (!e.target.closest("button")) {
+              openScienceOverlay(item.id);
+            }
+          };
+        }
+
+        function renderGrid(items) {
+          const container = document.getElementById("scienceGrid");
+          if (!items || items.length === 0) {
+            container.innerHTML = `
+              <div style="grid-column:1/-1;text-align:center;padding:4rem 0;color:var(--brown-soft);">
+                <i class="fas fa-search" style="font-size:2rem;opacity:0.3;display:block;margin-bottom:0.8rem;"></i>
+                <p style="font-size:1.1rem;">No articles match your criteria.</p>
+              </div>
+            `;
+            return;
+          }
+          container.innerHTML = items
+            .map((item) => {
+              const desc = (item.shortDesc || "")
+                .replace(/<[^>]*>/g, "")
+                .substring(0, 100);
+              return `
+              <div class="card-item" onclick="openScienceOverlay('${item.id}')">
+                <div class="card-image">
+                  <img src="${item.imageUrl || "images/cover.jpg"}" alt="${item.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+                  <span class="card-badge">${item.category || "Science"}</span>
+                  <button class="bookmark-btn" onclick="event.stopPropagation();toggleBookmark('${item.id}')" aria-label="Bookmark">
+                    <i class="far fa-bookmark"></i>
+                  </button>
+                </div>
+                <div class="card-body">
+                  <span class="card-category">${item.category || "Research"}</span>
+                  <h3 class="card-title">${item.title}</h3>
+                  <div class="card-meta">
+                    <span><i class="fas fa-user"></i> ${item.author || "Researcher"}</span>
+                    <span><i class="far fa-clock"></i> ${item.readTime || "5 min read"}</span>
+                  </div>
+                  <p class="card-desc">${desc}...</p>
+                  <div class="card-footer">
+                    <span class="read-link">Read Analysis <i class="fas fa-arrow-right"></i></span>
+                    <span class="meta-time">${item.readTime || "5 min read"}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+            })
+            .join("");
+        }
+
+        function renderCategoryPills(categories) {
+          const container = document.getElementById("categoryPills");
+          let html = "";
+          categories.forEach((cat) => {
+            const active = cat === "all" ? " active" : "";
+            const label =
+              cat === "all"
+                ? "All"
+                : cat.charAt(0).toUpperCase() + cat.slice(1);
+            html += `<span class="pill${active}" data-category="${cat}">${label}</span>`;
+          });
+          container.innerHTML = html;
+
+          container.querySelectorAll(".pill").forEach((pill) => {
+            pill.addEventListener("click", function () {
+              container
+                .querySelectorAll(".pill")
+                .forEach((p) => p.classList.remove("active"));
+              this.classList.add("active");
+              currentCategory = this.dataset.category;
+              filterAndRender();
+            });
+          });
+        }
+
+        function filterAndRender() {
+          const searchTerm = document
+            .getElementById("searchInput")
+            .value.toLowerCase()
+            .trim();
+          let filtered = [...allScience];
+
+          if (currentCategory !== "all") {
+            filtered = filtered.filter(
+              (a) =>
+                (a.category || "science").toLowerCase() ===
+                currentCategory.toLowerCase(),
+            );
+          }
+
+          if (searchTerm) {
+            filtered = filtered.filter(
+              (a) =>
+                (a.title || "").toLowerCase().includes(searchTerm) ||
+                (a.author || "").toLowerCase().includes(searchTerm) ||
+                (a.shortDesc || "").toLowerCase().includes(searchTerm) ||
+                (a.fullAnalysis || "").toLowerCase().includes(searchTerm),
+            );
+          }
+
+          const featured = filtered.length > 0 ? filtered.shift() : null;
+          renderFeatured(featured);
+          renderGrid(filtered);
+        }
+
+        // ── Firebase load ──
+        async function loadScience() {
+          try {
+            const snap = await db
+              .collection("scientificCards")
+              .where("published", "==", true)
+              .get();
+
+            let items = [];
+            if (!snap.empty) {
+              snap.forEach((doc) => {
+                const data = doc.data();
+                const tags = data.tags || [];
+                items.push({
+                  id: doc.id,
+                  ...data,
+                  category: data.category || "science",
+                  readTime: data.readTime || "5 min read",
+                  imageUrl: data.imageUrl || "images/cover.jpg",
+                  tags: Array.isArray(tags) ? tags : [],
+                });
+              });
+            } else {
+              // Fallback sample
+              items = [
+                {
+                  id: "s1",
+                  title: "The Science of Yoga: Beyond the Physical",
+                  category: "yoga",
+                  author: "Dr. Ananya Sharma",
+                  shortDesc:
+                    "Exploring the physiological and neurological benefits of yoga, from ancient wisdom to modern research.",
+                  fullAnalysis:
+                    "<p>Yoga is more than just physical postures — it is a comprehensive system for physical, mental, and spiritual well-being. Modern research has validated many of the claims made by ancient yogis.</p>",
+                  traditionalRef:
+                    "The Yoga Sutras of Patanjali describe the eight limbs of yoga, including asana, pranayama, and dhyana.",
+                  modernExplanation:
+                    "Studies show that regular yoga practice reduces cortisol levels, improves heart rate variability, and enhances neuroplasticity.",
+                  references:
+                    "Smith, J. (2023). The Neuroscience of Yoga. Journal of Holistic Health.",
+                  externalLinks: "https://example.com/yoga-research",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&crop=center&q=80",
+                  tags: ["yoga", "neuroscience", "health"],
+                },
+                {
+                  id: "s2",
+                  title: "Ancient Indian Astronomy: The Science of the Sages",
+                  category: "astronomy",
+                  author: "Dr. Alap Mahar",
+                  shortDesc:
+                    "How ancient Indian astronomers mapped the cosmos with astonishing precision — long before modern telescopes.",
+                  fullAnalysis:
+                    "<p>Ancient Indian astronomers made remarkable contributions to the field of astronomy. They accurately calculated the Earth's circumference, the distance to the sun, and the precession of the equinoxes.</p>",
+                  traditionalRef:
+                    "The Surya Siddhanta is one of the earliest texts on astronomy, dating back to 500 CE.",
+                  modernExplanation:
+                    "The calculations in the Surya Siddhanta are remarkably close to modern measurements, showcasing the advanced mathematical understanding of the time.",
+                  references:
+                    "Kumar, R. (2022). Ancient Indian Astronomy. Oxford Press.",
+                  externalLinks: "https://example.com/indian-astronomy",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=400&fit=crop&crop=center&q=80",
+                  tags: ["astronomy", "mathematics", "history"],
+                },
+                {
+                  id: "s3",
+                  title: "Ayurveda: The Science of Life",
+                  category: "ayurveda",
+                  author: "Dr. Hemant Kumar Joshi",
+                  shortDesc:
+                    "Understanding the ancient system of medicine that views health as a balance between body, mind, and spirit.",
+                  fullAnalysis:
+                    "<p>Ayurveda is a holistic system of medicine that emphasizes prevention and balance. It uses herbs, diet, and lifestyle modifications to maintain health.</p>",
+                  traditionalRef:
+                    "Charaka Samhita and Sushruta Samhita are the foundational texts of Ayurveda.",
+                  modernExplanation:
+                    "Scientific research has validated many Ayurvedic herbs, including turmeric, ashwagandha, and triphala, for their anti-inflammatory and antioxidant properties.",
+                  references:
+                    "Patel, M. (2024). Ayurvedic Herbs in Modern Medicine.",
+                  externalLinks: "https://example.com/ayurveda-research",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop&crop=center&q=80",
+                  tags: ["ayurveda", "herbalism", "health"],
+                },
+                {
+                  id: "s4",
+                  title: "The Mathematics of Vedic Geometry",
+                  category: "mathematics",
+                  author: "Dibyanshu Sanyal",
+                  shortDesc:
+                    "Exploring the geometric principles embedded in Vedic altars and temple architecture.",
+                  fullAnalysis:
+                    "<p>Vedic geometry is a sophisticated system of mathematical knowledge that was used to construct altars and temples. The Sulba Sutras contain detailed geometric principles.</p>",
+                  traditionalRef:
+                    "The Sulba Sutras are appendices to the Vedas that describe geometric constructions.",
+                  modernExplanation:
+                    "The geometric principles in the Sulba Sutras are remarkably advanced, including the Pythagorean theorem, which was discovered independently in India.",
+                  references:
+                    "Sharma, P. (2023). Vedic Geometry and the Sulba Sutras.",
+                  externalLinks: "https://example.com/vedic-geometry",
+                  imageUrl:
+                    "https://images.unsplash.com/photo-1500485035595-bbe6f645feb1?w=600&h=400&fit=crop&crop=center&q=80",
+                  tags: ["mathematics", "geometry", "history"],
+                },
+              ];
+            }
+
+            items.sort(
+              (a, b) =>
+                (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+            );
+
+            allScience = items;
+
+            const categorySet = new Set();
+            categorySet.add("all");
+            allScience.forEach((a) => {
+              if (a.category) categorySet.add(a.category);
+            });
+            renderCategoryPills(Array.from(categorySet));
+            filterAndRender();
+
+            // Check URL for science param on load
+            const scienceId = new URLSearchParams(window.location.search).get(
+              "science",
+            );
+            if (scienceId) {
+              const item = allScience.find((b) => b.id === scienceId);
+              if (item) {
+                setTimeout(() => openScienceOverlay(scienceId), 300);
+              }
+            }
+          } catch (err) {
+            console.error("Error loading science:", err);
+            // Use fallback
+            const fallback = [
+              {
+                id: "s1",
+                title: "The Science of Yoga: Beyond the Physical",
+                category: "yoga",
+                author: "Dr. Ananya Sharma",
+                shortDesc:
+                  "Exploring the physiological and neurological benefits of yoga, from ancient wisdom to modern research.",
+                fullAnalysis:
+                  "<p>Yoga is more than just physical postures — it is a comprehensive system for physical, mental, and spiritual well-being. Modern research has validated many of the claims made by ancient yogis.</p>",
+                traditionalRef:
+                  "The Yoga Sutras of Patanjali describe the eight limbs of yoga, including asana, pranayama, and dhyana.",
+                modernExplanation:
+                  "Studies show that regular yoga practice reduces cortisol levels, improves heart rate variability, and enhances neuroplasticity.",
+                references:
+                  "Smith, J. (2023). The Neuroscience of Yoga. Journal of Holistic Health.",
+                externalLinks: "https://example.com/yoga-research",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&crop=center&q=80",
+                tags: ["yoga", "neuroscience", "health"],
+              },
+              {
+                id: "s2",
+                title: "Ancient Indian Astronomy: The Science of the Sages",
+                category: "astronomy",
+                author: "Dr. Alap Mahar",
+                shortDesc:
+                  "How ancient Indian astronomers mapped the cosmos with astonishing precision.",
+                fullAnalysis:
+                  "<p>Ancient Indian astronomers made remarkable contributions to the field of astronomy. They accurately calculated the Earth's circumference and the distance to the sun.</p>",
+                traditionalRef:
+                  "The Surya Siddhanta is one of the earliest texts on astronomy.",
+                modernExplanation:
+                  "The calculations in the Surya Siddhanta are remarkably close to modern measurements.",
+                references:
+                  "Kumar, R. (2022). Ancient Indian Astronomy. Oxford Press.",
+                externalLinks: "https://example.com/indian-astronomy",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&h=400&fit=crop&crop=center&q=80",
+                tags: ["astronomy", "mathematics"],
+              },
+              {
+                id: "s3",
+                title: "Ayurveda: The Science of Life",
+                category: "ayurveda",
+                author: "Dr. Hemant Kumar Joshi",
+                shortDesc:
+                  "Understanding the ancient system of medicine that views health as balance.",
+                fullAnalysis:
+                  "<p>Ayurveda is a holistic system of medicine that emphasizes prevention and balance.</p>",
+                traditionalRef:
+                  "Charaka Samhita and Sushruta Samhita are the foundational texts of Ayurveda.",
+                modernExplanation:
+                  "Scientific research has validated many Ayurvedic herbs for their medicinal properties.",
+                references:
+                  "Patel, M. (2024). Ayurvedic Herbs in Modern Medicine.",
+                externalLinks: "https://example.com/ayurveda-research",
+                imageUrl:
+                  "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop&crop=center&q=80",
+                tags: ["ayurveda", "herbalism"],
+              },
+            ];
+            allScience = fallback;
+            const catSet = new Set();
+            catSet.add("all");
+            allScience.forEach((a) => {
+              if (a.category) catSet.add(a.category);
+            });
+            renderCategoryPills(Array.from(catSet));
+            filterAndRender();
+
+            const scienceId = new URLSearchParams(window.location.search).get(
+              "science",
+            );
+            if (scienceId) {
+              const item = allScience.find((b) => b.id === scienceId);
+              if (item) {
+                setTimeout(() => openScienceOverlay(scienceId), 300);
+              }
+            }
+          }
+        }
+
+        // ── Search ──
+        document
+          .getElementById("searchInput")
+          .addEventListener("input", filterAndRender);
+
+        // ── Bookmark toggle (card) ──
+        window.toggleBookmark = function (id) {
+          const btn = document.querySelector(`.card-item .bookmark-btn i`);
+          if (btn) {
+            btn.classList.toggle("far");
+            btn.classList.toggle("fas");
+            btn.style.color = btn.classList.contains("fas")
+              ? "var(--gold)"
+              : "";
+          }
+          openModal("Bookmark", "<p>Article bookmarked! 🙏</p>");
+        };
+
+        // ── Bookmark toggle (overlay) ──
+        let overlayBookmarked = false;
+        window.toggleBookmarkOverlay = function () {
+          overlayBookmarked = !overlayBookmarked;
+          const icon = document.getElementById("overlayBookmarkIcon");
+          if (icon) {
+            icon.classList.toggle("far");
+            icon.classList.toggle("fas");
+            icon.style.color = overlayBookmarked ? "var(--gold)" : "";
+          }
+          openModal(
+            overlayBookmarked ? "Saved" : "Removed",
+            overlayBookmarked
+              ? "<p>Article saved to your collection! 🙏</p>"
+              : "<p>Article removed from collection. 🙏</p>",
+          );
+        };
+
+        // ── Share ──
+        window.shareScience = function () {
+          const currentId = new URLSearchParams(window.location.search).get(
+            "science",
+          );
+          const shareUrl = currentId
+            ? window.location.origin +
+              window.location.pathname +
+              "?science=" +
+              currentId
+            : window.location.href;
+          const title =
+            document.querySelector("#overlayContent .science-title")
+              ?.textContent || "Spiriligious Science";
+
+          if (navigator.share) {
+            navigator
+              .share({
+                title: title,
+                url: shareUrl,
+              })
+              .catch(() => {});
+          } else {
+            navigator.clipboard
+              .writeText(shareUrl)
+              .then(() => {
+                openModal(
+                  "🔗 Link Copied",
+                  "<p>Article link copied to your clipboard.</p>",
+                );
+              })
+              .catch(() => {
+                openModal(
+                  "🔗 Share",
+                  `<p>Share this article: <a href="${shareUrl}" target="_blank">${shareUrl}</a></p>`,
+                );
+              });
+          }
+        };
+
+        // ── Open Science Overlay ──
+        window.openScienceOverlay = function (id, scrollToTop = true) {
+          const item = allScience.find((b) => b.id === id);
+          if (!item) {
+            openModal("Error", "<p>Article not found. 🙏</p>");
+            return;
+          }
+
+          document.getElementById("overlayTitlePreview").textContent =
+            item.title;
+
+          const content = document.getElementById("overlayContent");
+          const desc = (item.shortDesc || "")
+            .replace(/<[^>]*>/g, "")
+            .substring(0, 300);
+
+          // Related articles (same category, excluding current)
+          const related = allScience
+            .filter((b) => b.id !== id && b.category === item.category)
+            .slice(0, 4);
+          let relatedHtml = "";
+          if (related.length > 0) {
+            relatedHtml = related
+              .map(
+                (r) => `
+                <div class="related-card" onclick="openScienceOverlay('${r.id}')">
+                  <div class="rel-img">
+                    <img src="${r.imageUrl || "images/cover.jpg"}" alt="${r.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+                  </div>
+                  <div class="rel-body">
+                    <div class="rel-category">${r.category || "Science"}</div>
+                    <div class="rel-title">${r.title}</div>
+                    <div class="rel-meta"><i class="fas fa-user"></i> ${r.author || "Researcher"} · ${r.readTime || "5 min read"}</div>
+                  </div>
+                </div>
+              `,
+              )
+              .join("");
+          } else {
+            const fallbackRelated = allScience
+              .filter((b) => b.id !== id)
+              .slice(0, 4);
+            relatedHtml = fallbackRelated
+              .map(
+                (r) => `
+                <div class="related-card" onclick="openScienceOverlay('${r.id}')">
+                  <div class="rel-img">
+                    <img src="${r.imageUrl || "images/cover.jpg"}" alt="${r.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+                  </div>
+                  <div class="rel-body">
+                    <div class="rel-category">${r.category || "Science"}</div>
+                    <div class="rel-title">${r.title}</div>
+                    <div class="rel-meta"><i class="fas fa-user"></i> ${r.author || "Researcher"} · ${r.readTime || "5 min read"}</div>
+                  </div>
+                </div>
+              `,
+              )
+              .join("");
+          }
+
+          // Build content sections
+          let fullAnalysisHtml = "";
+          if (item.fullAnalysis) {
+            fullAnalysisHtml = `<h3>Full Analysis</h3>${item.fullAnalysis}`;
+          }
+          let traditionalRefHtml = "";
+          if (item.traditionalRef) {
+            traditionalRefHtml = `
+              <div class="ref-block">
+                <strong>📜 Traditional Reference</strong>
+                <p style="margin-top:0.4rem;">${item.traditionalRef}</p>
+              </div>
+            `;
+          }
+          let modernExplanationHtml = "";
+          if (item.modernExplanation) {
+            modernExplanationHtml = `
+              <div class="ref-block" style="border-left-color:var(--gold);">
+                <strong>🔬 Modern Explanation</strong>
+                <p style="margin-top:0.4rem;">${item.modernExplanation}</p>
+              </div>
+            `;
+          }
+          let referencesHtml = "";
+          if (item.references) {
+            referencesHtml = `
+              <div style="background:rgba(255,255,255,0.3);border-radius:var(--radius-sm);padding:1.2rem 1.5rem;margin:1.5rem 0;">
+                <strong style="color:var(--brown);">📚 References</strong>
+                <p style="font-size:0.9rem;color:var(--brown-soft);margin-top:0.3rem;">${item.references}</p>
+              </div>
+            `;
+          }
+          let externalLinksHtml = "";
+          if (item.externalLinks) {
+            externalLinksHtml = `
+              <div style="margin:1rem 0;">
+                <strong style="color:var(--brown);">🔗 External Links</strong>
+                <p style="margin-top:0.2rem;"><a href="${item.externalLinks}" target="_blank" class="external-link">${item.externalLinks}</a></p>
+              </div>
+            `;
+          }
+          let tagsHtml = "";
+          if (item.tags && item.tags.length > 0) {
+            tagsHtml = `
+              <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin:0.5rem 0;">
+                ${item.tags.map((tag) => `<span style="background:rgba(185,145,45,0.06);border:1px solid rgba(185,145,45,0.08);border-radius:var(--radius-pill);padding:0.15rem 0.8rem;font-size:0.65rem;color:var(--gold);font-weight:500;">${tag}</span>`).join("")}
+              </div>
+            `;
+          }
+
+          content.innerHTML = `
+            <!-- Hero Artwork -->
+            <div class="overlay-hero">
+              <img src="${item.imageUrl || "images/cover.jpg"}" alt="${item.title}" loading="lazy" onerror="this.src='images/cover.jpg'" />
+              <span class="hero-category-badge">${item.category || "Science"}</span>
+            </div>
+
+            <!-- Header -->
+            <div class="overlay-header">
+              <h1 class="science-title">${item.title}</h1>
+              <div class="science-meta">
+                <span><i class="fas fa-user"></i> ${item.author || "Researcher"}</span>
+                <span><i class="far fa-clock"></i> ${item.readTime || "5 min read"}</span>
+                ${item.category ? `<span><i class="fas fa-tag"></i> ${item.category}</span>` : ""}
+              </div>
+              <div class="lotus-divider-sm">
+                <span class="line"></span>
+                <i class="fas fa-lotus"></i>
+                <span class="line"></span>
+              </div>
+            </div>
+
+            <!-- Primary Actions -->
+            <div class="primary-actions">
+              <button class="btn-icon-action" onclick="toggleBookmarkOverlay()" aria-label="Save"><i class="fas fa-bookmark"></i></button>
+              <button class="btn-icon-action" onclick="shareScience()" aria-label="Share"><i class="fas fa-share-alt"></i></button>
+            </div>
+
+            <!-- Body -->
+            <div class="overlay-body">
+              <div class="main-content">
+                <div class="intro-text">${desc}</div>
+                <div class="content-text">
+                  ${fullAnalysisHtml}
+                  ${traditionalRefHtml}
+                  ${modernExplanationHtml}
+                  ${referencesHtml}
+                  ${externalLinksHtml}
+                  ${tagsHtml}
+                </div>
+              </div>
+              <div class="overlay-sidebar">
+                <div class="sidebar-card">
+                  <h5><i class="fas fa-info-circle"></i> Details</h5>
+                  <div class="sidebar-item"><span class="label">Author</span><span class="value">${item.author || "Researcher"}</span></div>
+                  ${item.category ? `<div class="sidebar-item"><span class="label">Category</span><span class="value">${item.category}</span></div>` : ""}
+                  <div class="sidebar-item"><span class="label">Read Time</span><span class="value">${item.readTime || "5 min"}</span></div>
+                  ${item.tags && item.tags.length > 0 ? `<div class="sidebar-item"><span class="label">Tags</span><span class="value">${item.tags.slice(0, 3).join(", ")}</span></div>` : ""}
+                </div>
+                <div class="sidebar-card">
+                  <h5><i class="fas fa-key"></i> Key Takeaways</h5>
+                  <div class="sidebar-item"><span class="bullet">•</span><div class="item-text"><div class="title">Bridging ancient and modern</div></div></div>
+                  <div class="sidebar-item"><span class="bullet">•</span><div class="item-text"><div class="title">Scientific validation of tradition</div></div></div>
+                  <div class="sidebar-item"><span class="bullet">•</span><div class="item-text"><div class="title">Practical applications today</div></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Related -->
+            <div class="related-section">
+              <h3 class="related-title">Continue Exploring</h3>
+              <p class="related-sub">More scientific insights</p>
+              <div class="related-grid">
+                ${relatedHtml}
+              </div>
+            </div>
+
+            <!-- Bottom Nav -->
+            <div class="overlay-bottom-nav">
+              <button class="nav-btn" onclick="openPrevScience()">
+                <i class="fas fa-arrow-left"></i> Previous
+              </button>
+              <button class="nav-btn back-to-list" onclick="closeScienceOverlay()">
+                <i class="fas fa-th-large"></i> Back to Science
+              </button>
+              <button class="nav-btn next" onclick="openNextScience()">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          `;
+
+          // Show overlay
+          const overlay = document.getElementById("scienceOverlay");
+          overlay.classList.add("open");
+          document.body.classList.add("overlay-open");
+
+          const overlayContainer = document.getElementById("overlayContainer");
+          if (scrollToTop && overlayContainer) {
+            overlayContainer.scrollTop = 0;
+          }
+
+          // Update URL
+          const url = new URL(window.location);
+          url.searchParams.set("science", id);
+          history.pushState({ science: id }, "", url);
+
+          overlayBookmarked = false;
+          const icon = document.getElementById("overlayBookmarkIcon");
+          if (icon) {
+            icon.className = "far fa-bookmark";
+            icon.style.color = "";
+          }
+        };
+
+        // ── Navigation ──
+        window.openPrevScience = function () {
+          const ids = allScience.map((b) => b.id);
+          const currentId = new URLSearchParams(window.location.search).get(
+            "science",
+          );
+          const idx = ids.indexOf(currentId);
+          if (idx > 0) {
+            openScienceOverlay(ids[idx - 1], true);
+          } else {
+            openModal("End of List", "<p>You're at the first article. 🙏</p>");
+          }
+        };
+
+        window.openNextScience = function () {
+          const ids = allScience.map((b) => b.id);
+          const currentId = new URLSearchParams(window.location.search).get(
+            "science",
+          );
+          const idx = ids.indexOf(currentId);
+          if (idx < ids.length - 1) {
+            openScienceOverlay(ids[idx + 1], true);
+          } else {
+            openModal(
+              "End of List",
+              "<p>You've reached the last article. 🙏</p>",
+            );
+          }
+        };
+
+        // ── Close Overlay ──
+        window.closeScienceOverlay = function () {
+          const overlay = document.getElementById("scienceOverlay");
+          overlay.classList.remove("open");
+          document.body.classList.remove("overlay-open");
+
+          const url = new URL(window.location);
+          url.searchParams.delete("science");
+          history.pushState({}, "", url);
+        };
+
+        // ── Popstate ──
+        window.addEventListener("popstate", function (e) {
+          const scienceId = new URLSearchParams(window.location.search).get(
+            "science",
+          );
+          if (scienceId) {
+            const item = allScience.find((b) => b.id === scienceId);
+            if (item) {
+              openScienceOverlay(scienceId, false);
+            }
+          } else {
+            closeScienceOverlay();
+          }
+        });
+
+        // ── Helper ──
+        function convertToEmbedUrl(url) {
+          if (!url) return "";
+          if (url.includes("/embed/")) return url;
+          let match = url.match(/youtu\.be\/([^?&]+)/);
+          if (match) return "https://www.youtube.com/embed/" + match[1];
+          match = url.match(/v=([^&]+)/);
+          if (match) return "https://www.youtube.com/embed/" + match[1];
+          match = url.match(/\/shorts\/([^?&]+)/);
+          if (match) return "https://www.youtube.com/embed/" + match[1];
+          match = url.match(/\/live\/([^?&]+)/);
+          if (match) return "https://www.youtube.com/embed/" + match[1];
+          return url;
+        }
+
+        // ── Init ──
+        loadScience();
+
+        // ── Reveal observer ──
+        const revealObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+        );
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          revealObserver.observe(el);
+        });
+
+        // ── Header scroll ──
+        const header = document.querySelector(".premium-header");
+        let lastScrollY = 0;
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!header) return;
+            const currentScrollY = window.scrollY;
+            const delta = currentScrollY - lastScrollY;
+            if (delta > 10 && currentScrollY > 100)
+              header.classList.add("hidden");
+            else if (delta < -5 || currentScrollY < 50)
+              header.classList.remove("hidden");
+            lastScrollY = currentScrollY;
+            if (currentScrollY > 100) header.classList.add("scrolled");
+            else header.classList.remove("scrolled");
+          },
+          { passive: true },
+        );
+
+        console.log("✨ Spiriligious – Scientific Cards page loaded.");
+      });
+    </script>
+  </body>
+</html>

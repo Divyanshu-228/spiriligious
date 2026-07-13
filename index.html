@@ -12,9 +12,9 @@
       content="Spiriligious – a sacred space where ancient traditions meet modern understanding."
     />
     <!-- Favicon -->
-    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
-    <link rel="shortcut icon" href="images/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="images/favicon.svg" />
+    <link rel="icon" href="images/favicon1.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="images/favicon1.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="images/favicon1.svg" />
     <!-- Google AdSense -->
     <script
       async
@@ -90,7 +90,7 @@
       .page-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(248, 245, 239, 0.82);
+        background: rgba(238, 220, 191, 0.712);
         backdrop-filter: blur(2px);
         z-index: 0;
         pointer-events: none;
@@ -282,14 +282,15 @@
       }
 
       /* ============================================================
-           HERO – premium, cinematic, typography only
+           HERO – content at bottom, horizontally centered
            ============================================================ */
       .hero {
         position: relative;
         min-height: 100vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         text-align: center;
         padding: 0;
         margin: 0;
@@ -298,7 +299,6 @@
         isolation: isolate;
       }
 
-      /* Background with subtle zoom */
       .hero::before {
         content: "";
         position: absolute;
@@ -317,7 +317,6 @@
         }
       }
 
-      /* Rich overlay – cinematic */
       .hero-overlay {
         position: absolute;
         inset: 0;
@@ -342,7 +341,6 @@
           );
       }
 
-      /* Golden ambient glow */
       .hero::after {
         content: "";
         position: absolute;
@@ -360,7 +358,6 @@
         pointer-events: none;
       }
 
-      /* Bottom blend */
       .hero-blend {
         position: absolute;
         bottom: 0;
@@ -378,13 +375,13 @@
         width: 100%;
         max-width: 1000px;
         padding: 0 1rem;
+        padding-bottom: 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         text-align: center;
-        gap: 2rem;
-        padding-top: 18vh;
+        gap: 1.5rem;
       }
 
       .hero-title {
@@ -447,7 +444,6 @@
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
       }
 
-      /* ── Floating particles ── */
       .particles {
         position: absolute;
         inset: 0;
@@ -548,7 +544,6 @@
         }
       }
 
-      /* ── Scroll indicator ── */
       .scroll-indicator {
         position: absolute;
         bottom: 30px;
@@ -626,7 +621,8 @@
         }
         .hero-content {
           padding: 0 1.2rem;
-          padding-top: 15vh;
+          padding-bottom: 70px;
+          gap: 1.2rem;
         }
         .scroll-indicator {
           bottom: 16px;
@@ -667,8 +663,8 @@
         }
         .hero-content {
           padding: 0 1rem;
+          padding-bottom: 60px;
           gap: 0.8rem;
-          padding-top: 12vh;
         }
         .hero-blend {
           height: 90px;
@@ -707,7 +703,7 @@
         }
         .hero-content {
           gap: 0.6rem;
-          padding-top: 10vh;
+          padding-bottom: 50px;
         }
         .hero-blend {
           height: 60px;
@@ -924,6 +920,7 @@
         margin-bottom: 2.8rem;
         cursor: pointer;
         max-width: 1200px;
+        width: 100%; /* ← FIX: ensures featured card fills parent width */
         margin-left: auto;
         margin-right: auto;
         min-height: 400px;
@@ -1056,21 +1053,16 @@
       }
 
       /* ============================================================
-           UNIFIED CONTENT CARD – refined
+           UNIFIED CONTENT CARD – refined (3-column)
            ============================================================ */
       .unified-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
         max-width: 1200px;
+        width: 100%; /* ← FIX: ensures grid fills parent width */
         margin: 0 auto;
-      }
-      .unified-grid-2col {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
+        justify-content: center;
       }
 
       .content-card-unified {
@@ -1185,6 +1177,43 @@
       }
       .content-card-unified .card-body * {
         pointer-events: none;
+      }
+
+      /* ============================================================
+           VIEW ALL BUTTON
+           ============================================================ */
+      .view-all-wrapper {
+        text-align: center;
+        margin-top: 2.5rem;
+      }
+      .view-all-btn {
+        display: inline-block;
+        padding: 0.7rem 2.5rem;
+        border: 1.5px solid var(--gold);
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--primary-green);
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(4px);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-family: var(--font-sans);
+        letter-spacing: 0.3px;
+      }
+      .view-all-btn:hover {
+        background: var(--primary-green);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(35, 75, 54, 0.15);
+        border-color: var(--primary-green);
+      }
+      .view-all-btn i {
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+      }
+      .view-all-btn:hover i {
+        transform: translateX(4px);
       }
 
       /* ============================================================
@@ -2245,9 +2274,9 @@
         }
         .unified-grid {
           grid-template-columns: repeat(2, 1fr);
-        }
-        .unified-grid-2col {
-          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+          max-width: 900px;
+          width: 100%;
         }
         .footer-main {
           grid-template-columns: 1fr 1fr;
@@ -2322,11 +2351,8 @@
         .unified-grid {
           grid-template-columns: 1fr;
           gap: 1.4rem;
-          padding: 0 0.5rem;
-        }
-        .unified-grid-2col {
-          grid-template-columns: 1fr;
-          gap: 1.4rem;
+          max-width: 100%;
+          width: 100%;
           padding: 0 0.5rem;
         }
         .coming-grid {
@@ -2480,6 +2506,108 @@
           .detail-hero-image-wrap {
             max-height: 200px !important;
           }
+        }
+        /* ── Footer mobile optimisations ── */
+        .premium-footer {
+          padding-top: 2.5rem;
+          margin-top: 2rem;
+        }
+
+        .premium-footer .container {
+          padding: 0 1rem;
+        }
+
+        .footer-main {
+          grid-template-columns: 1fr !important; /* force single column */
+          gap: 1.8rem !important;
+          padding-bottom: 1rem;
+        }
+
+        .footer-brand {
+          align-items: center;
+          text-align: center;
+          gap: 0.3rem;
+        }
+
+        .footer-brand .brand-description {
+          max-width: 100%;
+          font-size: 0.9rem;
+          text-align: center;
+        }
+
+        .footer-col {
+          text-align: center;
+        }
+
+        .footer-col h4 {
+          font-size: 1rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .footer-col h4::after {
+          left: 50%;
+          transform: translateX(-50%);
+          width: 30px;
+        }
+
+        .footer-col ul {
+          gap: 0.4rem;
+        }
+
+        .footer-col ul li a {
+          font-size: 0.9rem;
+          justify-content: center;
+          padding: 0.2rem 0;
+        }
+
+        .footer-social-col ul.social-links-list li a {
+          justify-content: center;
+        }
+
+        .footer-contact-col {
+          max-width: 100%;
+          margin: 0;
+        }
+
+        .footer-contact-card {
+          min-height: auto;
+          padding: 1.2rem 1rem;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+
+        .footer-contact-card .contact-icon {
+          font-size: 1.4rem;
+          margin-bottom: 0.2rem;
+        }
+
+        .footer-contact-card h4 {
+          font-size: 0.95rem;
+        }
+
+        .footer-contact-card .contact-email a {
+          font-size: 0.9rem;
+        }
+
+        .footer-contact-card .contact-response {
+          font-size: 0.75rem;
+        }
+
+        .footer-lotus-divider {
+          padding: 1rem 0;
+        }
+
+        .footer-bottom {
+          padding: 1rem 0 1.2rem;
+        }
+
+        .footer-bottom .copyright {
+          font-size: 0.75rem;
+          line-height: 1.5;
+        }
+
+        .footer-bottom .credit {
+          font-size: 0.65rem;
         }
       }
 
@@ -3282,7 +3410,7 @@
 
     <!-- ===== MAIN ===== -->
     <main>
-      <!-- HERO – cinematic with typography only -->
+      <!-- HERO -->
       <section class="hero">
         <div class="hero-overlay"></div>
         <div class="particles">
@@ -3300,13 +3428,7 @@
           <h1 class="hero-title">
             <span class="highlight">ज्ञान · अध्यात्म · विज्ञान</span>
           </h1>
-          <!-- <p class="hero-sub">ज्ञान · अध्यात्म · विज्ञान</p> -->
-          <!-- <p class="hero-desc">
-            Where ancient traditions meet modern understanding — a curated
-            journey into India's spiritual heritage.
-          </p> -->
         </div>
-        <!-- Scroll indicator -->
         <div
           class="scroll-indicator"
           onclick="
@@ -3355,45 +3477,24 @@
         <div class="divider-line"><span class="line"></span></div>
       </div>
 
-      <!-- SANT DARSHAN -->
+      <!-- ARTICLES (Sant Darshan) -->
       <section
         class="container section-spacing reveal section-ambient-sant"
         id="sant-section"
       >
         <div class="section-header-custom">
-          <!-- <span class="section-label">Wisdom of the Masters</span> -->
-          <h2>Sant Darshan</h2>
-          <p class="sub">Wisdom of the great masters, preserved and shared.</p>
+          <h2>Articles</h2>
+          <p class="sub">
+            Explore timeless wisdom, ancient knowledge and modern insights.
+          </p>
         </div>
-        <div id="featuredSantContainer" class="featured-card">
-          <div class="featured-image">
-            <img
-              src="images/cover.jpg"
-              alt="Featured Sant"
-              loading="lazy"
-              onerror="this.src = 'images/cover.jpg'"
-            />
-            <span class="featured-badge">Featured</span>
-          </div>
-          <div class="featured-content">
-            <span class="category-tag">Sant Darshan</span>
-            <h3>Loading...</h3>
-            <div class="featured-meta">
-              <span><i class="fas fa-user"></i> Loading</span>
-              <span><i class="fas fa-clock"></i> Loading</span>
-            </div>
-            <div class="featured-divider"></div>
-            <p class="featured-desc">
-              Please wait while we load the featured article.
-            </p>
-            <div class="featured-actions">
-              <button class="btn-primary-featured" disabled>
-                <i class="fas fa-book-open"></i> Read Article
-              </button>
-            </div>
-          </div>
+        <div id="featuredSantContainer" class="featured-card"></div>
+        <div id="santArticlesGrid" class="unified-grid"></div>
+        <div class="view-all-wrapper">
+          <a href="articles.html" class="view-all-btn"
+            >View All Articles <i class="fas fa-arrow-right"></i
+          ></a>
         </div>
-        <div id="santArticlesGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
       <div class="container">
@@ -3406,133 +3507,64 @@
         id="mandir-section"
       >
         <div class="section-header-custom">
-          <!-- <span class="section-label">Sacred Architecture</span> -->
           <h2>Mandir Darshan</h2>
           <p class="sub">
             Sacred architecture, history, and spiritual significance.
           </p>
         </div>
-        <div id="featuredTempleContainer" class="featured-card">
-          <div class="featured-image">
-            <img
-              src="images/cover.jpg"
-              alt="Featured Temple"
-              loading="lazy"
-              onerror="this.src = 'images/cover.jpg'"
-            />
-            <span class="featured-badge">Featured</span>
-          </div>
-          <div class="featured-content">
-            <span class="category-tag">Mandir Darshan</span>
-            <h3>Loading...</h3>
-            <div class="featured-meta">
-              <span><i class="fas fa-map-pin"></i> Loading</span>
-              <span><i class="fas fa-clock"></i> Loading</span>
-            </div>
-            <div class="featured-divider"></div>
-            <p class="featured-desc">
-              Please wait while we load the featured temple.
-            </p>
-            <div class="featured-actions">
-              <button class="btn-primary-featured" disabled>
-                <i class="fas fa-landmark"></i> Explore Temple
-              </button>
-            </div>
-          </div>
+        <div id="featuredTempleContainer" class="featured-card"></div>
+        <div id="mandirGrid" class="unified-grid"></div>
+        <div class="view-all-wrapper">
+          <a href="mandir.html" class="view-all-btn"
+            >View All Temples <i class="fas fa-arrow-right"></i
+          ></a>
         </div>
-        <div id="mandirGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
       <div class="container">
         <div class="divider-line"><span class="line"></span></div>
       </div>
 
-      <!-- BHAJAN -->
+      <!-- BHAJAN COLLECTION -->
       <section
         class="container section-spacing reveal section-ambient-bhajan"
         id="bhajan-section"
       >
         <div class="section-header-custom">
-          <!-- <span class="section-label">Devotional Music</span> -->
           <h2>Bhajan Collection</h2>
           <p class="sub">Devotional music to uplift the soul.</p>
         </div>
-        <div id="featuredBhajanContainer" class="featured-card">
-          <div class="featured-image">
-            <img
-              src="images/cover.jpg"
-              alt="Featured Bhajan"
-              loading="lazy"
-              onerror="this.src = 'images/cover.jpg'"
-            />
-            <span class="featured-badge">Featured</span>
-          </div>
-          <div class="featured-content">
-            <span class="category-tag">Bhajan Collection</span>
-            <h3>Loading...</h3>
-            <div class="featured-meta">
-              <span><i class="fas fa-microphone-alt"></i> Loading</span>
-              <span><i class="fas fa-clock"></i> Loading</span>
-            </div>
-            <div class="featured-divider"></div>
-            <p class="featured-desc">
-              Please wait while we load the featured bhajan.
-            </p>
-            <div class="featured-actions">
-              <button class="btn-primary-featured" disabled>
-                <i class="fas fa-play"></i> Listen Now
-              </button>
-            </div>
-          </div>
+        <div id="featuredBhajanContainer" class="featured-card"></div>
+        <div id="bhajanGrid" class="unified-grid"></div>
+        <div class="view-all-wrapper">
+          <a href="bhajan.html" class="view-all-btn"
+            >View All Bhajans <i class="fas fa-arrow-right"></i
+          ></a>
         </div>
-        <div id="bhajanGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
       <div class="container">
         <div class="divider-lotus"><i class="fas fa-lotus"></i></div>
       </div>
 
-      <!-- SCIENCE -->
+      <!-- SCIENCE & KNOWLEDGE -->
       <section
         class="container section-spacing reveal section-ambient-science"
         id="science-section"
       >
         <div class="section-header-custom">
-          <!-- <span class="section-label">Logic &amp; Tradition</span> -->
           <h2>Science &amp; Knowledge</h2>
           <p class="sub">
             Exploring the logic and science behind ancient traditions.
           </p>
         </div>
-        <div id="featuredScienceContainer" class="featured-card">
-          <div class="featured-image">
-            <img
-              src="images/cover.jpg"
-              alt="Featured Science"
-              loading="lazy"
-              onerror="this.src = 'images/cover.jpg'"
-            />
-            <span class="featured-badge">Featured</span>
-          </div>
-          <div class="featured-content">
-            <span class="category-tag">Science &amp; Knowledge</span>
-            <h3>Loading...</h3>
-            <div class="featured-meta">
-              <span><i class="fas fa-flask"></i> Loading</span>
-              <span><i class="fas fa-clock"></i> Loading</span>
-            </div>
-            <div class="featured-divider"></div>
-            <p class="featured-desc">
-              Please wait while we load the featured article.
-            </p>
-            <div class="featured-actions">
-              <button class="btn-primary-featured" disabled>
-                <i class="fas fa-microscope"></i> Read Analysis
-              </button>
-            </div>
-          </div>
+        <div id="featuredScienceContainer" class="featured-card"></div>
+        <div id="scienceGrid" class="unified-grid"></div>
+        <div class="view-all-wrapper">
+          <a href="science.html" class="view-all-btn"
+            >View All Science <i class="fas fa-arrow-right"></i
+          ></a>
         </div>
-        <div id="scienceGrid" class="unified-grid unified-grid-2col"></div>
       </section>
 
       <div class="container">
@@ -3545,7 +3577,6 @@
         id="manthan-section"
       >
         <div class="section-header-custom">
-          <!-- <span class="section-label">Community</span> -->
           <h2>Manthan Forum</h2>
           <p class="sub">Discuss, ask, and share wisdom with fellow seekers.</p>
         </div>
@@ -3608,7 +3639,6 @@
       <!-- COMING SOON -->
       <section class="container section-spacing reveal section-ambient-coming">
         <div class="section-header-custom">
-          <!-- <span class="section-label">On the Horizon</span> -->
           <h2>Future Experiences</h2>
           <p class="sub">
             We are expanding — new ways to connect, learn, and grow.
@@ -3677,6 +3707,200 @@
             });
         }
 
+        // ── Homepage-specific loaders (limit to 3 cards) ──
+        async function loadSantArticlesHome() {
+          try {
+            const snap = await db
+              .collection("santArticles")
+              .where("published", "==", true)
+              .get();
+            const docs = snap.docs;
+            docs.sort((a, b) => {
+              const aDate = a.data().createdAt?.toDate
+                ? a.data().createdAt.toDate()
+                : new Date(0);
+              const bDate = b.data().createdAt?.toDate
+                ? b.data().createdAt.toDate()
+                : new Date(0);
+              return bDate - aDate;
+            });
+            const transform = (doc) => ({ id: doc.id, ...doc.data() });
+            let featuredDoc =
+              docs.find((d) => d.data().featured === true) ||
+              (docs.length > 0 ? docs[0] : null);
+            let rest = docs.filter((d) => d.id !== featuredDoc?.id).slice(0, 3);
+            let featuredItem = featuredDoc ? transform(featuredDoc) : null;
+            let restItems = rest.map((d) => transform(d));
+            const featuredOnclick = featuredItem
+              ? `openSantArticle('${featuredItem.id}')`
+              : "";
+            renderFeatured(
+              "featuredSantContainer",
+              featuredItem,
+              "sant",
+              featuredOnclick,
+            );
+            renderCards(
+              "santArticlesGrid",
+              restItems,
+              "sant",
+              (item) => `openSantArticle('${item.id}')`,
+            );
+          } catch (e) {
+            console.warn("Sant load failed", e);
+          }
+        }
+
+        async function loadMandirsHome() {
+          try {
+            const snap = await db
+              .collection("mandirDarshan")
+              .where("published", "==", true)
+              .get();
+            const docs = snap.docs;
+            docs.sort((a, b) => {
+              const aDate = a.data().createdAt?.toDate
+                ? a.data().createdAt.toDate()
+                : new Date(0);
+              const bDate = b.data().createdAt?.toDate
+                ? b.data().createdAt.toDate()
+                : new Date(0);
+              return bDate - aDate;
+            });
+            const transform = (doc) => ({ id: doc.id, ...doc.data() });
+            let featuredDoc =
+              docs.find((d) => d.data().featured === true) ||
+              (docs.length > 0 ? docs[0] : null);
+            let rest = docs.filter((d) => d.id !== featuredDoc?.id).slice(0, 3);
+            let featuredItem = featuredDoc ? transform(featuredDoc) : null;
+            let restItems = rest.map((d) => transform(d));
+            const featuredOnclick = featuredItem
+              ? `openMandirDetail('${featuredItem.id}')`
+              : "";
+            renderFeatured(
+              "featuredTempleContainer",
+              featuredItem,
+              "mandir",
+              featuredOnclick,
+            );
+            renderCards(
+              "mandirGrid",
+              restItems,
+              "mandir",
+              (item) => `openMandirDetail('${item.id}')`,
+            );
+          } catch (e) {
+            console.warn("Mandir load failed", e);
+          }
+        }
+
+        async function loadBhajansHome() {
+          try {
+            const snap = await db
+              .collection("bhajanVideos")
+              .where("published", "==", true)
+              .get();
+            const docs = snap.docs;
+            docs.sort((a, b) => {
+              const aDate = a.data().createdAt?.toDate
+                ? a.data().createdAt.toDate()
+                : new Date(0);
+              const bDate = b.data().createdAt?.toDate
+                ? b.data().createdAt.toDate()
+                : new Date(0);
+              return bDate - aDate;
+            });
+            const transform = (doc) => ({ id: doc.id, ...doc.data() });
+            let featuredDoc =
+              docs.find((d) => d.data().featured === true) ||
+              (docs.length > 0 ? docs[0] : null);
+            let rest = docs.filter((d) => d.id !== featuredDoc?.id).slice(0, 3);
+            let featuredItem = featuredDoc ? transform(featuredDoc) : null;
+            let restItems = rest.map((d) => transform(d));
+            const featuredOnclick = featuredItem
+              ? `openBhajanDetail('${featuredItem.id}')`
+              : "";
+            renderFeatured(
+              "featuredBhajanContainer",
+              featuredItem,
+              "bhajan",
+              featuredOnclick,
+            );
+            renderCards(
+              "bhajanGrid",
+              restItems,
+              "bhajan",
+              (item) => `openBhajanDetail('${item.id}')`,
+            );
+          } catch (e) {
+            console.warn("Bhajan load failed", e);
+          }
+        }
+
+        async function loadScienceHome() {
+          try {
+            const [cardsSnap, termsSnap] = await Promise.all([
+              db
+                .collection("scientificCards")
+                .where("published", "==", true)
+                .get(),
+              db
+                .collection("encyclopediaTerms")
+                .where("published", "==", true)
+                .get(),
+            ]);
+            let items = [];
+            cardsSnap.forEach((doc) => {
+              const data = doc.data();
+              items.push({
+                id: doc.id,
+                type: "scientific",
+                ...data,
+                createdAt: data.createdAt?.seconds || 0,
+              });
+            });
+            termsSnap.forEach((doc) => {
+              const data = doc.data();
+              items.push({
+                id: doc.id,
+                type: "encyclopedia",
+                term: data.term,
+                meaning: data.meaning,
+                scientific: data.scientific,
+                createdAt: 0,
+                featured: false,
+              });
+            });
+            items.sort((a, b) => {
+              if (a.featured !== b.featured) return a.featured ? -1 : 1;
+              return b.createdAt - a.createdAt;
+            });
+            let featuredItem =
+              items.find((i) => i.featured === true) ||
+              (items.length > 0 ? items[0] : null);
+            let restItems = items
+              .filter((i) => i.id !== featuredItem?.id)
+              .slice(0, 3);
+            const featuredOnclick = featuredItem
+              ? `openScienceDetail('${featuredItem.id}', '${featuredItem.type}')`
+              : "";
+            renderFeatured(
+              "featuredScienceContainer",
+              featuredItem,
+              "science",
+              featuredOnclick,
+            );
+            renderCards(
+              "scienceGrid",
+              restItems,
+              "science",
+              (item) => `openScienceDetail('${item.id}', '${item.type}')`,
+            );
+          } catch (e) {
+            console.warn("Science load failed", e);
+          }
+        }
+
         // ── loaders ──
         try {
           if (typeof loadDailyShlok === "function") loadDailyShlok();
@@ -3684,10 +3908,10 @@
           console.warn("Shlok load failed", e);
         }
         try {
-          if (typeof loadSantArticles === "function") loadSantArticles();
-          if (typeof loadMandirs === "function") loadMandirs();
-          if (typeof loadBhajans === "function") loadBhajans();
-          if (typeof loadScience === "function") loadScience();
+          loadSantArticlesHome();
+          loadMandirsHome();
+          loadBhajansHome();
+          loadScienceHome();
           if (typeof loadCommunityDiscussions === "function")
             loadCommunityDiscussions();
         } catch (e) {

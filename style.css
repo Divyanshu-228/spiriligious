@@ -435,6 +435,7 @@ a {
     box-shadow 0.4s ease;
   border: 1px solid rgba(185, 145, 45, 0.06);
   margin-bottom: 2.5rem;
+  width: 100%; /* ← FIX: ensures featured card fills parent width */
 }
 .featured-card:hover {
   transform: translateY(-6px);
@@ -559,6 +560,7 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.8rem;
+  width: 100%; /* ← FIX: ensures grid fills parent width */
 }
 .unified-grid-2col {
   grid-template-columns: repeat(2, 1fr);
@@ -1521,6 +1523,7 @@ a {
   }
   .unified-grid {
     grid-template-columns: 1fr;
+    width: 100%;
   }
   .unified-grid-2col {
     grid-template-columns: 1fr;
@@ -1676,5 +1679,8 @@ a {
   .featured-card:hover .featured-image img,
   .content-card-unified:hover .card-image-wrap img {
     transform: none !important;
+  }
+  * {
+    outline: 1px solid red;
   }
 }
