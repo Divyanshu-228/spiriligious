@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="style.css" />
     <style>
       /* ============================================================
-           ROOT – extended premium tokens
+           ROOT – premium tokens
            ============================================================ */
       :root {
         --primary-green: #234b36;
@@ -71,7 +71,7 @@
       }
 
       /* ============================================================
-           BODY – temple-bg.jpg with overlay
+           BODY
            ============================================================ */
       body {
         background: var(--cream);
@@ -116,7 +116,7 @@
       }
 
       /* ============================================================
-           FLOATING NAVBAR – refined
+           NAVBAR – unchanged
            ============================================================ */
       .premium-header {
         position: fixed;
@@ -282,7 +282,7 @@
       }
 
       /* ============================================================
-           HERO – content at bottom, horizontally centered
+           HERO – untouched
            ============================================================ */
       .hero {
         position: relative;
@@ -613,7 +613,7 @@
       }
 
       /* ============================================================
-           RESPONSIVE – hero
+           HERO RESPONSIVE – untouched
            ============================================================ */
       @media (max-width: 820px) {
         .hero {
@@ -721,194 +721,330 @@
       }
 
       /* ============================================================
-           DAILY SHLOK – refined
+           DAILY SHLOK – illuminated manuscript
            ============================================================ */
       .shlok-manuscript {
-        background: rgba(255, 255, 255, 0.35);
-        backdrop-filter: blur(16px) saturate(1.1);
-        -webkit-backdrop-filter: blur(16px) saturate(1.1);
-        border: 1px solid rgba(185, 145, 45, 0.1);
+        background: rgba(234, 189, 140, 0.542) url("images/shlok.jpg") center /
+          cover no-repeat;
+        background-blend-mode: multiply;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: var(--radius-lg);
-        padding: 2.8rem 2.2rem;
+        padding: 3.5rem 2.5rem;
         text-align: center;
-        box-shadow: var(--shadow-glass);
-        max-width: 800px;
+        box-shadow: 0 16px 56px rgba(47, 43, 39, 0.08);
+        max-width: 1000px;
+        width: 100%;
         margin: 0 auto;
-        min-height: 180px;
+        min-height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: box-shadow 0.4s ease;
       }
       .shlok-manuscript:hover {
-        box-shadow: 0 12px 48px rgba(47, 43, 39, 0.06);
+        box-shadow: 0 24px 72px rgba(47, 43, 39, 0.12);
       }
 
       .shlok-text {
         font-family: var(--font-devanagari);
-        font-size: 1.7rem;
+        font-size: 1.8rem;
         font-weight: 500;
-        color: var(--primary-green);
+        color: #cc5506;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
         white-space: pre-line;
-        line-height: 2.1;
+        line-height: 2.2;
         text-align: center;
         padding: 0 0.5rem;
       }
-
       .shlok-line {
         display: block;
-        line-height: 2.1;
+        line-height: 2.2;
         text-align: center;
         padding: 0 0.5rem;
       }
       .shlok-line:not(:last-child) {
         margin-bottom: 0.2rem;
       }
-
       .shlok-meaning {
         margin-top: 1.2rem;
-        font-size: 1.05rem;
-        color: var(--brown);
+        font-size: 1.1rem;
+        color: rgba(54, 43, 5, 0.92);
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
         font-weight: 400;
-        opacity: 0.85;
+        opacity: 0.95;
       }
       .shlok-meaning strong {
-        color: var(--gold);
+        color: rgb(225, 7, 7);
         font-weight: 600;
       }
       .shlok-source {
         margin-top: 0.5rem;
-        font-size: 0.85rem;
-        color: var(--brown-soft);
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
         font-style: italic;
-        opacity: 0.7;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0.9;
       }
       .shlok-placeholder {
         font-size: 1.1rem;
-        color: var(--brown-soft);
+        color: rgba(255, 255, 255, 0.8);
         padding: 1rem 0;
       }
       .shlok-fallback {
         font-family: var(--font-devanagari);
-        font-size: 1.4rem;
-        color: var(--primary-green);
-        line-height: 2;
+        font-size: 1.5rem;
+        color: #fff;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+        line-height: 2.2;
       }
       .shlok-fallback .meaning {
         font-family: var(--font-sans);
         font-size: 1rem;
-        color: var(--brown-soft);
+        color: rgba(255, 255, 255, 0.85);
         margin-top: 0.8rem;
-        opacity: 0.8;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0.9;
       }
       .shlok-fallback .source {
         font-size: 0.85rem;
         color: var(--gold);
         margin-top: 0.3rem;
         font-style: italic;
-        opacity: 0.7;
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        .shlok-manuscript {
+          padding: 2rem 1.5rem;
+          min-height: 160px;
+          max-width: 100%;
+          background-position: center 30%;
+        }
+        .shlok-text {
+          font-size: 1.4rem;
+          line-height: 2;
+        }
+        .shlok-meaning {
+          font-size: 1rem;
+        }
+        .shlok-fallback {
+          font-size: 1.2rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .shlok-manuscript {
+          padding: 1.5rem 1rem;
+          min-height: 140px;
+          background-position: center 20%;
+        }
+        .shlok-text {
+          font-size: 1.2rem;
+        }
+        .shlok-meaning {
+          font-size: 0.9rem;
+        }
+        .shlok-fallback {
+          font-size: 1rem;
+        }
+        .shlok-fallback .meaning {
+          font-size: 0.85rem;
+        }
       }
 
       /* ============================================================
-           SECTION HEADERS – elevated typography
+           SECTION HEADERS – editorial premium
            ============================================================ */
       .section-header-custom {
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
+        position: relative;
       }
       .section-header-custom .section-label {
         display: inline-block;
         font-size: 0.6rem;
         font-weight: 600;
-        letter-spacing: 3px;
+        letter-spacing: 4px;
         text-transform: uppercase;
         color: var(--gold);
         background: rgba(185, 145, 45, 0.06);
-        padding: 0.25rem 1.4rem;
+        padding: 0.3rem 1.6rem;
         border-radius: var(--radius-pill);
         border: 1px solid rgba(185, 145, 45, 0.08);
         margin-bottom: 0.8rem;
         transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
       }
       .section-header-custom .section-label:hover {
         background: rgba(185, 145, 45, 0.1);
         border-color: rgba(185, 145, 45, 0.15);
+        transform: translateY(-1px);
       }
       .section-header-custom h2 {
         font-family: var(--font-serif);
-        font-size: 2.8rem;
+        font-size: 3rem;
         color: var(--brown);
-        margin: 0.4rem 0 0.3rem;
+        margin: 0.2rem 0 0.3rem;
         letter-spacing: -0.02em;
-        font-weight: 600;
-        line-height: 1.15;
+        font-weight: 700;
+        line-height: 1.1;
+        position: relative;
+      }
+      .section-header-custom h2 .gold-accent {
+        color: var(--gold);
+        font-weight: 700;
       }
       .section-header-custom .sub {
         color: var(--brown-soft);
-        font-size: 1rem;
+        font-size: 1.05rem;
         max-width: 600px;
         margin: 0 auto;
         font-weight: 400;
-        opacity: 0.75;
+        opacity: 0.7;
         line-height: 1.6;
+      }
+      .section-header-custom .header-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 0.6rem 0 0.2rem;
+      }
+      .section-header-custom .header-divider .line {
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, var(--gold));
+        border-radius: 2px;
+      }
+      .section-header-custom .header-divider .line:last-child {
+        background: linear-gradient(to left, transparent, var(--gold));
+      }
+      .section-header-custom .header-divider i {
+        color: var(--gold);
+        font-size: 0.8rem;
+        opacity: 0.4;
       }
 
       /* ============================================================
-           SECTION AMBIENCE – subtle background tints
+           SECTION AMBIENCE
            ============================================================ */
       .section-ambient-sant {
         background: radial-gradient(
           ellipse at 20% 50%,
-          rgba(185, 145, 45, 0.015) 0%,
+          rgba(185, 145, 45, 0.012) 0%,
           transparent 70%
         );
       }
       .section-ambient-mandir {
         background: radial-gradient(
           ellipse at 80% 40%,
-          rgba(35, 75, 54, 0.015) 0%,
+          rgba(35, 75, 54, 0.012) 0%,
           transparent 70%
         );
       }
       .section-ambient-bhajan {
         background: radial-gradient(
           ellipse at 50% 80%,
-          rgba(185, 145, 45, 0.018) 0%,
+          rgba(185, 145, 45, 0.015) 0%,
           transparent 70%
         );
       }
       .section-ambient-science {
         background: radial-gradient(
           ellipse at 30% 60%,
-          rgba(47, 43, 39, 0.012) 0%,
+          rgba(47, 43, 39, 0.01) 0%,
           transparent 70%
         );
       }
       .section-ambient-manthan {
         background: radial-gradient(
           ellipse at 70% 30%,
-          rgba(185, 145, 45, 0.012) 0%,
+          rgba(185, 145, 45, 0.01) 0%,
           transparent 70%
         );
       }
       .section-ambient-coming {
         background: radial-gradient(
           ellipse at 50% 50%,
-          rgba(185, 145, 45, 0.02) 0%,
+          rgba(185, 145, 45, 0.015) 0%,
           transparent 70%
         );
       }
 
       /* ============================================================
-           UNIFIED FEATURED CARD – elevated
+           SECTION SPACING – refined rhythm
+           ============================================================ */
+      .section-spacing {
+        padding: 2.5rem 0 3rem;
+      }
+
+      /* ============================================================
+           DIVIDERS
+           ============================================================ */
+      .divider-lotus {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 0.4rem 0;
+        color: var(--gold);
+        font-size: 0.9rem;
+        opacity: 0.2;
+      }
+      .divider-lotus::before,
+      .divider-lotus::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        max-width: 100px;
+      }
+      .divider-lotus i {
+        font-size: 1.2rem;
+        color: var(--gold);
+        animation: lotusFloat 4s ease-in-out infinite;
+      }
+
+      .divider-line {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.2rem 0;
+        opacity: 0.1;
+      }
+      .divider-line .line {
+        width: 60px;
+        height: 1px;
+        background: var(--gold);
+        border-radius: 1px;
+      }
+
+      @keyframes lotusFloat {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-3px) scale(1.04);
+        }
+      }
+
+      /* ============================================================
+           FEATURED CARD – premium editorial
            ============================================================ */
       .featured-card {
         display: grid;
         grid-template-columns: 44% 1fr;
         gap: 0;
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(8px) saturate(1.05);
-        -webkit-backdrop-filter: blur(8px) saturate(1.05);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(12px) saturate(1.05);
+        -webkit-backdrop-filter: blur(12px) saturate(1.05);
         border-radius: var(--radius-lg);
         overflow: hidden;
         box-shadow: var(--shadow-featured);
@@ -920,7 +1056,7 @@
         margin-bottom: 2.8rem;
         cursor: pointer;
         max-width: 1200px;
-        width: 100%; /* ← FIX: ensures featured card fills parent width */
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         min-height: 400px;
@@ -1001,6 +1137,7 @@
         margin-right: 0.3rem;
         width: 1.1rem;
         opacity: 0.7;
+        font-size: 0.85rem;
       }
       .featured-card .featured-content .featured-divider {
         width: 48px;
@@ -1053,22 +1190,22 @@
       }
 
       /* ============================================================
-           UNIFIED CONTENT CARD – refined (3-column)
+           CONTENT CARDS – premium unified
            ============================================================ */
       .unified-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        gap: 1.8rem;
         max-width: 1200px;
-        width: 100%; /* ← FIX: ensures grid fills parent width */
+        width: 100%;
         margin: 0 auto;
         justify-content: center;
       }
 
       .content-card-unified {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(8px) saturate(1.02);
-        -webkit-backdrop-filter: blur(8px) saturate(1.02);
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(10px) saturate(1.02);
+        -webkit-backdrop-filter: blur(10px) saturate(1.02);
         border-radius: var(--radius-md);
         overflow: hidden;
         box-shadow: var(--shadow-soft);
@@ -1126,7 +1263,7 @@
       }
       .content-card-unified .card-body .card-title {
         font-family: var(--font-serif);
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         color: var(--brown);
         line-height: 1.3;
         margin: 0;
@@ -1156,6 +1293,7 @@
         margin-right: 0.2rem;
         color: var(--gold);
         opacity: 0.6;
+        font-size: 0.7rem;
       }
       .content-card-unified .card-body .card-action {
         margin-top: 0.6rem;
@@ -1171,6 +1309,7 @@
       }
       .content-card-unified .card-body .card-action i {
         transition: transform 0.35s ease;
+        font-size: 0.75rem;
       }
       .content-card-unified:hover .card-body .card-action i {
         transform: translateX(5px);
@@ -1180,7 +1319,7 @@
       }
 
       /* ============================================================
-           VIEW ALL BUTTON
+           VIEW ALL BUTTON – elegant
            ============================================================ */
       .view-all-wrapper {
         text-align: center;
@@ -1188,25 +1327,39 @@
       }
       .view-all-btn {
         display: inline-block;
-        padding: 0.7rem 2.5rem;
+        padding: 0.7rem 2.8rem;
         border: 1.5px solid var(--gold);
         border-radius: var(--radius-pill);
-        font-weight: 600;
+        font-weight: 500;
         font-size: 0.9rem;
         color: var(--primary-green);
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(4px);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         text-decoration: none;
         font-family: var(--font-sans);
-        letter-spacing: 0.3px;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+      }
+      .view-all-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--primary-green);
+        transform: translateX(-100%);
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: -1;
+        border-radius: var(--radius-pill);
       }
       .view-all-btn:hover {
-        background: var(--primary-green);
         color: #fff;
         transform: translateY(-3px);
         box-shadow: 0 8px 24px rgba(35, 75, 54, 0.15);
         border-color: var(--primary-green);
+      }
+      .view-all-btn:hover::before {
+        transform: translateX(0);
       }
       .view-all-btn i {
         transition: transform 0.3s ease;
@@ -1217,67 +1370,7 @@
       }
 
       /* ============================================================
-           VISUAL RHYTHM – section spacing & dividers
-           ============================================================ */
-      .section-spacing {
-        padding: 4rem 0 4.5rem;
-      }
-
-      .divider-lotus {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        padding: 0.6rem 0 0.2rem;
-        color: var(--gold);
-        font-size: 0.9rem;
-        opacity: 0.3;
-      }
-      .divider-lotus::before,
-      .divider-lotus::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          var(--gold),
-          transparent
-        );
-        max-width: 100px;
-      }
-      .divider-lotus i {
-        font-size: 1.2rem;
-        color: var(--gold);
-        animation: lotusFloat 4s ease-in-out infinite;
-      }
-
-      .divider-line {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.4rem 0 0.1rem;
-        opacity: 0.15;
-      }
-      .divider-line .line {
-        width: 60px;
-        height: 1px;
-        background: var(--gold);
-        border-radius: 1px;
-      }
-
-      @keyframes lotusFloat {
-        0%,
-        100% {
-          transform: translateY(0) scale(1);
-        }
-        50% {
-          transform: translateY(-3px) scale(1.04);
-        }
-      }
-
-      /* ============================================================
-           MANTHAN FORUM – refined
+           MANTHAN FORUM – premium community
            ============================================================ */
       .manthan-grid {
         display: grid;
@@ -1288,9 +1381,9 @@
       }
       .discussions,
       .create-discussion {
-        background: rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(14px) saturate(1.05);
-        -webkit-backdrop-filter: blur(14px) saturate(1.05);
+        background: rgba(255, 255, 255, 0.48);
+        backdrop-filter: blur(16px) saturate(1.05);
+        -webkit-backdrop-filter: blur(16px) saturate(1.05);
         border: 1px solid rgba(185, 145, 45, 0.05);
         border-radius: var(--radius-md);
         padding: 2rem;
@@ -1379,6 +1472,7 @@
         margin-right: 0.2rem;
         color: var(--gold);
         opacity: 0.6;
+        font-size: 0.7rem;
       }
       .discuss-form .form-group {
         margin-bottom: 0.8rem;
@@ -1424,7 +1518,7 @@
       }
 
       /* ============================================================
-           COMING SOON – refined
+           COMING SOON
            ============================================================ */
       .coming-grid {
         display: grid;
@@ -1434,9 +1528,9 @@
         margin: 0 auto;
       }
       .coming-card {
-        background: rgba(255, 255, 255, 0.35);
-        backdrop-filter: blur(14px) saturate(1.05);
-        -webkit-backdrop-filter: blur(14px) saturate(1.05);
+        background: rgba(255, 255, 255, 0.38);
+        backdrop-filter: blur(16px) saturate(1.05);
+        -webkit-backdrop-filter: blur(16px) saturate(1.05);
         border: 1px solid rgba(185, 145, 45, 0.05);
         border-radius: var(--radius-md);
         padding: 2.2rem 1.8rem;
@@ -2043,7 +2137,7 @@
       }
 
       /* ============================================================
-           PRINT STYLES – unchanged
+           PRINT
            ============================================================ */
       @media print {
         body {
@@ -2219,7 +2313,7 @@
       }
 
       /* ============================================================
-           RESPONSIVE – cards, footer, etc.
+           RESPONSIVE
            ============================================================ */
       @media (max-width: 1024px) {
         .container {
@@ -2315,7 +2409,7 @@
           margin-bottom: 2rem;
         }
         .section-spacing {
-          padding: 2.5rem 0 3rem;
+          padding: 1.5rem 0 2rem;
         }
         .nav-links {
           display: none;
@@ -2449,7 +2543,6 @@
         .detail-audio-player audio {
           width: 100%;
         }
-        /* Footer mobile */
         .footer-main {
           grid-template-columns: 1fr;
           gap: 2rem;
@@ -2507,105 +2600,84 @@
             max-height: 200px !important;
           }
         }
-        /* ── Footer mobile optimisations ── */
         .premium-footer {
           padding-top: 2.5rem;
           margin-top: 2rem;
         }
-
         .premium-footer .container {
           padding: 0 1rem;
         }
-
         .footer-main {
-          grid-template-columns: 1fr !important; /* force single column */
+          grid-template-columns: 1fr !important;
           gap: 1.8rem !important;
           padding-bottom: 1rem;
         }
-
         .footer-brand {
           align-items: center;
           text-align: center;
           gap: 0.3rem;
         }
-
         .footer-brand .brand-description {
           max-width: 100%;
           font-size: 0.9rem;
           text-align: center;
         }
-
         .footer-col {
           text-align: center;
         }
-
         .footer-col h4 {
           font-size: 1rem;
           margin-bottom: 0.6rem;
         }
-
         .footer-col h4::after {
           left: 50%;
           transform: translateX(-50%);
           width: 30px;
         }
-
         .footer-col ul {
           gap: 0.4rem;
         }
-
         .footer-col ul li a {
           font-size: 0.9rem;
           justify-content: center;
           padding: 0.2rem 0;
         }
-
         .footer-social-col ul.social-links-list li a {
           justify-content: center;
         }
-
         .footer-contact-col {
           max-width: 100%;
           margin: 0;
         }
-
         .footer-contact-card {
           min-height: auto;
           padding: 1.2rem 1rem;
           flex-direction: column;
           gap: 0.2rem;
         }
-
         .footer-contact-card .contact-icon {
           font-size: 1.4rem;
           margin-bottom: 0.2rem;
         }
-
         .footer-contact-card h4 {
           font-size: 0.95rem;
         }
-
         .footer-contact-card .contact-email a {
           font-size: 0.9rem;
         }
-
         .footer-contact-card .contact-response {
           font-size: 0.75rem;
         }
-
         .footer-lotus-divider {
           padding: 1rem 0;
         }
-
         .footer-bottom {
           padding: 1rem 0 1.2rem;
         }
-
         .footer-bottom .copyright {
           font-size: 0.75rem;
           line-height: 1.5;
         }
-
         .footer-bottom .credit {
           font-size: 0.65rem;
         }
@@ -2719,7 +2791,7 @@
       }
 
       /* ============================================================
-           FOOTER – refined, no newsletter
+           FOOTER – refined
            ============================================================ */
       .premium-footer {
         background: rgba(255, 255, 255, 0.45);
@@ -2988,9 +3060,6 @@
         opacity: 0.7;
       }
 
-      /* ============================================================
-           MOBILE DRAWER – refined
-           ============================================================ */
       .mobile-drawer-overlay {
         display: none;
         position: fixed;
@@ -3145,7 +3214,7 @@
         letter-spacing: 4px;
       }
       .section-spacing {
-        padding: 3rem 0 3.5rem;
+        padding: 1.5rem 0 2rem;
       }
       .reveal {
         opacity: 0;
@@ -3158,8 +3227,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-
-      /* ── Remove newsletter from footer ── */
       .footer-newsletter-col {
         display: none !important;
       }
@@ -3190,7 +3257,6 @@
           <i class="fas fa-times"></i>
         </button>
         <div class="detail-modal-inner" id="detailModalInner">
-          <!-- Hero -->
           <div class="detail-hero-grid">
             <div class="detail-hero-image-wrap" id="detailHeroImageWrap">
               <img
@@ -3266,7 +3332,6 @@
             </div>
           </div>
 
-          <!-- Body -->
           <div class="detail-body-grid">
             <div id="detailBody" class="detail-body-text">
               <p>Loading article content...</p>
@@ -3301,7 +3366,6 @@
             </aside>
           </div>
 
-          <!-- Share & Print -->
           <div class="detail-share-print" id="detailSharePrint">
             <button aria-label="Share on Facebook" data-share="fb">
               <i class="fab fa-facebook-f"></i>
@@ -3483,7 +3547,13 @@
         id="sant-section"
       >
         <div class="section-header-custom">
+          <span class="section-label">Explore</span>
           <h2>Articles</h2>
+          <div class="header-divider">
+            <span class="line"></span>
+            <i class="fas fa-lotus"></i>
+            <span class="line"></span>
+          </div>
           <p class="sub">
             Explore timeless wisdom, ancient knowledge and modern insights.
           </p>
@@ -3492,7 +3562,7 @@
         <div id="santArticlesGrid" class="unified-grid"></div>
         <div class="view-all-wrapper">
           <a href="Articles.html" class="view-all-btn"
-            >View All Articles <i class="fas fa-arrow-right"></i
+            >Explore All Articles <i class="fas fa-arrow-right"></i
           ></a>
         </div>
       </section>
@@ -3507,7 +3577,13 @@
         id="mandir-section"
       >
         <div class="section-header-custom">
+          <span class="section-label">Journey</span>
           <h2>Mandir Darshan</h2>
+          <div class="header-divider">
+            <span class="line"></span>
+            <i class="fas fa-lotus"></i>
+            <span class="line"></span>
+          </div>
           <p class="sub">
             Sacred architecture, history, and spiritual significance.
           </p>
@@ -3516,7 +3592,7 @@
         <div id="mandirGrid" class="unified-grid"></div>
         <div class="view-all-wrapper">
           <a href="mandir.html" class="view-all-btn"
-            >View All Temples <i class="fas fa-arrow-right"></i
+            >Explore All Temples <i class="fas fa-arrow-right"></i
           ></a>
         </div>
       </section>
@@ -3531,14 +3607,20 @@
         id="bhajan-section"
       >
         <div class="section-header-custom">
+          <span class="section-label">Listen</span>
           <h2>Bhajan Collection</h2>
+          <div class="header-divider">
+            <span class="line"></span>
+            <i class="fas fa-lotus"></i>
+            <span class="line"></span>
+          </div>
           <p class="sub">Devotional music to uplift the soul.</p>
         </div>
         <div id="featuredBhajanContainer" class="featured-card"></div>
         <div id="bhajanGrid" class="unified-grid"></div>
         <div class="view-all-wrapper">
           <a href="bhajan.html" class="view-all-btn"
-            >View All Bhajans <i class="fas fa-arrow-right"></i
+            >Explore All Bhajans <i class="fas fa-arrow-right"></i
           ></a>
         </div>
       </section>
@@ -3553,7 +3635,13 @@
         id="science-section"
       >
         <div class="section-header-custom">
+          <span class="section-label">Research</span>
           <h2>Science &amp; Knowledge</h2>
+          <div class="header-divider">
+            <span class="line"></span>
+            <i class="fas fa-lotus"></i>
+            <span class="line"></span>
+          </div>
           <p class="sub">
             Exploring the logic and science behind ancient traditions.
           </p>
@@ -3562,7 +3650,7 @@
         <div id="scienceGrid" class="unified-grid"></div>
         <div class="view-all-wrapper">
           <a href="science.html" class="view-all-btn"
-            >View All Science <i class="fas fa-arrow-right"></i
+            >Explore All Science <i class="fas fa-arrow-right"></i
           ></a>
         </div>
       </section>
@@ -3577,7 +3665,13 @@
         id="manthan-section"
       >
         <div class="section-header-custom">
+          <span class="section-label">Community</span>
           <h2>Manthan Forum</h2>
+          <div class="header-divider">
+            <span class="line"></span>
+            <i class="fas fa-lotus"></i>
+            <span class="line"></span>
+          </div>
           <p class="sub">Discuss, ask, and share wisdom with fellow seekers.</p>
         </div>
         <div class="manthan-grid">
@@ -3639,7 +3733,13 @@
       <!-- COMING SOON -->
       <section class="container section-spacing reveal section-ambient-coming">
         <div class="section-header-custom">
+          <span class="section-label">Coming Soon</span>
           <h2>Future Experiences</h2>
+          <div class="header-divider">
+            <span class="line"></span>
+            <i class="fas fa-lotus"></i>
+            <span class="line"></span>
+          </div>
           <p class="sub">
             We are expanding — new ways to connect, learn, and grow.
           </p>
@@ -3677,7 +3777,6 @@
     <script src="script.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // ── Set print date on modal inner ──
         var modalInner = document.getElementById("detailModalInner");
         if (modalInner) {
           var now = new Date();
@@ -3689,7 +3788,6 @@
           modalInner.setAttribute("data-print-date", dateStr);
         }
 
-        // ── card image fallback ──
         function setCardImageFallbacks() {
           document
             .querySelectorAll(".card-image-wrap img, .featured-image img")
@@ -3707,7 +3805,6 @@
             });
         }
 
-        // ── Homepage-specific loaders (limit to 3 cards) ──
         async function loadSantArticlesHome() {
           try {
             const snap = await db
@@ -3901,7 +3998,6 @@
           }
         }
 
-        // ── loaders ──
         try {
           if (typeof loadDailyShlok === "function") loadDailyShlok();
         } catch (e) {
@@ -3922,7 +4018,6 @@
         var observer = new MutationObserver(setCardImageFallbacks);
         observer.observe(document.body, { childList: true, subtree: true });
 
-        // ── discussion submit ──
         document
           .getElementById("submitDiscussionBtn")
           ?.addEventListener("click", async function () {
@@ -3982,7 +4077,6 @@
             });
           });
 
-        // ── reveal observer ──
         var revealObserver = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (entry) {
@@ -4017,7 +4111,6 @@
           document.body.style.overflow = "auto";
         };
 
-        // ── DETAIL MODAL ──
         var originalOpenDetailModal = window.openDetailModal;
         window.openDetailModal = function (data) {
           var html = typeof data === "string" ? data : data.html || "";
@@ -4203,7 +4296,6 @@
             }
           });
 
-        // ── Share & Print ──
         function getCurrentArticleUrl() {
           return window.location.href;
         }
@@ -4292,7 +4384,6 @@
             );
           });
 
-        // ── mobile menu ──
         var menuBtn = document.getElementById("mobileMenuBtn");
         var drawer = document.getElementById("mobileDrawer");
         var overlay = document.getElementById("mobileDrawerOverlay");
@@ -4328,7 +4419,6 @@
           });
         }
 
-        // ── header scroll ──
         var header = document.querySelector(".premium-header");
         var lastScrollY = 0;
         window.addEventListener(
@@ -4347,7 +4437,6 @@
           { passive: true },
         );
 
-        // ── card clickability ──
         document.querySelectorAll(".featured-card").forEach(function (card) {
           card.style.cursor = "pointer";
           card.addEventListener("click", function (e) {
@@ -4357,7 +4446,6 @@
           });
         });
 
-        // ── bhajan audio interception ──
         var bhajanGrid = document.getElementById("bhajanGrid");
         if (bhajanGrid) {
           bhajanGrid.addEventListener("click", function (e) {
